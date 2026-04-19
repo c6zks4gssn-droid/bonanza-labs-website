@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Zap, Video, Wallet, Stethoscope, Terminal, ArrowRight, Sparkles, ExternalLink } from "lucide-react";
+import { useState } from "react";
+import { Zap, Video, Wallet, Stethoscope, Terminal, ArrowRight, Sparkles, ExternalLink, Check, Copy, BookOpen } from "lucide-react";
 import Link from "next/link";
 
 const fadeUp = {
@@ -16,6 +17,24 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.08 } },
 };
 
+function CopyButton({ text, label }: { text: string; label: string }) {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <button
+      onClick={handleCopy}
+      className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm hover:bg-white/10 transition group"
+    >
+      <code className="text-green-400">{label}</code>
+      {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-gray-500 group-hover:text-gray-300" />}
+    </button>
+  );
+}
+
 const PROJECTS = [
   {
     name: "FrameForge",
@@ -26,6 +45,8 @@ const PROJECTS = [
     status: "Beta",
     color: "from-violet-500 to-cyan-500",
     features: ["AI script writer", "4 styles", "3 formats (16:9, 9:16, 1:1)", "Edge-TTS voiceover", "HyperFrames + Manim"],
+    install: "pip install bonanza-labs[video]",
+    demo: true,
   },
   {
     name: "Fork Doctor",
@@ -36,6 +57,8 @@ const PROJECTS = [
     status: "v0.1.0",
     color: "from-emerald-500 to-teal-500",
     features: ["13 health checks", "CI/CD detection", "Security scanning", "SBOM generation", "pip install fork-doctor"],
+    install: "pip install fork-doctor",
+    demo: false,
   },
   {
     name: "Agent Wallet",
@@ -43,9 +66,43 @@ const PROJECTS = [
     tagline: "AI Payment Infrastructure",
     desc: "Policy-based wallets for AI agents. Auto-approve under $X, human approval above. Multi-chain, dashboard, spending analytics.",
     repo: "bonanza-labs-agent-wallet",
-    status: "Coming Soon",
+    status: "v0.1.0",
     color: "from-amber-500 to-orange-500",
-    features: ["Policy engine", "Spending caps", "Human approval flow", "Multi-chain (Solana, BSC)", "Dashboard"],
+    features: ["Policy engine", "Spending caps", "Human approval flow", "Multi-chain (Solana, BSC)", "REST API + CLI"],
+    install: "pip install agent-wallet",
+    demo: false,
+  },
+];
+
+const DOCS = [
+  {
+    project: "FrameForge",
+    emoji: "🎬",
+    sections: [
+      { title: "Quick Start", content: "pip install bonanza-labs[video] && bonanza video 'My Topic' --style viral --format 9:16" },
+      { title: "Styles", content: "corporate, product, viral, explainer — each with unique colors, pacing and voice" },
+      { title: "Formats", content: "16:9 (YouTube), 9:16 (TikTok/Reels), 1:1 (LinkedIn)" },
+      { title: "Voice", content: "Edge-TTS with 100+ voices. Default: en-US-AriaNeural" },
+    ],
+  },
+  {
+    project: "Fork Doctor",
+    emoji: "🩺",
+    sections: [
+      { title: "Install", content: "pip install fork-doctor && fork-doctor openclaw/openclaw" },
+      { title: "13 Checks", content: "CI/CD, Security, SBOM, Dev Container, License, Readme, Contributing, Changelog, Tests, Linting, Type hints, Dependencies, API docs" },
+      { title: "Output", content: "JSON, Markdown or terminal table with pass/fail per check" },
+    ],
+  },
+  {
+    project: "Agent Wallet",
+    emoji: "💰",
+    sections: [
+      { title: "Install", content: "pip install agent-wallet && agent-wallet create --name MyAgent --chain solana" },
+      { title: "Policy Engine", content: "YAML-based rules: auto-approve under $X, human approval above, daily/monthly limits, cooldowns" },
+      { title: "REST API", content: "FastAPI with 6 endpoints: create wallet, list, pay, approve, settle, analytics" },
+      { title: "Chains", content: "Solana, BSC, Base — USDC/USD1 settlements" },
+    ],
   },
 ];
 
@@ -61,6 +118,7 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-6 text-sm text-gray-400">
             <a href="#projects" className="hover:text-white transition">Projects</a>
+            <a href="#docs" className="hover:text-white transition">Docs</a>
             <a href="#about" className="hover:text-white transition">About</a>
             <a href="https://github.com/c6zks4gssn-droid" className="hover:text-white transition flex items-center gap-1">🐙 GitHub</a>
           </div>
@@ -82,9 +140,12 @@ export default function Home() {
             <motion.p variants={fadeUp} custom={2} className="mt-6 text-xl text-gray-400 max-w-xl">
               Open source AI tools for builders. Video generation, repo health, agent payments — all open, all free.
             </motion.p>
-            <motion.div variants={fadeUp} custom={3} className="mt-8 flex gap-4">
+            <motion.div variants={fadeUp} custom={3} className="mt-8 flex gap-4 flex-wrap justify-center">
               <a href="#projects" className="flex items-center gap-2 bg-gradient-to-r from-violet-600 to-cyan-600 px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition">
                 <Sparkles className="w-4 h-4" /> View Projects
+              </a>
+              <a href="#docs" className="flex items-center gap-2 border border-white/10 px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
+                <BookOpen className="w-4 h-4" /> Docs
               </a>
               <a href="https://github.com/c6zks4gssn-droid" className="flex items-center gap-2 border border-white/10 px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
                 🐙 GitHub
@@ -117,7 +178,7 @@ export default function Home() {
                 <div className="flex flex-col md:flex-row md:items-start gap-6">
                   <div className="text-5xl">{p.emoji}</div>
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
+                    <div className="flex items-center gap-3 mb-2 flex-wrap">
                       <h3 className="text-2xl font-bold">Bonanza Labs ✦ {p.name}</h3>
                       <span className={`text-xs font-medium px-2 py-0.5 rounded-full bg-gradient-to-r ${p.color} bg-clip-text text-transparent border border-white/10`}>
                         {p.status}
@@ -130,13 +191,53 @@ export default function Home() {
                         <span key={f} className="text-xs bg-white/5 border border-white/5 rounded-full px-3 py-1 text-gray-400">{f}</span>
                       ))}
                     </div>
-                    <a
-                      href={`https://github.com/c6zks4gssn-droid/${p.repo}`}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-violet-400 hover:text-violet-300 transition"
-                    >
-                      🐙 View on GitHub <ExternalLink className="w-3 h-3" />
-                    </a>
+                    <div className="flex flex-wrap items-center gap-3 mb-3">
+                      <CopyButton text={p.install} label={p.install} />
+                      <a
+                        href={`https://github.com/c6zks4gssn-droid/${p.repo}`}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-violet-400 hover:text-violet-300 transition"
+                      >
+                        🐙 View on GitHub <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
                   </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Docs */}
+      <section id="docs" className="py-20 px-6 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-950/5 to-transparent" />
+        <div className="relative max-w-5xl mx-auto">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="text-center mb-12">
+            <motion.div variants={fadeUp} custom={0} className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-sm text-emerald-300 mb-6">
+              <BookOpen className="w-3.5 h-3.5" /> Documentation
+            </motion.div>
+            <motion.h2 variants={fadeUp} custom={1} className="text-4xl font-black">Get started fast</motion.h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {DOCS.map((doc, i) => (
+              <motion.div
+                key={doc.project}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="rounded-2xl border border-white/5 bg-white/[0.02] p-6"
+              >
+                <div className="text-3xl mb-3">{doc.emoji}</div>
+                <h3 className="text-lg font-bold mb-4">{doc.project}</h3>
+                <div className="space-y-4">
+                  {doc.sections.map((s) => (
+                    <div key={s.title}>
+                      <div className="text-xs font-semibold text-emerald-400 uppercase tracking-wider mb-1">{s.title}</div>
+                      <p className="text-sm text-gray-400 leading-relaxed">{s.content}</p>
+                    </div>
+                  ))}
                 </div>
               </motion.div>
             ))}
@@ -165,7 +266,7 @@ export default function Home() {
             className="rounded-2xl border border-white/5 bg-[#0a0a12] p-6 font-mono text-sm"
           >
             <div className="text-gray-500 mb-2"># Install</div>
-            <div className="text-green-400">$ pip install bonanza-labs</div>
+            <div className="flex items-center gap-2"><span className="text-green-400">$ pip install bonanza-labs</span><CopyButton text="pip install bonanza-labs" label="" /></div>
             <div className="mt-4 text-gray-500"># Generate a video</div>
             <div className="text-green-400">$ bonanza video "AI Agents Are the Future" --style viral --format 9:16</div>
             <div className="mt-4 text-gray-500"># Check repo health</div>
@@ -187,11 +288,11 @@ export default function Home() {
           </p>
           <div className="grid grid-cols-3 gap-8 text-center">
             <div>
-              <div className="text-3xl font-black bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">3</div>
+              <div className="text-3xl font-black bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">5</div>
               <div className="text-sm text-gray-500 mt-1">Projects</div>
             </div>
             <div>
-              <div className="text-3xl font-black bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">2</div>
+              <div className="text-3xl font-black bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">3</div>
               <div className="text-sm text-gray-500 mt-1">Active</div>
             </div>
             <div>
