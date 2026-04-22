@@ -69,7 +69,7 @@ const PROJECTS = [
     status: "v0.1.0",
     color: "from-amber-500 to-orange-500",
     features: ["Policy engine", "Spending caps", "Human approval flow", "Multi-chain (Solana, BSC)", "REST API + CLI"],
-    install: "pip install agent-wallet",
+    install: "pip install bonanza-wallet",
     demo: false,
   },
   {
