@@ -54,7 +54,7 @@ const PROJECTS = [
     tagline: "Repo Health Checker",
     desc: "13 automated infrastructure checks for any GitHub repo. CI/CD, security, SBOM, Dev Containers — diagnose and fix in seconds.",
     repo: "bonanza-labs-fork-doctor",
-    status: "v0.2.0",
+    status: "v0.3.0",
     color: "from-emerald-500 to-teal-500",
     features: ["13 health checks", "CI/CD detection", "Security scanning", "SBOM generation", "pip install fork-doctor"],
     install: "pip install fork-doctor",
@@ -66,7 +66,7 @@ const PROJECTS = [
     tagline: "AI Payment Infrastructure",
     desc: "Policy-based wallets for AI agents. Auto-approve under $X, human approval above. Multi-chain, dashboard, spending analytics.",
     repo: "bonanza-labs-agent-wallet",
-    status: "v0.1.0",
+    status: "v0.2.1",
     color: "from-amber-500 to-orange-500",
     features: ["Policy engine", "Spending caps", "Human approval flow", "Multi-chain (Solana, BSC)", "REST API + CLI"],
     install: "pip install bonanza-wallet",
@@ -78,7 +78,7 @@ const PROJECTS = [
     tagline: "AI Agent Orchestration",
     desc: "Build, deploy and orchestrate AI agents with built-in payments, video & search. One framework, every tool.",
     repo: "bonanza-labs-agents",
-    status: "v0.1.0",
+    status: "v0.2.1",
     color: "from-pink-500 to-rose-500",
     features: ["6 built-in tools", "Multi-agent workflows", "Ollama LLM runtime", "Wallet integration", "REST API + CLI"],
     install: "pip install bonanza-agents",
@@ -90,7 +90,7 @@ const PROJECTS = [
     tagline: "AI Web Search & Extract",
     desc: "Search the web and extract page content. DuckDuckGo-powered, cached results, clean URLs. Open source Exa/Tavily killer.",
     repo: "bonanza-labs-search",
-    status: "v0.1.0",
+    status: "v0.2.1",
     color: "from-blue-500 to-indigo-500",
     features: ["DuckDuckGo search", "URL content extraction", "Result caching", "Clean URLs", "REST API + CLI"],
     install: "pip install bonanza-search",
@@ -102,7 +102,7 @@ const PROJECTS = [
     tagline: "Webhook Hub for AI Agents",
     desc: "Receive webhooks → trigger agent actions. GitHub push → run Fork Doctor. Stripe payment → send video. Event-driven AI.",
     repo: "bonanza-labs-webhooks",
-    status: "v0.1.0",
+    status: "v0.2.1",
     color: "from-green-500 to-emerald-500",
     features: ["Endpoint management", "HMAC verification", "Agent trigger rules", "Event logging", "REST API + CLI"],
     install: "pip install bonanza-webhooks",
@@ -114,7 +114,7 @@ const PROJECTS = [
     tagline: "AI Agent Identity & Auth",
     desc: "Give agents digital identities, API keys and JWT tokens. OAuth for AI — agents authenticate to services on your behalf.",
     repo: "bonanza-labs-auth",
-    status: "v0.1.0",
+    status: "v0.2.1",
     color: "from-red-500 to-pink-500",
     features: ["Agent identities", "API keys (bza_ prefix)", "JWT tokens", "Scope-based permissions", "REST API + CLI"],
     install: "pip install bonanza-auth",
@@ -126,7 +126,7 @@ const PROJECTS = [
     tagline: "AI Payment Framework",
     desc: "Stripe + stablecoin payments for AI agents. Multi-chain wallet, x402 protocol, crypto checkout, pricing calculator.",
     repo: "bonanza-labs-pay",
-    status: "v0.1.0",
+    status: "v0.2.1",
     color: "from-purple-500 to-violet-500",
     features: ["Stripe integration", "USDC/USD1 on Base", "x402 protocol", "Pricing calculator", "REST API + CLI"],
     install: "pip install bonanza-pay",
@@ -138,7 +138,7 @@ const PROJECTS = [
     tagline: "AI Search Optimization",
     desc: "Optimize content for ChatGPT, Perplexity & Google. 20-point audit, JSON-LD schemas, llms.txt generator, AI search visibility.",
     repo: "https://github.com/c6zks4gssn-droid",
-    status: "v0.1.0",
+    status: "v0.2.1",
     color: "from-lime-500 to-green-500",
     features: ["GEO + SEO audit (0-20)", "llms.txt generator", "JSON-LD schemas", "AI search visibility", "GitHub README optimizer"],
     install: "python3 skills/geo-seo/scripts/audit.py",
@@ -150,7 +150,7 @@ const PROJECTS = [
     tagline: "Multi-Channel Agent Messaging",
     desc: "Connect AI agents to iMessage, WhatsApp, Telegram, Discord, Slack via one API. Built on Photon Spectrum (MIT).",
     repo: "https://github.com/c6zks4gssn-droid/spectrum-ts",
-    status: "v0.1.0",
+    status: "v0.2.1",
     color: "from-sky-500 to-blue-500",
     features: ["iMessage + WhatsApp", "Telegram + Discord + Slack", "One unified API", "OpenClaw integration", "Free tier available"],
     install: "bun add spectrum-ts",
@@ -166,6 +166,42 @@ const PROJECTS = [
     color: "from-rose-500 to-pink-500",
     features: ["7 TTS engines", "Voice cloning", "23 languages", "Post-processing effects", "MLX Apple Silicon"],
     install: "Download from voicebox.sh",
+    demo: false,
+  },
+  {
+    name: "Reflexio",
+    emoji: "🧠",
+    tagline: "AI Agent Self-Improvement",
+    desc: "Harness that enables AI agents to learn from every interaction. 81% fewer planning steps, 72% less tokens. Fork of ReflexioAI.",
+    repo: "https://github.com/c6zks4gssn-droid/reflexio",
+    status: "Fork",
+    color: "from-indigo-500 to-purple-500",
+    features: ["Self-improving agents", "81% fewer steps", "Transfer learning", "Playbook extraction", "PyPI package"],
+    install: "pip install bonanza-labs-reflexio",
+    demo: false,
+  },
+  {
+    name: "Clearwing",
+    emoji: "🦅",
+    tagline: "Autonomous Vuln Scanner",
+    desc: "Network pentest agent + source-code vulnerability hunter. 63 bind-tools, SARIF reports, exploit validation. Fork of Lazarus AI.",
+    repo: "https://github.com/c6zks4gssn-droid/clearwing",
+    status: "Fork",
+    color: "from-red-500 to-orange-500",
+    features: ["63 bind-tools", "SARIF reports", "Exploit validation", "macOS/arm64 support", "Responsible disclosure"],
+    install: "pip install bonanza-labs-clearwing",
+    demo: false,
+  },
+  {
+    name: "RevPDF",
+    emoji: "📄",
+    tagline: "Offline PDF Editor",
+    desc: "10x smaller than Adobe, 100% offline, no signup. Edit, sign, redact, split, merge PDFs. Works on every platform.",
+    repo: "https://revpdf.com",
+    status: "Tested",
+    color: "from-teal-500 to-emerald-500",
+    features: ["26MB vs 300MB+", "100% offline", "No signup", "All platforms", "Free"],
+    install: "Download from revpdf.com",
     demo: false,
   },
 ];
@@ -297,7 +333,7 @@ export default function Home() {
       <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-[#050508]/80 border-b border-white/5">
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-lg">🧨</span>
+            <img src="/logo-256.png" alt="Bonanza Labs" className="h-8 w-8 rounded" />
             <span className="font-bold tracking-tight">Bonanza Labs</span>
           </div>
           <div className="flex items-center gap-6 text-sm text-gray-400">
@@ -318,7 +354,9 @@ export default function Home() {
         </div>
         <div className="relative max-w-4xl mx-auto text-center">
           <motion.div initial="hidden" animate="visible" variants={stagger} className="flex flex-col items-center">
-            <motion.div variants={fadeUp} custom={0} className="text-6xl mb-6">🧨</motion.div>
+            <motion.div variants={fadeUp} custom={0} className="mb-6">
+              <img src="/logo.png" alt="Bonanza Labs" className="w-32 h-32 mx-auto rounded-2xl" />
+            </motion.div>
             <motion.h1 variants={fadeUp} custom={1} className="text-5xl md:text-7xl font-black tracking-tight leading-[0.95]">
               Bonanza Labs
             </motion.h1>
@@ -640,7 +678,7 @@ export default function Home() {
       <footer className="border-t border-white/5 py-12 px-6">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <span className="text-lg">🧨</span>
+            <img src="/logo-256.png" alt="Bonanza Labs" className="h-6 w-6 rounded" />
             <span className="font-bold">Bonanza Labs</span>
           </div>
           <p className="text-sm text-gray-600">© 2026 Bonanza Labs — Open source AI tools for builders</p>
