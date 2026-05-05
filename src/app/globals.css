@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 html {
   scroll-behavior: smooth;
@@ -11,19 +9,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Mobile fixes */
+/* Mobile nav fix */
 @media (max-width: 767px) {
   .nav-links {
-    display: none;
+    display: none !important;
   }
   .nav-links.open {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     position: absolute;
     top: 3.5rem;
     left: 0;
     right: 0;
-    background: rgba(5, 5, 8, 0.95);
+    background: rgba(5, 5, 8, 0.97);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     padding: 1rem 1.5rem;
@@ -31,13 +29,20 @@ body {
     z-index: 40;
   }
   .hero-title {
-    font-size: 2.5rem !important;
+    font-size: 2.25rem !important;
     line-height: 1.05 !important;
   }
   .hero-sub {
-    font-size: 1.1rem !important;
+    font-size: 1rem !important;
   }
   .section-title {
-    font-size: 1.75rem !important;
+    font-size: 1.5rem !important;
+  }
+}
+
+/* Overflow fix for mobile */
+@media (max-width: 767px) {
+  body {
+    overflow-x: hidden;
   }
 }
