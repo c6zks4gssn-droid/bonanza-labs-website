@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { CheckCircle2, Film, Mic, Play, RefreshCw, Sparkles, Terminal, Wand2 } from "lucide-react";
+import { CheckCircle2, Film, Mic, Play, RefreshCw, Sparkles, Terminal, Wand2, Menu, X } from "lucide-react";
 
 const features = [
   "Script → scene outline → voiceover → MP4 workflow",
@@ -14,6 +14,7 @@ const features = [
 
 export default function FrameForgePage() {
   const [loading, setLoading] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const checkout = async () => {
     setLoading(true);
@@ -36,12 +37,15 @@ export default function FrameForgePage() {
   return (
     <main className="min-h-screen bg-[#050508] text-white overflow-x-hidden">
       <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-[#050508]/80 border-b border-white/5">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between relative">
           <Link href="/" className="flex items-center gap-2 font-bold"><img src="/logo-256.png" alt="Bonanza Labs" className="h-8 w-8 rounded" /> Bonanza Labs</Link>
-          <div className="flex items-center gap-6 text-sm text-gray-400">
-            <Link href="/products" className="hover:text-white transition">Products</Link>
-            <Link href="/frameforge" className="text-white font-medium">FrameForge</Link>
-            <Link href="/pricing" className="hover:text-white transition">Pricing</Link>
+          <button className="md:hidden text-gray-400 hover:text-white" onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+          <div className={`nav-links ${menuOpen ? 'open' : ''} md:flex items-center gap-6 text-sm text-gray-400`}>
+            <Link href="/products" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Products</Link>
+            <Link href="/frameforge" className="text-white font-medium" onClick={() => setMenuOpen(false)}>FrameForge</Link>
+            <Link href="/pricing" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Pricing</Link>
           </div>
         </div>
       </nav>
@@ -53,7 +57,7 @@ export default function FrameForgePage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-1.5 text-sm text-violet-300 mb-6">
               <Film className="w-4 h-4" /> Flagship product
             </div>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-[0.95] mb-6">FrameForge</h1>
+            <h1 className="text-4xl md:text-7xl font-black tracking-tight leading-[1.05] mb-6">FrameForge</h1>
             <p className="text-xl text-gray-400 mb-8">Turn a product idea, repo launch or tutorial into a polished AI-generated video workflow.</p>
             <div className="flex flex-wrap gap-4">
               <button onClick={checkout} disabled={loading} className="flex items-center gap-2 bg-gradient-to-r from-violet-600 to-cyan-600 px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition disabled:opacity-50">

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Shield, Check, X, AlertTriangle, Clock, ReceiptText, RefreshCw } from "lucide-react";
+import { Shield, Check, X, AlertTriangle, Clock, ReceiptText, RefreshCw, Menu } from "lucide-react";
 
 type FirewallEvent = {
   id: string;
@@ -42,6 +42,7 @@ export default function FirewallDashboard() {
   const [loading, setLoading] = useState(true);
   const [adminToken, setAdminToken] = useState(() => typeof window === "undefined" ? "" : window.localStorage.getItem("bonanza_firewall_admin_token") || "");
   const [newRequestLoading, setNewRequestLoading] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   function authHeaders(): Record<string, string> {
     return adminToken ? { "x-admin-token": adminToken } : {};
@@ -102,18 +103,26 @@ export default function FirewallDashboard() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#050508] text-white px-6 py-10">
+    <main className="min-h-screen bg-[#050508] text-white px-4 md:px-6 py-10">
       <div className="max-w-6xl mx-auto">
-        <Link href="/" className="text-sm text-gray-500 hover:text-white">← Back to Bonanza Labs</Link>
-        <span className="ml-6 text-sm text-gray-500"><Link href="/products" className="hover:text-white">Products</Link> · <Link href="/pricing" className="hover:text-white">Pricing</Link></span>
+        <nav className="flex items-center justify-between mb-6">
+          <Link href="/" className="text-sm text-gray-500 hover:text-white">← Back</Link>
+          <button className="md:hidden text-gray-400 hover:text-white" onClick={() => setMenuOpen(!menuOpen)}>
+            <Menu className="w-5 h-5" />
+          </button>
+          <div className={`nav-links ${menuOpen ? 'open' : ''} md:flex items-center gap-4 text-sm text-gray-500`}>
+            <Link href="/products" className="hover:text-white" onClick={() => setMenuOpen(false)}>Products</Link>
+            <Link href="/pricing" className="hover:text-white" onClick={() => setMenuOpen(false)}>Pricing</Link>
+          </div>
+        </nav>
 
-        <section className="mt-10 rounded-3xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 via-white/[0.03] to-orange-500/10 p-8">
+        <section className="mt-10 rounded-3xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 via-white/[0.03] to-orange-500/10 p-5 md:p-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 text-sm text-amber-300 mb-5">
                 <Shield className="w-4 h-4" /> Spending Firewall Dashboard
               </div>
-              <h1 className="text-4xl md:text-6xl font-black tracking-tight">Approve agent spend before money moves.</h1>
+              <h1 className="text-3xl md:text-6xl font-black tracking-tight">Approve agent spend before money moves.</h1>
               <p className="mt-5 max-w-2xl text-gray-400 text-lg">
                 Test-mode control center for AI agent spending: policy decisions, risk scores, approval queue, and audit trail.
               </p>
@@ -138,7 +147,7 @@ export default function FirewallDashboard() {
           </div>
         </section>
 
-        <section className="grid md:grid-cols-4 gap-4 mt-8">
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-8">
           {[
             ["Pending", summary.pending, Clock, "text-amber-300"],
             ["Approved/Completed", summary.approved, Check, "text-emerald-300"],
@@ -156,7 +165,7 @@ export default function FirewallDashboard() {
           })}
         </section>
 
-        <section className="mt-8 grid lg:grid-cols-[1.4fr_0.6fr] gap-6">
+        <section className="mt-8 grid grid-cols-1 lg:grid-cols-[1.4fr_0.6fr] gap-6">
           <div className="rounded-3xl border border-white/5 bg-white/[0.02] overflow-hidden">
             <div className="p-6 border-b border-white/5 flex items-center justify-between">
               <h2 className="text-xl font-bold">Approval queue + audit log</h2>

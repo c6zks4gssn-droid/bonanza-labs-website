@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { X } from "lucide-react";
+import { X, Menu } from "lucide-react";
 
 const plans = [
   {
@@ -113,6 +113,7 @@ function CheckoutModal({ product, tier, onClose }: { product: string; tier: stri
 
 export default function PricingPage() {
   const [checkout, setCheckout] = useState<{ product: string; tier: string } | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleCtaClick = (product: string, tier: string, action: string) => {
     if (action === "checkout") {
@@ -130,15 +131,18 @@ export default function PricingPage() {
       <main className="min-h-screen bg-[#0a0a0f] text-white">
         {/* Nav */}
         <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-[#0a0a0f]/70 border-b border-white/5">
-          <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+          <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between relative">
             <Link href="/" className="text-lg font-bold bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">
               Bonanza Labs
             </Link>
-            <div className="flex gap-6 text-sm text-white/60">
-              <Link href="/" className="hover:text-white transition">Home</Link>
-              <Link href="/products" className="hover:text-white transition">Products</Link>
+            <button className="md:hidden text-gray-400 hover:text-white" onClick={() => setMenuOpen(!menuOpen)}>
+              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+            <div className={`nav-links ${menuOpen ? 'open' : ''} md:flex gap-6 text-sm text-white/60`}>
+              <Link href="/" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Home</Link>
+              <Link href="/products" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Products</Link>
               <span className="text-white font-medium">Pricing</span>
-              <a href="https://github.com/c6zks4gssn-droid" target="_blank" className="hover:text-white transition">GitHub</a>
+              <a href="https://github.com/c6zks4gssn-droid" target="_blank" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>GitHub</a>
             </div>
           </div>
         </nav>
@@ -146,7 +150,7 @@ export default function PricingPage() {
         <div className="max-w-6xl mx-auto px-6 pt-32 pb-20">
           {/* Header */}
           <div className="text-center mb-16">
-            <h1 className="text-5xl font-black mb-4">
+            <h1 className="text-4xl md:text-5xl font-black mb-4">
               Simple, transparent pricing
             </h1>
             <p className="text-white/50 text-lg max-w-xl mx-auto">

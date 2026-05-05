@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ExternalLink, Search, Copy, Check } from "lucide-react";
+import { ExternalLink, Search, Copy, Check, Menu, X } from "lucide-react";
 
 const CATEGORIES = [
   { key: "all", label: "All Products" },
@@ -218,6 +218,7 @@ function CopyButton({ text }: { text: string }) {
 export default function ProductsPage() {
   const [category, setCategory] = useState("all");
   const [search, setSearch] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const filtered = PRODUCTS.filter((p) => {
     const matchCat = category === "all" || p.category === category;
@@ -238,17 +239,20 @@ export default function ProductsPage() {
     <main className="min-h-screen bg-[#050508] text-white overflow-x-hidden">
       {/* Nav */}
       <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-[#050508]/80 border-b border-white/5">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between relative">
           <Link href="/" className="flex items-center gap-2">
             <img src="/logo-256.png" alt="Bonanza Labs" className="h-8 w-8 rounded" />
             <span className="font-bold tracking-tight">Bonanza Labs</span>
           </Link>
-          <div className="flex items-center gap-6 text-sm text-gray-400">
-            <a href="/" className="hover:text-white transition">Home</a>
+          <button className="md:hidden text-gray-400 hover:text-white" onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+          <div className={`nav-links ${menuOpen ? 'open' : ''} md:flex items-center gap-6 text-sm text-gray-400`}>
+            <a href="/" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Home</a>
             <span className="text-white font-medium">Products</span>
-            <a href="/pricing" className="hover:text-white transition">Pricing</a>
-            <a href="/firewall" className="hover:text-white transition">Dashboard</a>
-            <a href="https://github.com/c6zks4gssn-droid" className="hover:text-white transition flex items-center gap-1">🐙 GitHub</a>
+            <a href="/pricing" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Pricing</a>
+            <a href="/firewall" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Dashboard</a>
+            <a href="https://github.com/c6zks4gssn-droid" className="hover:text-white transition flex items-center gap-1" onClick={() => setMenuOpen(false)}>🐙 GitHub</a>
           </div>
         </div>
       </nav>
@@ -261,7 +265,7 @@ export default function ProductsPage() {
         </div>
         <div className="relative max-w-5xl mx-auto text-center">
           <p className="text-violet-400 font-semibold tracking-[3px] uppercase text-sm mb-4">14 Open Source Products</p>
-          <h1 className="text-5xl md:text-6xl font-black tracking-tight leading-[0.95] mb-6">
+          <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-[1.05] mb-6">
             Every tool an AI builder needs
           </h1>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
@@ -312,7 +316,7 @@ export default function ProductsPage() {
             </div>
           )}
 
-          <div className="grid md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {filtered.map((p) => (
               <div
                 key={p.name}

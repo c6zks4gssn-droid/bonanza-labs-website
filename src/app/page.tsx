@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Wallet, Terminal, Sparkles, ExternalLink, Check, Copy, BookOpen, X } from "lucide-react";
+import { Wallet, Terminal, Sparkles, ExternalLink, Check, Copy, BookOpen, X, Menu } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -318,6 +318,7 @@ const DOCS = [
 ];
 
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
   const [checkoutProduct, setCheckoutProduct] = useState("");
   const [checkoutTier, setCheckoutTier] = useState("");
@@ -366,19 +367,22 @@ export default function Home() {
     <main className="min-h-screen bg-[#050508] text-white overflow-x-hidden">
       {/* Navbar */}
       <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-[#050508]/80 border-b border-white/5">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between relative">
           <div className="flex items-center gap-2">
             <img src="/logo-256.png" alt="Bonanza Labs" className="h-8 w-8 rounded" />
             <span className="font-bold tracking-tight">Bonanza Labs</span>
           </div>
-          <div className="flex items-center gap-6 text-sm text-gray-400">
-            <a href="#wallet-demo" className="hover:text-white transition">Firewall</a>
-            <a href="/products" className="hover:text-white transition">Products</a>
-            <a href="#pricing" className="hover:text-white transition">Pricing</a>
-            <a href="/firewall" className="hover:text-white transition">Dashboard</a>
-            <a href="#docs" className="hover:text-white transition">Docs</a>
-            <a href="#about" className="hover:text-white transition">About</a>
-            <a href="https://github.com/c6zks4gssn-droid" className="hover:text-white transition flex items-center gap-1">🐙 GitHub <span className="text-xs text-gray-600">20+</span></a>
+          <button className="md:hidden text-gray-400 hover:text-white" onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+          <div className={`nav-links ${menuOpen ? 'open' : ''} md:flex items-center gap-6 text-sm text-gray-400`}>
+            <a href="#wallet-demo" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Firewall</a>
+            <a href="/products" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Products</a>
+            <a href="#pricing" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Pricing</a>
+            <a href="/firewall" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Dashboard</a>
+            <a href="#docs" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Docs</a>
+            <a href="#about" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>About</a>
+            <a href="https://github.com/c6zks4gssn-droid" className="hover:text-white transition flex items-center gap-1" onClick={() => setMenuOpen(false)}>🐙 GitHub <span className="text-xs text-gray-600">20+</span></a>
           </div>
         </div>
       </nav>
@@ -397,14 +401,14 @@ export default function Home() {
             <motion.div variants={fadeUp} custom={0.5} className="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 text-sm text-amber-300">
               <Wallet className="w-3.5 h-3.5" /> Spending Firewall is the flagship
             </motion.div>
-            <motion.h1 variants={fadeUp} custom={1} className="text-5xl md:text-7xl font-black tracking-tight leading-[0.95]">
+            <motion.h1 variants={fadeUp} custom={1} className="hero-title text-5xl md:text-7xl font-black tracking-tight leading-[0.95]">
               The spending firewall for AI agents
             </motion.h1>
-            <motion.p variants={fadeUp} custom={2} className="mt-6 text-xl text-gray-400 max-w-2xl">
+            <motion.p variants={fadeUp} custom={2} className="hero-sub mt-6 text-lg md:text-xl text-gray-400 max-w-2xl">
               Set rules, approve risky payments, block bad vendors, and audit every agent transaction before money moves.
             </motion.p>
             {/* Animated Terminal Demo */}
-            <motion.div variants={fadeUp} custom={2.5} className="mt-8 w-full max-w-2xl mx-auto">
+            <motion.div variants={fadeUp} custom={2.5} className="mt-8 w-full max-w-2xl mx-auto overflow-hidden">
               <div className="rounded-xl border border-white/10 bg-[#0d0d12] overflow-hidden shadow-2xl shadow-violet-500/5">
                 <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/5 bg-white/[0.02]">
                   <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
@@ -415,13 +419,13 @@ export default function Home() {
                 <TerminalDemo />
               </div>
             </motion.div>
-            <div className="flex items-center justify-center gap-3 mt-6 text-xs text-gray-500 flex-wrap">
+            <div className="flex items-center justify-center gap-2 md:gap-3 mt-6 text-xs text-gray-500 flex-wrap px-2">
               <span className="px-2 py-1 rounded bg-white/5 border border-white/10">🔒 Live-key safety block</span>
               <span className="px-2 py-1 rounded bg-white/5 border border-white/10">✅ 11/11 tests passing</span>
               <span className="px-2 py-1 rounded bg-white/5 border border-white/10">💳 Stripe test checkout</span>
               <span className="px-2 py-1 rounded bg-white/5 border border-white/10">🤖 Agent approval flow</span>
             </div>
-            <motion.div variants={fadeUp} custom={3} className="mt-6 flex gap-4 flex-wrap justify-center">
+            <motion.div variants={fadeUp} custom={3} className="mt-6 flex gap-3 md:gap-4 flex-wrap justify-center">
               <a href="#wallet-demo" className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition">
                 <Wallet className="w-4 h-4" /> See Firewall Demo
               </a>
@@ -457,13 +461,13 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="rounded-2xl border border-white/5 bg-white/[0.02] p-8 hover:border-white/10 transition group"
+                className="rounded-2xl border border-white/5 bg-white/[0.02] p-5 md:p-8 hover:border-white/10 transition group"
               >
                 <div className="flex flex-col md:flex-row md:items-start gap-6">
                   <div className="text-5xl">{p.emoji}</div>
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2 flex-wrap">
-                      <h3 className="text-2xl font-bold">Bonanza Labs ✦ {p.name}</h3>
+                      <h3 className="text-xl md:text-2xl font-bold">Bonanza Labs ✦ {p.name}</h3>
                       <span className={`text-xs font-medium px-2 py-0.5 rounded-full bg-gradient-to-r ${p.color} bg-clip-text text-transparent border border-white/10`}>
                         {p.status}
                       </span>
@@ -500,10 +504,10 @@ export default function Home() {
             <motion.div variants={fadeUp} custom={0} className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-sm text-emerald-300 mb-6">
               <BookOpen className="w-3.5 h-3.5" /> Documentation
             </motion.div>
-            <motion.h2 variants={fadeUp} custom={1} className="text-4xl font-black">Get started fast</motion.h2>
+            <motion.h2 variants={fadeUp} custom={1} className="text-3xl md:text-4xl font-black">Get started fast</motion.h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {DOCS.map((doc, i) => (
               <motion.div
                 key={doc.project}
@@ -537,14 +541,14 @@ export default function Home() {
             <motion.div variants={fadeUp} custom={0} className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 text-sm text-amber-300 mb-6">
               <Wallet className="w-3.5 h-3.5" /> Spending Firewall demo
             </motion.div>
-            <motion.h2 variants={fadeUp} custom={1} className="text-4xl font-black mb-4">Policy, risk, approval, and audit before payment.</motion.h2>
+            <motion.h2 variants={fadeUp} custom={1} className="text-3xl md:text-4xl font-black mb-4">Policy, risk, approval, and audit before payment.</motion.h2>
             <motion.p variants={fadeUp} custom={2} className="text-gray-400 max-w-2xl mx-auto">
               Agents can request money, but Bonanza evaluates policy first: allow, deny, or require approval. Live keys stay blocked until explicitly enabled.
             </motion.p>
           </motion.div>
 
           <div className="rounded-3xl border border-amber-500/20 bg-gradient-to-r from-amber-500/10 via-white/[0.03] to-orange-500/10 p-6 md:p-8 mb-8">
-            <div className="grid md:grid-cols-4 gap-4 items-stretch">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 items-stretch">
               {[
                 ["🤖", "Agent asks", "I need to spend $9 for this task."],
                 ["🧮", "Budget check", "Bonanza checks vendor, limits, and risk."],
@@ -556,12 +560,13 @@ export default function Home() {
                   <h3 className="font-bold mb-1">{title}</h3>
                   <p className="text-xs text-gray-500 leading-relaxed">{body}</p>
                   {i < 3 && <div className="hidden md:block absolute top-1/2 -right-3 text-amber-300">→</div>}
+              {i < 3 && i % 2 === 0 && <div className="md:hidden absolute -bottom-2 left-1/2 text-amber-300 text-xs">↓</div>}
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             {[
               ["1", "Budget request", "The agent asks to spend, and Bonanza checks the request against a local budget cap before anything payment-related happens."],
               ["2", "Manual approval", "A human approves or denies the request. No hidden auto-spend, no background purchase."],
@@ -584,7 +589,7 @@ export default function Home() {
             <div className="text-green-400">$ bonanza-agents wallet checkout-test lsrq_xxx</div>
             <div className="mt-4 text-amber-300">✅ Verified locally: 11/11 tests passing · live Stripe keys refused · firewall decisions audited</div>
           </div>
-          <div className="mt-8 grid md:grid-cols-4 gap-4">
+          <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {[
               ["No silent spend", "Every paid action starts as a visible request."],
               ["Test mode first", "Stripe Checkout demo runs without moving real money."],
@@ -608,7 +613,7 @@ export default function Home() {
             <motion.div variants={fadeUp} custom={0} className="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-1.5 text-sm text-violet-300 mb-6">
               <Terminal className="w-3.5 h-3.5" /> Install now
             </motion.div>
-            <motion.h2 variants={fadeUp} custom={1} className="text-4xl font-black mb-4">One toolbox. Every launch.</motion.h2>
+            <motion.h2 variants={fadeUp} custom={1} className="text-3xl md:text-4xl font-black mb-4">One toolbox. Every launch.</motion.h2>
             <motion.p variants={fadeUp} custom={2} className="text-gray-400 mb-10 text-lg">
               <code className="text-violet-400">bonanza</code> — the single command for all Bonanza Labs tools.
             </motion.p>
@@ -637,12 +642,12 @@ export default function Home() {
       {/* Pricing */}
       <section id="pricing" className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl font-black mb-4 text-center">Simple pricing</h2>
+          <h2 className="text-3xl md:text-4xl font-black mb-4 text-center">Simple pricing</h2>
           <p className="text-gray-500 text-center mb-12">Start with a safe test-mode setup. Move live only after approval.</p>
 
           {/* Agent Wallet */}
           <h3 className="text-xl font-bold mb-6 flex items-center gap-2">💰 Agent Wallet</h3>
-          <div className="grid md:grid-cols-3 gap-4 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
             {["Free|$0|1 demo agent · manual approval · Stripe test checkout · live-key safety block|Start Free", "Go Pro|$29/mo|10 agents · approval queue · policy editor · Stripe test flow · setup support|Start Safe Demo", "Enterprise|$199/mo|Unlimited agents · custom policies · live rollout support · SSO · SLA|Request Setup"].map((p, i) => {
               const [price, name, feats, cta] = p.split("|");
               const hl = i === 1;
@@ -660,7 +665,7 @@ export default function Home() {
 
           {/* FrameForge */}
           <h3 className="text-xl font-bold mb-6 flex items-center gap-2">🎬 FrameForge</h3>
-          <div className="grid md:grid-cols-3 gap-4 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
             {["Free|$0|5 videos/mo · 720p · 2 styles|Start Free", "$29/mo|Pro|50 videos · 1080p · All styles · Voice cloning · No watermark|Go Pro", "$199/mo|Enterprise|Unlimited · 4K · API · Custom templates|Contact Us"].map((p, i) => {
               const [price, name, feats, cta] = p.split("|");
               const hl = i === 1;
@@ -678,7 +683,7 @@ export default function Home() {
 
           {/* Fork Doctor */}
           <h3 className="text-xl font-bold mb-6 flex items-center gap-2">🩺 Fork Doctor</h3>
-          <div className="grid md:grid-cols-2 gap-4 max-w-2xl mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mb-12">
             {["Free|$0|5 checks/day · JSON · Public repos|Start Free", "$9/mo|Pro|Unlimited · All formats · Private repos · Auto-fix|Go Pro"].map((p, i) => {
               const [price, name, feats, cta] = p.split("|");
               const hl = i === 1;
@@ -696,7 +701,7 @@ export default function Home() {
 
           {/* Agents */}
           <h3 className="text-xl font-bold mb-6 flex items-center gap-2">🤖 Agents</h3>
-          <div className="grid md:grid-cols-3 gap-4 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
             {["Free|$0|1 agent · Basic tools · 10 tasks/day|Start Free", "$29/mo|Pro|10 agents · All tools · Workflows · API|Go Pro", "$199/mo|Enterprise|Unlimited · Custom models · SSO · SLA|Contact Us"].map((p, i) => {
               const [price, name, feats, cta] = p.split("|");
               const hl = i === 1;
@@ -714,7 +719,7 @@ export default function Home() {
 
           {/* Search */}
           <h3 className="text-xl font-bold mb-6 flex items-center gap-2">🔍 Search</h3>
-          <div className="grid md:grid-cols-2 gap-4 max-w-2xl mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mb-12">
             {["Free|$0|100 searches/day · DuckDuckGo · Caching|Start Free", "$19/mo|Pro|Unlimited · All providers · Extract · API|Go Pro"].map((p, i) => {
               const [price, name, feats, cta] = p.split("|");
               const hl = i === 1;
@@ -732,7 +737,7 @@ export default function Home() {
 
           {/* Webhooks */}
           <h3 className="text-xl font-bold mb-6 flex items-center gap-2">📡 Webhooks</h3>
-          <div className="grid md:grid-cols-2 gap-4 max-w-2xl mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mb-12">
             {["Free|$0|3 endpoints · Basic events|Start Free", "$15/mo|Pro|Unlimited · HMAC · Rules · Agent triggers|Go Pro"].map((p, i) => {
               const [price, name, feats, cta] = p.split("|");
               const hl = i === 1;
@@ -750,7 +755,7 @@ export default function Home() {
 
           {/* Auth + Analytics */}
           <h3 className="text-xl font-bold mb-6 flex items-center gap-2">🔐 Auth + 📊 Analytics</h3>
-          <div className="grid md:grid-cols-2 gap-4 max-w-2xl mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mb-12">
             {["Free|$0|1 agent identity · Basic analytics|Start Free", "$12/mo|Pro|Unlimited · JWT · API keys · AI insights|Go Pro"].map((p, i) => {
               const [price, name, feats, cta] = p.split("|");
               const hl = i === 1;
@@ -767,7 +772,7 @@ export default function Home() {
           </div>
 
           {/* Crypto */}
-          <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-8 text-center">
+          <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-5 md:p-8 text-center">
             <h3 className="text-xl font-bold mb-2">🪙 Pay with Stablecoins</h3>
             <p className="text-gray-500 text-sm max-w-md mx-auto">USDC & USDT on Solana & Base. Choose crypto inside checkout to see the exact plan amount and wallet addresses.</p>
             <button className="mt-4 px-6 py-2.5 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-sm font-medium hover:opacity-90 transition" onClick={() => { setCheckoutProduct("Stablecoins"); setCheckoutTier("Crypto"); setCryptoMode(true); setShowCheckout(true); }}>Pay with Crypto →</button>
@@ -800,7 +805,7 @@ export default function Home() {
           </div>
 
           {/* Testimonial */}
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-violet-500/5 to-cyan-500/5 p-8 mb-8">
+          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-violet-500/5 to-cyan-500/5 p-5 md:p-8 mb-8">
             <p className="text-lg text-gray-300 leading-relaxed mb-4">
               Bonanza Labs is being built in the open: repo health checks, video tooling, agent payments and web automation packaged into simple developer-first tools.
             </p>
@@ -816,7 +821,7 @@ export default function Home() {
           {/* Real Outputs */}
           <div className="mb-8">
             <h3 className="text-xl font-bold mb-4 text-center">Verified build signals</h3>
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
                 <div className="text-xs text-gray-500 mb-2">fork-doctor</div>
                 <div className="font-mono text-sm text-green-400">13/13 checks passed</div>
@@ -852,7 +857,7 @@ export default function Home() {
       {/* Checkout Modal */}
       {showCheckout && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={() => setShowCheckout(false)}>
-          <div className="bg-[#0a0a0f] border border-white/10 rounded-2xl p-8 max-w-md w-full mx-4" onClick={e => e.stopPropagation()}>
+          <div className="bg-[#0a0a0f] border border-white/10 rounded-2xl p-5 md:p-8 max-w-md w-full mx-4" onClick={e => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold">{cryptoMode ? "🪙 Pay with Crypto" : `💳 ${checkoutProduct} ${checkoutTier}`}</h3>
               <button onClick={() => setShowCheckout(false)} className="text-gray-500 hover:text-white"><X className="w-5 h-5" /></button>

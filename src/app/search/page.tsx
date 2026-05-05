@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { CheckCircle2, Search, Terminal, RefreshCw, ExternalLink, Download } from "lucide-react";
+import { CheckCircle2, Search, Terminal, RefreshCw, ExternalLink, Download, Menu, X } from "lucide-react";
 
 const features = [
   "DuckDuckGo search with cached results",
@@ -17,6 +17,7 @@ export default function SearchPage() {
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<Array<{ title: string; url: string; snippet: string }>>([]);
   const [checked, setChecked] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const runDemo = async () => {
     if (!query.trim()) return;
@@ -37,13 +38,16 @@ export default function SearchPage() {
   return (
     <main className="min-h-screen bg-[#050508] text-white overflow-x-hidden">
       <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-[#050508]/80 border-b border-white/5">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between relative">
           <Link href="/" className="flex items-center gap-2 font-bold">
             <img src="/logo-256.png" alt="Bonanza Labs" className="h-8 w-8 rounded" /> Bonanza Labs
           </Link>
-          <div className="flex items-center gap-6 text-sm text-gray-400">
-            <Link href="/products" className="hover:text-white transition">Products</Link>
-            <Link href="/pricing" className="hover:text-white transition">Pricing</Link>
+          <button className="md:hidden text-gray-400 hover:text-white" onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+          <div className={`nav-links ${menuOpen ? 'open' : ''} md:flex items-center gap-6 text-sm text-gray-400`}>
+            <Link href="/products" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Products</Link>
+            <Link href="/pricing" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Pricing</Link>
           </div>
         </div>
       </nav>
@@ -55,7 +59,7 @@ export default function SearchPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-sm text-blue-300 mb-6">
               <Search className="w-4 h-4" /> v0.2.1
             </div>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-[0.95] mb-6">Bonanza Labs ✦ Search</h1>
+            <h1 className="text-4xl md:text-7xl font-black tracking-tight leading-[1.05] mb-6">Bonanza Labs ✦ Search</h1>
             <p className="text-xl text-gray-400 mb-8">AI web search & extract. DuckDuckGo-powered, cached results, clean URLs. Open source Tavily/Exa killer — no API key needed.</p>
             <div className="flex flex-wrap gap-4">
               <a href="https://github.com/c6zks4gssn-droid/bonanza-labs-search" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition">
