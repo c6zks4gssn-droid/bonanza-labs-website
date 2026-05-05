@@ -1,0 +1,31 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Bonanza Labs",
+  "url": "https://bonanza-labs.tiiny.site",
+  "sameAs": [
+    "https://github.com/c6zks4gssn-droid"
+  ],
+  "makesOffer": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Fork Doctor"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "FrameForge"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Agent Wallet"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Bonanza Pay"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Bonanza CLI"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+# Bonanza Labs
+
+> Open source AI tools for builders. Video generation, repo health, agent payments — all open, all free.
+
+## What is Bonanza Labs?
+
+Bonanza Labs is a suite of open source AI developer tools. We build CLI tools, Python packages, and infrastructure for the agentic AI ecosystem. Every tool is MIT licensed, runs locally or in CI, and costs nothing to start.
+
+## Products
+
+### Fork Doctor — Repo Health Checker
+- 13 automated checks for any GitHub repo (CI/CD, CodeQL, Dependabot, pre-commit hooks, SBOM, dev containers, etc.)
+- Auto-fix missing configs with `fork-doctor --fix`
+- Output: JSON, Markdown, or terminal table
+- Install: `pip install fork-doctor`
+- Pricing: Free (5 checks/day) / Pro $9/mo (unlimited, private repos, auto-fix)
+- Verified: PR #29 on claude-ads scored 13/13 on GitHub Actions
+- URL: https://bonanza-labs.com/fork-doctor
+
+### FrameForge — AI Video Generator
+- Script → Voiceover → Video in minutes
+- 4 styles: viral, corporate, product, explainer
+- 3 formats: 16:9, 9:16, 1:1
+- Edge-TTS voiceover with 100+ voices
+- Install: `pip install bonanza-labs[video]`
+- Pricing: Free (5 videos/mo) / Pro $29/mo (50 videos, 1080p, voice cloning)
+
+### Agent Wallet — AI Payment Infrastructure
+- Policy-based wallets for AI agents
+- Auto-approve under $X, human approval above
+- Multi-chain: Solana, Base (USDC/USD1)
+- REST API + CLI
+- Install: `pip install bonanza-wallet`
+- Pricing: Free (1 agent) / Pro $29/mo (10 agents, all chains)
+
+### Other Tools
+- **Agents**: Multi-agent orchestration framework (6 built-in tools)
+- **Search**: DuckDuckGo-powered web search + extraction
+- **Webhooks**: Webhook hub for AI agents (GitHub, Stripe triggers)
+- **Auth**: Agent identity, API keys, JWT tokens
+- **Pay**: Stripe + stablecoin payments (x402 protocol)
+- **Analytics**: Privacy-first analytics (no cookies, no PII)
+- **GEO/SEO**: AI search optimization (20-point audit, llms.txt, JSON-LD)
+- **Spectrum**: Multi-channel messaging (iMessage, WhatsApp, Telegram, Discord, Slack)
+- **Voicebox**: 7 TTS engines, voice cloning, 23 languages
+- **Reflexio**: Agent self-improvement (81% fewer planning steps)
+- **Clearwing**: Autonomous vulnerability scanner (63 bind-tools)
+
+## Affiliate Program
+
+Earn 30% recurring commission for 12 months on every customer you refer. If your referral pays $29/mo, you earn $8.70/mo for a full year. Apply at https://bonanza-labs.com/affiliate
+
+Commission tiers:
+- 1-10 referrals/mo: 20% commission
+- 11-50 referrals/mo: 30% commission
+- 51+ referrals/mo: 40% commission
+
+Tools we recommend (affiliate links):
+- Cursor (AI code editor) — 20% recurring × 12mo
+- Vercel (hosting) — $10 per signup
+- Railway (deploy) — $5 per signup
+- Supabase (backend) — $10 per signup
+
+## Blog
+
+- [Why Your GitHub Repo Is Losing Trust](https://bonanza-labs.com/blog/why-your-github-repo-is-losing-trust) — 5 min read
+- [13 Checks Every Open Source Project Needs in 2026](https://bonanza-labs.com/blog/13-checks-every-open-source-project-needs-2026) — 4 min read
+- [AI Agents That Pay: Building a Policy-Based Wallet](https://bonanza-labs.com/blog/ai-agents-that-pay-building-a-policy-based-wallet) — 6 min read
+
+## Pricing
+
+All tools start free. Pro plans from $9/mo. Enterprise available. Cancel anytime.
+
+## Contact
+
+- GitHub: https://github.com/c6zks4gssn-droid
+- Email: passiveassets@proton.me
+- Affiliate Program: https://bonanza-labs.com/affiliate
+
+## Stats
+
+- 441+ monthly downloads (PyPI)
+- 12 CLI tools
+- 20+ GitHub repos
+- MIT licensed, zero vendor lock-in
