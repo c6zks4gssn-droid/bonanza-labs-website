@@ -40,7 +40,7 @@ body {
   }
 }
 
-/* Overflow fix for mobile */
+/* Mobile overflow fix */
 @media (max-width: 767px) {
   body {
     overflow-x: hidden;
