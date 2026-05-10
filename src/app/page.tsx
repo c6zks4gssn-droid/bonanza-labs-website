@@ -378,6 +378,7 @@ export default function Home() {
           <div className={`nav-links ${menuOpen ? 'open' : ''} md:flex items-center gap-6 text-sm text-gray-400`}>
             <a href="#wallet-demo" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Firewall</a>
             <a href="/products" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Products</a>
+            <a href="/gasvrij" className="hover:text-white transition text-emerald-400" onClick={() => setMenuOpen(false)}>🌱 GasVrij</a>
             <a href="#pricing" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Pricing</a>
             <a href="/firewall" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Dashboard</a>
             <a href="#docs" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Docs</a>
