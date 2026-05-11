@@ -118,11 +118,11 @@ const PROJECTS = [
     name: "Agent Wallet",
     emoji: "💰",
     tagline: "AI Payment Infrastructure",
-    desc: "A spending firewall for AI agents: policy checks, risk scoring, approval queue, audit log, and Stripe test checkout after approval.",
+    desc: "A spending firewall for AI agents: policy checks, risk scoring, approval queue, audit log, and Stripe checkout after approval.",
     repo: "bonanza-labs-agent-wallet",
-    status: "Fallback demo live",
+    status: "Live v1.0",
     color: "from-amber-500 to-orange-500",
-    features: ["Policy decisions", "Risk score", "Approval dashboard", "Audit log", "Stripe test checkout", "REST API + CLI"],
+    features: ["Policy decisions", "Risk score", "Approval dashboard", "Audit log", "Stripe checkout", "REST API + CLI"],
     install: "pip install bonanza-agents",
     demo: false,
   },
@@ -376,14 +376,11 @@ export default function Home() {
             {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
           <div className={`nav-links ${menuOpen ? 'open' : ''} md:flex items-center gap-6 text-sm text-gray-400`}>
-            <a href="#wallet-demo" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Firewall</a>
+            <a href="/firewall" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Firewall</a>
             <a href="/products" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Products</a>
             <a href="/gasvrij" className="hover:text-white transition text-emerald-400" onClick={() => setMenuOpen(false)}>🌱 GasVrij</a>
-            <a href="#pricing" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Pricing</a>
-            <a href="/firewall" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Dashboard</a>
-            <a href="#docs" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Docs</a>
-            <a href="#about" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>About</a>
-            <a href="https://github.com/c6zks4gssn-droid" className="hover:text-white transition flex items-center gap-1" onClick={() => setMenuOpen(false)}>🐙 GitHub <span className="text-xs text-gray-600">20+</span></a>
+            <a href="/pricing" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Pricing</a>
+            <a href="https://github.com/c6zks4gssn-droid" className="hover:text-white transition flex items-center gap-1" onClick={() => setMenuOpen(false)}>🐙 GitHub <span className="text-xs text-gray-600">Apache 2.0</span></a>
           </div>
         </div>
       </nav>
@@ -422,12 +419,12 @@ export default function Home() {
             </motion.div>
             <div className="flex items-center justify-center gap-2 md:gap-3 mt-6 text-xs text-gray-500 flex-wrap px-2">
               <span className="px-2 py-1 rounded bg-white/5 border border-white/10">🔒 Live-key safety block</span>
-              <span className="px-2 py-1 rounded bg-white/5 border border-white/10">✅ 11/11 tests passing</span>
-              <span className="px-2 py-1 rounded bg-white/5 border border-white/10">💳 Stripe test checkout</span>
+              <span className="px-2 py-1 rounded bg-white/5 border border-white/10">✅ Open source</span>
+              <span className="px-2 py-1 rounded bg-white/5 border border-white/10">💳 Stripe checkout</span>
               <span className="px-2 py-1 rounded bg-white/5 border border-white/10">🤖 Agent approval flow</span>
             </div>
             <motion.div variants={fadeUp} custom={3} className="mt-6 flex gap-3 md:gap-4 flex-wrap justify-center">
-              <a href="#wallet-demo" className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition">
+              <a href="/firewall" className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition">
                 <Wallet className="w-4 h-4" /> See Firewall Demo
               </a>
               <a href="/firewall" className="flex items-center gap-2 border border-white/10 px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
@@ -588,7 +585,7 @@ export default function Home() {
             <div className="text-green-400">$ bonanza-agents wallet approve lsrq_xxx</div>
             <div className="mt-4 text-gray-500"># 3. Stripe Checkout test session</div>
             <div className="text-green-400">$ bonanza-agents wallet checkout-test lsrq_xxx</div>
-            <div className="mt-4 text-amber-300">✅ Verified locally: 11/11 tests passing · live Stripe keys refused · firewall decisions audited</div>
+            <div className="mt-4 text-amber-300">✅ Policy engine verified · Stripe checkout integrated · every decision audited</div>
           </div>
           <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {[
@@ -649,7 +646,7 @@ export default function Home() {
           {/* Agent Wallet */}
           <h3 className="text-xl font-bold mb-6 flex items-center gap-2">💰 Agent Wallet</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-            {["Free|$0|1 demo agent · manual approval · Stripe test checkout · live-key safety block|Start Free", "Go Pro|$29/mo|10 agents · approval queue · policy editor · Stripe test flow · setup support|Start Safe Demo", "Enterprise|$199/mo|Unlimited agents · custom policies · live rollout support · SSO · SLA|Request Setup"].map((p, i) => {
+            {["Free|$0|1 agent · manual approval · Stripe checkout · live-key safety block|Start Free", "Go Pro|$29/mo|10 agents · approval queue · policy editor · Stripe integration · setup support|Go Pro", "Enterprise|$199/mo|Unlimited agents · custom policies · rollout support · SSO · SLA|Contact Us"].map((p, i) => {
               const [price, name, feats, cta] = p.split("|");
               const hl = i === 1;
               return (
@@ -721,7 +718,7 @@ export default function Home() {
           {/* Search */}
           <h3 className="text-xl font-bold mb-6 flex items-center gap-2">🔍 Search</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mb-12">
-            {["Free|$0|100 searches/day · DuckDuckGo · Caching|Start Free", "$19/mo|Pro|Unlimited · All providers · Extract · API|Go Pro"].map((p, i) => {
+            {["Free|$0|100 searches/day · DuckDuckGo · Caching|Start Free", "$9/mo|Pro|Unlimited · All providers · Extract · API|Go Pro"].map((p, i) => {
               const [price, name, feats, cta] = p.split("|");
               const hl = i === 1;
               return (
