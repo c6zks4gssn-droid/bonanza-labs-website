@@ -1,0 +1,42 @@
+# Bonanza Labs
+> Open source AI tools for builders. Video generation, repo health checking, agent payments, webhooks, search, and more.
+
+## Products
+
+### 🩺 Fork Doctor
+Repo health checker — 13 automated checks for CI/CD, security, SBOM, Dev Containers, licensing, README quality.
+- Free: 5 checks/day, JSON output, public repos
+- Pro ($9/mo): Unlimited, all formats, private repos, auto-fix
+
+### 🎬 FrameForge
+AI video generator — type a topic, pick a style, get a polished MP4.
+- Free: 5 videos/mo, 720p, 2 styles
+- Pro ($29/mo): 50 videos, 1080p, all styles, voice cloning
+
+### 💰 Agent Wallet
+Policy-based wallets for AI agents. Auto-approve under $X, human approval above.
+- Free: 1 agent, $50/mo limit, Solana
+- Pro ($29/mo): 10 agents, $5K/mo, all chains, policy editor
+
+### 🤖 Agents
+AI agent orchestration framework with built-in tools.
+- Free: 1 agent, basic tools, 10 tasks/day
+- Pro ($29/mo): 10 agents, all tools, workflows, API
+
+## Quick Start
+```bash
+pip install fork-doctor
+fork-doctor openclaw/openclaw
+
+pip install bonanza-labs[video]
+bonanza video "AI Agents" --style viral --format 9:16
+```
+
+## Pricing
+All tools have free tiers. Paid plans start at $9/mo.
+Crypto accepted: USDC/USDT on Solana, Base, BSC.
+
+## Links
+- Website: https://bonanza-labs.com
+- GitHub: https://github.com/c6zks4gssn-droid
+- Docs: https://github.com/c6zks4gssn-droid/bonanza-labs-fork-doctor
