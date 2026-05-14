@@ -93,7 +93,7 @@ const plans = [
       "Job posting monitoring",
       "3-day free trial",
     ],
-    cta: "Start Free Trial",
+    cta: "Join Early Access",
     popular: false,
   },
   {
@@ -109,7 +109,7 @@ const plans = [
       "Review tracking",
       "Priority alerts",
     ],
-    cta: "Start Free Trial",
+    cta: "Join Early Access",
     popular: true,
   },
   {
@@ -219,7 +219,7 @@ export default function IntelPage() {
               className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-medium transition-colors"
             >
               <Send className="w-4 h-4" />
-              Start 3-Day Free Trial
+              Join Early Access
             </a>
             <a
               href="#how"
@@ -236,7 +236,7 @@ export default function IntelPage() {
             transition={{ delay: 0.6 }}
             className="mt-4 text-xs text-gray-600"
           >
-            No credit card required • 5-minute setup • Cancel anytime
+            Early access · No credit card · Cancel anytime
           </motion.p>
         </div>
       </section>
@@ -406,7 +406,7 @@ export default function IntelPage() {
               Indie pricing, not enterprise pricing
             </h2>
             <p className="text-gray-400">
-              Start free for 3 days. No credit card. Cancel anytime.
+              Early access now · Founding pricing · Cancel anytime.
             </p>
           </div>
 
@@ -473,8 +473,12 @@ export default function IntelPage() {
           </h2>
           {[
             {
+              q: "When can I start using Bonanza Intel?",
+              a: "We're onboarding early access users now. Join via our Telegram bot and you'll get access within days — plus founding pricing when we launch publicly.",
+            },
+            {
               q: "How does the free trial work?",
-              a: "Sign up via our Telegram bot, add your competitors, and get daily briefs for 3 days — no credit card needed. After the trial, pick a plan to continue.",
+              a: "Early access users get a free trial with 1 competitor. After the trial, Scout plan starts at €29/mo for 3 competitors.",
             },
             {
               q: "What if my competitor's site blocks scrapers?",
@@ -532,10 +536,10 @@ export default function IntelPage() {
               className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-500 rounded-lg font-medium text-lg transition-colors"
             >
               <Send className="w-5 h-5" />
-              Start Your Free Trial
+              Join Early Access
             </a>
             <p className="mt-4 text-xs text-gray-600">
-              3 days free • €29/mo after • Cancel anytime
+              Early access · €29/mo after trial · Cancel anytime
             </p>
           </motion.div>
         </div>
