@@ -215,7 +215,7 @@ export default function IntelPage() {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <a
-              href="https://t.me/BonanzaIntelBot"
+              href="https://t.me/BonanzaIntel_bot"
               className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-medium transition-colors"
             >
               <Send className="w-4 h-4" />
@@ -266,7 +266,7 @@ export default function IntelPage() {
               {
                 step: "1",
                 title: "Add your competitors",
-                desc: "Drop up to 5 URLs. We handle the rest — no complex setup, no tags to configure.",
+                desc: "Drop up to 5 URLs. For example: /add https://crayon.com Crayon",
                 icon: Target,
               },
               {
@@ -450,7 +450,7 @@ export default function IntelPage() {
                   ))}
                 </ul>
                 <a
-                  href="https://t.me/BonanzaIntelBot"
+                  href="https://t.me/BonanzaIntel_bot"
                   className={`block text-center py-3 rounded-lg font-medium transition-colors ${
                     plan.popular
                       ? "bg-blue-600 hover:bg-blue-500 text-white"
@@ -528,7 +528,7 @@ export default function IntelPage() {
               signals — every morning, in your Telegram.
             </p>
             <a
-              href="https://t.me/BonanzaIntelBot"
+              href="https://t.me/BonanzaIntel_bot"
               className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-500 rounded-lg font-medium text-lg transition-colors"
             >
               <Send className="w-5 h-5" />
