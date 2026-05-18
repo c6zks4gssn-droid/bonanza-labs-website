@@ -165,6 +165,25 @@ export default function FirewallDashboard() {
           })}
         </section>
 
+        {/* Interactive Demo */}
+        <section className="mt-8 rounded-3xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 via-white/[0.03] to-cyan-500/10 p-5 md:p-8">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">Try it now</h2>
+          <p className="text-gray-400 mb-6">Install the Bonanza packages and see the firewall in action.</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { pkg: "bonanza-x402", desc: "Spending firewall for HTTP 402 protocol", cmd: "pip install bonanza-x402" },
+              { pkg: "bonanza-mcp", desc: "MCP server for AI agent payments (7 tools)", cmd: "pip install bonanza-mcp" },
+              { pkg: "bonanza-guard", desc: "Security guardrails — 28 injection + 9 PII patterns", cmd: "pip install bonanza-guard" },
+            ].map((p) => (
+              <div key={p.pkg} className="rounded-2xl border border-white/5 bg-black/30 p-5">
+                <div className="text-emerald-300 font-mono text-sm mb-2">{p.pkg}</div>
+                <p className="text-gray-500 text-xs mb-3">{p.desc}</p>
+                <code className="block rounded-lg bg-black/50 border border-white/5 px-3 py-2 text-xs text-green-400 font-mono">{p.cmd}</code>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section className="mt-8 grid grid-cols-1 lg:grid-cols-[1.4fr_0.6fr] gap-6">
           <div className="rounded-3xl border border-white/5 bg-white/[0.02] overflow-hidden">
             <div className="p-6 border-b border-white/5 flex items-center justify-between">
@@ -213,11 +232,20 @@ export default function FirewallDashboard() {
             </div>
 
             <div className="rounded-3xl border border-white/5 bg-[#0a0a12] p-6 font-mono text-xs text-gray-400">
-              <div className="flex items-center gap-2 text-white font-sans font-bold text-base mb-4"><ReceiptText className="w-4 h-4" /> CLI demo</div>
-              <p className="text-green-400">$ bonanza-agents wallet request --firewall --merchant-name OpenAI --amount 1200</p>
-              <p className="mt-4 text-amber-300">→ require_approval · risk 15/100</p>
-              <p className="mt-4 text-green-400">$ bonanza-agents wallet approve lsrq_xxx</p>
-              <p className="mt-4 text-green-400">$ bonanza-agents wallet checkout-test lsrq_xxx</p>
+              <div className="flex items-center gap-2 text-white font-sans font-bold text-base mb-4"><ReceiptText className="w-4 h-4" /> Python demo</div>
+              <p className="text-green-400">from bonanza_x402 import Firewall, Policy</p>
+              <p className="mt-1 text-gray-500"># Configure the spending firewall</p>
+              <p className="mt-1 text-green-400">policy = Policy(max_spend_usd=10,</p>
+              <p className="text-green-400">  require_approval_above=5,</p>
+              <p className="text-green-400">  trusted_vendors=["api.weather.com"])</p>
+              <p className="mt-2 text-green-400">fw = Firewall(policy=policy)</p>
+              <p className="mt-2 text-gray-500"># Evaluate a payment request</p>
+              <p className="mt-1 text-green-400">result = fw.evaluate(amount=3.00,</p>
+              <p className="text-green-400">  vendor="api.weather.com")</p>
+              <p className="mt-2 text-emerald-300">→ approved · risk 0.20 · LOW</p>
+              <p className="mt-3 text-green-400">result = fw.evaluate(amount=8.00,</p>
+              <p className="text-green-400">  vendor="unknown.com")</p>
+              <p className="mt-2 text-red-300">→ blocked · vendor not trusted</p>
             </div>
           </aside>
         </section>
