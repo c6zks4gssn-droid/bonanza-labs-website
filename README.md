@@ -25,15 +25,18 @@ bonanza-labs-website/
 ├── packages/
 │   ├── agent-wallet/       # 💰 Spending firewall for AI agents
 │   ├── agents/             # 🤖 Agent CLI (pip install bonanza-agents)
+│   ├── approve/            # ✅ Human-in-the-loop approval gateway
 │   ├── cli/                # 🧨 Unified CLI (pip install bonanza-labs)
 │   ├── fork-doctor/        # 🩺 Repo health checker
 │   ├── frameforge/         # 🎬 AI video generator
+│   ├── guard/              # 🛡️ Security guardrails for AI agents
+│   ├── observe/            # 📊 AI agent cost observability
 │   ├── pay/                # 💳 Stripe + Stablecoin payments
-│   ├── analytics/          # 📊 Bonanza analytics
-│   ├── webhooks/           # 🔗 Webhook handlers
 │   ├── search/             # 🔍 Search utilities
 │   ├── auth/               # 🔐 Authentication
-│   └── app-forge/          # 🏗️ App scaffolding
+│   ├── app-forge/          # 🏗️ App scaffolding
+│   ├── x402-adapter/       # 🔌 x402 protocol adapter (pip install bonanza-x402)
+│   └── mcp/                # 🤖 MCP server (pip install bonanza-mcp)
 └── README.md
 ```
 

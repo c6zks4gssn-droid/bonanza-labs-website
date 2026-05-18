@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bonanza-observe"
+version = "0.1.0"
+description = "AI agent cost observability — track spending, latency, and token usage across all your agent sessions"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+authors = [{name = "Bonanza Labs", email = "passiveassets@proton.me"}]
+keywords = ["ai", "agent", "observability", "cost", "spending", "latency", "monitoring", "audit"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = ["pydantic>=2.0", "httpx>=0.24"]
+
+[project.urls]
+Homepage = "https://bonanza-labs.com"
+Repository = "https://github.com/c6zks4gssn-droid/bonanza-labs-website"
+
+[tool.setuptools.packages.find]
+where = ["src"]
