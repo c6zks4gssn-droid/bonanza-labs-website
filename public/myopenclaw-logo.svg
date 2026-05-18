@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" width="480" height="480">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&amp;display=swap');
+    </style>
+    <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3a9e5f" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#3a9e5f" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="480" height="480" fill="#080808"/>
+
+  <!-- Subtle grid -->
+  <g opacity="0.04" stroke="#3a9e5f" stroke-width="0.5">
+    <line x1="0" y1="60" x2="480" y2="60"/>
+    <line x1="0" y1="120" x2="480" y2="120"/>
+    <line x1="0" y1="180" x2="480" y2="180"/>
+    <line x1="0" y1="240" x2="480" y2="240"/>
+    <line x1="0" y1="300" x2="480" y2="300"/>
+    <line x1="0" y1="360" x2="480" y2="360"/>
+    <line x1="0" y1="420" x2="480" y2="420"/>
+    <line x1="60" y1="0" x2="60" y2="480"/>
+    <line x1="120" y1="0" x2="120" y2="480"/>
+    <line x1="180" y1="0" x2="180" y2="480"/>
+    <line x1="240" y1="0" x2="240" y2="480"/>
+    <line x1="300" y1="0" x2="300" y2="480"/>
+    <line x1="360" y1="0" x2="360" y2="480"/>
+    <line x1="420" y1="0" x2="420" y2="480"/>
+  </g>
+
+  <!-- Gold glow behind gear -->
+  <circle cx="240" cy="185" r="130" fill="url(#glowGrad)"/>
+
+  <!-- Gold accent ring (outer) -->
+  <circle cx="240" cy="185" r="112" fill="none" stroke="#3a9e5f" stroke-width="0.8" opacity="0.4"/>
+  <circle cx="240" cy="185" r="120" fill="none" stroke="#3a9e5f" stroke-width="0.4" opacity="0.2"/>
+
+  <!-- ═══ GEAR ICON ═══ -->
+  <!-- The gear body - main dark circle with teeth -->
+  <g filter="url(#shadow)" transform="translate(240,185)">
+
+    <!-- Gear teeth — 12 teeth evenly spaced -->
+    <g fill="#e8e4dc">
+      <!-- Each tooth is a rounded rect rotated around center -->
+      <rect x="-10" y="-105" width="20" height="26" rx="3" transform="rotate(0)"/>
+      <rect x="-10" y="-105" width="20" height="26" rx="3" transform="rotate(30)"/>
+      <rect x="-10" y="-105" width="20" height="26" rx="3" transform="rotate(60)"/>
+      <rect x="-10" y="-105" width="20" height="26" rx="3" transform="rotate(90)"/>
+      <rect x="-10" y="-105" width="20" height="26" rx="3" transform="rotate(120)"/>
+      <rect x="-10" y="-105" width="20" height="26" rx="3" transform="rotate(150)"/>
+      <rect x="-10" y="-105" width="20" height="26" rx="3" transform="rotate(180)"/>
+      <rect x="-10" y="-105" width="20" height="26" rx="3" transform="rotate(210)"/>
+      <rect x="-10" y="-105" width="20" height="26" rx="3" transform="rotate(240)"/>
+      <rect x="-10" y="-105" width="20" height="26" rx="3" transform="rotate(270)"/>
+      <rect x="-10" y="-105" width="20" height="26" rx="3" transform="rotate(300)"/>
+      <rect x="-10" y="-105" width="20" height="26" rx="3" transform="rotate(330)"/>
+    </g>
+
+    <!-- Gear outer body -->
+    <circle r="92" fill="#1e2d3d"/>
+
+    <!-- Gear inner ring (lighter) -->
+    <circle r="72" fill="#243447"/>
+
+    <!-- Gold accent inner ring -->
+    <circle r="66" fill="none" stroke="#3a9e5f" stroke-width="1.5" opacity="0.5"/>
+
+    <!-- Gear hole -->
+    <circle r="38" fill="#080808"/>
+
+    <!-- Inner hole ring -->
+    <circle r="34" fill="none" stroke="#1e2d3d" stroke-width="3"/>
+
+    <!-- Center dot -->
+    <circle r="6" fill="#3a9e5f" opacity="0.8"/>
+
+    <!-- Spoke details -->
+    <g stroke="#1a2635" stroke-width="6" opacity="0.6">
+      <line x1="0" y1="-60" x2="0" y2="-38"/>
+      <line x1="0" y1="38" x2="0" y2="60"/>
+      <line x1="-60" y1="0" x2="-38" y2="0"/>
+      <line x1="38" y1="0" x2="60" y2="0"/>
+      <line x1="-42" y1="-42" x2="-27" y2="-27"/>
+      <line x1="27" y1="27" x2="42" y2="42"/>
+      <line x1="42" y1="-42" x2="27" y2="-27"/>
+      <line x1="-27" y1="27" x2="-42" y2="42"/>
+    </g>
+
+    <!-- Side bolt/pin (like original) -->
+    <rect x="90" y="-5" width="22" height="10" rx="2" fill="#e8e4dc"/>
+    <rect x="-112" y="-5" width="22" height="10" rx="2" fill="#e8e4dc"/>
+
+    <!-- Small diagonal marks (like original logo detail) -->
+    <line x1="-68" y1="68" x2="-55" y2="55" stroke="#e8e4dc" stroke-width="7" stroke-linecap="round" opacity="0.7"/>
+  </g>
+
+  <!-- ═══ TEXT ═══ -->
+  <!-- "myopenclaw" — white/cream -->
+  <text
+    x="240"
+    y="338"
+    text-anchor="middle"
+    font-family="'Syne', 'Arial Black', sans-serif"
+    font-weight="800"
+    font-size="52"
+    letter-spacing="-1"
+    fill="#f0ede6"
+  >myopenclaw</text>
+
+  <!-- ".agent" — green -->
+  <text
+    x="240"
+    y="388"
+    text-anchor="middle"
+    font-family="'Syne', 'Arial Black', 'Trebuchet MS', sans-serif"
+    font-weight="700"
+    font-size="22"
+    letter-spacing="6"
+    fill="#3a9e5f"
+  >.agent</text>
+
+  <!-- Divider line under .agent -->
+  <line x1="200" y1="408" x2="280" y2="408" stroke="#3a9e5f" stroke-width="1" opacity="0.5"/>
+
+  <!-- Tagline -->
+  <text
+    x="240"
+    y="438"
+    text-anchor="middle"
+    font-family="'DM Mono', 'Courier New', monospace"
+    font-size="11"
+    letter-spacing="2.5"
+    fill="#555"
+  >AI · WEB3 · TRADING</text>
+
+</svg>

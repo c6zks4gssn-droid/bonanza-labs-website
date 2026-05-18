@@ -1,8 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+
+
 import { useState, useEffect } from "react";
 import { Wallet, Terminal, Sparkles, ExternalLink, Check, Copy, BookOpen, X, Menu } from "lucide-react";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -187,6 +190,19 @@ const PROJECTS = [
     demo: false,
   },
   {
+    name: "AiToEarn",
+    emoji: "🤖",
+    tagline: "AI Content Marketing Agent",
+    desc: "14k+ stars. Automate content creation, publishing and monetization across 13+ platforms. TikTok, X, YouTube, Instagram, Pinterest, LinkedIn. OpenClaw + MCP compatible.",
+    repo: "https://github.com/yikart/AiToEarn",
+    status: "14.2k ⭐",
+    color: "from-cyan-500 to-blue-500",
+    features: ["13+ platforms", "AI content creation", "Monetization (CPS/CPE/CPM)", "OpenClaw plugin", "MCP protocol"],
+    install: "aitoearn.ai",
+    demo: true,
+    featured: true,
+  },
+  {
     name: "GEO/SEO",
     emoji: "🔍",
     tagline: "AI Search Optimization",
@@ -369,7 +385,7 @@ export default function Home() {
       <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-[#050508]/80 border-b border-white/5">
         <div className="max-w-6xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between relative">
           <div className="flex items-center gap-2">
-            <img src="/logo-256.png" alt="Bonanza Labs" className="h-8 w-8 rounded" />
+            <img src="/logo.png" alt="Bonanza Labs" className="h-10" />
             <span className="font-bold tracking-tight">Bonanza Labs</span>
           </div>
           <button className="md:hidden text-gray-400 hover:text-white" onClick={() => setMenuOpen(!menuOpen)}>
@@ -378,9 +394,12 @@ export default function Home() {
           <div className={`nav-links ${menuOpen ? 'open' : ''} md:flex items-center gap-6 text-sm text-gray-400`}>
             <a href="/firewall" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Firewall</a>
             <a href="/products" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Products</a>
+            <a href="/quiz" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Quiz</a>
+            <a href="/prompts" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Prompts</a>
             <a href="/gasvrij" className="hover:text-white transition text-emerald-400" onClick={() => setMenuOpen(false)}>🌱 GasVrij</a>
             <a href="/pricing" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Pricing</a>
             <a href="https://github.com/c6zks4gssn-droid" className="hover:text-white transition flex items-center gap-1" onClick={() => setMenuOpen(false)}>🐙 GitHub <span className="text-xs text-gray-600">Apache 2.0</span></a>
+            <LanguageSwitcher />
           </div>
         </div>
       </nav>
@@ -394,7 +413,7 @@ export default function Home() {
         <div className="relative max-w-4xl mx-auto text-center">
           <motion.div initial="hidden" animate="visible" variants={stagger} className="flex flex-col items-center">
             <motion.div variants={fadeUp} custom={0} className="mb-6">
-              <img src="/logo.png" alt="Bonanza Labs" className="w-32 h-32 mx-auto rounded-2xl" />
+              <img src="/logo.png" alt="Bonanza Labs" className="w-52 mx-auto" />
             </motion.div>
             <motion.div variants={fadeUp} custom={0.5} className="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 text-sm text-amber-300">
               <Wallet className="w-3.5 h-3.5" /> Spending Firewall is the flagship
@@ -452,7 +471,7 @@ export default function Home() {
           </motion.div>
 
           <div className="space-y-6">
-            {PROJECTS.filter((p) => ["Agent Wallet", "Fork Doctor", "FrameForge"].includes(p.name)).sort((a, b) => ["Agent Wallet", "Fork Doctor", "FrameForge"].indexOf(a.name) - ["Agent Wallet", "Fork Doctor", "FrameForge"].indexOf(b.name)).map((p, i) => (
+            {PROJECTS.filter((p) => ["Agent Wallet", "Fork Doctor", "FrameForge", "AiToEarn"].includes(p.name)).sort((a, b) => ["Agent Wallet", "Fork Doctor", "FrameForge", "AiToEarn"].indexOf(a.name) - ["Agent Wallet", "Fork Doctor", "FrameForge", "AiToEarn"].indexOf(b.name)).map((p, i) => (
               <motion.div
                 key={p.name}
                 initial={{ opacity: 0, y: 30 }}
@@ -810,7 +829,8 @@ export default function Home() {
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-gradient-to-r from-violet-500 to-cyan-500 flex items-center justify-center font-bold">B</div>
               <div>
-                <div className="font-semibold text-sm">Bonanza Labs Team</div>
+                <img src="/logo.png" alt="Bonanza Labs" className="h-6" />
+                <div className="font-semibold text-sm">Bonanza Labs</div>
                 <div className="text-xs text-gray-500">Built in public</div>
               </div>
             </div>
@@ -841,14 +861,45 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 py-12 px-6">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
-            <img src="/logo-256.png" alt="Bonanza Labs" className="h-6 w-6 rounded" />
-            <span className="font-bold">Bonanza Labs</span>
+      <footer className="border-t border-white/5 py-16 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+            <div>
+              <img src="/logo.png" alt="Bonanza Labs" className="h-8 mb-4" />
+              <p className="text-sm text-gray-500 leading-relaxed">Open source AI tools for builders. Set rules, approve risky payments, block bad vendors.</p>
+            </div>
+            <div>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-4">Products</h4>
+              <ul className="space-y-2.5">
+                <li><a href="/firewall" className="text-sm text-gray-500 hover:text-white transition">Firewall</a></li>
+                <li><a href="/tenderai" className="text-sm text-gray-500 hover:text-white transition">TenderAI</a></li>
+                <li><a href="/gasvrij" className="text-sm text-gray-500 hover:text-white transition">GasVrij</a></li>
+                <li><a href="/products" className="text-sm text-gray-500 hover:text-white transition">All Products</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-4">Resources</h4>
+              <ul className="space-y-2.5">
+                <li><a href="/pricing" className="text-sm text-gray-500 hover:text-white transition">Pricing</a></li>
+                <li><a href="/quiz" className="text-sm text-gray-500 hover:text-white transition">Quiz</a></li>
+                <li><a href="/prompts" className="text-sm text-gray-500 hover:text-white transition">Prompts</a></li>
+                <li><a href="/intel" className="text-sm text-gray-500 hover:text-white transition">Intel</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-4">Community</h4>
+              <ul className="space-y-2.5">
+                <li><a href="https://github.com/c6zks4gssn-droid" className="text-sm text-gray-500 hover:text-white transition flex items-center gap-1.5">🐙 GitHub</a></li>
+                <li><a href="/search" className="text-sm text-gray-500 hover:text-white transition">🔍 Search</a></li>
+              </ul>
+            </div>
           </div>
-          <p className="text-sm text-gray-600">© 2026 Bonanza Labs — Open source AI tools for builders</p>
-          <a href="https://github.com/c6zks4gssn-droid" className="text-sm text-gray-600 hover:text-white transition flex items-center gap-1">🐙 GitHub</a>
+          <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-xs text-gray-600">© 2026 Bonanza Labs — Open source AI tools for builders</p>
+            <div className="flex items-center gap-4 text-xs text-gray-600">
+              <span>Apache 2.0 License</span>
+            </div>
+          </div>
         </div>
       </footer>
 

@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bonanza-wallet"
+version = "0.1.0"
+description = "💰 Agent Wallet — Policy-based payment infrastructure for AI agents"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+authors = [{name = "Bonanza Labs", email = "passiveassets@proton.me"}]
+keywords = ["ai", "agents", "payments", "wallet", "policy", "crypto"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+    "httpx>=0.25",
+    "cryptography>=41.0",
+]
+
+[project.scripts]
+agent-wallet = "agent_wallet.cli:main"
+
+[project.optional-dependencies]
+solana = ["solana>=0.30", "solders>=0.14"]
+bsc = ["web3>=6.0"]
+dashboard = ["fastapi>=0.104", "uvicorn>=0.24"]
+dev = ["pytest>=7.0", "pytest-asyncio>=0.21", "ruff>=0.1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

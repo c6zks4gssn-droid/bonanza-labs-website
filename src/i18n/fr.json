@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "firewall": "Pare-feu",
+    "products": "Produits",
+    "gasvrij": "🌱 GasVrij",
+    "pricing": "Tarifs",
+    "github": "🐙 GitHub",
+    "quiz": "Quiz",
+    "prompts": "Prompts",
+    "play": "🎮 Jouer"
+  },
+  "hero": {
+    "subtitle": "Le Spending Firewall est le produit phare",
+    "title": "Le pare-feu de dépenses pour les agents IA",
+    "description": "Définissez des règles, approuvez les paiements risqués, bloquez les mauvais fournisseurs et auditez chaque transaction d'agent avant que l'argent ne bouge.",
+    "cta": "Voir la Démo Firewall",
+    "secondary": "Ouvrir le Dashboard",
+    "badge1": "Live v1.0",
+    "badge2": "Open source",
+    "badge3": "💳 Stripe checkout",
+    "badge4": "🤖 Flux d'approbation agent"
+  },
+  "products": {
+    "title": "Un produit phare, deux moteurs de preuve",
+    "subtitle": "Le Spending Firewall mène l'histoire. Fork Doctor et FrameForge prouvent que Bonanza peut livrer de vrais outils."
+  },
+  "quiz": {
+    "title": "Trouvez Votre Outil Parfait",
+    "subtitle": "5 questions, 30 secondes. Obtenez une recommandation personnalisée.",
+    "question": "Question",
+    "of": "sur",
+    "result": "Votre Outil Parfait",
+    "retake": "Refaire le quiz",
+    "findTool": "Trouvez votre outil parfait →"
+  },
+  "prompts": {
+    "title": "Copiez. Collez. Expédiez.",
+    "subtitle": "Prompts IA éprouvés pour développeurs, fondateurs et marketeurs. Mis à jour chaque semaine.",
+    "copyPrompt": "Copier le Prompt",
+    "copied": "✓ Copié",
+    "newPrompts": "Nouveaux prompts chaque semaine",
+    "bookmark": "Ajoutez cette page à vos favoris. Nous ajoutons de nouveaux prompts chaque lundi."
+  },
+  "footer": {
+    "builtInPublic": "Construit en public",
+    "verified": "Signaux de build vérifiés",
+    "copyright": "© 2026 Bonanza Labs — Outils IA open source pour les builders"
+  }
+}

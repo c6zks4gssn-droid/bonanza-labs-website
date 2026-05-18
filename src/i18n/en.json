@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "firewall": "Firewall",
+    "products": "Products",
+    "gasvrij": "🌱 GasVrij",
+    "pricing": "Pricing",
+    "github": "🐙 GitHub",
+    "quiz": "Quiz",
+    "prompts": "Prompts",
+    "play": "🎮 Play"
+  },
+  "hero": {
+    "subtitle": "Spending Firewall is the flagship",
+    "title": "The spending firewall for AI agents",
+    "description": "Set rules, approve risky payments, block bad vendors, and audit every agent transaction before money moves.",
+    "cta": "See Firewall Demo",
+    "secondary": "Open Dashboard",
+    "badge1": "Live v1.0",
+    "badge2": "Open source",
+    "badge3": "💳 Stripe checkout",
+    "badge4": "🤖 Agent approval flow"
+  },
+  "products": {
+    "title": "One flagship, two proof engines",
+    "subtitle": "The Spending Firewall leads the story. Fork Doctor and FrameForge prove Bonanza can ship real tools, not mock demos."
+  },
+  "quiz": {
+    "title": "Find Your Perfect Tool",
+    "subtitle": "5 questions, 30 seconds. Get a personalized recommendation.",
+    "question": "Question",
+    "of": "of",
+    "result": "Your Perfect Tool",
+    "retake": "Retake quiz",
+    "findTool": "Find your perfect tool →"
+  },
+  "prompts": {
+    "title": "Copy. Paste. Ship.",
+    "subtitle": "Battle-tested AI prompts for developers, founders, and marketers. Updated weekly. No fluff.",
+    "copyPrompt": "Copy Prompt",
+    "copied": "✓ Copied",
+    "newPrompts": "New prompts every week",
+    "bookmark": "Bookmark this page. We add fresh prompts every Monday."
+  },
+  "footer": {
+    "builtInPublic": "Built in public",
+    "verified": "Verified build signals",
+    "copyright": "© 2026 Bonanza Labs — Open source AI tools for builders"
+  }
+}

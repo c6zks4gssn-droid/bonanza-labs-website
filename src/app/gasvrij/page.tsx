@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+
+
 import { Zap, Home, Thermometer, Shield, ArrowRight, CheckCircle, Phone, Euro } from "lucide-react";
 import { useState } from "react";
 
@@ -162,9 +164,14 @@ export default function GasVrijPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 py-8 px-6 text-center text-sm text-gray-600">
-        <p>© 2026 Bonanza Labs — GasVrij Groningen is een product van Bonanza Labs</p>
-        <p className="mt-1">Niet bevestigd als financieel of juridisch advies. Raadpleeg altijd een erkend installateur.</p>
+      <footer className="border-t border-white/5 py-8 px-6">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <div>
+            <p className="text-sm text-gray-600">© 2026 Bonanza Labs — GasVrij Groningen</p>
+            <p className="text-xs text-gray-700 mt-1">Niet bevestigd als financieel of juridisch advies. Raadpleeg altijd een erkend installateur.</p>
+          </div>
+          <a href="/gasvrij/dashboard" className="text-xs text-gray-600 hover:text-emerald-400 transition">Dashboard →</a>
+        </div>
       </footer>
     </div>
   );

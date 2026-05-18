@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "firewall": "Firewall",
+    "products": "Produkte",
+    "gasvrij": "🌱 GasVrij",
+    "pricing": "Preise",
+    "github": "🐙 GitHub",
+    "quiz": "Quiz",
+    "prompts": "Prompts",
+    "play": "🎮 Spielen"
+  },
+  "hero": {
+    "subtitle": "Spending Firewall ist das Flaggschiff",
+    "title": "Der Ausgaben-Firewall für KI-Agenten",
+    "description": "Regeln festlegen, riskante Zahlungen genehmigen, schlechte Anbieter blockieren und jede Agenten-Transaktion prüfen, bevor Geld fließt.",
+    "cta": "Firewall Demo ansehen",
+    "secondary": "Dashboard öffnen",
+    "badge1": "Live v1.0",
+    "badge2": "Open Source",
+    "badge3": "💳 Stripe Checkout",
+    "badge4": "🤖 Agent-Genehmigungsfluss"
+  },
+  "products": {
+    "title": "Ein Flaggschiff, zwei Proof-Engines",
+    "subtitle": "Der Spending Firewall führt die Story. Fork Doctor und FrameForge beweisen, dass Bonanza echte Tools liefert."
+  },
+  "quiz": {
+    "title": "Finde Dein Perfektes Tool",
+    "subtitle": "5 Fragen, 30 Sekunden. Erhalte eine personalisierte Empfehlung.",
+    "question": "Frage",
+    "of": "von",
+    "result": "Dein Perfektes Tool",
+    "retake": "Quiz wiederholen",
+    "findTool": "Finde dein perfektes Tool →"
+  },
+  "prompts": {
+    "title": "Kopieren. Einfügen. Versenden.",
+    "subtitle": "Erprobte KI-Prompts für Entwickler, Gründer und Marketer. Wöchentlich aktualisiert.",
+    "copyPrompt": "Prompt kopieren",
+    "copied": "✓ Kopiert",
+    "newPrompts": "Neue Prompts jede Woche",
+    "bookmark": "Lesezeichen setzen. Wir fügen jeden Montag neue Prompts hinzu."
+  },
+  "footer": {
+    "builtInPublic": "Öffentlich gebaut",
+    "verified": "Verifizierte Build-Signale",
+    "copyright": "© 2026 Bonanza Labs — Open-Source-KI-Tools für Builder"
+  }
+}

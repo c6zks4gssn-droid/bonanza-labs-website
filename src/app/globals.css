@@ -9,6 +9,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Framer-motion fallback: content visible even if JS fails or is slow */
+/* After 2s, force all hidden-by-default elements visible */
+@keyframes force-visible {
+  to { opacity: 1 !important; transform: none !important; }
+}
+
+[style*="opacity: 0"],
+[style*="opacity:0"] {
+  animation: force-visible 0.4s ease 2s forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [style*="opacity: 0"],
+  [style*="opacity:0"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* Mobile nav fix */
 @media (max-width: 767px) {
   .nav-links {

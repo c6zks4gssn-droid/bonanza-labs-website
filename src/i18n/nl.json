@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "firewall": "Firewall",
+    "products": "Producten",
+    "gasvrij": "🌱 GasVrij",
+    "pricing": "Prijzen",
+    "github": "🐙 GitHub",
+    "quiz": "Quiz",
+    "prompts": "Prompts",
+    "play": "🎮 Spelen"
+  },
+  "hero": {
+    "subtitle": "Spending Firewall is het vlaggenschip",
+    "title": "De bestedingsfirewall voor AI-agents",
+    "description": "Stel regels in, keur riskante betalingen goed, blokkeer slechte leveranciers en controleer elke agenttransactie voordat geld verplaatst wordt.",
+    "cta": "Zie Firewall Demo",
+    "secondary": "Open Dashboard",
+    "badge1": "Live v1.0",
+    "badge2": "Open source",
+    "badge3": "💳 Stripe checkout",
+    "badge4": "🤖 Agent goedkeuring"
+  },
+  "products": {
+    "title": "Eén vlaggenschip, twee proof-engines",
+    "subtitle": "De Spending Firewall leidt het verhaal. Fork Doctor en FrameForge bewijzen dat Bonanza echte tools bouwt, geen mock demos."
+  },
+  "quiz": {
+    "title": "Vind Jouw Perfecte Tool",
+    "subtitle": "5 vragen, 30 seconden. Krijg een gepersonaliseerde aanbeveling.",
+    "question": "Vraag",
+    "of": "van",
+    "result": "Jouw Perfecte Tool",
+    "retake": "Opnieuw doen",
+    "findTool": "Vind je perfecte tool →"
+  },
+  "prompts": {
+    "title": "Kopieer. Plak. Verstuur.",
+    "subtitle": "Battle-tested AI prompts voor developers, founders en marketeers. Elke week vernieuwd. Geen fluff.",
+    "copyPrompt": "Kopieer Prompt",
+    "copied": "✓ Gekopieerd",
+    "newPrompts": "Elke week nieuwe prompts",
+    "bookmark": "Bookmark deze pagina. We voegen elke maandag nieuwe prompts toe."
+  },
+  "footer": {
+    "builtInPublic": "Openbaar gebouwd",
+    "verified": "Geverifieerde build signalen",
+    "copyright": "© 2026 Bonanza Labs — Open source AI tools voor builders"
+  }
+}

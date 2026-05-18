@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bonanza-app-forge"
+version = "0.3.0"
+description = "Visual idea → working app. Combines image generation with AI coding to turn any concept into a deployable web app."
+authors = [{name = "Bonanza Labs"}]
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = [
+    "openai>=1.0.0",
+    "anthropic>=0.30.0",
+    "click>=8.0.0",
+    "rich>=13.0.0",
+    "requests>=2.28.0",
+    "jinja2>=3.1.0",
+    "Pillow>=10.0.0",
+]
+
+[project.scripts]
+bonanza-forge = "bonanza_app_forge.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bonanza_app_forge"]
+
+[project.urls]
+Logo = "https://bonanza-labs.tiiny.site/bonanza-labs-logo-256.png"

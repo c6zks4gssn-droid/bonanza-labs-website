@@ -1,0 +1,14 @@
+# 🧨 Bonanza Labs CLI
+> One command for all Bonanza Labs AI tools.
+
+## What it does
+One command for all Bonanza Labs AI tools.
+
+## Quick start
+```
+pip install bonanza-labs
+```
+
+## Links
+- Source: https://github.com/c6zks4gssn-droid/bonanza-labs-cli
+- Brand: Bonanza Labs ✦ https://bonanza-labs.tiiny.site

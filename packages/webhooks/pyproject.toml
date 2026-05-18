@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bonanza-webhooks"
+version = "0.2.1"
+description = "📡 Bonanza Labs ✦ Webhooks — Webhook hub for AI agents"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+authors = [{name = "Bonanza Labs", email = "passiveassets@proton.me"}]
+dependencies = ["pydantic>=2.0", "httpx>=0.25", "click>=8.0", "rich>=13.0"]
+
+[project.scripts]
+bonanza-webhooks = "bonanza_webhooks.cli:main"
+
+[project.optional-dependencies]
+api = ["fastapi>=0.104", "uvicorn>=0.24"]
+dev = ["pytest>=7.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
