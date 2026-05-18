@@ -5,16 +5,15 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "bonanza-x402"
 version = "0.1.0"
-description = "💸 Bonanza Labs x402 Adapter — Spending firewall meets the HTTP 402 payment protocol"
+description = "Spending firewall meets the HTTP 402 payment protocol. Policy-based spending controls for AI agent payments."
 readme = "README.md"
 license = "Apache-2.0"
 requires-python = ">=3.10"
 authors = [{name = "Bonanza Labs", email = "passiveassets@proton.me"}]
-keywords = ["x402", "payment", "ai", "agent", "firewall", "spending", "stripe", "crypto", "usdc"]
+keywords = ["x402", "payment", "ai", "agent", "firewall", "spending", "stripe", "crypto", "usdc", "budget", "approval"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -40,6 +39,9 @@ Homepage = "https://bonanza-labs.com"
 Documentation = "https://github.com/c6zks4gssn-droid/bonanza-labs-website/tree/main/packages/x402-adapter"
 Repository = "https://github.com/c6zks4gssn-droid/bonanza-labs-website"
 Issues = "https://github.com/c6zks4gssn-droid/bonanza-labs-website/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.ruff]
 target-version = "py310"
