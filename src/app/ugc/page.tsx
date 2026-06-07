@@ -1,6 +1,4 @@
 import type { Metadata } from 'next';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'AI UGC Video — Bonanza Labs',
@@ -66,7 +64,19 @@ const steps = [
 export default function UGCPage() {
   return (
     <>
-      <Header />
+      {/* Nav */}
+      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-gray-950/80 border-b border-white/5">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+          <a href="/" className="font-bold text-lg">Bonanza Labs</a>
+          <div className="flex items-center gap-6 text-sm text-gray-400">
+            <a href="/ai-ops" className="hover:text-white transition">AI Ops</a>
+            <a href="/firewall" className="hover:text-white transition">Firewall</a>
+            <a href="/products" className="hover:text-white transition">Products</a>
+            <a href="/pricing" className="hover:text-white transition">Pricing</a>
+            <a href="https://github.com/c6zks4gssn-droid" className="hover:text-white transition" target="_blank" rel="noopener noreferrer">🐙 GitHub</a>
+          </div>
+        </div>
+      </nav>
       <main className="min-h-screen bg-black text-white">
         {/* Hero */}
         <section className="relative overflow-hidden">
@@ -286,7 +296,13 @@ export default function UGCPage() {
           </div>
         </section>
       </main>
-      <Footer />
+      {/* Footer */}
+      <footer className="border-t border-white/5 py-12 px-6">
+        <div className="max-w-6xl mx-auto text-center text-sm text-gray-600">
+          <p>© {new Date().getFullYear()} Bonanza Labs. All rights reserved.</p>
+          <p className="mt-2">KvK: 88564517 | BTW: NL004627152B36</p>
+        </div>
+      </footer>
     </>
   );
 }

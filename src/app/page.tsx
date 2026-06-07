@@ -392,6 +392,7 @@ export default function Home() {
             {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
           <div className={`nav-links ${menuOpen ? 'open' : ''} md:flex items-center gap-6 text-sm text-gray-400`}>
+            <a href="/ai-ops" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>AI Ops</a>
             <a href="/firewall" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Firewall</a>
             <a href="/products" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Products</a>
             <a href="/quiz" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Quiz</a>
@@ -871,6 +872,7 @@ export default function Home() {
             <div>
               <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-4">Products</h4>
               <ul className="space-y-2.5">
+                <li><a href="/ai-ops" className="text-sm text-gray-500 hover:text-white transition">AI Ops</a></li>
                 <li><a href="/firewall" className="text-sm text-gray-500 hover:text-white transition">Firewall</a></li>
                 <li><a href="/tenderai" className="text-sm text-gray-500 hover:text-white transition">TenderAI</a></li>
                 <li><a href="/gasvrij" className="text-sm text-gray-500 hover:text-white transition">GasVrij</a></li>
