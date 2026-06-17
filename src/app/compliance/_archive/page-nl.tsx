@@ -50,7 +50,7 @@ const STEPS = [
 const FAQ = [
   {
     q: "Does Article 14 apply to my AI agents?",
-    a: "Article 14 applies to 'high-risk AI systems' as defined in Annex III of the EU AI Act. Autonomous AI agents that manage financial transactions, make procurement decisions, or control significant resources are typically in scope. If your agent can spend money or make decisions with real consequences for users, treat it as high-risk. Consult your legal team for specific advice.",
+    a: "Article 14 applies to "high-risk AI systems" as defined in Annex III of the EU AI Act. Autonomous AI agents that manage financial transactions, make procurement decisions, or control significant resources are typically in scope. If your agent can spend money or make decisions with real consequences for users, treat it as high-risk. Consult your legal team for specific advice.",
   },
   {
     q: "When does Article 14 enforcement start?",

@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Wallet, Terminal, Sparkles, ExternalLink, Check, Copy, BookOpen, X, Menu } from "lucide-react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import OpenSourcePackages from "@/components/OpenSourcePackages";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -860,6 +861,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Open Source Packages */}
+      <OpenSourcePackages />
 
       {/* Footer */}
       <footer className="border-t border-white/5 py-16 px-6">
