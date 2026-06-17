@@ -47,7 +47,7 @@ async function callOpenRouter(systemPrompt: string, userPrompt: string): Promise
         'X-Title': 'TenderAI',
       },
       body: JSON.stringify({
-        model: 'google/gemini-2.0-flash-exp:free',
+        model: 'google/gemma-4-26b-a4b-it:free',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt },
