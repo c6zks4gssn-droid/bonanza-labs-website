@@ -381,7 +381,7 @@ export default function TenderAIDemo() {
           </div>
         )}
 
-        {/* Visual Search Section */
+        {/* Visual Search Section */}
         {step === 'input' && (
           <div className="max-w-3xl mx-auto mt-12">
             <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
