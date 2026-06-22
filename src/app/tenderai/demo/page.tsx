@@ -15,6 +15,15 @@ interface Analysis {
   competitiveAdvantages: string[];
 }
 
+interface VisualResult {
+  article_id: number;
+  title: string;
+  url: string;
+  score: number;
+  tile_index: number;
+  chunk_index: number;
+}
+
 export default function TenderAIDemo() {
   const [step, setStep] = useState<Step>('input');
   const [tenderText, setTenderText] = useState('');
@@ -23,6 +32,26 @@ export default function TenderAIDemo() {
   const [analysis, setAnalysis] = useState<Analysis | null>(null);
   const [offer, setOffer] = useState<string>('');
   const [error, setError] = useState('');
+  const [visualQuery, setVisualQuery] = useState('');
+  const [visualResults, setVisualResults] = useState<VisualResult[]>([]);
+  const [visualLoading, setVisualLoading] = useState(false);
+
+  async function handleVisualSearch() {
+    if (!visualQuery.trim()) return;
+    setVisualLoading(true);
+    try {
+      const res = await fetch('/tenderai/api/visual-search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: visualQuery.trim(), n_docs: 5 }),
+      });
+      const data = await res.json();
+      setVisualResults(data.results || []);
+    } catch {
+      setVisualResults([]);
+    }
+    setVisualLoading(false);
+  }
 
   async function handleAnalyze() {
     if (!tenderText.trim()) return;
@@ -349,6 +378,62 @@ export default function TenderAIDemo() {
             >
               Nieuwe aanbesteding analyseren
             </button>
+          </div>
+        )}
+
+        {/* Visual Search Section */
+        {step === 'input' && (
+          <div className="max-w-3xl mx-auto mt-12">
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+              <h3 className="text-sm font-semibold text-amber-400 uppercase tracking-wider mb-3">
+                🔍 Visual Search (PixelRAG)
+              </h3>
+              <p className="text-white/50 text-sm mb-4">
+                Zoek door geïndexeerde websites visueel — geen tekst parsing, maar screenshot-based retrieval.
+              </p>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={visualQuery}
+                  onChange={(e) => setVisualQuery(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleVisualSearch()}
+                  placeholder="bijv. zilveren ringen, aanbesteding, automation..."
+                  className="flex-1 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-amber-500/50 focus:outline-none text-sm"
+                />
+                <button
+                  onClick={handleVisualSearch}
+                  disabled={visualLoading || !visualQuery.trim()}
+                  className="px-5 py-2.5 rounded-xl bg-amber-500 text-black font-semibold text-sm hover:bg-amber-400 transition-colors disabled:opacity-30"
+                >
+                  {visualLoading ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    'Zoek'
+                  )}
+                </button>
+              </div>
+              {visualResults.length > 0 && (
+                <div className="mt-4 space-y-2">
+                  {visualResults.map((r, i) => (
+                    <div key={i} className="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-white/5">
+                      <div>
+                        <div className="text-white/80 text-sm font-medium">{r.title}</div>
+                        <a href={r.url} target="_blank" rel="noopener noreferrer" className="text-amber-400/60 text-xs hover:text-amber-400">
+                          {r.url}
+                        </a>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-amber-400 text-sm font-mono">{(r.score * 100).toFixed(1)}%</div>
+                        <div className="text-white/30 text-xs">tile {r.tile_index} · chunk {r.chunk_index}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {visualResults.length === 0 && visualQuery && !visualLoading & (
+                <div className="mt-4 text-white/40 text-sm">Geen resultaten. Probeer een andere zoekterm.</div>
+              )}
+            </div>
           </div>
         )}
       </div>
