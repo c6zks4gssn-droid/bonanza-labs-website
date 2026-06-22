@@ -8,6 +8,7 @@ interface TenderAnalysisRequest {
   tenderText: string;
   companyName?: string;
   knowledgeBase?: string[];
+  useVisualSearch?: boolean;
 }
 
 interface TenderAnalysisResponse {
@@ -159,9 +160,27 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'tenderText is required' }, { status: 400 });
     }
 
+    // Optional: fetch visual search results from PixelRAG
+    let visualContext = '';
+    if (body.useVisualSearch) {
+      try {
+        const vsResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/tenderai/api/visual-search`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: body.tenderText.slice(0, 500), n_docs: 3 }),
+        });
+        if (vsResponse.ok) {
+          const vsData = await vsResponse.json();
+          if (vsData.results?.length) {
+            visualContext = `\n\nRelevante visuele documenten uit kennisbank:\n${vsData.results.map((r: any) => `- ${r.title} (${r.url}, score: ${r.score.toFixed(2)})`).join('\n')}`;
+          }
+        }
+      } catch { /* visual search optional */ }
+    }
+
     const userPrompt = body.companyName
-      ? `Analyseer deze aanbesteding voor ${body.companyName}:\n\n${body.tenderText}`
-      : `Analyseer deze aanbesteding:\n\n${body.tenderText}`;
+      ? `Analyseer deze aanbesteding voor ${body.companyName}:\n\n${body.tenderText}${visualContext}`
+      : `Analyseer deze aanbesteding:\n\n${body.tenderText}${visualContext}`;
 
     // Try OpenRouter first (production), then Ollama (local), then mock (always works)
     let content = await callOpenRouter(SYSTEM_PROMPT, userPrompt);
