@@ -44,14 +44,18 @@ async def my_agent(query: str):
     pypi: "bonanza-mcp-guard",
     github: "https://github.com/c6zks4gssn-droid/mcp-guard",
     pypiUrl: "https://pypi.org/project/bonanza-mcp-guard/",
-    tagline: "Production MCP gateway",
+    tagline: "Auth, rate limits & spend caps for MCP",
     description:
-      "JWT auth, rate limiting, spending controls, and audit log for any MCP server.",
+      "Stdio gateway for any MCP server. API-key/JWT auth, per-agent rate limiting, spend caps on wallet/x402 tools, and JSONL audit logs. Zero required dependencies. Includes GitHub Action for scanning MCP configs on PRs.",
     code: `# mcp-guard.yaml
+auth:
+  mode: api_key
+  keys: ["sk-agent-1"]
 policies:
-  auth: jwt
-  rate_limit: 100/hour
-  max_spend_per_session: 10.00`,
+  rate_limit:
+    requests_per_minute: 60
+  max_spend_per_session: 10.00
+  audit_log: /var/log/mcp-guard.jsonl`,
     badge: "🔐",
   },
   {

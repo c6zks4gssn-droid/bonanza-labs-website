@@ -29,6 +29,7 @@ function TerminalDemo() {
     { cmd: "$ bonanza-agents wallet request --amount 900 --budget 25", outputs: ["\n✅ Budget check passed", "\n⏳ Human approval required", "\n✅ Stripe Checkout test session created", "\n\nLive keys blocked by default 🔒"] },
     { cmd: "$ bonanza doctor openclaw/openclaw", outputs: ["\n✅ CI/CD detected (GitHub Actions)", "\n✅ Security scanning enabled", "\n✅ 13/13 checks passed", "\n\nRepo health: 100% 🎉"] },
     { cmd: "$ bonanza video \"AI Agents\" --style viral", outputs: ["\n✅ Script generated (4 scenes)", "\n✅ Voiceover created (en-US-AriaNeural)", "\n✅ Video rendered → output.mp4 (9:16)"] },
+    { cmd: "$ mcp-guard scan", outputs: ["\n📁 claude_desktop_config.json", "\n🔴 remote-fetch: no auth on https://api.example.com/mcp", "\n🟡 filesystem: no guard wrapper", "\n\n1 critical, 1 warning 🔐"] },
   ];
 
   const command = commands[line];
