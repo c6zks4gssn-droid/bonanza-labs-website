@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { I18nProvider } from "@/i18n/I18nProvider";
+import PageAgentLoader from "./PageAgentLoader";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -86,6 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <style>{`[style*="opacity: 0"], [style*="opacity:0"] { opacity: 1 !important; transform: none !important; }`}</style>
         </noscript>
         <I18nProvider>{children}</I18nProvider>
+        <PageAgentLoader />
       </body>
     </html>
   );
