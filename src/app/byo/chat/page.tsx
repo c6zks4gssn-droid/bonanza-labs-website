@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Send, LogOut, Trash2 } from "lucide-react";
+import { Send, LogOut, Trash2, Sparkles } from "lucide-react";
 
 interface Msg {
   role: "user" | "assistant";
@@ -70,7 +70,6 @@ export default function ByoChatPage() {
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let acc = "";
-      // append empty assistant message that grows as we read
       setMessages((cur) => [...cur, { role: "assistant", content: "" }]);
 
       while (true) {
@@ -92,73 +91,100 @@ export default function ByoChatPage() {
   }
 
   if (authed === null) {
-    return <div className="min-h-screen bg-black text-white p-8">loading…</div>;
+    return (
+      <div className="grid min-h-screen place-items-center bg-[#F7F8F6] text-[#4A5361]">
+        loading…
+      </div>
+    );
   }
 
   return (
-    <main className="flex h-screen flex-col bg-black text-white">
-      <header className="flex items-center justify-between border-b border-zinc-900 px-6 py-3">
-        <div className="flex items-center gap-3">
-          <Link href="/" className="text-xs text-zinc-500 hover:text-zinc-300">
-            bonanza labs
-          </Link>
-          <span className="text-zinc-700">/</span>
-          <span className="text-sm font-medium">BYO chat</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <select
-            value={model}
-            onChange={(e) => setModel(e.target.value)}
-            className="rounded-md border border-zinc-800 bg-zinc-950 px-2 py-1 text-xs focus:border-violet-500 focus:outline-none"
-          >
-            {models.map((m) => (
-              <option key={m} value={m}>
-                {m}
-              </option>
-            ))}
-          </select>
-          <button
-            onClick={() => setMessages([])}
-            className="rounded-md border border-zinc-800 bg-zinc-950 px-2 py-1 text-xs text-zinc-400 hover:text-white"
-            title="clear"
-          >
-            <Trash2 className="h-3.5 w-3.5" />
-          </button>
-          <button
-            onClick={logout}
-            className="rounded-md border border-zinc-800 bg-zinc-950 px-2 py-1 text-xs text-zinc-400 hover:text-white"
-            title="sign out"
-          >
-            <LogOut className="h-3.5 w-3.5" />
-          </button>
+    <div className="flex h-screen flex-col bg-[#F7F8F6] text-[#171D26]">
+      {/* Header — ForgeWith sticky pattern */}
+      <header className="border-b border-[#DDE2E0] bg-[rgba(247,248,246,.88)] backdrop-blur">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
+          <div className="flex items-center gap-3">
+            <Link href="/byo" className="flex items-center gap-2.5">
+              <span className="grid grid-cols-3 gap-0.5" aria-hidden="true">
+                <span className="block h-2 w-2 rounded-sm bg-[#7C5CFF]" />
+                <span className="block h-2 w-2 rounded-sm bg-[#1FA971]" />
+                <span className="block h-2 w-2 rounded-sm bg-[#2E7CF6]" />
+              </span>
+              <span className="font-semibold tracking-tight">
+                BYO<span className="font-normal">-LLM</span>
+              </span>
+            </Link>
+            <span className="text-[#DDE2E0]">/</span>
+            <span className="text-sm text-[#4A5361]">chat</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <select
+              value={model}
+              onChange={(e) => setModel(e.target.value)}
+              className="rounded-full border border-[#DDE2E0] bg-white px-3 py-1.5 font-mono text-xs focus:border-[#7C5CFF] focus:outline-none"
+            >
+              {models.map((m) => (
+                <option key={m} value={m}>
+                  {m}
+                </option>
+              ))}
+            </select>
+            <button
+              onClick={() => setMessages([])}
+              className="rounded-full border border-[#DDE2E0] bg-white p-2 text-[#4A5361] hover:border-[#7C5CFF] hover:text-[#171D26]"
+              title="clear"
+            >
+              <Trash2 className="h-3.5 w-3.5" />
+            </button>
+            <button
+              onClick={logout}
+              className="rounded-full border border-[#DDE2E0] bg-white p-2 text-[#4A5361] hover:border-[#ef4444] hover:text-[#ef4444]"
+              title="sign out"
+            >
+              <LogOut className="h-3.5 w-3.5" />
+            </button>
+          </div>
         </div>
       </header>
 
-      <div ref={scrollerRef} className="flex-1 overflow-y-auto px-6 py-6">
+      {/* Chat scroll area */}
+      <div ref={scrollerRef} className="flex-1 overflow-y-auto px-6 py-8">
         <div className="mx-auto max-w-3xl space-y-4">
           {messages.length === 0 && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="rounded-2xl border border-dashed border-zinc-800 bg-zinc-950/30 p-8 text-center text-zinc-500"
+              className="rounded-2xl border-2 border-dashed border-[#DDE2E0] bg-white p-12 text-center"
             >
-              Ask anything. Your key stays server-side.
+              <div
+                className="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-full"
+                style={{ background: "#F1EDFF" }}
+              >
+                <Sparkles className="h-5 w-5" style={{ color: "#7C5CFF" }} />
+              </div>
+              <p className="text-base font-semibold text-[#171D26]">
+                Ask anything.
+              </p>
+              <p className="mt-1 text-sm text-[#4A5361]">
+                Your key stays server-side. Encrypted, signed, HttpOnly.
+              </p>
             </motion.div>
           )}
           {messages.map((m, i) => (
             <ChatBubble key={i} role={m.role} content={m.content} />
           ))}
           {error && (
-            <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-300">
+            <div className="rounded-2xl border border-[#ef4444]/30 bg-[#FEF2F2] px-4 py-3 text-sm text-[#ef4444]">
               {error}
             </div>
           )}
         </div>
       </div>
 
+      {/* Input bar */}
       <form
         onSubmit={send}
-        className="border-t border-zinc-900 bg-zinc-950/60 px-6 py-4"
+        className="border-t border-[#DDE2E0] bg-white px-6 py-4"
       >
         <div className="mx-auto flex max-w-3xl gap-2">
           <input
@@ -166,18 +192,18 @@ export default function ByoChatPage() {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Message…"
             disabled={busy}
-            className="flex-1 rounded-lg border border-zinc-800 bg-black px-4 py-2.5 text-sm focus:border-violet-500 focus:outline-none disabled:opacity-50"
+            className="flex-1 rounded-full border border-[#DDE2E0] bg-[#F7F8F6] px-5 py-2.5 text-sm focus:border-[#7C5CFF] focus:bg-white focus:outline-none disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={busy || !input.trim()}
-            className="rounded-lg bg-violet-600 px-4 text-sm font-medium text-white hover:bg-violet-500 disabled:opacity-50"
+            className="inline-flex items-center gap-2 rounded-full bg-[#171D26] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#2E7CF6] disabled:opacity-50"
           >
             <Send className="h-4 w-4" />
           </button>
         </div>
       </form>
-    </main>
+    </div>
   );
 }
 
@@ -190,13 +216,13 @@ function ChatBubble({ role, content }: Msg) {
       className={`flex ${isUser ? "justify-end" : "justify-start"}`}
     >
       <div
-        className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${
+        className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${
           isUser
-            ? "bg-violet-600 text-white"
-            : "border border-zinc-800 bg-zinc-950/60 text-zinc-100"
+            ? "bg-[#7C5CFF] text-white"
+            : "border border-[#DDE2E0] bg-white text-[#171D26]"
         }`}
       >
-        {content || <span className="animate-pulse text-zinc-500">▍</span>}
+        {content || <span className="animate-pulse text-[#4A5361]">▍</span>}
       </div>
     </motion.div>
   );

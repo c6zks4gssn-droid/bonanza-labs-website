@@ -1,7 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Code } from "lucide-react";
-import { Anatomy } from "@/components/byo/anatomy";
-import { CodeBlock } from "@/components/byo/code-block";
+import { ArrowUpRight, Code, Lock, KeyRound, Server, ShieldCheck } from "lucide-react";
 
 export const metadata = {
   title: "BYO-LLM — Bring Your Own Subscription",
@@ -11,151 +9,182 @@ export const metadata = {
 
 export default function ByoLanding() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-ink text-bone">
-      {/* grid + noise backdrop */}
-      <div className="pointer-events-none absolute inset-0 bg-grid opacity-40" />
-      <div className="pointer-events-none absolute inset-0 bg-noise opacity-[0.04] mix-blend-overlay" />
-
-      {/* top bar */}
-      <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-        <Link
-          href="/"
-          className="font-mono-c text-xs uppercase tracking-widest text-bone-dim hover:text-bone"
-        >
-          ← bonanza labs / byo-llm
-        </Link>
-        <nav className="flex items-center gap-4 font-mono-c text-[11px] uppercase tracking-widest text-zinc-500">
-          <Link href="#how" className="hover:text-bone">
-            how
+    <div className="min-h-screen bg-[#F7F8F6] text-[#171D26]">
+      {/* sticky nav — ForgeWith pattern */}
+      <header className="sticky top-0 z-50 border-b border-[#DDE2E0] bg-[rgba(247,248,246,.88)] backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <Link href="/" className="flex items-center gap-2.5 font-semibold tracking-tight">
+            <span className="grid grid-cols-3 gap-0.5" aria-hidden="true">
+              <span className="block h-2.5 w-2.5 rounded-sm bg-[#7C5CFF]" />
+              <span className="block h-2.5 w-2.5 rounded-sm bg-[#1FA971]" />
+              <span className="block h-2.5 w-2.5 rounded-sm bg-[#2E7CF6]" />
+            </span>
+            <span>BYO<span className="font-normal">-LLM</span></span>
+            <span className="ml-2 rounded-full border border-[#DDE2E0] bg-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-[#4A5361]">
+              v0.1 · alpha
+            </span>
           </Link>
-          <Link href="#code" className="hover:text-bone">
-            code
-          </Link>
-          <Link href="#security" className="hover:text-bone">
-            security
-          </Link>
-          <Link
-            href="/api/byo/session"
-            className="flex items-center gap-1 text-bone-dim hover:text-lime-400"
-          >
-            api <ArrowUpRight className="h-3 w-3" />
-          </Link>
-        </nav>
-      </header>
-
-      {/* Hero: asymmetric split */}
-      <section className="relative z-10 mx-auto grid max-w-7xl gap-12 px-6 pb-24 pt-8 lg:grid-cols-12">
-        <div className="reveal lg:col-span-7" style={{ animationDelay: "0ms" }}>
-          <div className="inline-flex items-center gap-2 font-mono-c text-[10px] uppercase tracking-widest text-lime-400">
-            <span className="h-px w-6 bg-lime-400" /> v0.1 · open alpha
-          </div>
-          <h1 className="mt-6 font-display text-[clamp(3rem,7vw,6rem)] leading-[0.95] tracking-tight">
-            Bring your own
-            <br />
-            <em className="text-bone-dim">subscription</em>
-            <span className="text-lime-400">.</span>
-          </h1>
-          <p className="mt-6 max-w-xl text-balance font-mono-c text-sm leading-relaxed text-bone-dim">
-            Users log in with their own Ollama Cloud account. Tokens never reach the
-            browser — only an encrypted, signed HttpOnly cookie stays on this server
-            for 24&nbsp;hours. You ship the product, they pay the inference.
-          </p>
-
-          {/* CTA row */}
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <nav className="flex items-center gap-6 text-sm text-[#4A5361]">
+            <a href="#how" className="hover:text-[#171D26]">how</a>
+            <a href="#code" className="hover:text-[#171D26]">code</a>
+            <a href="#security" className="hover:text-[#171D26]">security</a>
             <Link
               href="/byo/chat"
-              className="group inline-flex items-center gap-2 rounded-md bg-lime-400 px-4 py-2 font-mono-c text-xs font-medium uppercase tracking-widest text-ink transition hover:bg-lime-300"
+              className="inline-flex items-center gap-1 rounded-full bg-[#171D26] px-4 py-1.5 text-sm font-medium text-white hover:bg-[#2E7CF6]"
             >
-              try the demo
-              <ArrowUpRight className="h-3 w-3 transition group-hover:translate-x-0.5" />
+              try demo <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
-            <a
-              href="https://github.com/c6zks4gssn-droid/bonanza-labs-website/tree/main/src/app/byo"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-md border border-zinc-800 px-4 py-2 font-mono-c text-xs uppercase tracking-widest text-bone-dim transition hover:border-zinc-700 hover:text-bone"
-            >
-              <Code className="h-3.5 w-3.5" /> src
-            </a>
-          </div>
-
-          {/* stat strip */}
-          <dl className="mt-12 grid grid-cols-3 gap-px overflow-hidden rounded-md border border-zinc-800 bg-zinc-800/40 font-mono-c">
-            {[
-              { v: "0", l: "trusted blindly" },
-              { v: "AES-256-GCM", l: "at rest" },
-              { v: "HttpOnly", l: "in transit" },
-            ].map((s) => (
-              <div key={s.l} className="bg-ink p-4">
-                <dt className="text-[10px] uppercase tracking-widest text-zinc-500">
-                  {s.l}
-                </dt>
-                <dd className="mt-1 font-display text-2xl tracking-tight">
-                  {s.v}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          </nav>
         </div>
+      </header>
 
-        {/* Anatomy diagram */}
-        <aside className="reveal lg:col-span-5" style={{ animationDelay: "180ms" }}>
-          <div className="rounded-lg border border-zinc-800 bg-black/40 p-6 backdrop-blur">
-            <div className="mb-3 flex items-center justify-between font-mono-c text-[10px] uppercase tracking-widest text-zinc-500">
-              <span>anatomy</span>
-              <span>hover a node</span>
+      {/* Hero */}
+      <section className="mx-auto max-w-6xl px-6 pt-16 pb-20">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <p className="font-mono text-xs uppercase tracking-widest text-[#1FA971]">
+              bring your own subscription
+            </p>
+            <h1 className="mt-4 text-5xl font-bold leading-[1.05] tracking-tight md:text-6xl">
+              Stop subsidising{" "}
+              <span className="text-[#7C5CFF]">inference</span>.
+              <br />
+              <span className="text-[#4A5361]">They pay for the model.</span>
+              <br />
+              You ship the product.
+            </h1>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-[#4A5361]">
+              Users log in with their own Ollama Cloud account. Tokens never reach
+              the browser — only an encrypted, signed HttpOnly cookie stays on this
+              server for 24 hours. Inference paid by them.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link
+                href="/byo/chat"
+                className="inline-flex items-center gap-2 rounded-full bg-[#171D26] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#2E7CF6]"
+              >
+                try the demo <ArrowUpRight className="h-4 w-4" />
+              </Link>
+              <a
+                href="https://github.com/c6zks4gssn-droid/bonanza-labs-website/tree/main/src/app/byo"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-[#DDE2E0] bg-white px-5 py-2.5 text-sm font-medium text-[#171D26] hover:border-[#7C5CFF]"
+              >
+                <Code className="h-4 w-4" /> source
+              </a>
             </div>
-            <Anatomy />
+
+            {/* stat strip */}
+            <dl className="mt-12 grid grid-cols-3 gap-4">
+              {[
+                { v: "0", l: "trusted blindly", color: "#7C5CFF" },
+                { v: "AES-256-GCM", l: "at rest", color: "#1FA971" },
+                { v: "HttpOnly", l: "in transit", color: "#2E7CF6" },
+              ].map((s) => (
+                <div
+                  key={s.l}
+                  className="rounded-2xl border border-[#DDE2E0] bg-white p-4"
+                >
+                  <dt className="font-mono text-[10px] uppercase tracking-widest text-[#4A5361]">
+                    {s.l}
+                  </dt>
+                  <dd
+                    className="mt-1 text-2xl font-bold tracking-tight"
+                    style={{ color: s.color }}
+                  >
+                    {s.v}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
-        </aside>
+
+          {/* Visual: flow diagram */}
+          <aside className="lg:col-span-5">
+            <div className="rounded-2xl border border-[#DDE2E0] bg-white p-6">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-[#4A5361]">
+                anatomy
+              </p>
+              <div className="mt-6 space-y-4">
+                <Node
+                  icon={<KeyRound className="h-4 w-4" />}
+                  label="User pastes Ollama key"
+                  sub="HTTPS POST → /api/byo/session"
+                  color="#7C5CFF"
+                />
+                <Arrow />
+                <Node
+                  icon={<Lock className="h-4 w-4" />}
+                  label="AES-256-GCM + HMAC signed"
+                  sub="server-side, BYO_LLM_ENCRYPTION_KEY"
+                  color="#1FA971"
+                />
+                <Arrow />
+                <Node
+                  icon={<Server className="h-4 w-4" />}
+                  label="HttpOnly cookie set"
+                  sub="JS cannot read. 24h max-age."
+                  color="#2E7CF6"
+                />
+                <Arrow />
+                <Node
+                  icon={<ShieldCheck className="h-4 w-4" />}
+                  label="Chat proxy decrypts on demand"
+                  sub="key never touches the client"
+                  color="#1FA971"
+                />
+              </div>
+            </div>
+          </aside>
+        </div>
       </section>
 
-      {/* The differentiator strip — what this is not */}
-      <section
-        id="how"
-        className="relative z-10 border-y border-zinc-900 bg-black/30 py-16"
-      >
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-12">
-          <div className="lg:col-span-3">
-            <p className="font-mono-c text-[10px] uppercase tracking-widest text-lime-400">
-              § 01 — what it isn't
-            </p>
-            <h2 className="mt-3 font-display text-3xl tracking-tight">
-              Not another wrapper.
-            </h2>
-          </div>
-          <div className="font-mono-c text-sm leading-relaxed text-bone-dim lg:col-span-9">
-            <div className="grid gap-6 sm:grid-cols-3">
+      {/* What this is not */}
+      <section id="how" className="border-y border-[#DDE2E0] bg-white py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="grid gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-4">
+              <p className="font-mono text-xs uppercase tracking-widest text-[#7C5CFF]">
+                § 01 — what it isn't
+              </p>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight">
+                Not another wrapper.
+              </h2>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-3 lg:col-span-8">
               <Diff
                 title="✗ Stored in localStorage"
                 body="XSS steals it the moment it lands. We don't."
+                color="#ef4444"
               />
               <Diff
                 title="✗ Passed through your server"
                 body="The chat proxy uses your key, decrypts with your key, never persists."
+                color="#ef4444"
               />
               <Diff
                 title="✗ Paywalled by Bonanza"
                 body="User brings the model. You bring the product. Inference paid by them."
+                color="#ef4444"
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Code, dark-terminal style */}
-      <section id="code" className="relative z-10 py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <p className="font-mono-c text-[10px] uppercase tracking-widest text-lime-400">
+      {/* Code, clean cards */}
+      <section id="code" className="py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <p className="font-mono text-xs uppercase tracking-widest text-[#1FA971]">
             § 02 — the receipt
           </p>
-          <h2 className="mt-3 font-display text-4xl tracking-tight">
+          <h2 className="mt-3 text-4xl font-bold tracking-tight">
             Two routes. One cookie.
           </h2>
           <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            <CodeBlock
-              lang="ts"
+            <CodeCard
               caption="/api/byo/session POST"
               code={`// server validates, encrypts, signs
 import { encryptKey, signCookie } from "@/lib/byo";
@@ -175,8 +204,7 @@ export async function POST(req: Request) {
   return res;
 }`}
             />
-            <CodeBlock
-              lang="ts"
+            <CodeCard
               caption="/api/byo/chat POST"
               code={`// server proxies the stream
 import { readByoSession } from "@/lib/byo";
@@ -202,71 +230,78 @@ export async function POST(req: Request) {
         </div>
       </section>
 
-      {/* Security block — spec sheet */}
-      <section id="security" className="relative z-10 border-t border-zinc-900 py-20">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <p className="font-mono-c text-[10px] uppercase tracking-widest text-lime-400">
-              § 03 — threat model
-            </p>
-            <h2 className="mt-3 font-display text-3xl leading-tight tracking-tight">
-              What we promise,
-              <br />
-              and what we don&apos;t.
-            </h2>
-            <p className="mt-4 font-mono-c text-sm leading-relaxed text-bone-dim">
-              A short, boring, explicit list. No &quot;bank-grade encryption&quot;
-              marketing copy.
-            </p>
-          </div>
+      {/* Security block */}
+      <section id="security" className="border-t border-[#DDE2E0] py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="grid gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-4">
+              <p className="font-mono text-xs uppercase tracking-widest text-[#2E7CF6]">
+                § 03 — threat model
+              </p>
+              <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tight">
+                What we promise,
+                <br /> and what we don't.
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed text-[#4A5361]">
+                A short, boring, explicit list. No "bank-grade encryption"
+                marketing copy.
+              </p>
+            </div>
 
-          <div className="lg:col-span-8">
-            <table className="w-full border-collapse font-mono-c text-sm">
-              <thead>
-                <tr className="border-b border-zinc-800 text-left text-[10px] uppercase tracking-widest text-zinc-500">
-                  <th className="pb-3 pr-4 font-normal">Threat</th>
-                  <th className="pb-3 pr-4 font-normal">Mitigation</th>
-                  <th className="pb-3 font-normal">Status</th>
-                </tr>
-              </thead>
-              <tbody className="text-bone-dim">
-                {SECURITY_ROWS.map((row, i) => (
-                  <tr
-                    key={row.threat}
-                    className={i % 2 ? "bg-black/20" : ""}
-                  >
-                    <td className="py-3 pr-4 align-top text-bone">
-                      {row.threat}
-                    </td>
-                    <td className="py-3 pr-4 align-top">{row.mitigation}</td>
-                    <td className="py-3 align-top">
-                      <StatusPill value={row.status} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div className="lg:col-span-8">
+              <div className="overflow-hidden rounded-2xl border border-[#DDE2E0] bg-white">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-[#DDE2E0] bg-[#F7F8F6] text-left font-mono text-[10px] uppercase tracking-widest text-[#4A5361]">
+                      <th className="px-5 py-3 font-normal">Threat</th>
+                      <th className="px-5 py-3 font-normal">Mitigation</th>
+                      <th className="px-5 py-3 font-normal">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {SECURITY_ROWS.map((row, i) => (
+                      <tr
+                        key={row.threat}
+                        className={i % 2 === 0 ? "" : "bg-[#F7F8F6]/50"}
+                      >
+                        <td className="px-5 py-4 align-top text-sm font-medium text-[#171D26]">
+                          {row.threat}
+                        </td>
+                        <td className="px-5 py-4 align-top text-sm text-[#4A5361]">
+                          {row.mitigation}
+                        </td>
+                        <td className="px-5 py-4 align-top">
+                          <StatusPill value={row.status} />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA strip */}
-      <section className="relative z-10 border-t border-zinc-900 py-16">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 sm:flex-row sm:items-center">
-          <p className="font-display text-3xl tracking-tight">
-            Stop subsidising inference.
-          </p>
+      <section className="border-t border-[#DDE2E0] py-16">
+        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-6 sm:flex-row sm:items-center">
+          <div>
+            <p className="text-3xl font-bold tracking-tight">Ready to test?</p>
+            <p className="mt-1 text-sm text-[#4A5361]">
+              Bring an Ollama Cloud key. Try the chat. No telemetry.
+            </p>
+          </div>
           <div className="flex gap-3">
             <Link
               href="/byo/chat"
-              className="inline-flex items-center gap-2 rounded-md bg-lime-400 px-5 py-2.5 font-mono-c text-xs uppercase tracking-widest text-ink hover:bg-lime-300"
+              className="inline-flex items-center gap-2 rounded-full bg-[#171D26] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#2E7CF6]"
             >
-              try the demo
-              <ArrowUpRight className="h-3 w-3" />
+              try the demo <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link
               href="/"
-              className="inline-flex items-center gap-2 rounded-md border border-zinc-800 px-5 py-2.5 font-mono-c text-xs uppercase tracking-widest text-bone-dim hover:border-zinc-700 hover:text-bone"
+              className="inline-flex items-center gap-2 rounded-full border border-[#DDE2E0] bg-white px-5 py-2.5 text-sm font-medium text-[#171D26] hover:border-[#7C5CFF]"
             >
               back to home
             </Link>
@@ -274,35 +309,101 @@ export async function POST(req: Request) {
         </div>
       </section>
 
-      <footer className="relative z-10 border-t border-zinc-900 px-6 py-6 font-mono-c text-[10px] uppercase tracking-widest text-zinc-600">
-        <div className="mx-auto flex max-w-7xl items-center justify-between">
+      <footer className="border-t border-[#DDE2E0] px-6 py-6 font-mono text-[10px] uppercase tracking-widest text-[#4A5361]">
+        <div className="mx-auto flex max-w-6xl items-center justify-between">
           <span>bonanza labs / byo-llm</span>
           <span>apache-2.0 · no telemetry</span>
         </div>
       </footer>
-    </main>
+    </div>
   );
 }
 
-function Diff({ title, body }: { title: string; body: string }) {
+function Node({
+  icon,
+  label,
+  sub,
+  color,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  sub: string;
+  color: string;
+}) {
   return (
-    <div className="border-l-2 border-zinc-800 pl-4">
-      <p className="text-bone">{title}</p>
-      <p className="mt-2 leading-relaxed">{body}</p>
+    <div className="flex items-start gap-3 rounded-xl border border-[#DDE2E0] bg-[#F7F8F6] p-3">
+      <div
+        className="grid h-8 w-8 shrink-0 place-items-center rounded-lg text-white"
+        style={{ background: color }}
+      >
+        {icon}
+      </div>
+      <div className="min-w-0 flex-1">
+        <p className="text-sm font-semibold text-[#171D26]">{label}</p>
+        <p className="mt-0.5 font-mono text-[11px] text-[#4A5361]">{sub}</p>
+      </div>
+    </div>
+  );
+}
+
+function Arrow() {
+  return (
+    <div className="flex justify-center">
+      <div className="h-4 w-px bg-[#DDE2E0]" />
+    </div>
+  );
+}
+
+function Diff({
+  title,
+  body,
+  color,
+}: {
+  title: string;
+  body: string;
+  color: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-[#DDE2E0] bg-white p-5">
+      <p className="text-sm font-semibold" style={{ color }}>
+        {title}
+      </p>
+      <p className="mt-2 text-sm leading-relaxed text-[#4A5361]">{body}</p>
+    </div>
+  );
+}
+
+function CodeCard({ caption, code }: { caption: string; code: string }) {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-[#DDE2E0] bg-white">
+      <div className="flex items-center justify-between border-b border-[#DDE2E0] bg-[#F7F8F6] px-5 py-2.5">
+        <p className="font-mono text-[10px] uppercase tracking-widest text-[#4A5361]">
+          {caption}
+        </p>
+        <div className="flex gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-full bg-[#DDE2E0]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#DDE2E0]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#1FA971]" />
+        </div>
+      </div>
+      <pre className="overflow-x-auto p-5 font-mono text-xs leading-relaxed text-[#171D26]">
+        <code>{code}</code>
+      </pre>
     </div>
   );
 }
 
 function StatusPill({ value }: { value: "shipped" | "next" | "no" }) {
   const map = {
-    shipped: { label: "shipped", cls: "border-lime-400/40 text-lime-400" },
-    next: { label: "next", cls: "border-zinc-700 text-zinc-400" },
-    no: { label: "no", cls: "border-red-400/30 text-red-400" },
+    shipped: { label: "shipped", bg: "#1FA971", text: "white" },
+    next: { label: "next", bg: "#F7F8F6", text: "#4A5361" },
+    no: { label: "no", bg: "#FEF2F2", text: "#ef4444" },
   } as const;
   const m = map[value];
   return (
     <span
-      className={`inline-block rounded-sm border bg-black/40 px-2 py-0.5 text-[10px] uppercase tracking-widest ${m.cls}`}
+      className="inline-block rounded-full px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-widest"
+      style={{ background: m.bg, color: m.text }}
     >
       {m.label}
     </span>
