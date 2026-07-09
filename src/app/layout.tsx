@@ -1,7 +1,28 @@
 import type { Metadata } from "next";
+import { Instrument_Serif, Geist_Mono, Inter } from "next/font/google";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import PageAgentLoader from "./PageAgentLoader";
 import "./globals.css";
+
+const instrumentSerif = Instrument_Serif({
+  weight: ["400"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -82,7 +103,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className="bg-[#050508] text-white antialiased">
+      <body className={`${inter.variable} ${instrumentSerif.variable} ${geistMono.variable} bg-[#050508] text-white antialiased`}>
         <noscript>
           <style>{`[style*="opacity: 0"], [style*="opacity:0"] { opacity: 1 !important; transform: none !important; }`}</style>
         </noscript>

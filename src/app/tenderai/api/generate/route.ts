@@ -31,7 +31,7 @@ async function callOpenRouter(systemPrompt: string, userPrompt: string): Promise
         'X-Title': 'TenderAI',
       },
       body: JSON.stringify({
-        model: 'google/gemma-4-26b-a4b-it:free',
+        model: 'nvidia/nemotron-3-super-120b-a12b:free',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt },
@@ -54,37 +54,7 @@ async function callOpenRouter(systemPrompt: string, userPrompt: string): Promise
   }
 }
 
-async function callOllama(systemPrompt: string, userPrompt: string): Promise<string | null> {
-  const baseUrl = process.env.OLLAMA_BASE_URL || 'http://localhost:11434';
-  const model = process.env.OLLAMA_MODEL || 'gemma4-abliterated:latest';
-
-  try {
-    const response = await fetch(`${baseUrl}/api/chat`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model,
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userPrompt },
-        ],
-        stream: false,
-        options: { temperature: 0.5, num_predict: 3000 },
-      }),
-    });
-
-    if (!response.ok) {
-      console.error('Ollama error:', response.status);
-      return null;
-    }
-
-    const data = await response.json();
-    return data.message?.content || null;
-  } catch (err) {
-    console.error('Ollama fetch error:', err);
-    return null;
-  }
-}
+// Ollama local fallback removed — doesn't work on Vercel serverless
 
 function mockOffer(body: GenerateRequest): string {
   const { companyName, companyDescription, tenderAnalysis, maxPrice } = body;
@@ -200,18 +170,12 @@ ${body.knowledgeBase?.length ? `Kennisbank:\n${body.knowledgeBase.map((k, i) => 
 
 Schrijf een overtuigende, concrete offerte.`;
 
-    // Try OpenRouter first, then Ollama, then structured template
+    // Try OpenRouter first, then mock template
     let content = await callOpenRouter(systemPrompt, userPrompt);
 
     let provider = 'openrouter';
     if (!content) {
-      console.log('OpenRouter unavailable, trying Ollama...');
-      content = await callOllama(systemPrompt, userPrompt);
-      provider = 'ollama';
-    }
-
-    if (!content) {
-      console.log('Ollama unavailable, using structured template offer');
+      console.log('OpenRouter unavailable, using structured template offer');
       content = mockOffer(body);
       provider = 'mock';
     }

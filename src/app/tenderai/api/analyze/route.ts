@@ -23,7 +23,7 @@ interface TenderAnalysisResponse {
 
 const SYSTEM_PROMPT = `Je bent TenderAI, een Nederlandse aanbestedingsexpert. Analyseer de volgende aanbesteding en geef een gestructureerde analyse in JSON formaat.
 
-Geef je antwoord ALS JSON met de volgende velden:
+Geef je antwoord ALS ALLEEN JSON (geen markdown code blocks, geen uitleg eromheen) met de volgende velden:
 - summary: korte samenvatting (2-3 zinnen)
 - requirements: array van belangrijkste eisen
 - deadlines: array van deadlines met datums
@@ -48,14 +48,15 @@ async function callOpenRouter(systemPrompt: string, userPrompt: string): Promise
         'X-Title': 'TenderAI',
       },
       body: JSON.stringify({
-        model: 'google/gemma-4-26b-a4b-it:free',
+        model: 'nvidia/nemotron-3-super-120b-a12b:free',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt },
         ],
         temperature: 0.3,
         max_tokens: 2000,
-        response_format: { type: 'json_object' },
+        // Note: removed response_format — not all free models support it
+        // We parse JSON manually from the response
       }),
     });
 
@@ -72,38 +73,8 @@ async function callOpenRouter(systemPrompt: string, userPrompt: string): Promise
   }
 }
 
-async function callOllama(systemPrompt: string, userPrompt: string): Promise<string | null> {
-  const baseUrl = process.env.OLLAMA_BASE_URL || 'http://localhost:11434';
-  const model = process.env.OLLAMA_MODEL || 'gemma4-abliterated:latest';
-
-  try {
-    const response = await fetch(`${baseUrl}/api/chat`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model,
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userPrompt },
-        ],
-        format: 'json',
-        stream: false,
-        options: { temperature: 0.3, num_predict: 2000 },
-      }),
-    });
-
-    if (!response.ok) {
-      console.error('Ollama error:', response.status);
-      return null;
-    }
-
-    const data = await response.json();
-    return data.message?.content || null;
-  } catch (err) {
-    console.error('Ollama fetch error:', err);
-    return null;
-  }
-}
+// Ollama local fallback removed — doesn't work on Vercel serverless
+// OpenRouter is the primary provider, mock is the fallback
 
 function mockAnalysis(tenderText: string, companyName?: string): TenderAnalysisResponse {
   const hasDeadline = /\b(\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{4}-\d{2}-\d{2})\b/.test(tenderText);
@@ -164,7 +135,7 @@ export async function POST(req: NextRequest) {
     let visualContext = '';
     if (body.useVisualSearch) {
       try {
-        const vsResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/tenderai/api/visual-search`, {
+        const vsResponse = await fetch(`${req.nextUrl.origin}/tenderai/api/visual-search`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ query: body.tenderText.slice(0, 500), n_docs: 3 }),
@@ -182,16 +153,11 @@ export async function POST(req: NextRequest) {
       ? `Analyseer deze aanbesteding voor ${body.companyName}:\n\n${body.tenderText}${visualContext}`
       : `Analyseer deze aanbesteding:\n\n${body.tenderText}${visualContext}`;
 
-    // Try OpenRouter first (production), then Ollama (local), then mock (always works)
+    // Try OpenRouter first, then mock fallback (always works)
     let content = await callOpenRouter(SYSTEM_PROMPT, userPrompt);
 
     if (!content) {
-      console.log('OpenRouter unavailable, trying Ollama...');
-      content = await callOllama(SYSTEM_PROMPT, userPrompt);
-    }
-
-    if (!content) {
-      console.log('Ollama unavailable, using structured mock analysis');
+      console.log('OpenRouter unavailable, using structured mock analysis');
       const mock = mockAnalysis(body.tenderText, body.companyName);
       return NextResponse.json({
         ...mock,
@@ -200,13 +166,18 @@ export async function POST(req: NextRequest) {
     }
 
     try {
-      const analysis: TenderAnalysisResponse = JSON.parse(content);
+      // Extract JSON from response (handle markdown code blocks)
+      let jsonStr = content.trim();
+      if (jsonStr.startsWith('```')) {
+        jsonStr = jsonStr.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '').trim();
+      }
+      const analysis: TenderAnalysisResponse = JSON.parse(jsonStr);
       return NextResponse.json({
         ...analysis,
-        _meta: { provider: 'openrouter-or-ollama' },
+        _meta: { provider: 'openrouter' },
       });
     } catch {
-      return NextResponse.json({ error: 'Invalid AI response format', raw: content }, { status: 502 });
+      return NextResponse.json({ error: 'Invalid AI response format', raw: content.slice(0, 500) }, { status: 502 });
     }
   } catch (error) {
     console.error('TenderAI analysis error:', error);

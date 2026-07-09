@@ -1,8 +1,54 @@
 @import "tailwindcss";
 
+@theme {
+  --font-display: var(--font-display), "Times New Roman", serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --color-bone: #f5f4f0;
+  --color-bone-dim: #c5c3bb;
+  --color-lime: #a3e635;
+  --color-ink: #0a0a0a;
+}
+
 html {
   scroll-behavior: smooth;
 }
+
+.font-display { font-family: var(--font-display), serif; }
+.font-mono-c { font-family: var(--font-mono), monospace; }
+
+/* grid background — subtle terminal vibe */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  background-blend-mode: overlay;
+}
+
+/* animated dashed flow line for diagram */
+@keyframes flowDash {
+  to { stroke-dashoffset: -40; }
+}
+.flow-dash {
+  stroke-dasharray: 4 4;
+  animation: flowDash 1.2s linear infinite;
+}
+
+/* fade-up on scroll reveal */
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0;
+  animation: revealUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
 
 body {
   -webkit-font-smoothing: antialiased;

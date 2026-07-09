@@ -4,7 +4,9 @@ import { NextRequest, NextResponse } from 'next/server';
 // Searches the PixelRAG FAISS index for relevant document screenshots
 // Uses the PixelRAG search server running locally on port 30001
 
-const PIXELRAG_URL = process.env.PIXELRAG_API_URL || 'http://127.0.0.1:30001';
+// PixelRAG visual search server — optional, defaults to localhost
+// Set PIXELRAG_API_URL env var to enable in production
+const PIXELRAG_URL = process.env.PIXELRAG_API_URL || '';
 
 interface VisualSearchRequest {
   query: string;
@@ -27,6 +29,15 @@ export async function POST(req: NextRequest) {
 
     if (!query) {
       return NextResponse.json({ error: 'query is required' }, { status: 400 });
+    }
+
+    if (!PIXELRAG_URL) {
+      return NextResponse.json({
+        query,
+        results: [],
+        total: 0,
+        note: 'Visual search not configured. Set PIXELRAG_API_URL env var.',
+      });
     }
 
     // Call PixelRAG search API
