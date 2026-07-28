@@ -10,6 +10,7 @@ const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || "";
 
 const EXPECTED_AMOUNTS: Record<string, number> = {
+  "serveflow-pilot-14-days": 49700,
   "flow-assessment-intro": 49700,
   "flow-assessment-standaard": 99900,
   "tradeflow-implementatie": 250000,
@@ -72,7 +73,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Amount mismatch" }, { status: 400 });
     }
 
-    // Atomic SET NX lock prevents duplicate processing across serverless instances.
     const acquired = await acquireLock(`stripe:event:${event.id}`, 60 * 60 * 24 * 7);
     if (!acquired) {
       return NextResponse.json({ received: true, duplicate: true });
@@ -83,6 +83,8 @@ export async function POST(req: NextRequest) {
       sessionId: session.id,
       productId,
       productName: session.metadata?.product_name || productId,
+      offerType: session.metadata?.offer_type || null,
+      durationDays: session.metadata?.duration_days || null,
       amount: session.amount_total,
       currency: session.currency,
       mode: session.mode,
@@ -105,8 +107,6 @@ export async function POST(req: NextRequest) {
 
     console.log("Stripe payment stored", paymentRecord);
 
-    // Fulfilment remains intentionally separate: schedule the assessment only
-    // after this durable payment record has been created.
     return NextResponse.json({ received: true, productId });
   } catch (error) {
     console.error("Webhook error:", error);
