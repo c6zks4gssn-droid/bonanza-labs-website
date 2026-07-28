@@ -23,6 +23,16 @@ Kunnen we de vooraf schriftelijk afgesproken reserveringsflow niet werkend oplev
 
 Voor meerdere processen, teams, locaties of complexe integraties.
 
+## Officiële onderneming
+
+- Handelsnaam: BonanzaLabs
+- Rechtsvorm: eenmanszaak
+- KvK: 88564517
+- Vestigingsnummer: 000054418089
+- Hoofdvestiging: Bloedkoraalstraat 49, 9743 KB Groningen
+
+De openbare gegevens staan centraal in `src/lib/business-details.ts` en worden gebruikt op `/voorwaarden`, `/privacy`, `/over-ons` en in LocalBusiness structured data.
+
 ## Kernpagina’s
 
 - `/` — pilotgerichte homepage
@@ -44,19 +54,18 @@ Voor meerdere processen, teams, locaties of complexe integraties.
 
 Zie `.env.example` voor alle vereiste variabelen.
 
-## Productiegate
+## Resterende productiegate
 
 Merge pas nadat het volgende daadwerkelijk is getest:
 
-1. officiële handelsnaam, KvK en vestigingsadres ingesteld;
-2. Upstash-, Stripe- en adminvariabelen ingesteld voor Preview en Production;
-3. testlead opgeslagen en zichtbaar in `/admin/leads`;
-4. Resend-notificatie ontvangen;
-5. Stripe-testbetaling van €497 voltooid;
-6. webhookbetaling zichtbaar in Upstash;
-7. admin-API getest met onjuiste en juiste credentials;
-8. WhatsApp- en telefoonlinks op mobiel getest;
-9. preview visueel gecontroleerd op mobiel en desktop.
+1. Upstash-, Stripe- en adminvariabelen ingesteld voor Preview en Production;
+2. testlead opgeslagen en zichtbaar in `/admin/leads`;
+3. Resend-notificatie ontvangen;
+4. Stripe-testbetaling van €497 voltooid;
+5. webhookbetaling zichtbaar in Upstash;
+6. admin-API getest met onjuiste en juiste credentials;
+7. WhatsApp- en telefoonlinks op mobiel getest;
+8. preview visueel gecontroleerd op mobiel en desktop.
 
 ## Scheiding van merken
 
