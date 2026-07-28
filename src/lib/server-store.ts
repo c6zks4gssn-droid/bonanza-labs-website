@@ -97,3 +97,31 @@ export async function storeJsonRecord(options: {
   await redisPipeline(commands);
   return true;
 }
+
+export async function readJsonRecordsFromRecentList<T>(options: {
+  recentList: string;
+  keyPrefix: string;
+  limit?: number;
+}): Promise<T[]> {
+  if (!isRedisConfigured) return [];
+
+  const limit = Math.max(1, Math.min(options.limit ?? 100, 200));
+  const ids =
+    (await redisCommand<string[]>("LRANGE", options.recentList, 0, limit - 1)) || [];
+
+  if (ids.length === 0) return [];
+
+  const responses = await redisPipeline(
+    ids.map((id) => ["GET", `${options.keyPrefix}${id}`]),
+  );
+
+  return responses.flatMap((response) => {
+    if (typeof response.result !== "string") return [];
+
+    try {
+      return [JSON.parse(response.result) as T];
+    } catch {
+      return [];
+    }
+  });
+}
