@@ -1,113 +1,126 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
-import { kv } from "@vercel/kv";
+import {
+  acquireLock,
+  isRedisConfigured,
+  storeJsonRecord,
+} from "@/lib/server-store";
 
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || "";
 
+const EXPECTED_AMOUNTS: Record<string, number> = {
+  "flow-assessment-intro": 49700,
+  "flow-assessment-standaard": 99900,
+  "tradeflow-implementatie": 250000,
+  "serveflow-implementatie": 250000,
+  "bonanza-voice-implementatie": 149500,
+  "beheer-basis": 19700,
+  "beheer-uitgebreid": 49700,
+};
+
 export async function POST(req: NextRequest) {
   try {
-    if (!STRIPE_WEBHOOK_SECRET) {
-      console.error("STRIPE_WEBHOOK_SECRET is not set");
+    if (!STRIPE_SECRET_KEY || !STRIPE_WEBHOOK_SECRET) {
       return NextResponse.json({ error: "Webhook not configured" }, { status: 503 });
     }
 
-    // 1. Read the raw request body
+    if (!isRedisConfigured) {
+      console.error("Upstash Redis is required for durable Stripe idempotency");
+      return NextResponse.json({ error: "Payment storage not configured" }, { status: 503 });
+    }
+
     const body = await req.text();
-
-    // 2. Get the Stripe signature header
     const signature = req.headers.get("stripe-signature");
-
     if (!signature) {
-      console.error("Missing stripe-signature header");
       return NextResponse.json({ error: "Missing signature" }, { status: 400 });
     }
 
-    // 3. Verify the event with the webhook secret
     const stripe = new Stripe(STRIPE_SECRET_KEY);
-
     let event: Stripe.Event;
 
     try {
       event = stripe.webhooks.constructEvent(body, signature, STRIPE_WEBHOOK_SECRET);
-    } catch (err) {
-      console.error("Webhook signature verification failed:", err);
+    } catch (error) {
+      console.error("Webhook signature verification failed:", error);
       return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
     }
 
-    // 4. Process checkout.session.completed events
-    if (event.type === "checkout.session.completed") {
-      const session = event.data.object as Stripe.Checkout.Session;
-
-      // Payment status check — only process paid sessions
-      if (session.payment_status !== "paid") {
-        console.log("Payment not completed, skipping");
-        return NextResponse.json({ received: true });
-      }
-
-      // Idempotency: check if session already processed (Vercel KV)
-      const processed = await kv.get(`stripe:session:${session.id}`);
-      if (processed) {
-        console.log("Session already processed:", session.id);
-        return NextResponse.json({ received: true, duplicate: true });
-      }
-
-      // Extract session data
-      const amountTotal = session.amount_total;
-      const customerEmail = session.customer_details?.email || session.customer_email || "unknown";
-      const customerName = session.customer_details?.name || "unknown";
-      const mode = session.mode; // "payment" or "subscription"
-
-      console.log(`✅ Payment received:
-        Session ID: ${session.id}
-        Amount: ${amountTotal} cents (€${amountTotal ? (amountTotal / 100).toFixed(2) : "N/A"})
-        Customer email: ${customerEmail}
-        Customer name: ${customerName}
-        Mode: ${mode}
-        Payment status: ${session.payment_status}
-        Created: ${new Date(session.created * 1000).toISOString()}`);
-
-      // Get product_id from session metadata or line items
-      let productId = "unknown";
-      try {
-        const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
-        for (const item of lineItems.data) {
-          console.log(`  Line item: ${item.description} — ${item.amount_total} cents`);
-        }
-      } catch (lineItemErr) {
-        console.error("Failed to fetch line items:", lineItemErr);
-      }
-
-      // Persist idempotency record to KV
-      await kv.set(`stripe:session:${session.id}`, JSON.stringify({
-        processed: true,
-        amount: session.amount_total,
-        email: session.customer_details?.email,
-        productId,
-        processedAt: new Date().toISOString(),
-      }));
-
-      // TODO: In production, also:
-      // - Store payment record in database
-      // - Trigger fulfillment (send welcome email, create account, schedule onboarding)
-      // - Update CRM / pipeline
-    } else {
-      // 5. Log other events but don't process
-      console.log(`📡 Stripe event received (not processed): ${event.type}`);
+    if (event.type !== "checkout.session.completed") {
+      return NextResponse.json({ received: true, ignored: event.type });
     }
 
-    // 6. Return 200 for valid events
-    return NextResponse.json({ received: true });
-  } catch (e) {
-    console.error("Webhook error:", e);
+    const session = event.data.object as Stripe.Checkout.Session;
+    if (session.payment_status !== "paid") {
+      return NextResponse.json({ received: true, pending: true });
+    }
+
+    const productId = session.metadata?.product_id || "";
+    const expectedAmount = EXPECTED_AMOUNTS[productId];
+
+    if (!productId || expectedAmount === undefined) {
+      console.error("Unknown Stripe product metadata:", session.metadata);
+      return NextResponse.json({ error: "Unknown product" }, { status: 400 });
+    }
+
+    if (session.amount_total !== expectedAmount) {
+      console.error("Stripe amount mismatch", {
+        productId,
+        expectedAmount,
+        receivedAmount: session.amount_total,
+      });
+      return NextResponse.json({ error: "Amount mismatch" }, { status: 400 });
+    }
+
+    // Atomic SET NX lock prevents duplicate processing across serverless instances.
+    const acquired = await acquireLock(`stripe:event:${event.id}`, 60 * 60 * 24 * 7);
+    if (!acquired) {
+      return NextResponse.json({ received: true, duplicate: true });
+    }
+
+    const paymentRecord = {
+      eventId: event.id,
+      sessionId: session.id,
+      productId,
+      productName: session.metadata?.product_name || productId,
+      amount: session.amount_total,
+      currency: session.currency,
+      mode: session.mode,
+      paymentStatus: session.payment_status,
+      customerId: session.customer,
+      customerEmail: session.customer_details?.email || session.customer_email || null,
+      customerName: session.customer_details?.name || null,
+      createdAt: new Date(session.created * 1000).toISOString(),
+      processedAt: new Date().toISOString(),
+    };
+
+    await storeJsonRecord({
+      key: `stripe:payment:${session.id}`,
+      value: paymentRecord,
+      ttlSeconds: 60 * 60 * 24 * 365 * 7,
+      recentList: "stripe:payments:recent",
+      recentValue: session.id,
+      recentLimit: 1000,
+    });
+
+    console.log("Stripe payment stored", paymentRecord);
+
+    // Fulfilment remains intentionally separate: schedule the assessment only
+    // after this durable payment record has been created.
+    return NextResponse.json({ received: true, productId });
+  } catch (error) {
+    console.error("Webhook error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
 
-// Health check
 export async function GET() {
   return NextResponse.json({
-    service: "Bonanza Labs Stripe Webhook",
-    configured: !!STRIPE_WEBHOOK_SECRET,
+    service: "BonanzaLabs Stripe Webhook",
+    configured: Boolean(
+      STRIPE_SECRET_KEY &&
+        STRIPE_WEBHOOK_SECRET &&
+        isRedisConfigured,
+    ),
   });
 }
