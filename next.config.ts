@@ -22,7 +22,8 @@ const nextConfig: NextConfig = {
       { source: "/mcp-guard/:path*", destination: "/portfolio", permanent: true },
       { source: "/gasvrij", destination: "/portfolio", permanent: true },
       { source: "/gasvrij/:path*", destination: "/portfolio", permanent: true },
-      // Oude tool pagina's → home
+
+      // Oude toolpagina's → home
       { source: "/quiz", destination: "/", permanent: true },
       { source: "/quiz/:path*", destination: "/", permanent: true },
       { source: "/intel", destination: "/", permanent: true },
@@ -34,12 +35,30 @@ const nextConfig: NextConfig = {
       { source: "/search", destination: "/", permanent: true },
       { source: "/ai-ops", destination: "/", permanent: true },
       { source: "/compliance", destination: "/", permanent: true },
-      // Oude productnaam redirects
+
+      // Oude namen en navigatieroutes
       { source: "/voiceflow", destination: "/bonanza-voice", permanent: true },
       { source: "/tenderai", destination: "/tradeflow", permanent: true },
       { source: "/tenderai/:path*", destination: "/tradeflow", permanent: true },
-      // Oude producten pagina → pricing
       { source: "/products", destination: "/pricing", permanent: true },
+      { source: "/about", destination: "/over-ons", permanent: true },
+
+      // Oude Engelstalige AI-videoartikelen → nieuwe MKB-kennisbank
+      {
+        source: "/blog/runway-vs-kling-vs-luma-vs-veo-3-2025",
+        destination: "/blog",
+        permanent: true,
+      },
+      {
+        source: "/blog/best-ai-video-generator-right-now-july-2025",
+        destination: "/blog",
+        permanent: true,
+      },
+      {
+        source: "/blog/text-to-video-ai-7-best-tools-compared",
+        destination: "/blog",
+        permanent: true,
+      },
     ];
   },
 };
