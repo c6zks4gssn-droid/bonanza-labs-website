@@ -1,76 +1,123 @@
-# 🧨 Bonanza Labs — AI Tools for the Autonomous Economy
+# BonanzaLabs — Automatisering voor het Nederlandse MKB
 
-Open source AI tools for builders. Spending firewall, tender analysis, repo health, and more.
+BonanzaLabs bouwt praktische automatiseringssystemen voor horeca, bouw, installatie en zakelijke dienstverlening.
 
-[![Live](https://img.shields.io/badge/live-bonanza--labs.com-emerald?style=flat-square)](https://bonanza-labs.com)
-[![License](https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
+**Positionering:** minder handwerk, snellere opvolging en meer omzet — zonder onnodige AI-hype of een zwaar softwaretraject.
 
-## 🚀 Products
+## Kernoplossingen
 
-| Product | Description | Status |
-|---------|-------------|--------|
-| **Agent Wallet** | Spending firewall for AI agents — policy checks, risk scoring, approval queue, audit log, Stripe checkout | ✅ Live v1.0 |
-| **TenderAI** | AI-powered tender/offerte analysis and generation for the NL/BE market | 🧪 Beta |
-| **Fork Doctor** | GitHub repo health checker — 13 automated infrastructure checks | ✅ v0.3.0 |
-| **FrameForge** | AI video generator — script to voiceover to MP4 | 🧪 Beta |
-| **GasVrij** | Energy transition lead gen for Groningen | ✅ Live |
-| **Intel** | AI-powered competitive intelligence | ✅ Live |
+| Oplossing | Voor wie | Kernfunctie |
+|---|---|---|
+| **TradeFlow** | Bouw, installatie en zakelijke dienstverlening | Intake, offertes, WhatsApp-opvolging, leadpipeline en CRM |
+| **ServeFlow** | Restaurants, cafés en horecaondernemers | Reserveringen, no-showpreventie, klantcommunicatie en reviews |
+| **Bonanza Voice** | Bedrijven die telefoontjes of afspraken missen | AI-telefonie, afspraken, samenvattingen en doorverbinden |
 
-## 📦 Monorepo Structure
+## Commercieel model
 
-```
-bonanza-labs-website/
-├── src/                    # Next.js website (bonanza-labs.com)
-├── packages/
-│   ├── agent-wallet/       # 💰 Spending firewall for AI agents
-│   ├── agents/             # 🤖 Agent CLI (pip install bonanza-agents)
-│   ├── approve/            # ✅ Human-in-the-loop approval gateway
-│   ├── cli/                # 🧨 Unified CLI (pip install bonanza-labs)
-│   ├── fork-doctor/        # 🩺 Repo health checker
-│   ├── frameforge/         # 🎬 AI video generator
-│   ├── guard/              # 🛡️ Security guardrails for AI agents
-│   ├── observe/            # 📊 AI agent cost observability
-│   ├── pay/                # 💳 Stripe + Stablecoin payments
-│   ├── search/             # 🔍 Search utilities
-│   ├── auth/               # 🔐 Authentication
-│   ├── app-forge/          # 🏗️ App scaffolding
-│   ├── x402-adapter/       # 🔌 x402 protocol adapter (pip install bonanza-x402)
-│   └── mcp/                # 🤖 MCP server (pip install bonanza-mcp)
-└── README.md
+- Flow Assessment Introductie: **€497**
+- Flow Assessment Standaard: **€999**
+- TradeFlow en ServeFlow implementaties: **vanaf €2.500**
+- Bonanza Voice implementatie: **vanaf €1.495**
+- Beheer en optimalisatie: **vanaf €197 per maand**
+
+Alleen de twee Flow Assessments hebben een directe Stripe Checkout. Implementaties met een vanafprijs lopen eerst via intake en offerte.
+
+## Belangrijkste routes
+
+```text
+/                  Homepage
+/tradeflow         TradeFlow
+/serveflow         ServeFlow
+/bonanza-voice     Bonanza Voice
+/pricing           Flow Assessments en prijsindicaties
+/portfolio         Gebouwde projecten en cases
+/over-ons          Over BonanzaLabs
+/contact           Leadformulier
+/blog              MKB-kennisbank
+/privacy           Privacyverklaring
 ```
 
-## 🛠️ Quick Start
+## Technische stack
+
+- Next.js App Router
+- React en TypeScript
+- Tailwind CSS
+- Stripe Checkout en webhooks
+- Upstash Redis REST voor leads, betalingen, idempotency en rate limiting
+- Resend voor optionele leadnotificaties
+- MiniMax of OpenRouter voor de website-assistent
+- Vercel voor hosting en preview deployments
+
+## Lokale installatie
 
 ```bash
-# Install the unified CLI
-pip install bonanza-labs
-
-# Or install individual tools
-pip install fork-doctor
-pip install bonanza-labs[video]
-pip install bonanza-agents
+pnpm install
+cp .env.example .env.local
+pnpm dev
 ```
 
-## 🌐 Live Sites
+Productiebuild:
 
-- **Main:** [bonanza-labs.com](https://bonanza-labs.com)
-- **Firewall Demo:** [bonanza-labs.com/firewall](https://bonanza-labs.com/firewall)
-- **GasVrij:** [bonanza-labs.com/gasvrij](https://bonanza-labs.com/gasvrij)
-- **TenderAI:** [bonanza-labs.com/tenderai](https://bonanza-labs.com/tenderai)
+```bash
+pnpm build
+```
 
-## 🤝 Contributing
+## Environment variables
 
-1. Fork the repo
-2. Create your feature branch (`git checkout -b feat/amazing-feature`)
-3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
-4. Push to the branch (`git push origin feat/amazing-feature`)
-5. Open a Pull Request
+Zie `.env.example` voor het volledige overzicht.
 
-## 📄 License
+Minimaal voor betalingen en leadopslag:
 
-Apache License 2.0 — see [LICENSE](LICENSE) for details.
+```text
+NEXT_PUBLIC_BASE_URL
+STRIPE_SECRET_KEY
+STRIPE_WEBHOOK_SECRET
+UPSTASH_REDIS_REST_URL
+UPSTASH_REDIS_REST_TOKEN
+```
 
----
+Voor leadnotificaties:
 
-Built by [Bonanza Labs](https://bonanza-labs.com) 🧨
+```text
+RESEND_API_KEY
+RESEND_FROM_EMAIL
+LEAD_NOTIFICATION_EMAIL
+```
+
+Voor de chat-assistent configureer je MiniMax of OpenRouter, niet beide als onbedoelde fallback.
+
+## Betalingsflow
+
+1. De bezoeker kiest een Flow Assessment op `/pricing`.
+2. `/api/checkout` valideert het product tegen de server-side catalogus.
+3. Stripe Checkout verwerkt de betaling.
+4. `/api/stripe-webhook` controleert de signature, betaalstatus, productmetadata en het verwachte bedrag.
+5. Het betaalrecord wordt idempotent en duurzaam opgeslagen.
+
+## Leadflow
+
+Contactformulier en chatwidget sturen aanvragen naar `/api/leads`.
+
+De API:
+
+- valideert en begrenst invoer;
+- controleert server-side honeypots;
+- gebruikt rate limiting;
+- bewaart de lead duurzaam;
+- kan een e-mailnotificatie sturen via Resend.
+
+## Voor productie controleren
+
+- [ ] Vercel environment variables ingesteld voor Preview én Production
+- [ ] Upstash-database gekoppeld en healthchecks gecontroleerd
+- [ ] Resend-verzenddomein geverifieerd
+- [ ] Stripe-webhookendpoint toegevoegd voor `/api/stripe-webhook`
+- [ ] Testbetaling van €497 volledig doorlopen
+- [ ] Testlead via contactformulier en chat ontvangen
+- [ ] Privacyverklaring aangevuld met officiële handelsnaam, KvK-nummer en adres
+- [ ] Mobiele navigatie en formulieren visueel gecontroleerd
+- [ ] Productiedomeinen naar de juiste Vercel-deployment verwezen
+
+## Scheiding van merken
+
+`bonanza-labs.com` is de commerciële MKB-site. Open-source developer tools, packages en experimentele agentproducten horen niet op deze homepage en worden later afzonderlijk onder BonanzaForge of GitHub gepositioneerd.
