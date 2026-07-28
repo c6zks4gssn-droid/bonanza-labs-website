@@ -2,262 +2,149 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { X, Menu } from "lucide-react";
+import { motion } from "framer-motion";
+import { X, Menu, Check, ArrowRight } from "lucide-react";
 
-const plans = [
+const assessments = [
   {
-    product: "FrameForge",
-    emoji: "🎬",
-    slug: "frameforge",
-    tiers: [
-      { name: "Free", price: "$0", period: "/mo", features: ["5 videos/mo", "720p", "2 styles", "Edge-TTS voices"], cta: "Start Free", highlight: false, action: "start-free" },
-      { name: "Pro", price: "$29", period: "/mo", features: ["50 videos/mo", "1080p", "All styles", "Voice cloning", "Batch render", "No watermark"], cta: "Go Pro", highlight: true, action: "checkout", tier: "pro" },
-      { name: "Enterprise", price: "$199", period: "/mo", features: ["Unlimited", "4K", "All styles", "Voice cloning", "API access", "Custom templates"], cta: "Contact Us", highlight: false, action: "contact" },
-    ],
+    name: "Introductie",
+    price: "€497",
+    desc: "Geschikt voor kleine bedrijven die willen weten waar automatisering de meeste winst oplevert.",
+    features: ["60 minuten gesprek", "Inzicht in knelpunten en kansen", "Korte actielijst", "Geschikt voor 1 locatie"],
+    highlight: false,
   },
   {
-    product: "Fork Doctor",
-    emoji: "🩺",
-    slug: "fork-doctor",
-    tiers: [
-      { name: "Free", price: "$0", period: "/mo", features: ["5 checks/day", "JSON output", "Public repos"], cta: "Start Free", highlight: false, action: "start-free" },
-      { name: "Pro", price: "$9", period: "/mo", features: ["Unlimited checks", "All formats", "Private repos", "CI/CD integration", "Auto-fix"], cta: "Go Pro", highlight: true, action: "checkout", tier: "pro" },
-    ],
-  },
-  {
-    product: "Agent Wallet",
-    emoji: "💰",
-    slug: "agent-wallet",
-    tiers: [
-      { name: "Free", price: "$0", period: "/mo", features: ["1 agent", "$50/mo limit", "Basic analytics", "Solana only"], cta: "Start Free", highlight: false, action: "start-free" },
-      { name: "Pro", price: "$29", period: "/mo", features: ["10 agents", "$5K/mo limit", "Full analytics", "All chains", "Policy editor", "API access"], cta: "Go Pro", highlight: true, action: "checkout", tier: "pro" },
-      { name: "Enterprise", price: "$199", period: "/mo", features: ["Unlimited agents", "Unlimited wallet", "Custom policies", "SSO", "Priority support", "SLA"], cta: "Contact Us", highlight: false, action: "contact" },
-    ],
-  },
-  {
-    product: "Search",
-    emoji: "🔍",
-    slug: "search",
-    tiers: [
-      { name: "Free", price: "$0", period: "/mo", features: ["100 searches/day", "CLI access", "DuckDuckGo"], cta: "Start Free", highlight: false, action: "start-free" },
-      { name: "Pro", price: "$9", period: "/mo", features: ["Unlimited searches", "URL extraction", "Private API", "Team seats"], cta: "Go Pro", highlight: true, action: "checkout", tier: "pro" },
-    ],
+    name: "Standaard",
+    price: "€999",
+    desc: "Voor bedrijven met meerdere locaties of complexere processen.",
+    features: ["Uitgebreid procesonderzoek", "Rapport met prioriteiten en ROI-schatting", "Aanbevolen implementatievolgorde", "Geschikt voor meerdere locaties"],
+    highlight: true,
   },
 ];
 
-function CheckoutModal({ product, tier, onClose }: { product: string; tier: string; onClose: () => void }) {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  const handleCheckout = async () => {
-    setLoading(true);
-    setError("");
-    try {
-      const productSlug = product.toLowerCase().replace(/ /g, "-");
-      const tierSlug = tier.toLowerCase();
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ product: productSlug, tier: tierSlug }),
-      });
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        setError(data.error || "Checkout failed. Please try again.");
-      }
-    } catch (e) {
-      setError("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" onClick={onClose}>
-      <div className="bg-[#111] border border-white/10 rounded-2xl p-8 max-w-md w-full shadow-2xl" onClick={e => e.stopPropagation()}>
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-xl font-bold">💳 Checkout</h3>
-          <button onClick={onClose} className="text-gray-500 hover:text-white transition">
-            <X className="w-5 h-5" />
-          </button>
-        </div>
-        <div className="rounded-xl border border-violet-500/30 bg-violet-500/5 p-4 mb-6">
-          <div className="text-sm text-gray-400 mb-1">{product}</div>
-          <div className="text-lg font-bold bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">{tier} plan</div>
-        </div>
-        {error && (
-          <div className="rounded-lg border border-red-500/30 bg-red-500/5 p-3 mb-4 text-sm text-red-400">
-            {error}
-          </div>
-        )}
-        <button
-          onClick={handleCheckout}
-          disabled={loading}
-          className="w-full py-3 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-sm font-semibold hover:opacity-90 transition disabled:opacity-50 flex items-center justify-center gap-2"
-        >
-          {loading ? "⏳ Redirecting to Stripe..." : "💳 Pay with Stripe"}
-        </button>
-        <p className="text-center text-xs text-gray-600 mt-3">
-          Secure checkout powered by Stripe. Cancel anytime.
-        </p>
-        <div className="mt-4 flex items-center justify-center gap-2 text-xs text-gray-600">
-          <span>🪙 Also accept</span>
-          <span className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-cyan-400">USDC</span>
-          <span className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-cyan-400">USDT</span>
-        </div>
-      </div>
-    </div>
-  );
-}
+const implementations = [
+  {
+    name: "TradeFlow",
+    emoji: "🔧",
+    price: "vanaf €2.500",
+    desc: "Van aanvraag naar offerte en opvolging zonder WhatsApp-chaos.",
+    features: ["Conversiegerichte website", "Intake- en offerteformulieren", "AI-offertegenerator", "WhatsApp-opvolging", "Leadpipeline en CRM", "Automatische herinneringen", "Dashboard met aanvragen"],
+  },
+  {
+    name: "ServeFlow",
+    emoji: "🍽️",
+    price: "vanaf €2.500",
+    desc: "Minder gemiste reserveringen, telefoontjes en no-shows.",
+    features: ["Online reserveringen", "WhatsApp-bevestigingen", "No-showpreventie", "Reviewverzoeken", "Digitale menukaart", "Website en lokale vindbaarheid", "Bonanza Voice als uitbreiding"],
+  },
+  {
+    name: "Bonanza Voice",
+    emoji: "🎙️",
+    price: "vanaf €1.495",
+    desc: "Iedere oproep professioneel beantwoorden, ook wanneer niemand beschikbaar is.",
+    features: ["AI-telefonie", "Afspraken en reserveringen registreren", "Veelgestelde vragen beantwoorden", "Gesprekssamenvattingen", "Doorverbinden naar medewerkers", "WhatsApp voice en follow-up", "Ook beschikbaar als add-on"],
+  },
+];
 
 export default function PricingPage() {
-  const [checkout, setCheckout] = useState<{ product: string; tier: string } | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleCtaClick = (product: string, tier: string, action: string) => {
-    if (action === "checkout") {
-      setCheckout({ product, tier });
-    } else if (action === "contact") {
-      window.location.href = "mailto:passiveassets@proton.me?subject=Enterprise%20Inquiry%20-%20Bonanza%20Labs";
-    } else if (action === "start-free") {
-      window.location.href = "https://github.com/c6zks4gssn-droid";
-    }
-  };
-
   return (
-    <>
-      {checkout && <CheckoutModal product={checkout.product} tier={checkout.tier} onClose={() => setCheckout(null)} />}
-      <main className="min-h-screen bg-[#0a0a0f] text-white">
-        {/* Nav */}
-        <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-[#0a0a0f]/70 border-b border-white/5">
-          <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between relative">
-            <Link href="/" className="text-lg font-bold bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">
-              Bonanza Labs
-            </Link>
-            <button className="md:hidden text-gray-400 hover:text-white" onClick={() => setMenuOpen(!menuOpen)}>
-              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-            <div className={`nav-links ${menuOpen ? 'open' : ''} md:flex gap-6 text-sm text-white/60`}>
-              <Link href="/" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Home</Link>
-              <Link href="/products" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>Products</Link>
-              <span className="text-white font-medium">Pricing</span>
-              <a href="https://github.com/c6zks4gssn-droid" target="_blank" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>GitHub</a>
-            </div>
+    <div className="min-h-screen bg-[#050508] text-white">
+      {/* Nav */}
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050508]/80 backdrop-blur-md">
+        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
+          <Link href="/" className="font-semibold tracking-tight">BonanzaLabs</Link>
+          <nav className="hidden md:flex items-center gap-6 text-sm text-white/60">
+            <Link href="/tradeflow" className="hover:text-white transition">TradeFlow</Link>
+            <Link href="/serveflow" className="hover:text-white transition">ServeFlow</Link>
+            <Link href="/bonanza-voice" className="hover:text-white transition">Bonanza Voice</Link>
+            <Link href="/portfolio" className="hover:text-white transition">Portfolio</Link>
+            <Link href="/over-ons" className="hover:text-white transition">Over ons</Link>
+            <Link href="/contact" className="hover:text-white transition">Contact</Link>
+          </nav>
+          <Link href="/pricing" className="hidden md:inline-flex items-center rounded-xl bg-[#2563EB] px-4 py-2 text-sm font-semibold text-white hover:bg-[#1D4ED8]">Flow Assessment</Link>
+          <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button>
+        </div>
+        {menuOpen && (
+          <div className="md:hidden border-t border-white/10 px-6 py-4 space-y-3 text-sm">
+            <Link href="/tradeflow" className="block text-white/60 hover:text-white">TradeFlow</Link>
+            <Link href="/serveflow" className="block text-white/60 hover:text-white">ServeFlow</Link>
+            <Link href="/bonanza-voice" className="block text-white/60 hover:text-white">Bonanza Voice</Link>
+            <Link href="/portfolio" className="block text-white/60 hover:text-white">Portfolio</Link>
+            <Link href="/over-ons" className="block text-white/60 hover:text-white">Over ons</Link>
+            <Link href="/contact" className="block text-white/60 hover:text-white">Contact</Link>
           </div>
-        </nav>
+        )}
+      </header>
 
-        <div className="max-w-6xl mx-auto px-6 pt-32 pb-20">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-black mb-4">
-              Simple, transparent pricing
-            </h1>
-            <p className="text-white/50 text-lg max-w-xl mx-auto">
-              Start free, upgrade when you need more. Every plan includes core features. Cancel anytime.
-            </p>
-            <div className="mt-6 flex items-center justify-center gap-2 text-sm text-white/40">
-              <span>🪙 Also accept</span>
-              <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-cyan-400">USDC</span>
-              <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-cyan-400">USDT</span>
-              <span>on Solana and Base</span>
-            </div>
-          </div>
+      {/* Flow Assessment */}
+      <section className="border-b border-white/10">
+        <div className="mx-auto max-w-5xl px-6 py-20">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <h1 className="text-4xl font-semibold tracking-tight">Prijzen</h1>
+            <p className="mt-4 text-lg text-white/60">Eerst begrijpen wat er mis gaat. Daarna pas bouwen.</p>
+          </motion.div>
 
-          {/* Plans */}
-          {plans.map((product) => (
-            <div key={product.product} className="mb-20">
-              <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
-                {product.emoji} {product.product}
-              </h2>
-              <div className={`grid ${product.tiers.length === 2 ? 'grid-cols-1 md:grid-cols-2 max-w-2xl' : 'grid-cols-1 md:grid-cols-3'} gap-6`}>
-                {product.tiers.map((tier) => (
-                  <div
-                    key={tier.name}
-                    className={`relative rounded-2xl p-6 border transition-all duration-300 hover:-translate-y-1 ${
-                      tier.highlight
-                        ? "border-violet-500/50 bg-violet-500/5 shadow-lg shadow-violet-500/10"
-                        : "border-white/5 bg-white/[0.02]"
-                    }`}
-                  >
-                    {tier.highlight && (
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-violet-500 to-cyan-500 text-xs font-bold">
-                        POPULAR
-                      </div>
-                    )}
-                    <div className="mb-4">
-                      <h3 className="text-lg font-semibold">{tier.name}</h3>
-                      <div className="flex items-baseline gap-1 mt-1">
-                        <span className="text-4xl font-black">{tier.price}</span>
-                        <span className="text-white/40">{tier.period}</span>
-                      </div>
-                    </div>
-                    <ul className="space-y-2 mb-8">
-                      {tier.features.map((f) => (
-                        <li key={f} className="flex items-center gap-2 text-sm text-white/70">
-                          <span className="text-violet-400">✓</span> {f}
-                        </li>
-                      ))}
-                    </ul>
-                    <button
-                      onClick={() => handleCtaClick(product.product, tier.name, tier.action)}
-                      className={`w-full py-3 rounded-xl font-semibold text-sm transition-all ${
-                        tier.highlight
-                          ? "bg-gradient-to-r from-violet-500 to-cyan-500 text-white hover:shadow-lg hover:shadow-violet-500/25"
-                          : "bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white"
-                      }`}
-                    >
-                      {tier.cta}
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-
-          {/* Crypto payment note */}
-          <div className="mt-12 rounded-2xl border border-white/5 bg-white/[0.02] p-8 text-center">
-            <h3 className="text-xl font-bold mb-2">🪙 Pay with Stablecoins</h3>
-            <p className="text-white/50 max-w-lg mx-auto">
-              Prefer crypto? We accept USDC and USDT on Solana and Base. Send the exact plan amount and email the transaction hash to activate access.
-            </p>
-            <div className="mt-5 grid md:grid-cols-2 gap-3 max-w-3xl mx-auto text-left">
-              <div className="rounded-xl border border-white/10 p-4">
-                <div className="text-sm text-white/40 mb-2">Solana — USDC/USDT</div>
-                <div className="text-xs font-mono text-cyan-400 break-all bg-white/5 rounded-lg p-3">EAvw5tJEVjLn9TYLdHrY1J5F7RgJwdnvEiVE8wMXCUz4</div>
-              </div>
-              <div className="rounded-xl border border-white/10 p-4">
-                <div className="text-sm text-white/40 mb-2">Base — USDC/USDT</div>
-                <div className="text-xs font-mono text-cyan-400 break-all bg-white/5 rounded-lg p-3">0x9398F142eB443C8e976c6ec9A27dEa3bA16Eab26</div>
-              </div>
-            </div>
-            <a
-              href="mailto:passiveassets@proton.me?subject=Crypto%20Payment%20Proof%20-%20Bonanza%20Labs"
-              className="inline-block mt-4 px-6 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm font-medium hover:bg-white/10 transition"
-            >
-              Email payment proof →
-            </a>
-          </div>
-
-          {/* FAQ */}
-          <div className="mt-16">
-            <h2 className="text-2xl font-bold mb-8 text-center">FAQ</h2>
-            <div className="max-w-2xl mx-auto space-y-4">
-              {[
-                { q: "Can I switch plans anytime?", a: "Yes. Upgrade or downgrade anytime. Changes take effect immediately." },
-                { q: "Do I need a credit card for the free plan?", a: "No. Free plans require no payment method at all." },
-                { q: "What chains do you support for crypto payments?", a: "Solana and Base. We accept USDC and USDT on both, with manual proof-of-payment activation." },
-                { q: "Is everything open source?", a: "Yes. All Bonanza Labs projects are Apache 2.0 licensed on GitHub." },
-              ].map((faq) => (
-                <div key={faq.q} className="rounded-xl border border-white/5 bg-white/[0.02] p-5">
-                  <h4 className="font-semibold mb-1">{faq.q}</h4>
-                  <p className="text-sm text-white/50">{faq.a}</p>
-                </div>
-              ))}
-            </div>
+          <h2 className="mt-16 text-sm font-medium uppercase tracking-widest text-white/40">Flow Assessment</h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            {assessments.map((a, i) => (
+              <motion.div key={a.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.5 }}
+                className={`rounded-2xl border p-8 ${a.highlight ? "border-[#2563EB] bg-[#2563EB]/5" : "border-white/10 bg-white/5"}`}>
+                {a.highlight && <span className="inline-block rounded-full bg-[#2563EB] px-3 py-1 text-xs font-semibold text-white mb-4">Aanbevolen</span>}
+                <h3 className="text-2xl font-semibold">{a.name}</h3>
+                <p className="mt-2 text-3xl font-bold text-[#2563EB]">{a.price}</p>
+                <p className="mt-4 text-sm text-white/60">{a.desc}</p>
+                <ul className="mt-6 space-y-3">
+                  {a.features.map((f) => (
+                    <li key={f} className="flex items-center gap-3 text-sm text-white/70"><Check className="h-4 w-4 text-[#2563EB]" />{f}</li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
           </div>
         </div>
-      </main>
-    </>
+      </section>
+
+      {/* Implementaties */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <h2 className="text-sm font-medium uppercase tracking-widest text-white/40">Implementaties</h2>
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {implementations.map((p, i) => (
+            <motion.div key={p.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.5 }}
+              className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <span className="text-3xl">{p.emoji}</span>
+              <h3 className="mt-4 text-xl font-semibold">{p.name}</h3>
+              <p className="mt-1 text-sm text-white/50">{p.desc}</p>
+              <p className="mt-4 text-2xl font-bold text-[#2563EB]">{p.price}</p>
+              <ul className="mt-6 space-y-2">
+                {p.features.map((f) => (
+                  <li key={f} className="flex items-start gap-2 text-xs text-white/60"><Check className="h-3.5 w-3.5 text-[#2563EB] mt-0.5 shrink-0" />{f}</li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Beheer */}
+      <section className="border-y border-white/10 bg-white/5">
+        <div className="mx-auto max-w-3xl px-6 py-12 text-center">
+          <h2 className="text-sm font-medium uppercase tracking-widest text-white/40">Beheer en optimalisatie</h2>
+          <p className="mt-4 text-3xl font-bold text-[#2563EB]">vanaf €197 per maand</p>
+          <p className="mt-4 text-sm text-white/60">Updates, hosting, support. Maandelijks opzegbaar. Telefonie en AI-verbruik apart op basis van gebruik.</p>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="mx-auto max-w-3xl px-6 py-20 text-center">
+        <h2 className="text-3xl font-semibold tracking-tight">Klaar voor minder handwerk?</h2>
+        <p className="mt-4 text-lg text-white/60">Boek een Flow Assessment. In 60 minuten weet je wat automatisering jou oplevert.</p>
+        <Link href="/contact" className="mt-8 inline-flex items-center rounded-xl bg-[#2563EB] px-8 py-4 text-base font-semibold text-white transition hover:bg-[#1D4ED8]">
+          Boek een Flow Assessment <ArrowRight className="ml-2 h-4 w-4" />
+        </Link>
+        <p className="mt-6 text-sm text-white/40">Exacte prijs na Flow Assessment. Geen verrassingen.</p>
+      </section>
+    </div>
   );
 }

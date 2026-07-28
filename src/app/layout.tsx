@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Geist_Mono, Inter } from "next/font/google";
 import { I18nProvider } from "@/i18n/I18nProvider";
-import PageAgentLoader from "./PageAgentLoader";
+import ChatWidget from "@/components/ChatWidget";
 import "./globals.css";
 
 const instrumentSerif = Instrument_Serif({
@@ -26,30 +26,33 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Bonanza Labs — Spending Firewall & AI Tools for Agents",
-    template: "%s | Bonanza Labs",
+    default: "BonanzaLabs — Automatisering voor het MKB",
+    template: "%s | BonanzaLabs",
   },
-  description: "Set rules, approve risky payments, block bad vendors, and audit every agent transaction before money moves. AI tools built for the autonomous economy.",
+  description:
+    "Minder handwerk. Snellere opvolging. Meer omzet. BonanzaLabs bouwt praktische automatiseringssystemen voor horeca, bouw, installatie en zakelijke dienstverlening.",
   metadataBase: new URL("https://bonanza-labs.com"),
   openGraph: {
-    title: "Bonanza Labs — Spending Firewall & AI Tools for Agents",
-    description: "Set rules, approve risky payments, block bad vendors, and audit every agent transaction before money moves.",
+    title: "BonanzaLabs — Automatisering voor het MKB",
+    description:
+      "Minder handwerk. Snellere opvolging. Meer omzet. BonanzaLabs bouwt praktische automatiseringssystemen voor horeca, bouw, installatie en zakelijke dienstverlening.",
     url: "https://bonanza-labs.com",
-    siteName: "Bonanza Labs",
+    siteName: "BonanzaLabs",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Bonanza Labs — Spending Firewall for AI Agents",
+        alt: "BonanzaLabs — Automatisering voor het MKB",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bonanza Labs — Spending Firewall & AI Tools for Agents",
-    description: "Set rules, approve risky payments, block bad vendors, and audit every agent transaction before money moves.",
+    title: "BonanzaLabs — Automatisering voor het MKB",
+    description:
+      "Minder handwerk. Snellere opvolging. Meer omzet. BonanzaLabs bouwt praktische automatiseringssystemen voor horeca, bouw, installatie en zakelijke dienstverlening.",
     images: ["/og-image.png"],
   },
   icons: {
@@ -62,14 +65,18 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    'max-image-preview': 'large',
-    'max-snippet': -1,
+    "max-image-preview": "large",
+    "max-snippet": -1,
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className="dark">
+    <html lang="nl" className="dark">
       <head>
         <noscript>
           <style>{`[style*="opacity: 0"], [style*="opacity:0"] { opacity: 1 !important; transform: none !important; }`}</style>
@@ -78,37 +85,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Organization',
-              name: 'Bonanza Labs',
-              url: 'https://bonanza-labs.com',
-              logo: 'https://bonanza-labs.com/logo-256.png',
-              description: 'AI tools for the autonomous economy. Spending firewall, tender analysis, and more.',
-              sameAs: ['https://github.com/c6zks4gssn-droid'],
-            }),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'SoftwareApplication',
-              name: 'Bonanza Agent Wallet',
-              applicationCategory: 'DeveloperApplication',
-              operatingSystem: 'Any',
-              offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-              description: 'Spending firewall for AI agents. Policy checks, risk scoring, approval queue, audit log, and Stripe checkout.',
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "BonanzaLabs",
+              url: "https://bonanza-labs.com",
+              logo: "https://bonanza-labs.com/logo-256.png",
+              description: "Automatiseringssystemen voor het Nederlandse MKB.",
+              sameAs: ["https://github.com/c6zks4gssn-droid"],
             }),
           }}
         />
       </head>
-      <body className={`${inter.variable} ${instrumentSerif.variable} ${geistMono.variable} bg-[#050508] text-white antialiased`}>
+      <body
+        className={`${inter.variable} ${instrumentSerif.variable} ${geistMono.variable} bg-[#050508] text-white antialiased`}
+      >
         <noscript>
           <style>{`[style*="opacity: 0"], [style*="opacity:0"] { opacity: 1 !important; transform: none !important; }`}</style>
         </noscript>
-        <I18nProvider>{children}</I18nProvider>
-        <PageAgentLoader />
+        <I18nProvider>
+          {children}
+          <ChatWidget />
+        </I18nProvider>
       </body>
     </html>
   );

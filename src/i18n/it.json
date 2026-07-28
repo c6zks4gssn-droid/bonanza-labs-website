@@ -1,49 +1,31 @@
 {
   "nav": {
-    "firewall": "Firewall",
-    "products": "Prodotti",
-    "gasvrij": "🌱 GasVrij",
+    "tradeflow": "TradeFlow",
+    "serveflow": "ServeFlow",
+    "voice": "🎙️ Bonanza Voice",
     "pricing": "Prezzi",
-    "github": "🐙 GitHub",
-    "quiz": "Quiz",
-    "prompts": "Prompts",
-    "play": "🎮 Gioca"
+    "portfolio": "Portfolio",
+    "about": "Chi siamo",
+    "contact": "Contatti"
   },
   "hero": {
-    "subtitle": "Lo Spending Firewall è il prodotto di punta",
-    "title": "Il firewall delle spese per gli agenti IA",
-    "description": "Imposta regole, approva i pagamenti rischiosi, blocca i fornitori sbagliati e controlla ogni transazione dell'agente prima che i soldi si muovano.",
-    "cta": "Vedi Demo Firewall",
-    "secondary": "Apri Dashboard",
-    "badge1": "Live v1.0",
-    "badge2": "Open source",
-    "badge3": "💳 Stripe checkout",
-    "badge4": "🤖 Flusso di approvazione agente"
+    "subtitle": "Automazione IA per PMI",
+    "title": "Automazione intelligente che fa crescere la tua azienda",
+    "description": "TradeFlow, ServeFlow e Bonanza Voice — soluzioni IA integrate per preventivi, prenotazioni e telefonia.",
+    "cta": "Prenota un Flow Assessment",
+    "secondary": "Vedi i prezzi",
+    "badge1": "Automazione IA",
+    "badge2": "Per PMI",
+    "badge3": "💳 Stripe & Solana Pay",
+    "badge4": "🤖 Agente IA"
   },
   "products": {
-    "title": "Un prodotto di punta, due motori di prova",
-    "subtitle": "Lo Spending Firewall guida la storia. Fork Doctor e FrameForge dimostrano che Bonanza può spedire strumenti reali."
-  },
-  "quiz": {
-    "title": "Trova Il Tuo Strumento Perfetto",
-    "subtitle": "5 domande, 30 secondi. Ottieni una raccomandazione personalizzata.",
-    "question": "Domanda",
-    "of": "di",
-    "result": "Il Tuo Strumento Perfetto",
-    "retake": "Rifai il quiz",
-    "findTool": "Trova il tuo strumento perfetto →"
-  },
-  "prompts": {
-    "title": "Copia. Incolla. Invia.",
-    "subtitle": "Prompt IA testati in battaglia per sviluppatori, fondatori e marketer. Aggiornati settimanalmente.",
-    "copyPrompt": "Copia Prompt",
-    "copied": "✓ Copiato",
-    "newPrompts": "Nuovi prompt ogni settimana",
-    "bookmark": "Salva questa pagina tra i preferiti. Aggiungiamo nuovi prompt ogni lunedì."
+    "title": "Tre prodotti, una piattaforma",
+    "subtitle": "TradeFlow automatizza i preventivi, ServeFlow le prenotazioni, Bonanza Voice la telefonia. Individuale o combinato."
   },
   "footer": {
     "builtInPublic": "Costruito in pubblico",
     "verified": "Segnali di build verificati",
-    "copyright": "© 2026 Bonanza Labs — Strumenti IA open source per builder"
+    "copyright": "© 2026 Bonanza Labs — Automazione IA per PMI"
   }
 }
