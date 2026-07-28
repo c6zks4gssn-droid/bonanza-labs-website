@@ -1,15 +1,12 @@
 import Link from "next/link";
 import { ArrowLeft, FileCheck2, Mail } from "lucide-react";
-
-const legalName = process.env.NEXT_PUBLIC_LEGAL_NAME || "BonanzaLabs";
-const kvkNumber = process.env.NEXT_PUBLIC_KVK_NUMBER || "";
-const businessAddress = process.env.NEXT_PUBLIC_BUSINESS_ADDRESS || "";
-const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@bonanza-labs.com";
+import { businessDetails, fullBusinessAddress } from "@/lib/business-details";
 
 const terms = [
   {
-    title: "1. Toepasselijkheid",
+    title: "1. Onderneming en toepasselijkheid",
     paragraphs: [
+      `${businessDetails.tradeName} is een geregistreerde handelsnaam van een eenmanszaak, ingeschreven bij de Kamer van Koophandel onder nummer ${businessDetails.kvkNumber}. Het vestigingsnummer is ${businessDetails.branchNumber}.`,
       "Deze voorwaarden gelden voor de ServeFlow 14-dagen pilot, Flow Assessments en andere diensten die BonanzaLabs schriftelijk aanbiedt. Afwijkingen gelden alleen wanneer ze schriftelijk zijn bevestigd.",
       "Bij tegenstrijdigheid gaat de individuele offerte of schriftelijk bevestigde pilotscope vóór op deze algemene voorwaarden.",
     ],
@@ -98,8 +95,6 @@ const terms = [
 ];
 
 export default function TermsPage() {
-  const legalDetailsComplete = Boolean(kvkNumber && businessAddress);
-
   return (
     <main className="min-h-screen bg-[#070A12] text-white">
       <header className="border-b border-white/10">
@@ -120,12 +115,13 @@ export default function TermsPage() {
       </section>
 
       <div className="mx-auto max-w-4xl px-6 py-16">
-        <section className={`rounded-2xl border p-6 text-sm leading-7 ${legalDetailsComplete ? "border-emerald-300/20 bg-emerald-300/5 text-slate-300" : "border-amber-300/25 bg-amber-300/5 text-amber-100"}`}>
-          <p><strong>Contractpartij:</strong> {legalName}</p>
-          <p><strong>KvK:</strong> {kvkNumber || "nog niet ingesteld"}</p>
-          <p><strong>Vestigingsadres:</strong> {businessAddress || "nog niet ingesteld"}</p>
-          <p><strong>E-mail:</strong> {contactEmail}</p>
-          {!legalDetailsComplete && <p className="mt-3 font-semibold">Publiceer of merge deze voorwaarden pas nadat KvK-nummer en vestigingsadres als productievariabelen zijn ingesteld.</p>}
+        <section className="rounded-2xl border border-emerald-300/20 bg-emerald-300/5 p-6 text-sm leading-7 text-slate-300">
+          <p><strong>Handelsnaam:</strong> {businessDetails.tradeName}</p>
+          <p><strong>Rechtsvorm:</strong> {businessDetails.legalForm}</p>
+          <p><strong>KvK-nummer:</strong> {businessDetails.kvkNumber}</p>
+          <p><strong>Vestigingsnummer:</strong> {businessDetails.branchNumber}</p>
+          <p><strong>Hoofdvestiging:</strong> {fullBusinessAddress}</p>
+          <p><strong>E-mail:</strong> {businessDetails.contactEmail}</p>
         </section>
 
         <div className="mt-12 space-y-12">
@@ -143,12 +139,12 @@ export default function TermsPage() {
           <Mail className="h-6 w-6 text-cyan-300" />
           <h2 className="mt-4 text-2xl font-black">Vraag over de voorwaarden</h2>
           <p className="mt-3 text-slate-400">Vraag vóór betaling om verduidelijking wanneer de pilotscope of garantie niet duidelijk is.</p>
-          <a href={`mailto:${contactEmail}`} className="mt-6 inline-flex rounded-xl bg-[#2563EB] px-5 py-3 font-semibold hover:bg-[#1D4ED8]">{contactEmail}</a>
+          <a href={`mailto:${businessDetails.contactEmail}`} className="mt-6 inline-flex rounded-xl bg-[#2563EB] px-5 py-3 font-semibold hover:bg-[#1D4ED8]">{businessDetails.contactEmail}</a>
         </div>
       </div>
 
       <footer className="border-t border-white/10 px-6 py-10">
-        <div className="mx-auto flex max-w-5xl flex-col justify-between gap-4 text-sm text-slate-500 md:flex-row"><p>© 2026 BonanzaLabs</p><div className="flex gap-5"><Link href="/privacy" className="hover:text-white">Privacy</Link><Link href="/pricing" className="hover:text-white">Prijzen</Link><Link href="/contact" className="hover:text-white">Contact</Link></div></div>
+        <div className="mx-auto flex max-w-5xl flex-col justify-between gap-4 text-sm text-slate-500 md:flex-row"><p>© 2026 BonanzaLabs · KvK {businessDetails.kvkNumber}</p><div className="flex gap-5"><Link href="/privacy" className="hover:text-white">Privacy</Link><Link href="/pricing" className="hover:text-white">Prijzen</Link><Link href="/contact" className="hover:text-white">Contact</Link></div></div>
       </footer>
     </main>
   );
