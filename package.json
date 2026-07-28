@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "@solana/web3.js": "^1.98.4",
     "@tailwindcss/postcss": "^4.2.4",
     "@vercel/blob": "^2.3.3",
     "@vercel/kv": "^3.0.0",

@@ -1,15 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://bonanza-labs.com";
 
-// Product catalog — new services
+// Product catalog — aligned with website pricing
 const PRODUCTS: Record<string, { name: string; amount: number; mode: "payment" | "subscription"; interval?: string }> = {
-  "tradeflow-pilot": { name: "TradeFlow Pilot (14 dagen)", amount: 89500, mode: "payment" },
-  "tradeflow-onderhoud": { name: "TradeFlow Onderhoud", amount: 19700, mode: "subscription", interval: "month" },
-  "serveflow-pilot": { name: "ServeFlow Pilot (14 dagen)", amount: 89500, mode: "payment" },
-  "serveflow-onderhoud": { name: "ServeFlow Onderhoud", amount: 19700, mode: "subscription", interval: "month" },
-  "bonanza-voice-setup": { name: "Bonanza Voice Setup", amount: 149500, mode: "payment" },
-  "bonanza-voice-onderhoud": { name: "Bonanza Voice Onderhoud", amount: 29700, mode: "subscription", interval: "month" },
+  "flow-assessment-intro": { name: "Flow Assessment — Introductie", amount: 49700, mode: "payment" },
+  "flow-assessment-standaard": { name: "Flow Assessment — Standaard", amount: 99900, mode: "payment" },
+  "tradeflow-implementatie": { name: "TradeFlow Implementatie", amount: 250000, mode: "payment" },
+  "serveflow-implementatie": { name: "ServeFlow Implementatie", amount: 250000, mode: "payment" },
+  "bonanza-voice-implementatie": { name: "Bonanza Voice Implementatie", amount: 149500, mode: "payment" },
+  "beheer-basis": { name: "Beheer en Optimalisatie — Basis", amount: 19700, mode: "subscription", interval: "month" },
+  "beheer-uitgebreid": { name: "Beheer en Optimalisatie — Uitgebreid", amount: 49700, mode: "subscription", interval: "month" },
 };
 
 export async function POST(req: NextRequest) {
@@ -31,8 +33,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Stripe not configured" }, { status: 503 });
     }
 
-    const origin = req.headers.get("origin") || "https://bonanza-labs.com";
-
     if (productConfig.mode === "subscription") {
       // Subscription checkout
       const session = await fetch("https://api.stripe.com/v1/checkout/sessions", {
@@ -45,12 +45,13 @@ export async function POST(req: NextRequest) {
           "payment_method_types[0]": "card",
           "line_items[0][price_data][currency]": "eur",
           "line_items[0][price_data][product_data][name]": productConfig.name,
+          "line_items[0][price_data][product_data][metadata][product_id]": product,
           "line_items[0][price_data][unit_amount]": String(productConfig.amount),
           "line_items[0][price_data][recurring][interval]": productConfig.interval || "month",
           "line_items[0][quantity]": "1",
           mode: "subscription",
-          success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-          cancel_url: `${origin}/pricing`,
+          success_url: `${BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `${BASE_URL}/pricing`,
         }),
       });
 
@@ -72,11 +73,12 @@ export async function POST(req: NextRequest) {
           "payment_method_types[0]": "card",
           "line_items[0][price_data][currency]": "eur",
           "line_items[0][price_data][product_data][name]": productConfig.name,
+          "line_items[0][price_data][product_data][metadata][product_id]": product,
           "line_items[0][price_data][unit_amount]": String(productConfig.amount),
           "line_items[0][quantity]": "1",
           mode: "payment",
-          success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-          cancel_url: `${origin}/pricing`,
+          success_url: `${BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `${BASE_URL}/pricing`,
         }),
       });
 

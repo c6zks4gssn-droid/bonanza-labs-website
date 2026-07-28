@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// BonanzaLabs chat agent — forwards to MiniMax-M3 via OpenAI-compatible API
+// BonanzaLabs chat agent — forwards to MiniMax-M3 or OpenRouter
 // Keeps API key server-side, exposes OpenAI-compatible endpoint for chat widget
 
-const MINIMAX_API_KEY = process.env.MINIMAX_API_KEY || process.env.OPENROUTER_API_KEY;
-const MINIMAX_BASE_URL = 'https://api.minimaxi.chat/v1';
-const MODEL = 'MiniMax-M3';
-
-// Fallback to OpenRouter if MiniMax key not set
+const MINIMAX_API_KEY = process.env.MINIMAX_API_KEY;
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+const useMiniMax = !!MINIMAX_API_KEY;
+const useOpenRouter = !useMiniMax && !!OPENROUTER_API_KEY;
+
+const MINIMAX_BASE_URL = 'https://api.minimaxi.chat/v1';
+const MINIMAX_MODEL = 'MiniMax-M3';
 const OPENROUTER_MODEL = 'tencent/hy3:free';
 
 interface ChatMessage {
@@ -63,8 +64,34 @@ Regels:
 - Gebruik de naam "BonanzaLabs" (niet "BonanzaLabs")
 - Gebruik "Bonanza Voice" (niet "VoiceFlow" of "Bonanna Voice")`;
 
+// Simple in-memory rate limiting (production: KV)
+const requestCounts = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT = 10; // max 10 messages per minute
+const RATE_WINDOW = 60000; // 1 minute
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const record = requestCounts.get(ip);
+  if (!record || now > record.resetTime) {
+    requestCounts.set(ip, { count: 1, resetTime: now + RATE_WINDOW });
+    return true;
+  }
+  if (record.count >= RATE_LIMIT) return false;
+  record.count++;
+  return true;
+}
+
+const MAX_MESSAGE_LENGTH = 2000;
+const MAX_MESSAGES = 50;
+
 export async function POST(req: NextRequest) {
   try {
+    // Rate limiting
+    const ip = req.headers.get('x-forwarded-for') || 'unknown';
+    if (!checkRateLimit(ip)) {
+      return NextResponse.json({ error: 'Te veel verzoeken. Probeer het over een minuut opnieuw.' }, { status: 429 });
+    }
+
     const body = await req.json();
     const { messages, stream } = body as { messages: ChatMessage[]; stream?: boolean };
 
@@ -72,25 +99,37 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'messages required' }, { status: 400 });
     }
 
+    // Limit number of messages in a conversation
+    if (messages.length > MAX_MESSAGES) {
+      return NextResponse.json({ error: 'Te veel berichten' }, { status: 400 });
+    }
+
+    // Validate message length
+    for (const msg of messages) {
+      if (msg.content.length > MAX_MESSAGE_LENGTH) {
+        return NextResponse.json({ error: 'Bericht te lang' }, { status: 400 });
+      }
+    }
+
+    // Filter system messages from client — only our system prompt is allowed
+    const filteredMessages = messages.filter(m => m.role !== 'system');
     const allMessages: ChatMessage[] = [
       { role: 'system', content: SYSTEM_PROMPT },
-      ...messages,
+      ...filteredMessages,
     ];
 
-    // Use MiniMax if key is set, otherwise fall back to OpenRouter
-    const useMiniMax = !!MINIMAX_API_KEY;
-    const apiUrl = useMiniMax
-      ? `${MINIMAX_BASE_URL}/chat/completions`
-      : 'https://openrouter.ai/api/v1/chat/completions';
-    const apiKey = useMiniMax ? MINIMAX_API_KEY : OPENROUTER_API_KEY;
-    const model = useMiniMax ? MODEL : OPENROUTER_MODEL;
-
-    if (!apiKey) {
+    if (!useMiniMax && !useOpenRouter) {
       return NextResponse.json(
         { error: 'Agent backend not configured. Set MINIMAX_API_KEY or OPENROUTER_API_KEY.' },
         { status: 503 }
       );
     }
+
+    const apiUrl = useMiniMax
+      ? `${MINIMAX_BASE_URL}/chat/completions`
+      : 'https://openrouter.ai/api/v1/chat/completions';
+    const apiKey = useMiniMax ? MINIMAX_API_KEY! : OPENROUTER_API_KEY!;
+    const model = useMiniMax ? MINIMAX_MODEL : OPENROUTER_MODEL;
 
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
@@ -169,7 +208,7 @@ export async function POST(req: NextRequest) {
 export async function GET() {
   return NextResponse.json({
     service: 'BonanzaLabs Chat Agent',
-    model: MINIMAX_API_KEY ? MODEL : OPENROUTER_MODEL,
+    model: useMiniMax ? MINIMAX_MODEL : OPENROUTER_MODEL,
     configured: !!(MINIMAX_API_KEY || OPENROUTER_API_KEY),
   });
 }

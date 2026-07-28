@@ -26,12 +26,13 @@ export default function ContactPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "", company: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const pageLoadTime = useRef(Date.now());
   // Honeypot field — separate state for the "website" trap
   const [honeypot, setHoneypot] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -42,7 +43,7 @@ export default function ContactPage() {
       return;
     }
 
-    // Basic server-side-equivalent validation
+    // Basic validation
     if (form.name.trim().length < 2) {
       setError("Voer een geldige naam in.");
       return;
@@ -59,20 +60,44 @@ export default function ContactPage() {
 
     // Honeypot 1: if company field is filled, it's a bot — silent reject
     if (form.company) {
-      // Pretend success but do nothing
       setSubmitted(true);
       return;
     }
 
     // Honeypot 2: if website field is filled, it's a bot — silent reject
     if (honeypot) {
-      // Pretend success but do nothing
       setSubmitted(true);
       return;
     }
 
-    setSubmitted(true);
-    window.location.href = `mailto:hello@bonanzalabs.com?subject=Contactaanvraag van ${encodeURIComponent(form.name)}&body=${encodeURIComponent(form.message + "\n\nE-mail: " + form.email)}`;
+    setSubmitting(true);
+
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          source: "contact-form",
+          page: window.location.href,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error || "Er ging iets mis. Probeer het opnieuw of mail ons direct.");
+        return;
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Contact form error:", err);
+      setError("Er ging iets mis. Probeer het opnieuw of mail ons direct op hello@bonanzalabs.com");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -175,7 +200,7 @@ export default function ContactPage() {
             <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-8 text-center">
               <div className="text-4xl mb-4">✅</div>
               <h3 className="text-xl font-bold text-emerald-300 mb-2">Bedankt voor je bericht!</h3>
-              <p className="text-sm text-gray-400">Je e-mailclient wordt geopend. Als dat niet lukt, mail ons direct op <a href="mailto:hello@bonanzalabs.com" className="text-violet-400 hover:underline">hello@bonanzalabs.com</a>.</p>
+              <p className="text-sm text-gray-400">We nemen binnen 24 uur contact met je op. Voor urgenties: <a href="mailto:hello@bonanzalabs.com" className="text-violet-400 hover:underline">hello@bonanzalabs.com</a>.</p>
             </div>
           ) : (
           <form onSubmit={handleSubmit} className="rounded-2xl border border-white/5 bg-white/[0.02] p-6 space-y-5">
@@ -244,9 +269,10 @@ export default function ContactPage() {
             </p>
             <button
               type="submit"
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-white font-semibold text-sm hover:shadow-lg hover:shadow-violet-500/25 transition"
+              disabled={submitting}
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 text-white font-semibold text-sm hover:shadow-lg hover:shadow-violet-500/25 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Verstuur →
+              {submitting ? "Versturen..." : "Verstuur →"}
             </button>
           </form>
           )}

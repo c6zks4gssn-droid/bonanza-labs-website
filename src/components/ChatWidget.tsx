@@ -51,6 +51,21 @@ export default function ChatWidget() {
       setLead({ name: lead?.name || "", email: leadInput });
       setLeadInput("");
       setLeadStep("done");
+
+      // Send lead to /api/leads (non-blocking — chat continues even if API fails)
+      fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: lead?.name || "",
+          email: leadInput,
+          source: "chat-widget",
+          page: window.location.href,
+        }),
+      }).catch((err) => {
+        console.error("Failed to submit lead:", err);
+      });
+
       setMessages([{
         role: "assistant",
         content: `Hallo ${lead?.name}! 👋 Ik ben de AI-assistent van Bonanza Labs. Waar kan ik je mee helpen? Je kunt vragen stellen over TradeFlow, ServeFlow of Bonanza Voice.`,

@@ -1,22 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import { kv } from "@vercel/kv";
 
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || "";
-
-// In-memory idempotency store (for development)
-// In production, use a database (Postgres, Redis, Vercel KV, etc.)
-const processedSessionIds = new Set<string>();
-
-// Product catalog — must match src/app/api/checkout/route.ts
-const PRODUCTS: Record<string, { name: string; amount: number; mode: "payment" | "subscription"; interval?: string }> = {
-  "tradeflow-pilot": { name: "TradeFlow Pilot (14 dagen)", amount: 89500, mode: "payment" },
-  "tradeflow-onderhoud": { name: "TradeFlow Onderhoud", amount: 19700, mode: "subscription", interval: "month" },
-  "serveflow-pilot": { name: "ServeFlow Pilot (14 dagen)", amount: 89500, mode: "payment" },
-  "serveflow-onderhoud": { name: "ServeFlow Onderhoud", amount: 19700, mode: "subscription", interval: "month" },
-  "bonanza-voice-setup": { name: "Bonanza Voice Setup", amount: 149500, mode: "payment" },
-  "bonanza-voice-onderhoud": { name: "Bonanza Voice Onderhoud", amount: 29700, mode: "subscription", interval: "month" },
-};
 
 export async function POST(req: NextRequest) {
   try {
@@ -52,14 +39,18 @@ export async function POST(req: NextRequest) {
     if (event.type === "checkout.session.completed") {
       const session = event.data.object as Stripe.Checkout.Session;
 
-      // Idempotency check: skip if already processed
-      if (processedSessionIds.has(session.id)) {
-        console.log(`Session ${session.id} already processed, skipping`);
-        return NextResponse.json({ received: true, duplicate: true });
+      // Payment status check — only process paid sessions
+      if (session.payment_status !== "paid") {
+        console.log("Payment not completed, skipping");
+        return NextResponse.json({ received: true });
       }
 
-      // Mark as processed
-      processedSessionIds.add(session.id);
+      // Idempotency: check if session already processed (Vercel KV)
+      const processed = await kv.get(`stripe:session:${session.id}`);
+      if (processed) {
+        console.log("Session already processed:", session.id);
+        return NextResponse.json({ received: true, duplicate: true });
+      }
 
       // Extract session data
       const amountTotal = session.amount_total;
@@ -76,27 +67,28 @@ export async function POST(req: NextRequest) {
         Payment status: ${session.payment_status}
         Created: ${new Date(session.created * 1000).toISOString()}`);
 
-      // Match against known products by checking line items
+      // Get product_id from session metadata or line items
+      let productId = "unknown";
       try {
         const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
         for (const item of lineItems.data) {
-          const productKey = Object.keys(PRODUCTS).find((key) => {
-            const p = PRODUCTS[key];
-            return p.name === item.description;
-          });
-
-          if (productKey) {
-            console.log(`  Matched product: ${productKey} (${PRODUCTS[productKey].name})`);
-          } else {
-            console.log(`  Line item: ${item.description} — ${item.amount_total} cents`);
-          }
+          console.log(`  Line item: ${item.description} — ${item.amount_total} cents`);
         }
       } catch (lineItemErr) {
         console.error("Failed to fetch line items:", lineItemErr);
       }
 
-      // TODO: In production, persist to database:
-      // - Store payment record (session.id, amount, email, product, timestamp)
+      // Persist idempotency record to KV
+      await kv.set(`stripe:session:${session.id}`, JSON.stringify({
+        processed: true,
+        amount: session.amount_total,
+        email: session.customer_details?.email,
+        productId,
+        processedAt: new Date().toISOString(),
+      }));
+
+      // TODO: In production, also:
+      // - Store payment record in database
       // - Trigger fulfillment (send welcome email, create account, schedule onboarding)
       // - Update CRM / pipeline
     } else {
@@ -117,6 +109,5 @@ export async function GET() {
   return NextResponse.json({
     service: "Bonanza Labs Stripe Webhook",
     configured: !!STRIPE_WEBHOOK_SECRET,
-    processedCount: processedSessionIds.size,
   });
 }
