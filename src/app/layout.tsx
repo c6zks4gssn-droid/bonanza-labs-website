@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Serif, Geist_Mono, Inter } from "next/font/google";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import ChatWidget from "@/components/ChatWidget";
+import { businessDetails } from "@/lib/business-details";
 import "./globals.css";
 
 const instrumentSerif = Instrument_Serif({
@@ -30,12 +31,12 @@ export const metadata: Metadata = {
     template: "%s | BonanzaLabs",
   },
   description:
-    "Minder handwerk. Snellere opvolging. Meer omzet. BonanzaLabs bouwt praktische automatiseringssystemen voor horeca, bouw, installatie en zakelijke dienstverlening.",
+    "BonanzaLabs in Groningen bouwt praktische automatiseringssystemen voor horeca, bouw en installatie, met ServeFlow als 14-dagen pilot voor lokale horecazaken.",
   metadataBase: new URL("https://bonanza-labs.com"),
   openGraph: {
     title: "BonanzaLabs — Automatisering voor het MKB",
     description:
-      "Minder handwerk. Snellere opvolging. Meer omzet. BonanzaLabs bouwt praktische automatiseringssystemen voor horeca, bouw, installatie en zakelijke dienstverlening.",
+      "Praktische automatisering voor horeca, bouw en installatie. Start met de ServeFlow 14-dagen pilot.",
     url: "https://bonanza-labs.com",
     siteName: "BonanzaLabs",
     images: [
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "BonanzaLabs — Automatisering voor het MKB",
     description:
-      "Minder handwerk. Snellere opvolging. Meer omzet. BonanzaLabs bouwt praktische automatiseringssystemen voor horeca, bouw, installatie en zakelijke dienstverlening.",
+      "Praktische automatisering voor horeca, bouw en installatie vanuit Groningen.",
     images: ["/og-image.png"],
   },
   icons: {
@@ -70,11 +71,48 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const telephone = process.env.NEXT_PUBLIC_PHONE_NUMBER || undefined;
+
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://bonanza-labs.com/#business",
+    name: businessDetails.tradeName,
+    legalName: businessDetails.tradeName,
+    description:
+      "Praktische automatiseringsoplossingen voor horeca, bouw en installatie in Nederland.",
+    url: "https://bonanza-labs.com",
+    logo: "https://bonanza-labs.com/logo-256.png",
+    image: "https://bonanza-labs.com/og-image.png",
+    email: businessDetails.contactEmail,
+    ...(telephone ? { telephone } : {}),
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: businessDetails.streetAddress,
+      postalCode: businessDetails.postalCode,
+      addressLocality: businessDetails.city,
+      addressCountry: "NL",
+    },
+    areaServed: [
+      { "@type": "City", name: "Groningen" },
+      { "@type": "Country", name: "Nederland" },
+    ],
+    identifier: [
+      {
+        "@type": "PropertyValue",
+        name: "KvK-nummer",
+        value: businessDetails.kvkNumber,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "Vestigingsnummer",
+        value: businessDetails.branchNumber,
+      },
+    ],
+    sameAs: ["https://github.com/c6zks4gssn-droid"],
+  };
+
   return (
     <html lang="nl" className="dark">
       <head>
@@ -83,17 +121,7 @@ export default function RootLayout({
         </noscript>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "BonanzaLabs",
-              url: "https://bonanza-labs.com",
-              logo: "https://bonanza-labs.com/logo-256.png",
-              description: "Automatiseringssystemen voor het Nederlandse MKB.",
-              sameAs: ["https://github.com/c6zks4gssn-droid"],
-            }),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
       </head>
       <body
