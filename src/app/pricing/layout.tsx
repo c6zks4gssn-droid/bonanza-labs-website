@@ -1,26 +1,22 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Prijzen — BonanzaLabs",
+  title: "ServeFlow 14-dagen pilot — €497",
   description:
-    "Flow Assessment vanaf €497. Implementaties vanaf €2.500. Beheer vanaf €197 per maand. Eerst begrijpen wat er mis gaat, daarna pas bouwen.",
+    "Test één reserveringsflow voor één horecalocatie gedurende 14 dagen. Geen automatische verlenging en geen gegarandeerde omzet- of no-showclaim.",
   alternates: {
     canonical: "https://bonanza-labs.com/pricing",
   },
   openGraph: {
-    title: "Prijzen — BonanzaLabs",
+    title: "ServeFlow 14-dagen pilot — €497 | BonanzaLabs",
     description:
-      "Flow Assessment vanaf €497. Implementaties vanaf €2.500. Beheer vanaf €197 per maand. Eerst begrijpen wat er mis gaat, daarna pas bouwen.",
+      "Eén locatie, één reserveringsflow, 14 dagen en geen automatische verlenging. Voor complexere aanvragen is het Flow Assessment beschikbaar.",
     url: "https://bonanza-labs.com/pricing",
     siteName: "BonanzaLabs",
     type: "website",
   },
 };
 
-export default function PricingLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function PricingLayout({ children }: { children: React.ReactNode }) {
   return children;
 }
