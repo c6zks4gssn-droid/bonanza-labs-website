@@ -1,17 +1,13 @@
 import Link from "next/link";
 import { ArrowLeft, Mail, ShieldCheck } from "lucide-react";
-
-const legalName = process.env.NEXT_PUBLIC_LEGAL_NAME || "BonanzaLabs";
-const kvkNumber = process.env.NEXT_PUBLIC_KVK_NUMBER || "";
-const businessAddress = process.env.NEXT_PUBLIC_BUSINESS_ADDRESS || "";
-const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@bonanza-labs.com";
+import { businessDetails, fullBusinessAddress } from "@/lib/business-details";
 
 const sections = [
   {
     title: "1. Wie verwerkt je gegevens?",
     paragraphs: [
-      `${legalName} is verantwoordelijk voor de verwerking van persoonsgegevens via bonanza-labs.com, het contactformulier, de chat, de ServeFlow-pilot en betaalprocessen.`,
-      `Voor privacyvragen of verzoeken kun je contact opnemen via ${contactEmail}.`,
+      `${businessDetails.tradeName}, een eenmanszaak ingeschreven bij de Kamer van Koophandel onder nummer ${businessDetails.kvkNumber}, is verantwoordelijk voor de verwerking van persoonsgegevens via bonanza-labs.com, het contactformulier, de chat, de ServeFlow-pilot en betaalprocessen.`,
+      `Voor privacyvragen of verzoeken kun je contact opnemen via ${businessDetails.contactEmail}.`,
     ],
   },
   {
@@ -55,7 +51,7 @@ const sections = [
     title: "7. Jouw privacyrechten",
     paragraphs: [
       "Je kunt vragen om inzage, correctie, verwijdering, beperking, overdracht of bezwaar tegen bepaalde verwerkingen. Waar verwerking op toestemming is gebaseerd, kun je die toestemming intrekken.",
-      `Stuur je verzoek naar ${contactEmail}. We kunnen aanvullende informatie vragen om je identiteit te controleren, maar vragen niet meer gegevens dan daarvoor nodig zijn. Je kunt ook een klacht indienen bij de Autoriteit Persoonsgegevens.`,
+      `Stuur je verzoek naar ${businessDetails.contactEmail}. We kunnen aanvullende informatie vragen om je identiteit te controleren, maar vragen niet meer gegevens dan daarvoor nodig zijn. Je kunt ook een klacht indienen bij de Autoriteit Persoonsgegevens.`,
     ],
   },
   {
@@ -74,8 +70,6 @@ const sections = [
 ];
 
 export default function PrivacyPage() {
-  const legalDetailsComplete = Boolean(kvkNumber && businessAddress);
-
   return (
     <main className="min-h-screen bg-[#070A12] text-white">
       <header className="border-b border-white/10">
@@ -96,12 +90,13 @@ export default function PrivacyPage() {
       </section>
 
       <div className="mx-auto max-w-4xl px-6 py-16">
-        <section className={`rounded-2xl border p-6 text-sm leading-7 ${legalDetailsComplete ? "border-emerald-300/20 bg-emerald-300/5 text-slate-300" : "border-amber-300/25 bg-amber-300/5 text-amber-100"}`}>
-          <p><strong>Verwerkingsverantwoordelijke:</strong> {legalName}</p>
-          <p><strong>KvK:</strong> {kvkNumber || "nog niet ingesteld"}</p>
-          <p><strong>Vestigingsadres:</strong> {businessAddress || "nog niet ingesteld"}</p>
-          <p><strong>Contact:</strong> {contactEmail}</p>
-          {!legalDetailsComplete && <p className="mt-3 font-semibold">Merge naar productie pas nadat KvK-nummer en vestigingsadres zijn ingesteld.</p>}
+        <section className="rounded-2xl border border-emerald-300/20 bg-emerald-300/5 p-6 text-sm leading-7 text-slate-300">
+          <p><strong>Verwerkingsverantwoordelijke:</strong> {businessDetails.tradeName}</p>
+          <p><strong>Rechtsvorm:</strong> {businessDetails.legalForm}</p>
+          <p><strong>KvK-nummer:</strong> {businessDetails.kvkNumber}</p>
+          <p><strong>Vestigingsnummer:</strong> {businessDetails.branchNumber}</p>
+          <p><strong>Hoofdvestiging:</strong> {fullBusinessAddress}</p>
+          <p><strong>Contact:</strong> {businessDetails.contactEmail}</p>
         </section>
 
         <div className="mt-12 space-y-12">
@@ -119,12 +114,12 @@ export default function PrivacyPage() {
           <Mail className="h-6 w-6 text-cyan-300" />
           <h2 className="mt-4 text-2xl font-black">Privacyverzoek indienen</h2>
           <p className="mt-3 text-slate-400">Vermeld duidelijk wat je wilt inzien, wijzigen of verwijderen. Stuur geen volledige kopie van je identiteitsbewijs mee.</p>
-          <a href={`mailto:${contactEmail}`} className="mt-6 inline-flex rounded-xl bg-[#2563EB] px-5 py-3 font-semibold hover:bg-[#1D4ED8]">{contactEmail}</a>
+          <a href={`mailto:${businessDetails.contactEmail}`} className="mt-6 inline-flex rounded-xl bg-[#2563EB] px-5 py-3 font-semibold hover:bg-[#1D4ED8]">{businessDetails.contactEmail}</a>
         </div>
       </div>
 
       <footer className="border-t border-white/10 px-6 py-10">
-        <div className="mx-auto flex max-w-5xl flex-col justify-between gap-4 text-sm text-slate-500 md:flex-row"><p>© 2026 BonanzaLabs</p><div className="flex gap-5"><Link href="/voorwaarden" className="hover:text-white">Voorwaarden</Link><Link href="/pricing" className="hover:text-white">Prijzen</Link><Link href="/contact" className="hover:text-white">Contact</Link></div></div>
+        <div className="mx-auto flex max-w-5xl flex-col justify-between gap-4 text-sm text-slate-500 md:flex-row"><p>© 2026 BonanzaLabs · KvK {businessDetails.kvkNumber}</p><div className="flex gap-5"><Link href="/voorwaarden" className="hover:text-white">Voorwaarden</Link><Link href="/pricing" className="hover:text-white">Prijzen</Link><Link href="/contact" className="hover:text-white">Contact</Link></div></div>
       </footer>
     </main>
   );
