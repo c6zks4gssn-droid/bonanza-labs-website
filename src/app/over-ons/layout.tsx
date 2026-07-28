@@ -1,26 +1,22 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Over ons — BonanzaLabs",
+  title: "Over BonanzaLabs — Eenmanszaak in Groningen",
   description:
-    "BonanzaLabs bouwt en exploiteert automatiseringssystemen voor het Nederlandse MKB. Geen vage AI-beloftes, maar systemen die werken.",
+    "BonanzaLabs is een Groningse eenmanszaak voor praktische automatisering in horeca, bouw en installatie. KvK 88564517.",
   alternates: {
     canonical: "https://bonanza-labs.com/over-ons",
   },
   openGraph: {
-    title: "Over ons — BonanzaLabs",
+    title: "Over BonanzaLabs — Praktische automatisering vanuit Groningen",
     description:
-      "BonanzaLabs bouwt en exploiteert automatiseringssystemen voor het Nederlandse MKB. Geen vage AI-beloftes, maar systemen die werken.",
+      "Nederlandse eenmanszaak voor afgebakende automatiseringspilots en implementaties.",
     url: "https://bonanza-labs.com/over-ons",
     siteName: "BonanzaLabs",
     type: "website",
   },
 };
 
-export default function OverOnsLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function OverOnsLayout({ children }: { children: React.ReactNode }) {
   return children;
 }
