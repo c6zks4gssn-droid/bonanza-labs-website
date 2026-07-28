@@ -3,21 +3,35 @@
 import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { X, Menu, Check, ArrowRight } from "lucide-react";
+import { X, Menu, Check, ArrowRight, Loader2, ShieldCheck } from "lucide-react";
 
 const assessments = [
   {
+    id: "flow-assessment-intro",
     name: "Introductie",
     price: "€497",
-    desc: "Geschikt voor kleine bedrijven die willen weten waar automatisering de meeste winst oplevert.",
-    features: ["60 minuten gesprek", "Inzicht in knelpunten en kansen", "Korte actielijst", "Geschikt voor 1 locatie"],
+    desc: "Voor kleinere bedrijven die snel willen zien waar automatisering de meeste winst oplevert.",
+    features: [
+      "60 minuten strategiesessie",
+      "Analyse van één kernproces",
+      "Knelpunten en quick wins",
+      "Korte actielijst met prioriteiten",
+      "20 minuten bespreking van de uitkomst",
+    ],
     highlight: false,
   },
   {
+    id: "flow-assessment-standaard",
     name: "Standaard",
     price: "€999",
-    desc: "Voor bedrijven met meerdere locaties of complexere processen.",
-    features: ["Uitgebreid procesonderzoek", "Rapport met prioriteiten en ROI-schatting", "Aanbevolen implementatievolgorde", "Geschikt voor meerdere locaties"],
+    desc: "Voor bedrijven met meerdere processen, teams of locaties die een volledig implementatieplan nodig hebben.",
+    features: [
+      "Uitgebreid procesonderzoek",
+      "Tijd-lek- en omzet-lekkaart",
+      "Rapport met prioriteiten en ROI-schatting",
+      "Aanbevolen implementatievolgorde",
+      "Reviewcall met concrete vervolgstappen",
+    ],
     highlight: true,
   },
 ];
@@ -28,123 +42,224 @@ const implementations = [
     emoji: "🔧",
     price: "vanaf €2.500",
     desc: "Van aanvraag naar offerte en opvolging zonder WhatsApp-chaos.",
-    features: ["Conversiegerichte website", "Intake- en offerteformulieren", "AI-offertegenerator", "WhatsApp-opvolging", "Leadpipeline en CRM", "Automatische herinneringen", "Dashboard met aanvragen"],
+    features: [
+      "Conversiegerichte website",
+      "Intake- en offerteformulieren",
+      "AI-offertegenerator",
+      "WhatsApp-opvolging",
+      "Leadpipeline en CRM",
+      "Dashboard met aanvragen",
+    ],
+    href: "/tradeflow",
   },
   {
     name: "ServeFlow",
     emoji: "🍽️",
     price: "vanaf €2.500",
     desc: "Minder gemiste reserveringen, telefoontjes en no-shows.",
-    features: ["Online reserveringen", "WhatsApp-bevestigingen", "No-showpreventie", "Reviewverzoeken", "Digitale menukaart", "Website en lokale vindbaarheid", "Bonanza Voice als uitbreiding"],
+    features: [
+      "Online reserveringen",
+      "WhatsApp-bevestigingen",
+      "No-showpreventie",
+      "Reviewverzoeken",
+      "Digitale menukaart",
+      "Lokale vindbaarheid",
+    ],
+    href: "/serveflow",
   },
   {
     name: "Bonanza Voice",
     emoji: "🎙️",
     price: "vanaf €1.495",
     desc: "Iedere oproep professioneel beantwoorden, ook wanneer niemand beschikbaar is.",
-    features: ["AI-telefonie", "Afspraken en reserveringen registreren", "Veelgestelde vragen beantwoorden", "Gesprekssamenvattingen", "Doorverbinden naar medewerkers", "WhatsApp voice en follow-up", "Ook beschikbaar als add-on"],
+    features: [
+      "AI-telefonie",
+      "Afspraken registreren",
+      "Veelgestelde vragen",
+      "Gesprekssamenvattingen",
+      "Doorverbinden",
+      "WhatsApp follow-up",
+    ],
+    href: "/bonanza-voice",
   },
 ];
 
 export default function PricingPage() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [checkoutProduct, setCheckoutProduct] = useState<string | null>(null);
+  const [checkoutError, setCheckoutError] = useState("");
+
+  const startCheckout = async (product: string) => {
+    setCheckoutProduct(product);
+    setCheckoutError("");
+
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ product }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.url) {
+        throw new Error(data.error || "Checkout kon niet worden gestart");
+      }
+
+      window.location.assign(data.url);
+    } catch (error) {
+      console.error("Checkout error:", error);
+      setCheckoutError(
+        "Betalen is nu niet beschikbaar. Boek via het contactformulier of mail hello@bonanzalabs.com.",
+      );
+      setCheckoutProduct(null);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#050508] text-white">
-      {/* Nav */}
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050508]/80 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050508]/85 backdrop-blur-md">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <Link href="/" className="font-semibold tracking-tight">BonanzaLabs</Link>
-          <nav className="hidden md:flex items-center gap-6 text-sm text-white/60">
-            <Link href="/tradeflow" className="hover:text-white transition">TradeFlow</Link>
-            <Link href="/serveflow" className="hover:text-white transition">ServeFlow</Link>
-            <Link href="/bonanza-voice" className="hover:text-white transition">Bonanza Voice</Link>
-            <Link href="/portfolio" className="hover:text-white transition">Portfolio</Link>
-            <Link href="/over-ons" className="hover:text-white transition">Over ons</Link>
-            <Link href="/contact" className="hover:text-white transition">Contact</Link>
+          <nav className="hidden items-center gap-6 text-sm text-white/60 md:flex">
+            <Link href="/tradeflow" className="transition hover:text-white">TradeFlow</Link>
+            <Link href="/serveflow" className="transition hover:text-white">ServeFlow</Link>
+            <Link href="/bonanza-voice" className="transition hover:text-white">Bonanza Voice</Link>
+            <Link href="/portfolio" className="transition hover:text-white">Portfolio</Link>
+            <Link href="/blog" className="transition hover:text-white">Kennisbank</Link>
+            <Link href="/contact" className="transition hover:text-white">Contact</Link>
           </nav>
-          <Link href="/pricing" className="hidden md:inline-flex items-center rounded-xl bg-[#2563EB] px-4 py-2 text-sm font-semibold text-white hover:bg-[#1D4ED8]">Flow Assessment</Link>
-          <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button>
+          <Link href="/contact" className="hidden rounded-xl bg-[#2563EB] px-4 py-2 text-sm font-semibold transition hover:bg-[#1D4ED8] md:inline-flex">
+            Plan een gesprek
+          </Link>
+          <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu openen">
+            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
         {menuOpen && (
-          <div className="md:hidden border-t border-white/10 px-6 py-4 space-y-3 text-sm">
-            <Link href="/tradeflow" className="block text-white/60 hover:text-white">TradeFlow</Link>
-            <Link href="/serveflow" className="block text-white/60 hover:text-white">ServeFlow</Link>
-            <Link href="/bonanza-voice" className="block text-white/60 hover:text-white">Bonanza Voice</Link>
-            <Link href="/portfolio" className="block text-white/60 hover:text-white">Portfolio</Link>
-            <Link href="/over-ons" className="block text-white/60 hover:text-white">Over ons</Link>
-            <Link href="/contact" className="block text-white/60 hover:text-white">Contact</Link>
+          <div className="space-y-3 border-t border-white/10 px-6 py-4 text-sm md:hidden">
+            {["tradeflow", "serveflow", "bonanza-voice", "portfolio", "blog", "over-ons", "contact"].map((route) => (
+              <Link key={route} href={`/${route}`} className="block text-white/60 hover:text-white">
+                {route === "bonanza-voice" ? "Bonanza Voice" : route === "over-ons" ? "Over ons" : route === "blog" ? "Kennisbank" : route.charAt(0).toUpperCase() + route.slice(1)}
+              </Link>
+            ))}
           </div>
         )}
       </header>
 
-      {/* Flow Assessment */}
-      <section className="border-b border-white/10">
-        <div className="mx-auto max-w-5xl px-6 py-20">
+      <section className="border-b border-white/10 px-6">
+        <div className="mx-auto max-w-6xl py-20">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-4xl font-semibold tracking-tight">Prijzen</h1>
-            <p className="mt-4 text-lg text-white/60">Eerst begrijpen wat er mis gaat. Daarna pas bouwen.</p>
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300">Begin met duidelijkheid</p>
+            <h1 className="max-w-3xl text-4xl font-black tracking-tight md:text-6xl">Eerst begrijpen wat er lekt. Daarna pas bouwen.</h1>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/60">
+              Het Flow Assessment brengt tijdverlies, gemiste omzet en onnodig handwerk in kaart. Je krijgt een concreet plan, ook wanneer je daarna niets laat bouwen.
+            </p>
           </motion.div>
 
-          <h2 className="mt-16 text-sm font-medium uppercase tracking-widest text-white/40">Flow Assessment</h2>
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-            {assessments.map((a, i) => (
-              <motion.div key={a.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.5 }}
-                className={`rounded-2xl border p-8 ${a.highlight ? "border-[#2563EB] bg-[#2563EB]/5" : "border-white/10 bg-white/5"}`}>
-                {a.highlight && <span className="inline-block rounded-full bg-[#2563EB] px-3 py-1 text-xs font-semibold text-white mb-4">Aanbevolen</span>}
-                <h3 className="text-2xl font-semibold">{a.name}</h3>
-                <p className="mt-2 text-3xl font-bold text-[#2563EB]">{a.price}</p>
-                <p className="mt-4 text-sm text-white/60">{a.desc}</p>
+          <div className="mt-14 grid gap-6 md:grid-cols-2">
+            {assessments.map((assessment, index) => (
+              <motion.article
+                key={assessment.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                className={`relative overflow-hidden rounded-3xl border p-8 ${assessment.highlight ? "border-cyan-400/60 bg-gradient-to-br from-cyan-500/15 via-blue-500/10 to-violet-500/10" : "border-white/10 bg-white/[0.04]"}`}
+              >
+                {assessment.highlight && (
+                  <span className="mb-5 inline-flex rounded-full border border-cyan-300/30 bg-cyan-300/10 px-3 py-1 text-xs font-semibold text-cyan-200">Meest compleet</span>
+                )}
+                <h2 className="text-2xl font-bold">{assessment.name}</h2>
+                <p className="mt-2 text-4xl font-black text-cyan-300">{assessment.price}</p>
+                <p className="mt-4 min-h-14 text-sm leading-relaxed text-white/60">{assessment.desc}</p>
                 <ul className="mt-6 space-y-3">
-                  {a.features.map((f) => (
-                    <li key={f} className="flex items-center gap-3 text-sm text-white/70"><Check className="h-4 w-4 text-[#2563EB]" />{f}</li>
+                  {assessment.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-3 text-sm text-white/75">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" />
+                      {feature}
+                    </li>
                   ))}
                 </ul>
-              </motion.div>
+                <button
+                  onClick={() => startCheckout(assessment.id)}
+                  disabled={checkoutProduct !== null}
+                  className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-6 py-3.5 font-semibold transition hover:bg-[#1D4ED8] disabled:cursor-wait disabled:opacity-60"
+                >
+                  {checkoutProduct === assessment.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <ShieldCheck className="h-4 w-4" />}
+                  {checkoutProduct === assessment.id ? "Stripe wordt geopend…" : `Boek en betaal ${assessment.price}`}
+                </button>
+              </motion.article>
             ))}
           </div>
+
+          {checkoutError && (
+            <div className="mt-6 rounded-xl border border-amber-400/30 bg-amber-400/10 px-5 py-4 text-sm text-amber-100" role="alert">
+              {checkoutError}
+            </div>
+          )}
+          <p className="mt-5 text-center text-xs text-white/40">Veilige betaling via Stripe. Je ontvangt na betaling instructies voor het plannen van de sessie.</p>
         </div>
       </section>
 
-      {/* Implementaties */}
-      <section className="mx-auto max-w-5xl px-6 py-20">
-        <h2 className="text-sm font-medium uppercase tracking-widest text-white/40">Implementaties</h2>
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
-          {implementations.map((p, i) => (
-            <motion.div key={p.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <span className="text-3xl">{p.emoji}</span>
-              <h3 className="mt-4 text-xl font-semibold">{p.name}</h3>
-              <p className="mt-1 text-sm text-white/50">{p.desc}</p>
-              <p className="mt-4 text-2xl font-bold text-[#2563EB]">{p.price}</p>
-              <ul className="mt-6 space-y-2">
-                {p.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-xs text-white/60"><Check className="h-3.5 w-3.5 text-[#2563EB] mt-0.5 shrink-0" />{f}</li>
+      <section className="mx-auto max-w-6xl px-6 py-20">
+        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-violet-300">Na het assessment</p>
+        <h2 className="mt-4 text-3xl font-black md:text-4xl">Implementaties op basis van echte prioriteiten</h2>
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
+          {implementations.map((product, index) => (
+            <motion.article
+              key={product.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6"
+            >
+              <span className="text-3xl">{product.emoji}</span>
+              <h3 className="mt-4 text-xl font-bold">{product.name}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-white/55">{product.desc}</p>
+              <p className="mt-4 text-2xl font-black text-violet-300">{product.price}</p>
+              <ul className="mt-6 flex-1 space-y-2">
+                {product.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-2 text-xs text-white/60">
+                    <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-violet-300" />
+                    {feature}
+                  </li>
                 ))}
               </ul>
-            </motion.div>
+              <Link href={product.href} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-cyan-300 hover:text-cyan-200">
+                Bekijk oplossing <ArrowRight className="h-4 w-4" />
+              </Link>
+            </motion.article>
           ))}
         </div>
       </section>
 
-      {/* Beheer */}
-      <section className="border-y border-white/10 bg-white/5">
-        <div className="mx-auto max-w-3xl px-6 py-12 text-center">
-          <h2 className="text-sm font-medium uppercase tracking-widest text-white/40">Beheer en optimalisatie</h2>
-          <p className="mt-4 text-3xl font-bold text-[#2563EB]">vanaf €197 per maand</p>
-          <p className="mt-4 text-sm text-white/60">Updates, hosting, support. Maandelijks opzegbaar. Telefonie en AI-verbruik apart op basis van gebruik.</p>
+      <section className="border-y border-white/10 bg-gradient-to-r from-blue-950/30 via-violet-950/20 to-cyan-950/30 px-6">
+        <div className="mx-auto max-w-3xl py-14 text-center">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300">Beheer en optimalisatie</h2>
+          <p className="mt-4 text-3xl font-black">vanaf €197 per maand</p>
+          <p className="mt-4 text-sm leading-relaxed text-white/60">Updates, hosting, support en continue verbetering. Telefonie- en AI-verbruik worden transparant apart berekend.</p>
         </div>
       </section>
 
-      {/* CTA */}
       <section className="mx-auto max-w-3xl px-6 py-20 text-center">
-        <h2 className="text-3xl font-semibold tracking-tight">Klaar voor minder handwerk?</h2>
-        <p className="mt-4 text-lg text-white/60">Boek een Flow Assessment. In 60 minuten weet je wat automatisering jou oplevert.</p>
-        <Link href="/contact" className="mt-8 inline-flex items-center rounded-xl bg-[#2563EB] px-8 py-4 text-base font-semibold text-white transition hover:bg-[#1D4ED8]">
-          Boek een Flow Assessment <ArrowRight className="ml-2 h-4 w-4" />
+        <h2 className="text-3xl font-black">Nog niet klaar om online te betalen?</h2>
+        <p className="mt-4 text-lg text-white/60">Bespreek eerst je situatie. We vertellen eerlijk of een Flow Assessment zinvol is.</p>
+        <Link href="/contact" className="mt-8 inline-flex items-center rounded-xl border border-white/15 bg-white/5 px-8 py-4 font-semibold transition hover:border-cyan-300/40 hover:bg-cyan-300/5">
+          Plan een kennismaking <ArrowRight className="ml-2 h-4 w-4" />
         </Link>
-        <p className="mt-6 text-sm text-white/40">Exacte prijs na Flow Assessment. Geen verrassingen.</p>
       </section>
+
+      <footer className="border-t border-white/10 px-6 py-8">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-xs text-white/40 md:flex-row">
+          <p>© 2026 BonanzaLabs</p>
+          <div className="flex gap-5">
+            <Link href="/blog" className="hover:text-white">Kennisbank</Link>
+            <Link href="/privacy" className="hover:text-white">Privacy</Link>
+            <Link href="/contact" className="hover:text-white">Contact</Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
