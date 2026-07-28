@@ -25,13 +25,15 @@ Voor meerdere processen, teams, locaties of complexe integraties.
 
 ## Officiële onderneming
 
-- Handelsnaam: BonanzaLabs
+- Handelsnaam op deze website: BonanzaLabs
 - Rechtsvorm: eenmanszaak
 - KvK: 88564517
 - Vestigingsnummer: 000054418089
 - Hoofdvestiging: Bloedkoraalstraat 49, 9743 KB Groningen
 
 De openbare gegevens staan centraal in `src/lib/business-details.ts` en worden gebruikt op `/voorwaarden`, `/privacy`, `/over-ons` en in LocalBusiness structured data.
+
+De overige geregistreerde handelsnamen worden bewust niet op de BonanzaLabs-site getoond. De foutief geregistreerde naam `BonanzaVitalis` wordt niet gebruikt als publieke BonanzaLabs-branding; een toekomstige correctie naar `BonanzaVitals` staat los van deze site.
 
 ## Kernpagina’s
 
