@@ -45,6 +45,10 @@ export default function BlogPage() {
             <Link href="/pricing" className="hover:text-white">Prijzen</Link>
             <Link href="/contact" className="rounded-xl bg-[#2563EB] px-4 py-2 font-semibold text-white hover:bg-[#1D4ED8]">Flow Assessment</Link>
           </nav>
+          <div className="flex items-center gap-3 md:hidden">
+            <Link href="/pricing" className="text-sm font-medium text-slate-300 hover:text-white">Prijzen</Link>
+            <Link href="/contact" className="rounded-lg bg-[#2563EB] px-3 py-2 text-xs font-semibold text-white hover:bg-[#1D4ED8]">Contact</Link>
+          </div>
         </div>
       </header>
 
