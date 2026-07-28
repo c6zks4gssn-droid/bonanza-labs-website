@@ -1,123 +1,63 @@
-# BonanzaLabs — Automatisering voor het Nederlandse MKB
+# BonanzaLabs
 
-BonanzaLabs bouwt praktische automatiseringssystemen voor horeca, bouw, installatie en zakelijke dienstverlening.
+BonanzaLabs bouwt praktische automatiseringsoplossingen voor het Nederlandse MKB.
 
-**Positionering:** minder handwerk, snellere opvolging en meer omzet — zonder onnodige AI-hype of een zwaar softwaretraject.
+## Primaire aanbieding
 
-## Kernoplossingen
+### ServeFlow 14-dagen pilot — €497 ex. btw
 
-| Oplossing | Voor wie | Kernfunctie |
-|---|---|---|
-| **TradeFlow** | Bouw, installatie en zakelijke dienstverlening | Intake, offertes, WhatsApp-opvolging, leadpipeline en CRM |
-| **ServeFlow** | Restaurants, cafés en horecaondernemers | Reserveringen, no-showpreventie, klantcommunicatie en reviews |
-| **Bonanza Voice** | Bedrijven die telefoontjes of afspraken missen | AI-telefonie, afspraken, samenvattingen en doorverbinden |
+- één horecalocatie;
+- één reserveringsflow;
+- intake en inrichting;
+- bevestiging, herinnering en wijzigen/annuleren;
+- interne reserveringssamenvatting;
+- evaluatie na 14 dagen;
+- geen automatische verlenging;
+- geen gegarandeerde omzet, reserveringsvolume of daling van no-shows.
 
-## Commercieel model
+Kunnen we de vooraf schriftelijk afgesproken reserveringsflow niet werkend opleveren, dan geldt de leveringsgarantie uit `/voorwaarden`.
 
-- Flow Assessment Introductie: **€497**
-- Flow Assessment Standaard: **€999**
-- TradeFlow en ServeFlow implementaties: **vanaf €2.500**
-- Bonanza Voice implementatie: **vanaf €1.495**
-- Beheer en optimalisatie: **vanaf €197 per maand**
+## Secundaire aanbieding
 
-Alleen de twee Flow Assessments hebben een directe Stripe Checkout. Implementaties met een vanafprijs lopen eerst via intake en offerte.
+### Flow Assessment — €999 ex. btw
 
-## Belangrijkste routes
+Voor meerdere processen, teams, locaties of complexe integraties.
 
-```text
-/                  Homepage
-/tradeflow         TradeFlow
-/serveflow         ServeFlow
-/bonanza-voice     Bonanza Voice
-/pricing           Flow Assessments en prijsindicaties
-/portfolio         Gebouwde projecten en cases
-/over-ons          Over BonanzaLabs
-/contact           Leadformulier
-/blog              MKB-kennisbank
-/privacy           Privacyverklaring
-```
+## Kernpagina’s
 
-## Technische stack
+- `/` — pilotgerichte homepage
+- `/serveflow` — ServeFlow-pilotscope
+- `/pricing` — Stripe Checkout voor pilot en Flow Assessment
+- `/voorwaarden` — pilotvoorwaarden
+- `/privacy` — privacyverklaring
+- `/contact` — formulier, WhatsApp en telefoon
+- `/admin/leads` — beveiligd leadoverzicht
+- `/blog` — Nederlandse MKB-kennisbank
 
-- Next.js App Router
-- React en TypeScript
-- Tailwind CSS
-- Stripe Checkout en webhooks
-- Upstash Redis REST voor leads, betalingen, idempotency en rate limiting
+## Productievoorzieningen
+
+- Stripe Checkout en webhookvalidatie
+- Upstash Redis voor leads, betalingen, idempotency en rate limiting
 - Resend voor optionele leadnotificaties
-- MiniMax of OpenRouter voor de website-assistent
-- Vercel voor hosting en preview deployments
+- HTTP Basic Auth voor `/admin/*` en `/api/admin/*`
+- MiniMax of OpenRouter voor de chat
 
-## Lokale installatie
+Zie `.env.example` voor alle vereiste variabelen.
 
-```bash
-pnpm install
-cp .env.example .env.local
-pnpm dev
-```
+## Productiegate
 
-Productiebuild:
+Merge pas nadat het volgende daadwerkelijk is getest:
 
-```bash
-pnpm build
-```
-
-## Environment variables
-
-Zie `.env.example` voor het volledige overzicht.
-
-Minimaal voor betalingen en leadopslag:
-
-```text
-NEXT_PUBLIC_BASE_URL
-STRIPE_SECRET_KEY
-STRIPE_WEBHOOK_SECRET
-UPSTASH_REDIS_REST_URL
-UPSTASH_REDIS_REST_TOKEN
-```
-
-Voor leadnotificaties:
-
-```text
-RESEND_API_KEY
-RESEND_FROM_EMAIL
-LEAD_NOTIFICATION_EMAIL
-```
-
-Voor de chat-assistent configureer je MiniMax of OpenRouter, niet beide als onbedoelde fallback.
-
-## Betalingsflow
-
-1. De bezoeker kiest een Flow Assessment op `/pricing`.
-2. `/api/checkout` valideert het product tegen de server-side catalogus.
-3. Stripe Checkout verwerkt de betaling.
-4. `/api/stripe-webhook` controleert de signature, betaalstatus, productmetadata en het verwachte bedrag.
-5. Het betaalrecord wordt idempotent en duurzaam opgeslagen.
-
-## Leadflow
-
-Contactformulier en chatwidget sturen aanvragen naar `/api/leads`.
-
-De API:
-
-- valideert en begrenst invoer;
-- controleert server-side honeypots;
-- gebruikt rate limiting;
-- bewaart de lead duurzaam;
-- kan een e-mailnotificatie sturen via Resend.
-
-## Voor productie controleren
-
-- [ ] Vercel environment variables ingesteld voor Preview én Production
-- [ ] Upstash-database gekoppeld en healthchecks gecontroleerd
-- [ ] Resend-verzenddomein geverifieerd
-- [ ] Stripe-webhookendpoint toegevoegd voor `/api/stripe-webhook`
-- [ ] Testbetaling van €497 volledig doorlopen
-- [ ] Testlead via contactformulier en chat ontvangen
-- [ ] Privacyverklaring aangevuld met officiële handelsnaam, KvK-nummer en adres
-- [ ] Mobiele navigatie en formulieren visueel gecontroleerd
-- [ ] Productiedomeinen naar de juiste Vercel-deployment verwezen
+1. officiële handelsnaam, KvK en vestigingsadres ingesteld;
+2. Upstash-, Stripe- en adminvariabelen ingesteld voor Preview en Production;
+3. testlead opgeslagen en zichtbaar in `/admin/leads`;
+4. Resend-notificatie ontvangen;
+5. Stripe-testbetaling van €497 voltooid;
+6. webhookbetaling zichtbaar in Upstash;
+7. admin-API getest met onjuiste en juiste credentials;
+8. WhatsApp- en telefoonlinks op mobiel getest;
+9. preview visueel gecontroleerd op mobiel en desktop.
 
 ## Scheiding van merken
 
-`bonanza-labs.com` is de commerciële MKB-site. Open-source developer tools, packages en experimentele agentproducten horen niet op deze homepage en worden later afzonderlijk onder BonanzaForge of GitHub gepositioneerd.
+`bonanza-labs.com` is de commerciële MKB-site. Open-source developer tools en experimentele agentproducten horen onder BonanzaForge of GitHub.
