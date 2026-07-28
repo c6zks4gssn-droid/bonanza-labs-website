@@ -20,7 +20,7 @@ interface Lead {
 const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
 const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "";
 const LEAD_NOTIFICATION_EMAIL =
-  process.env.LEAD_NOTIFICATION_EMAIL || "hello@bonanzalabs.com";
+  process.env.LEAD_NOTIFICATION_EMAIL || "hello@bonanza-labs.com";
 
 function clean(value: unknown, maxLength: number): string {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -85,7 +85,6 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    // Server-side honeypots. Bots receive a success response without storage.
     if (clean(body.company, 200) || clean(body.website, 200)) {
       return NextResponse.json({ success: true });
     }
