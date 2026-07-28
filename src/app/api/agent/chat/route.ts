@@ -1,19 +1,19 @@
-import { NextRequest, NextResponse } from 'next/server';
-
-// BonanzaLabs chat agent — forwards to MiniMax-M3 or OpenRouter
-// Keeps API key server-side, exposes OpenAI-compatible endpoint for chat widget
+import { NextRequest, NextResponse } from "next/server";
+import { incrementRateLimit, isRedisConfigured } from "@/lib/server-store";
 
 const MINIMAX_API_KEY = process.env.MINIMAX_API_KEY;
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
-const useMiniMax = !!MINIMAX_API_KEY;
-const useOpenRouter = !useMiniMax && !!OPENROUTER_API_KEY;
+const useMiniMax = Boolean(MINIMAX_API_KEY);
+const useOpenRouter = !useMiniMax && Boolean(OPENROUTER_API_KEY);
 
-const MINIMAX_BASE_URL = 'https://api.minimaxi.chat/v1';
-const MINIMAX_MODEL = 'MiniMax-M3';
-const OPENROUTER_MODEL = 'tencent/hy3:free';
+const MINIMAX_BASE_URL =
+  process.env.MINIMAX_BASE_URL || "https://api.minimax.io/v1";
+const MINIMAX_MODEL = process.env.MINIMAX_MODEL || "MiniMax-M3";
+const OPENROUTER_MODEL =
+  process.env.OPENROUTER_MODEL || "tencent/hy3:free";
 
 interface ChatMessage {
-  role: 'system' | 'user' | 'assistant';
+  role: "user" | "assistant";
   content: string;
 }
 
@@ -41,14 +41,14 @@ Onze diensten:
 
 Flow Assessment:
 - Eerst analyseren we je processen in een gesprek van 60 minuten
-- Je krijgt een rapport met prioriteiten en verwachte besparing en ROI
+- Je krijgt een rapport met prioriteiten en een onderbouwde ROI-schatting
 - Prijs: €497 introductie / €999 standaard
 
 Werkwijze:
 1. Analyse — We analyseren je processen en knelpunten.
 2. Ontwerp — We ontwerpen een systeem dat past bij jouw bedrijfsvoering.
 3. Implementatie — We bouwen en installeren alles. Live in 2-4 weken.
-4. Optimalisatie — Maandelijkse beheer en verbetering.
+4. Optimalisatie — Maandelijks beheer en continue verbetering.
 
 Beheer en optimalisatie: vanaf €197 per maand.
 Telefonie en AI-verbruik: apart op basis van gebruik.
@@ -56,159 +56,175 @@ Telefonie en AI-verbruik: apart op basis van gebruik.
 Regels:
 - Spreek de taal van de gebruiker (Nederlands of Engels)
 - Wees beknopt, vriendelijk en behulpzaam
-- Stuur voor vragen naar de juiste productpagina (/pricing)
-- Voor afspraken of offertes: verwijs naar hello@bonanzalabs.com
+- Verwijs bij prijzen en het Flow Assessment naar /pricing
+- Verwijs voor afspraken en offertes naar /contact of hello@bonanzalabs.com
 - Wees eerlijk als je iets niet weet
-- Vraag naar bedrijfsnaam en wat ze doen als ze interesse tonen
-- Geef geen korting tenzij expliciet gevraagd
-- Gebruik de naam "BonanzaLabs" (niet "BonanzaLabs")
+- Vraag naar bedrijfsnaam en werkzaamheden als iemand interesse toont
+- Beloof geen gegarandeerde omzet, besparing of resultaat
+- Gebruik de naam "BonanzaLabs" (niet "BonazaLabs" of "BonannaLabs")
 - Gebruik "Bonanza Voice" (niet "VoiceFlow" of "Bonanna Voice")`;
 
-// Simple in-memory rate limiting (production: KV)
-const requestCounts = new Map<string, { count: number; resetTime: number }>();
-const RATE_LIMIT = 10; // max 10 messages per minute
-const RATE_WINDOW = 60000; // 1 minute
+const fallbackCounts = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT = 10;
+const RATE_WINDOW_SECONDS = 60;
+const MAX_MESSAGE_LENGTH = 2000;
+const MAX_MESSAGES = 30;
 
-function checkRateLimit(ip: string): boolean {
+async function isAllowed(ip: string): Promise<boolean> {
+  if (isRedisConfigured) {
+    const count = await incrementRateLimit(
+      `rate:chat:${ip}`,
+      RATE_WINDOW_SECONDS,
+    );
+    return count <= RATE_LIMIT;
+  }
+
   const now = Date.now();
-  const record = requestCounts.get(ip);
+  const record = fallbackCounts.get(ip);
   if (!record || now > record.resetTime) {
-    requestCounts.set(ip, { count: 1, resetTime: now + RATE_WINDOW });
+    fallbackCounts.set(ip, {
+      count: 1,
+      resetTime: now + RATE_WINDOW_SECONDS * 1000,
+    });
     return true;
   }
+
   if (record.count >= RATE_LIMIT) return false;
-  record.count++;
+  record.count += 1;
   return true;
 }
 
-const MAX_MESSAGE_LENGTH = 2000;
-const MAX_MESSAGES = 50;
+function validateMessages(value: unknown): ChatMessage[] | null {
+  if (!Array.isArray(value) || value.length === 0 || value.length > MAX_MESSAGES) {
+    return null;
+  }
+
+  const messages: ChatMessage[] = [];
+  for (const item of value) {
+    if (!item || typeof item !== "object") return null;
+    const role = (item as { role?: unknown }).role;
+    const content = (item as { content?: unknown }).content;
+
+    if ((role !== "user" && role !== "assistant") || typeof content !== "string") {
+      return null;
+    }
+
+    const trimmed = content.trim();
+    if (!trimmed || trimmed.length > MAX_MESSAGE_LENGTH) return null;
+    messages.push({ role, content: trimmed });
+  }
+
+  return messages;
+}
 
 export async function POST(req: NextRequest) {
   try {
-    // Rate limiting
-    const ip = req.headers.get('x-forwarded-for') || 'unknown';
-    if (!checkRateLimit(ip)) {
-      return NextResponse.json({ error: 'Te veel verzoeken. Probeer het over een minuut opnieuw.' }, { status: 429 });
+    const forwardedFor = req.headers.get("x-forwarded-for") || "unknown";
+    const ip = forwardedFor.split(",")[0]?.trim() || "unknown";
+
+    if (!(await isAllowed(ip))) {
+      return NextResponse.json(
+        { error: "Te veel verzoeken. Probeer het over een minuut opnieuw." },
+        { status: 429 },
+      );
     }
 
     const body = await req.json();
-    const { messages, stream } = body as { messages: ChatMessage[]; stream?: boolean };
+    const messages = validateMessages(body.messages);
+    const stream = body.stream === true;
 
-    if (!messages?.length) {
-      return NextResponse.json({ error: 'messages required' }, { status: 400 });
+    if (!messages) {
+      return NextResponse.json(
+        { error: "Ongeldige of te lange chatgeschiedenis" },
+        { status: 400 },
+      );
     }
-
-    // Limit number of messages in a conversation
-    if (messages.length > MAX_MESSAGES) {
-      return NextResponse.json({ error: 'Te veel berichten' }, { status: 400 });
-    }
-
-    // Validate message length
-    for (const msg of messages) {
-      if (msg.content.length > MAX_MESSAGE_LENGTH) {
-        return NextResponse.json({ error: 'Bericht te lang' }, { status: 400 });
-      }
-    }
-
-    // Filter system messages from client — only our system prompt is allowed
-    const filteredMessages = messages.filter(m => m.role !== 'system');
-    const allMessages: ChatMessage[] = [
-      { role: 'system', content: SYSTEM_PROMPT },
-      ...filteredMessages,
-    ];
 
     if (!useMiniMax && !useOpenRouter) {
       return NextResponse.json(
-        { error: 'Agent backend not configured. Set MINIMAX_API_KEY or OPENROUTER_API_KEY.' },
-        { status: 503 }
+        { error: "Agent backend not configured" },
+        { status: 503 },
       );
     }
 
     const apiUrl = useMiniMax
       ? `${MINIMAX_BASE_URL}/chat/completions`
-      : 'https://openrouter.ai/api/v1/chat/completions';
+      : "https://openrouter.ai/api/v1/chat/completions";
     const apiKey = useMiniMax ? MINIMAX_API_KEY! : OPENROUTER_API_KEY!;
     const model = useMiniMax ? MINIMAX_MODEL : OPENROUTER_MODEL;
 
     const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`,
     };
 
     if (!useMiniMax) {
-      headers['HTTP-Referer'] = 'https://bonanza-labs.com';
-      headers['X-Title'] = 'BonanzaLabs Chat Agent';
+      headers["HTTP-Referer"] = "https://bonanza-labs.com";
+      headers["X-Title"] = "BonanzaLabs Chat Agent";
     }
 
-    if (stream) {
-      const upstream = await fetch(apiUrl, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
-          model,
-          messages: allMessages,
-          stream: true,
-          max_tokens: 1000,
-          temperature: 0.4,
-        }),
-      });
-
-      if (!upstream.ok || !upstream.body) {
-        return NextResponse.json({ error: 'Upstream error' }, { status: 502 });
-      }
-
-      return new Response(upstream.body, {
-        headers: {
-          'Content-Type': 'text/event-stream',
-          'Cache-Control': 'no-cache',
-          'Connection': 'keep-alive',
-        },
-      });
-    }
-
-    // Non-streaming response
-    const response = await fetch(apiUrl, {
-      method: 'POST',
+    const upstream = await fetch(apiUrl, {
+      method: "POST",
       headers,
       body: JSON.stringify({
         model,
-        messages: allMessages,
+        messages: [
+          { role: "system", content: SYSTEM_PROMPT },
+          ...messages,
+        ],
+        stream,
         max_tokens: 1000,
         temperature: 0.4,
       }),
     });
 
-    if (!response.ok) {
-      const errText = await response.text();
-      console.error('Chat API error:', response.status, errText);
-      return NextResponse.json({ error: 'AI service error' }, { status: 502 });
+    if (!upstream.ok) {
+      const errorText = await upstream.text();
+      console.error("Chat upstream error:", upstream.status, errorText);
+      return NextResponse.json({ error: "AI service error" }, { status: 502 });
     }
 
-    const data = await response.json();
-    const content = data.choices?.[0]?.message?.content || '';
+    if (stream) {
+      if (!upstream.body) {
+        return NextResponse.json({ error: "Empty AI response" }, { status: 502 });
+      }
+
+      return new Response(upstream.body, {
+        headers: {
+          "Content-Type": "text/event-stream",
+          "Cache-Control": "no-cache, no-transform",
+          Connection: "keep-alive",
+        },
+      });
+    }
+
+    const data = await upstream.json();
+    const content = data.choices?.[0]?.message?.content || "";
 
     return NextResponse.json({
       id: data.id,
-      object: 'chat.completion',
-      choices: [{
-        index: 0,
-        message: { role: 'assistant', content },
-        finish_reason: data.choices?.[0]?.finish_reason || 'stop',
-      }],
+      object: "chat.completion",
+      choices: [
+        {
+          index: 0,
+          message: { role: "assistant", content },
+          finish_reason: data.choices?.[0]?.finish_reason || "stop",
+        },
+      ],
       model,
     });
   } catch (error) {
-    console.error('Agent chat error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.error("Agent chat error:", error);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
 
-// Health check
 export async function GET() {
   return NextResponse.json({
-    service: 'BonanzaLabs Chat Agent',
+    service: "BonanzaLabs Chat Agent",
+    provider: useMiniMax ? "minimax" : useOpenRouter ? "openrouter" : "none",
     model: useMiniMax ? MINIMAX_MODEL : OPENROUTER_MODEL,
-    configured: !!(MINIMAX_API_KEY || OPENROUTER_API_KEY),
+    configured: Boolean(MINIMAX_API_KEY || OPENROUTER_API_KEY),
+    distributedRateLimit: isRedisConfigured,
   });
 }
