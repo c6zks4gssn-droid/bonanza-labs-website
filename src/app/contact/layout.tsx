@@ -1,26 +1,22 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact — BonanzaLabs",
+  title: "Contact over de ServeFlow-pilot",
   description:
-    "Neem contact op met BonanzaLabs. Stuur een bericht of boek een Flow Assessment.",
+    "Neem contact op met BonanzaLabs over de ServeFlow 14-dagen pilot of een complexer Flow Assessment.",
   alternates: {
     canonical: "https://bonanza-labs.com/contact",
   },
   openGraph: {
-    title: "Contact — BonanzaLabs",
+    title: "Contact over de ServeFlow-pilot | BonanzaLabs",
     description:
-      "Neem contact op met BonanzaLabs. Stuur een bericht of boek een Flow Assessment.",
+      "Bespreek één reserveringsflow voor één horecalocatie of vraag advies over een complexer automatiseringsproces.",
     url: "https://bonanza-labs.com/contact",
     siteName: "BonanzaLabs",
     type: "website",
   },
 };
 
-export default function ContactLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function ContactLayout({ children }: { children: React.ReactNode }) {
   return children;
 }
