@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Serif, Geist_Mono, Inter } from "next/font/google";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import ChatWidget from "@/components/ChatWidget";
+import BonanzaVoice from "@/components/BonanzaVoice";
 import { businessDetails } from "@/lib/business-details";
 import "./globals.css";
 
@@ -133,6 +134,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <I18nProvider>
           {children}
           <ChatWidget />
+          <BonanzaVoice />
         </I18nProvider>
       </body>
     </html>
