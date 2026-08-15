@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   description:
     "Van aanvraag naar offerte en opvolging zonder WhatsApp-chaos. Website, offertegenerator, WhatsApp bot en CRM voor bouw-, installatie- en servicebedrijven.",
   alternates: {
-    canonical: "https://bonanza-labs.com/tradeflow",
+    canonical: "https://www.bonanza-labs.com/tradeflow",
   },
   openGraph: {
     title: "TradeFlow — AI automatisering voor bouw & installatie",
     description:
       "Van aanvraag naar offerte en opvolging zonder WhatsApp-chaos. Website, offertegenerator, WhatsApp bot en CRM voor bouw-, installatie- en servicebedrijven.",
-    url: "https://bonanza-labs.com/tradeflow",
+    url: "https://www.bonanza-labs.com/tradeflow",
     siteName: "BonanzaLabs",
     type: "website",
   },

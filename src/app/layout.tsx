@@ -33,12 +33,12 @@ export const metadata: Metadata = {
   },
   description:
     "BonanzaLabs in Groningen bouwt praktische automatiseringssystemen voor horeca, bouw en installatie, met ServeFlow als 14-dagen pilot voor lokale horecazaken.",
-  metadataBase: new URL("https://bonanza-labs.com"),
+  metadataBase: new URL("https://www.bonanza-labs.com"),
   openGraph: {
     title: "BonanzaLabs — Automatisering voor het MKB",
     description:
       "Praktische automatisering voor horeca, bouw en installatie. Start met de ServeFlow 14-dagen pilot.",
-    url: "https://bonanza-labs.com",
+    url: "https://www.bonanza-labs.com",
     siteName: "BonanzaLabs",
     images: [
       {
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     apple: "/logo-256.png",
   },
   alternates: {
-    canonical: "https://bonanza-labs.com",
+    canonical: "https://www.bonanza-labs.com",
   },
   robots: {
     index: true,
@@ -78,14 +78,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://bonanza-labs.com/#business",
+    "@id": "https://www.bonanza-labs.com/#business",
     name: businessDetails.tradeName,
     legalName: businessDetails.tradeName,
     description:
       "Praktische automatiseringsoplossingen voor horeca, bouw en installatie in Nederland.",
-    url: "https://bonanza-labs.com",
-    logo: "https://bonanza-labs.com/logo-256.png",
-    image: "https://bonanza-labs.com/og-image.png",
+    url: "https://www.bonanza-labs.com",
+    logo: "https://www.bonanza-labs.com/logo-256.png",
+    image: "https://www.bonanza-labs.com/og-image.png",
     email: businessDetails.contactEmail,
     ...(telephone ? { telephone } : {}),
     address: {

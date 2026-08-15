@@ -159,7 +159,7 @@ export async function POST(req: NextRequest) {
     };
 
     if (!useMiniMax) {
-      headers["HTTP-Referer"] = "https://bonanza-labs.com";
+      headers["HTTP-Referer"] = "https://www.bonanza-labs.com";
       headers["X-Title"] = "BonanzaLabs Chat Agent";
     }
 

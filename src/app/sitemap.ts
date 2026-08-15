@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog-posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://bonanza-labs.com";
+  const baseUrl = "https://www.bonanza-labs.com";
   const now = new Date();
 
   const corePages: MetadataRoute.Sitemap = [

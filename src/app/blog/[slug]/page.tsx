@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const post = getBlogPost(slug);
   if (!post) return {};
 
-  const url = `https://bonanza-labs.com/blog/${post.slug}`;
+  const url = `https://www.bonanza-labs.com/blog/${post.slug}`;
   return {
     title: post.title,
     description: post.description,
@@ -79,9 +79,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     publisher: {
       "@type": "Organization",
       name: "BonanzaLabs",
-      logo: { "@type": "ImageObject", url: "https://bonanza-labs.com/logo-256.png" },
+      logo: { "@type": "ImageObject", url: "https://www.bonanza-labs.com/logo-256.png" },
     },
-    mainEntityOfPage: `https://bonanza-labs.com/blog/${post.slug}`,
+    mainEntityOfPage: `https://www.bonanza-labs.com/blog/${post.slug}`,
   };
 
   return (

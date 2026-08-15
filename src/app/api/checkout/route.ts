@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://bonanza-labs.com";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.bonanza-labs.com";
 
 type ProductConfig = {
   name: string;
