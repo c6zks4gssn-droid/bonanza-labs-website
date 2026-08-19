@@ -103,7 +103,6 @@ const serviceSchema = {
     "@type": "LocalBusiness",
     name: "BonanzaLabs",
     url: "https://www.bonanza-labs.com",
-    telephone: "+31612345678",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Bloedkoraalstraat 49",
@@ -320,19 +319,12 @@ export default function ServeFlowPage() {
         </div>
       </section>
 
-      {/* 9. WhatsApp/contact secondary CTA */}
+      {/* 9. Contact secondary CTA */}
       <section className="border-y border-white/10 bg-[#0A0E18] px-6 py-16">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-2xl font-black md:text-3xl">Liever eerst persoonlijk contact?</h2>
-          <p className="mt-4 text-white/55">Bel of stuur een bericht. We beantwoorden binnen 2 uur tijdens kantooruren.</p>
+          <p className="mt-4 text-white/55">Stuur een bericht. We reageren doorgaans binnen één werkdag.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a
-              href="tel:+31612345678"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/15 px-7 py-4 font-semibold hover:bg-white/5"
-              data-cta="serveflow-phone"
-            >
-              <Phone className="h-4 w-4" /> Bel ons
-            </a>
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 rounded-xl border border-white/15 px-7 py-4 font-semibold hover:bg-white/5"
