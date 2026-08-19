@@ -7,13 +7,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const corePages: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: now, changeFrequency: "weekly", priority: 1 },
+    { url: `${baseUrl}/oplossingen`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/tradeflow`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/serveflow`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
     { url: `${baseUrl}/bonanza-voice`, lastModified: now, changeFrequency: "monthly", priority: 0.75 },
     { url: `${baseUrl}/pricing`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
     { url: `${baseUrl}/portfolio`, lastModified: now, changeFrequency: "monthly", priority: 0.65 },
     { url: `${baseUrl}/over-ons`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${baseUrl}/voorwaarden`, lastModified: now, changeFrequency: "yearly", priority: 0.35 },
     { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.35 },

@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact over de ServeFlow-pilot",
+  title: "Contact BonanzaLabs | AI-automatisering vanuit Groningen",
   description:
-    "Neem contact op met BonanzaLabs over de ServeFlow 14-dagen pilot of een complexer Flow Assessment.",
+    "Bespreek één concreet proces met BonanzaLabs. ServeFlow voor horeca, TradeFlow voor bouw & installatie en afgebakende voice-automation.",
   alternates: {
     canonical: "https://www.bonanza-labs.com/contact",
   },
   openGraph: {
-    title: "Contact over de ServeFlow-pilot | BonanzaLabs",
+    title: "Contact BonanzaLabs",
     description:
-      "Bespreek één reserveringsflow voor één horecalocatie of vraag advies over een complexer automatiseringsproces.",
+      "Vertel waar je team onnodig tijd verliest en bespreek of een kleine automatiseringsflow zinvol is.",
     url: "https://www.bonanza-labs.com/contact",
-    siteName: "BonanzaLabs",
     type: "website",
   },
 };
