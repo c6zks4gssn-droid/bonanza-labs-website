@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "AI-automatisering voor MKB | Oplossingen van BonanzaLabs",
+  title: "AI-automatisering voor MKB | Oplossingen",
   description:
     "Praktische automatisering voor horeca, bouw & installatie en zakelijke telefonie. BonanzaLabs begint met één concreet proces en meet wat werkt.",
   alternates: {
