@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Bonanza Voice — AI telefoonassistent voor MKB | BonanzaLabs",
+  title: "Bonanza Voice — AI telefoonassistent voor MKB",
   description:
     "Afgebakende voice-automation voor terugkerende telefoontaken: basisvragen, terugbelverzoeken en gecontroleerde intake met menselijke escalatie.",
   alternates: {
