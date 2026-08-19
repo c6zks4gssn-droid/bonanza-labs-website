@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "TradeFlow — offertes en opvolging automatiseren | BonanzaLabs",
+  title: "TradeFlow — offertes en opvolging automatiseren",
   description:
     "TradeFlow helpt bouw- en installatiebedrijven aanvraaginformatie, offertevoorbereiding en opvolging overzichtelijker te maken met menselijke controle op prijs en uitzonderingen.",
   alternates: {
