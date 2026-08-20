@@ -8,7 +8,7 @@ export const businessDetails = {
   city: process.env.NEXT_PUBLIC_BUSINESS_CITY || "Groningen",
   country: process.env.NEXT_PUBLIC_BUSINESS_COUNTRY || "Nederland",
   contactEmail:
-    process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@bonanza-labs.com",
+    process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@bonanza-labs.com",
 } as const;
 
 export const fullBusinessAddress = [

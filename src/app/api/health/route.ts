@@ -24,11 +24,10 @@ export async function GET() {
     has("RESEND_FROM_EMAIL") &&
     has("LEAD_NOTIFICATION_EMAIL");
   const adminConfigured = has("ADMIN_USERNAME") && has("ADMIN_PASSWORD");
-  const contactConfigured =
-    has("NEXT_PUBLIC_WHATSAPP_NUMBER") &&
-    has("NEXT_PUBLIC_PHONE_NUMBER") &&
-    has("NEXT_PUBLIC_PHONE_DISPLAY");
-  const aiConfigured = has("MINIMAX_API_KEY") || has("OPENROUTER_API_KEY");
+  const publicContactEmail =
+    process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@bonanza-labs.com";
+  const contactConfigured = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(publicContactEmail);
+  const voiceConfigured = has("NEXT_PUBLIC_ELEVENLABS_AGENT_ID");
 
   const services: ServiceStatus[] = [
     {
@@ -76,16 +75,16 @@ export async function GET() {
       ok: contactConfigured,
       required: true,
       detail: contactConfigured
-        ? "WhatsApp- en telefoongegevens zijn geconfigureerd."
-        : "Publieke WhatsApp- of telefoongegevens ontbreken.",
+        ? "Het publieke e-mailadres is geconfigureerd."
+        : "Het publieke e-mailadres ontbreekt.",
     },
     {
-      name: "ai-chat",
-      ok: aiConfigured,
+      name: "bonanza-voice",
+      ok: voiceConfigured,
       required: true,
-      detail: aiConfigured
-        ? "Een AI-provider voor de chat is geconfigureerd."
-        : "MiniMax- of OpenRouter-configuratie ontbreekt.",
+      detail: voiceConfigured
+        ? "De ElevenLabs-agent is geconfigureerd."
+        : "De ElevenLabs-agent-id ontbreekt.",
     },
   ];
 

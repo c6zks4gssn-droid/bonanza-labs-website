@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { X, Menu, ExternalLink } from "lucide-react";
+import { X, Menu, ExternalLink, Gamepad2, HeartPulse, ShieldCheck, Store } from "lucide-react";
 import { motion } from "framer-motion";
 
 const fadeUp = {
@@ -24,22 +24,28 @@ const stagger = {
 
 const projects = [
   {
-    emoji: "🛍️",
+    icon: Store,
     name: "SilverJStore",
-    description: "925 zilveren sieraden webshop met Stripe en Solana Pay betalingen.",
+    description: "Webshop voor 925 sterling zilveren kettingen en armbanden, met een duidelijke collectie en checkoutflow.",
     url: "https://silverjstore.com",
   },
   {
-    emoji: "💧",
-    name: "OsmoseWaters",
-    description: "Onafhankelijke waterfilter vergelijkingssite.",
-    url: "https://osmosewaters.com",
+    icon: HeartPulse,
+    name: "BonanzaVitals",
+    description: "Wellnessmerk in pre-launch: leveranciers, labels, productdocumentatie en fulfilment worden eerst gecontroleerd.",
+    url: "https://bonanzavitals.com",
   },
   {
-    emoji: "🎮",
+    icon: Gamepad2,
     name: "JJ Brothers",
-    description: "Roblox game met 10 werelden, 100 pets en AI content pipeline.",
+    description: "Veilige, positieve game- en contentwereld voor gezinnen, met Portal Racers als speelbare browsergame.",
     url: "https://thejjbrothers.com",
+  },
+  {
+    icon: ShieldCheck,
+    name: "mcp-guard",
+    description: "Open-source MCP-gateway voor authenticatie, rate limits en spend caps rond AI-agents.",
+    url: "https://github.com/c6zks4gssn-droid/mcp-guard",
   },
 ];
 
@@ -124,7 +130,7 @@ export default function PortfolioPage() {
               custom={2}
               className="mt-6 text-lg md:text-xl text-gray-400 max-w-2xl"
             >
-              Projecten die we hebben ontworpen, gebouwd en beheerd — van e-commerce tot games.
+              Concrete eigen projecten — van e-commerce en wellness tot games en open-source beveiliging.
             </motion.p>
           </motion.div>
         </div>
@@ -133,7 +139,7 @@ export default function PortfolioPage() {
       {/* Projects */}
       <section className="py-12 px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {projects.map((project, i) => (
               <motion.a
                 key={project.name}
@@ -146,7 +152,7 @@ export default function PortfolioPage() {
                 transition={{ delay: i * 0.1 }}
                 className="group rounded-2xl border border-white/5 bg-white/[0.02] p-6 hover:border-white/10 hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="text-5xl mb-4">{project.emoji}</div>
+                <project.icon className="mb-5 h-10 w-10 text-cyan-300" aria-hidden="true" />
                 <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
                   {project.name}
                   <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-white transition" />

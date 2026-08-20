@@ -86,7 +86,7 @@ export default async function SuccessPage({
         <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center">
           <Mail className="mx-auto h-5 w-5 text-cyan-300" />
           <p className="mt-3 text-sm text-white/55">
-            Vragen over je boeking? Mail naar <a href="mailto:hello@bonanza-labs.com" className="text-cyan-300 underline">hello@bonanza-labs.com</a>.
+            Vragen over je boeking? Mail naar <a href="mailto:info@bonanza-labs.com" className="text-cyan-300 underline">info@bonanza-labs.com</a>.
           </p>
         </div>
 

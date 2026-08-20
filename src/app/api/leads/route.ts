@@ -20,7 +20,7 @@ interface Lead {
 const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
 const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "";
 const LEAD_NOTIFICATION_EMAIL =
-  process.env.LEAD_NOTIFICATION_EMAIL || "hello@bonanza-labs.com";
+  process.env.LEAD_NOTIFICATION_EMAIL || "info@bonanza-labs.com";
 
 function clean(value: unknown, maxLength: number): string {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";

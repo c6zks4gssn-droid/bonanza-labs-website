@@ -89,8 +89,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     ...(telephone ? { telephone } : {}),
     address: {
       "@type": "PostalAddress",
-      streetAddress: businessDetails.streetAddress,
-      postalCode: businessDetails.postalCode,
       addressLocality: businessDetails.city,
       addressCountry: "NL",
     },

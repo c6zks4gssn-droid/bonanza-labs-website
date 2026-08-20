@@ -262,7 +262,7 @@ export default function Home() {
           <div className="text-sm text-white/45">
             <p className="font-semibold text-white/70">Contact en juridisch</p>
             <div className="mt-3 flex flex-col gap-2">
-              <a href="mailto:hello@bonanza-labs.com" className="hover:text-white">hello@bonanza-labs.com</a>
+              <a href="mailto:info@bonanza-labs.com" className="hover:text-white">info@bonanza-labs.com</a>
               <Link href="/voorwaarden" className="hover:text-white">Voorwaarden</Link>
               <Link href="/privacy" className="hover:text-white">Privacy</Link>
             </div>

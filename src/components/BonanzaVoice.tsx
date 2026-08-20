@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 
 const WIDGET_SCRIPT_URL = "https://unpkg.com/@elevenlabs/convai-widget-embed";
+const WIDGET_AVATAR_URL = "https://www.bonanza-labs.com/logo-256.png";
 
 /**
  * Bonanza Voice — ElevenLabs voice agent, embedded site-wide.
@@ -25,6 +26,13 @@ export default function BonanzaVoice() {
     // upgrades the custom element once the script defines it.
     const el = document.createElement("elevenlabs-convai");
     el.setAttribute("agent-id", agentId);
+    el.setAttribute("avatar-image-url", WIDGET_AVATAR_URL);
+    el.setAttribute("action-text", "Praat met Bonanza Voice");
+    el.setAttribute("start-call-text", "Start gesprek");
+    el.setAttribute("end-call-text", "Gesprek stoppen");
+    el.setAttribute("expand-text", "Open Bonanza Voice");
+    el.setAttribute("listening-text", "Ik luister...");
+    el.setAttribute("speaking-text", "Bonanza Voice spreekt");
     containerRef.current.appendChild(el);
 
     let script = document.querySelector<HTMLScriptElement>(
@@ -34,6 +42,7 @@ export default function BonanzaVoice() {
       script = document.createElement("script");
       script.src = WIDGET_SCRIPT_URL;
       script.async = true;
+      script.type = "text/javascript";
       document.body.appendChild(script);
     }
 
@@ -44,5 +53,5 @@ export default function BonanzaVoice() {
 
   if (!agentId) return null;
 
-  return <div ref={containerRef} aria-hidden="true" />;
+  return <div ref={containerRef} />;
 }

@@ -102,7 +102,7 @@ export default function ChatWidget() {
     } catch (error) {
       setMessages([...newMessages, {
         role: "assistant",
-        content: "Sorry, er ging iets mis. Probeer het opnieuw of mail ons: hello@bonanzalabs.com",
+        content: "Sorry, er ging iets mis. Probeer het opnieuw of mail ons: info@bonanza-labs.com",
       }]);
     } finally {
       setLoading(false);

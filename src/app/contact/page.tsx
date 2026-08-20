@@ -13,9 +13,9 @@ import {
 } from "lucide-react";
 import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
-import { businessDetails, fullBusinessAddress } from "@/lib/business-details";
+import { businessDetails } from "@/lib/business-details";
 
-const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@bonanza-labs.com";
+const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@bonanza-labs.com";
 const WHATSAPP_NUMBER = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "").replace(/\D/g, "");
 const PHONE_NUMBER = process.env.NEXT_PUBLIC_PHONE_NUMBER || "";
 const PHONE_DISPLAY = process.env.NEXT_PUBLIC_PHONE_DISPLAY || PHONE_NUMBER;
@@ -155,7 +155,7 @@ export default function ContactPage() {
               </div>
               <div className="mt-5 flex items-start gap-2 text-sm text-white/50">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" />
-                <span>{fullBusinessAddress}</span>
+                <span>{businessDetails.city}, {businessDetails.country}</span>
               </div>
             </div>
 

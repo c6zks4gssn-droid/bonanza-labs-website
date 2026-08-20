@@ -90,7 +90,7 @@ async function main() {
       "admin",
       "resend",
       "contact",
-      "ai-chat",
+      "bonanza-voice",
     ]) {
       if (!names.has(required)) throw new Error(`service ontbreekt: ${required}`);
     }
