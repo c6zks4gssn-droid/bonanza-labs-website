@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     "Lees welke persoonsgegevens BonanzaLabs verwerkt, voor welke doelen en hoe je jouw privacyrechten kunt uitoefenen.",
   alternates: {
-    canonical: "https://bonanza-labs.com/privacy",
+    canonical: "https://www.bonanza-labs.com/privacy",
   },
 };
 

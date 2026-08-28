@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   description:
     "Praktische artikelen over offerteprocessen, horeca-automatisering, AI-telefonie en slimmer werken voor Nederlandse MKB-bedrijven.",
   alternates: {
-    canonical: "https://bonanza-labs.com/blog",
+    canonical: "https://www.bonanza-labs.com/blog",
   },
   openGraph: {
     title: "BonanzaLabs Kennisbank",
     description:
       "Praktische artikelen over automatisering voor bouw, installatie, horeca en zakelijke dienstverlening.",
-    url: "https://bonanza-labs.com/blog",
+    url: "https://www.bonanza-labs.com/blog",
     type: "website",
   },
 };

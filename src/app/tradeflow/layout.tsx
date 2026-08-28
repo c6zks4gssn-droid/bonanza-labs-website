@@ -1,26 +1,21 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "TradeFlow — AI automatisering voor bouw & installatie",
+  title: "TradeFlow — offertes en opvolging automatiseren",
   description:
-    "Van aanvraag naar offerte en opvolging zonder WhatsApp-chaos. Website, offertegenerator, WhatsApp bot en CRM voor bouw-, installatie- en servicebedrijven.",
+    "TradeFlow helpt bouw- en installatiebedrijven aanvraaginformatie, offertevoorbereiding en opvolging overzichtelijker te maken met menselijke controle op prijs en uitzonderingen.",
   alternates: {
-    canonical: "https://bonanza-labs.com/tradeflow",
+    canonical: "https://www.bonanza-labs.com/tradeflow",
   },
   openGraph: {
-    title: "TradeFlow — AI automatisering voor bouw & installatie",
+    title: "TradeFlow — van aanvraag naar offerte en opvolging",
     description:
-      "Van aanvraag naar offerte en opvolging zonder WhatsApp-chaos. Website, offertegenerator, WhatsApp bot en CRM voor bouw-, installatie- en servicebedrijven.",
-    url: "https://bonanza-labs.com/tradeflow",
-    siteName: "BonanzaLabs",
+      "Praktische workflow-automatisering voor bouw- en installatiebedrijven.",
+    url: "https://www.bonanza-labs.com/tradeflow",
     type: "website",
   },
 };
 
-export default function TradeFlowLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function TradeFlowLayout({ children }: { children: React.ReactNode }) {
   return children;
 }

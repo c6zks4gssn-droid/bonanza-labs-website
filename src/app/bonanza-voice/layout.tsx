@@ -1,26 +1,21 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Bonanza Voice — AI-telefonie voor het MKB",
+  title: "Bonanza Voice — AI telefoonassistent voor MKB",
   description:
-    "Iedere oproep professioneel beantwoorden, ook wanneer niemand beschikbaar is. AI-telefonie, afspraken registreren, gesprekssamenvattingen en doorverbinden.",
+    "Afgebakende voice-automation voor terugkerende telefoontaken: basisvragen, terugbelverzoeken en gecontroleerde intake met menselijke escalatie.",
   alternates: {
-    canonical: "https://bonanza-labs.com/bonanza-voice",
+    canonical: "https://www.bonanza-labs.com/bonanza-voice",
   },
   openGraph: {
-    title: "Bonanza Voice — AI-telefonie voor het MKB",
+    title: "Bonanza Voice — gecontroleerde AI-telefonie voor MKB",
     description:
-      "Iedere oproep professioneel beantwoorden, ook wanneer niemand beschikbaar is. AI-telefonie, afspraken registreren, gesprekssamenvattingen en doorverbinden.",
-    url: "https://bonanza-labs.com/bonanza-voice",
-    siteName: "BonanzaLabs",
+      "Start met één gesprekstype, duidelijke guardrails en menselijke escalatie.",
+    url: "https://www.bonanza-labs.com/bonanza-voice",
     type: "website",
   },
 };
 
-export default function BonanzaVoiceLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function BonanzaVoiceLayout({ children }: { children: React.ReactNode }) {
   return children;
 }

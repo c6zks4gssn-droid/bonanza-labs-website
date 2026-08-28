@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   description:
     "Zelf gebouwd, zelf gelanceerd. Bekijk projecten die BonanzaLabs heeft gebouwd en exploiteert.",
   alternates: {
-    canonical: "https://bonanza-labs.com/portfolio",
+    canonical: "https://www.bonanza-labs.com/portfolio",
   },
   openGraph: {
     title: "Portfolio — BonanzaLabs",
     description:
       "Zelf gebouwd, zelf gelanceerd. Bekijk projecten die BonanzaLabs heeft gebouwd en exploiteert.",
-    url: "https://bonanza-labs.com/portfolio",
+    url: "https://www.bonanza-labs.com/portfolio",
     siteName: "BonanzaLabs",
     type: "website",
   },

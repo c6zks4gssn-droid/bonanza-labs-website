@@ -1,5 +1,18 @@
 # https://www.robotstxt.org/robotstxt.html
+
+# Allow all major crawlers full access
 User-agent: *
 Allow: /
 
-Sitemap: https://bonanza-labs.com/sitemap.xml
+# Block admin routes (none exposed publicly, but defensive)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /success
+
+# Sitemap
+Sitemap: https://www.bonanza-labs.com/sitemap.xml
+Sitemap: https://www.bonanza-labs.com/sitemap.xml
+
+# IndexNow key location (per IndexNow spec)
+# Key: 847e3d95f661518d66260353ec435c35
+# Verify at: https://www.bonanza-labs.com/847e3d95f661518d66260353ec435c35.txt
