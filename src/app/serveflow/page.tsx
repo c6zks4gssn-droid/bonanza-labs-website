@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Check, Clock3, MapPin, RefreshCcw, ShieldCheck, X, Phone, MessageCircle, Star } from "lucide-react";
+import ServeFlowWebMCP from "@/components/ServeFlowWebMCP";
 
 export const metadata: Metadata = {
   title: "ServeFlow — AI reserveringsflow voor horeca",
@@ -201,6 +202,7 @@ export default function ServeFlowPage() {
               Eerst een vraag stellen
             </Link>
           </div>
+          <ServeFlowWebMCP />
         </div>
       </section>
 
