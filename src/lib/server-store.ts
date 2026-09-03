@@ -2,8 +2,11 @@ type RedisValue = string | number;
 type RedisCommand = RedisValue[];
 type RedisResponse<T = unknown> = { result?: T; error?: string };
 
-const REST_URL = process.env.UPSTASH_REDIS_REST_URL?.replace(/\/$/, "") || "";
-const REST_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN || "";
+const REST_URL = (
+  process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL || ""
+).replace(/\/$/, "");
+const REST_TOKEN =
+  process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN || "";
 
 export const isRedisConfigured = Boolean(REST_URL && REST_TOKEN);
 
