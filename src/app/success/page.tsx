@@ -1,28 +1,13 @@
 import Link from "next/link";
 import { CheckCircle2, ClipboardList, Mail, ShieldCheck } from "lucide-react";
+import type Stripe from "stripe";
+import { getStripe, isStripeConfigured } from "@/lib/stripe";
 
-const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
-
-type StripeSession = {
-  payment_status?: string;
-  customer_details?: { email?: string | null; name?: string | null };
-  metadata?: Record<string, string>;
-};
-
-async function getSession(sessionId: string): Promise<StripeSession | null> {
-  if (!STRIPE_SECRET_KEY || !sessionId.startsWith("cs_")) return null;
+async function getSession(sessionId: string): Promise<Stripe.Checkout.Session | null> {
+  if (!isStripeConfigured || !sessionId.startsWith("cs_")) return null;
 
   try {
-    const response = await fetch(
-      `https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}`,
-      {
-        headers: { Authorization: `Bearer ${STRIPE_SECRET_KEY}` },
-        cache: "no-store",
-      },
-    );
-
-    if (!response.ok) return null;
-    return (await response.json()) as StripeSession;
+    return await getStripe().checkout.sessions.retrieve(sessionId);
   } catch (error) {
     console.error("Could not retrieve Stripe session:", error);
     return null;
