@@ -10,10 +10,13 @@ import {
   MessageCircle,
   Phone,
   UserRound,
+  CheckCircle,
 } from "lucide-react";
 import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
 import { businessDetails } from "@/lib/business-details";
+import "../light-home.css";
+import "./light-contact.css";
 
 const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@bonanza-labs.com";
 const WHATSAPP_NUMBER = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "").replace(/\D/g, "");
@@ -94,14 +97,10 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#050508] text-white">
-      <SiteNav active="/contact" />
+    <main id="main-content" className="light-site light-contact min-h-screen">
+      <SiteNav active="/contact" light />
 
       <section className="relative px-6 pb-14 pt-36 text-center">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute left-1/3 top-1/4 h-[500px] w-[500px] rounded-full bg-amber-600/12 blur-[120px]" />
-          <div className="absolute bottom-1/3 right-1/4 h-[400px] w-[400px] rounded-full bg-cyan-600/10 blur-[100px]" />
-        </div>
 
         <div className="relative mx-auto max-w-4xl">
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-amber-300">Contact</p>
@@ -198,7 +197,7 @@ export default function ContactPage() {
           <div>
             {submitted ? (
               <div className="rounded-3xl border border-emerald-500/25 bg-emerald-500/5 p-8 text-center">
-                <div className="text-4xl">✅</div>
+                <CheckCircle className="mx-auto h-10 w-10 text-emerald-700" aria-hidden="true" />
                 <h2 className="mt-4 text-2xl font-black text-emerald-300">Bericht ontvangen</h2>
                 <p className="mt-3 text-sm text-white/55">
                   We reageren doorgaans binnen één werkdag. We starten met een korte
@@ -238,14 +237,16 @@ export default function ContactPage() {
                 />
 
                 {error && (
-                  <div className="rounded-xl border border-red-500/30 bg-red-500/5 px-4 py-3 text-sm text-red-300">
+                  <div role="alert" className="rounded-xl border border-red-500/30 bg-red-500/5 px-4 py-3 text-sm text-red-300">
                     {error}
                   </div>
                 )}
 
                 <div>
-                  <label className="mb-2 block text-sm text-white/55">Naam</label>
+                  <label htmlFor="contact-name" className="mb-2 block text-sm text-white/55">Naam</label>
                   <input
+                    id="contact-name"
+                    autoComplete="name"
                     type="text"
                     required
                     value={form.name}
@@ -256,8 +257,10 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="mb-2 block text-sm text-white/55">E-mail</label>
+                  <label htmlFor="contact-email" className="mb-2 block text-sm text-white/55">E-mail</label>
                   <input
+                    id="contact-email"
+                    autoComplete="email"
                     type="email"
                     required
                     value={form.email}
@@ -268,8 +271,9 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="mb-2 block text-sm text-white/55">Waar verlies je nu tijd?</label>
+                  <label htmlFor="contact-message" className="mb-2 block text-sm text-white/55">Waar verlies je nu tijd?</label>
                   <textarea
+                    id="contact-message"
                     required
                     rows={7}
                     value={form.message}
@@ -318,7 +322,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <SiteFooter />
+      <SiteFooter light />
     </main>
   );
 }

@@ -1,7 +1,16 @@
 import Link from "next/link";
-import { CheckCircle2, ClipboardList, Mail, ShieldCheck } from "lucide-react";
+import SiteFooter from "@/components/site-footer";
+import SiteNav from "@/components/site-nav";
+import { CheckCircle2, Clock3, CircleHelp, ClipboardList, Mail, ShieldCheck } from "lucide-react";
 import type Stripe from "stripe";
 import { getStripe, isStripeConfigured } from "@/lib/stripe";
+import { paymentResult } from "@/lib/payment-result";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Betaalstatus",
+  robots: { index: false, follow: false },
+};
 
 async function getSession(sessionId: string): Promise<Stripe.Checkout.Session | null> {
   if (!isStripeConfigured || !sessionId.startsWith("cs_")) return null;
@@ -24,24 +33,30 @@ export default async function SuccessPage({
   const session = await getSession(sessionId);
   const productId = session?.metadata?.product_id || "";
   const isPilot = productId === "serveflow-pilot-14-days";
-  const paymentConfirmed = session?.payment_status === "paid";
+  const result = paymentResult(session);
+  const StatusIcon = result.confirmed ? CheckCircle2 : result.kind === "pending" ? Clock3 : CircleHelp;
 
   return (
-    <main className="min-h-screen bg-[#050508] px-6 py-16 text-white">
-      <div className="mx-auto max-w-2xl">
+    <main id="main-content" className="light-site light-subpage min-h-screen  px-6 py-16">
+      <SiteNav />
+      <div className="mx-auto max-w-2xl pt-8">
         <div className="rounded-3xl border border-emerald-500/25 bg-emerald-500/5 p-8 text-center md:p-10">
-          <CheckCircle2 className="mx-auto h-12 w-12 text-emerald-300" />
+          <StatusIcon className="mx-auto h-12 w-12 text-emerald-300" aria-hidden="true" />
           <h1 className="mt-5 text-3xl font-black md:text-4xl">
-            {paymentConfirmed ? "Betaling ontvangen" : "Checkout afgerond"}
+            {result.title}
           </h1>
           <p className="mx-auto mt-4 max-w-xl leading-relaxed text-white/60">
-            {isPilot
+            {!result.confirmed
+              ? result.kind === "pending"
+                ? "De checkout is voltooid, maar de betaling is nog niet bevestigd. Betaal niet opnieuw zolang de verwerking loopt. Neem bij twijfel contact met ons op."
+                : "We kunnen op deze pagina geen geslaagde betaling bevestigen. Dit betekent niet automatisch dat een betaling is mislukt. Controleer je betaalbevestiging of neem contact met ons op voordat je opnieuw betaalt."
+              : isPilot
               ? "Bedankt voor het boeken van de ServeFlow 14-dagen pilot. De pilotperiode start niet vandaag, maar pas wanneer de afgesproken reserveringsflow live staat."
               : "Bedankt. We nemen contact op om de intake en planning af te stemmen."}
           </p>
         </div>
 
-        {isPilot && (
+        {isPilot && result.confirmed && (
           <section className="mt-8 rounded-3xl border border-white/10 bg-[#0D1220] p-8">
             <div className="flex items-center gap-3">
               <ClipboardList className="h-6 w-6 text-amber-300" />
@@ -80,6 +95,7 @@ export default async function SuccessPage({
           <Link href="/serveflow" className="rounded-xl border border-white/10 px-5 py-3 text-sm font-semibold hover:bg-white/5">Bekijk ServeFlow</Link>
         </div>
       </div>
+      <SiteFooter />
     </main>
   );
 }

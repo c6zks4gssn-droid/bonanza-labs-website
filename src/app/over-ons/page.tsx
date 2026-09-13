@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import SiteFooter from "@/components/site-footer";
+import SiteNav from "@/components/site-nav";
 import { Building2, Check, MapPin, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { businessDetails, fullBusinessAddress } from "@/lib/business-details";
@@ -26,34 +27,13 @@ const approach = [
 ];
 
 export default function OverOnsPage() {
-  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <main className="min-h-screen bg-[#050508] text-white">
-      <nav className="fixed top-0 z-50 w-full border-b border-white/5 bg-[#050508]/85 backdrop-blur-xl">
-        <div className="relative mx-auto flex h-14 max-w-6xl items-center justify-between px-4 md:px-6">
-          <Link href="/" className="flex items-center gap-2 font-bold tracking-tight">
-            <img src="/logo-256.png" alt="BonanzaLabs" className="h-8 w-8 rounded" />
-            BonanzaLabs
-          </Link>
-          <button className="text-white/60 md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu openen">
-            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-          <div className={`${menuOpen ? "flex" : "hidden"} absolute left-4 right-4 top-16 flex-col gap-4 rounded-2xl border border-white/10 bg-[#0D1220] p-5 text-sm text-white/65 md:static md:flex md:flex-row md:items-center md:border-0 md:bg-transparent md:p-0`}>
-            <Link href="/serveflow" className="hover:text-white">ServeFlow</Link>
-            <Link href="/tradeflow" className="hover:text-white">TradeFlow</Link>
-            <Link href="/blog" className="hover:text-white">Kennisbank</Link>
-            <span className="font-semibold text-white">Over ons</span>
-            <Link href="/contact" className="hover:text-white">Contact</Link>
-            <Link href="/pricing" className="rounded-lg bg-amber-400 px-4 py-2 font-semibold text-black hover:bg-amber-300">Start pilot</Link>
-          </div>
-        </div>
-      </nav>
+    <main id="main-content" className="light-site light-subpage min-h-screen">
+      <SiteNav />
 
       <section className="relative px-6 pb-20 pt-36">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute left-1/3 top-1/4 h-[500px] w-[500px] rounded-full bg-violet-600/15 blur-[120px]" />
-          <div className="absolute bottom-1/3 right-1/4 h-[400px] w-[400px] rounded-full bg-cyan-600/10 blur-[100px]" />
         </div>
         <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} className="relative mx-auto max-w-4xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-violet-300">Over BonanzaLabs</p>
@@ -111,12 +91,7 @@ export default function OverOnsPage() {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 px-6 py-10">
-        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-4 text-sm text-white/40 md:flex-row">
-          <p>© 2026 BonanzaLabs · KvK {businessDetails.kvkNumber}</p>
-          <div className="flex gap-5"><Link href="/voorwaarden" className="hover:text-white">Voorwaarden</Link><Link href="/privacy" className="hover:text-white">Privacy</Link><Link href="/contact" className="hover:text-white">Contact</Link></div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

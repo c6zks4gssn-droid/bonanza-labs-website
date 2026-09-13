@@ -1,4 +1,6 @@
 import Link from "next/link";
+import SiteFooter from "@/components/site-footer";
+import SiteNav from "@/components/site-nav";
 import { ArrowRight, Clock, BookOpen, Sparkles } from "lucide-react";
 import { blogPosts, type BlogAccent } from "@/data/blog-posts";
 
@@ -34,23 +36,8 @@ export default function BlogPage() {
   const featuredStyle = accentStyles[featured.accent];
 
   return (
-    <main className="min-h-screen bg-[#070A12] text-white">
-      <header className="border-b border-white/10 bg-[#070A12]/90 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <Link href="/" className="font-bold tracking-tight">BonanzaLabs</Link>
-          <nav className="hidden items-center gap-6 text-sm text-white/60 md:flex">
-            <Link href="/tradeflow" className="hover:text-white">TradeFlow</Link>
-            <Link href="/serveflow" className="hover:text-white">ServeFlow</Link>
-            <Link href="/bonanza-voice" className="hover:text-white">Bonanza Voice</Link>
-            <Link href="/pricing" className="hover:text-white">Prijzen</Link>
-            <Link href="/contact" className="rounded-xl bg-[#2563EB] px-4 py-2 font-semibold text-white hover:bg-[#1D4ED8]">Flow Assessment</Link>
-          </nav>
-          <div className="flex items-center gap-3 md:hidden">
-            <Link href="/pricing" className="text-sm font-medium text-slate-300 hover:text-white">Prijzen</Link>
-            <Link href="/contact" className="rounded-lg bg-[#2563EB] px-3 py-2 text-xs font-semibold text-white hover:bg-[#1D4ED8]">Contact</Link>
-          </div>
-        </div>
-      </header>
+    <main id="main-content" className="light-site light-subpage min-h-screen">
+      <SiteNav />
 
       <section className="relative overflow-hidden border-b border-white/10 px-6 py-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.12),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(139,92,246,0.12),transparent_35%)]" />
@@ -111,12 +98,7 @@ export default function BlogPage() {
         </div>
       </section>
 
-      <footer className="px-6 py-10">
-        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-4 text-sm text-slate-500 md:flex-row">
-          <p>© 2026 BonanzaLabs</p>
-          <div className="flex gap-5"><Link href="/privacy" className="hover:text-white">Privacy</Link><Link href="/contact" className="hover:text-white">Contact</Link><Link href="/" className="hover:text-white">Home</Link></div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

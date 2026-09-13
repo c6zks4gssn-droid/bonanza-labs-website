@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SiteFooter from "@/components/site-footer";
+import SiteNav from "@/components/site-nav";
 import { ArrowRight, Check, Clock3, MapPin, RefreshCcw, ShieldCheck, X, Phone, MessageCircle, Star } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -137,7 +139,7 @@ const faqSchema = {
 
 export default function ServeFlowPage() {
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#050508] text-white">
+    <main id="main-content" className="light-site light-subpage min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
@@ -148,30 +150,11 @@ export default function ServeFlowPage() {
       />
 
       {/* Nav */}
-      <nav className="fixed top-0 z-50 w-full border-b border-white/5 bg-[#050508]/85 backdrop-blur-xl">
-        <div className="relative mx-auto flex h-14 max-w-6xl items-center justify-between px-4 md:px-6">
-          <Link href="/" className="flex items-center gap-2 font-bold tracking-tight">
-            <img src="/logo-256.png" alt="BonanzaLabs" className="h-8 w-8 rounded" />
-            BonanzaLabs
-          </Link>
-          <div className="hidden items-center gap-5 text-sm text-gray-300 md:flex">
-            <Link href="/tradeflow" className="hover:text-white">TradeFlow</Link>
-            <span className="font-semibold text-white">ServeFlow</span>
-            <Link href="/bonanza-voice" className="hover:text-white">Bonanza Voice</Link>
-            <Link href="/blog" className="hover:text-white">Kennisbank</Link>
-            <Link href="/contact" className="hover:text-white">Contact</Link>
-            <Link href="/pricing" className="rounded-lg bg-amber-400 px-4 py-2 font-semibold text-black hover:bg-amber-300">
-              Start pilot
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <SiteNav />
 
       {/* 1. Hero met één concrete uitkomst */}
       <section className="relative px-6 pb-20 pt-36">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute left-1/3 top-1/4 h-[500px] w-[500px] rounded-full bg-amber-600/15 blur-[120px]" />
-          <div className="absolute bottom-1/3 right-1/4 h-[400px] w-[400px] rounded-full bg-orange-600/10 blur-[100px]" />
         </div>
         <div className="relative mx-auto max-w-4xl text-center">
           <div className="mx-auto inline-flex rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-2 text-sm font-semibold text-amber-300">
@@ -368,16 +351,7 @@ export default function ServeFlowPage() {
       </section>
 
       {/* 14. Footer */}
-      <footer className="border-t border-white/10 px-6 py-10">
-        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-4 text-sm text-white/40 md:flex-row">
-          <p>© 2026 BonanzaLabs</p>
-          <div className="flex gap-5">
-            <Link href="/voorwaarden" className="hover:text-white">Voorwaarden</Link>
-            <Link href="/privacy" className="hover:text-white">Privacy</Link>
-            <Link href="/contact" className="hover:text-white">Contact</Link>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

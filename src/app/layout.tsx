@@ -4,6 +4,8 @@ import { I18nProvider } from "@/i18n/I18nProvider";
 import BonanzaVoice from "@/components/BonanzaVoice";
 import { businessDetails } from "@/lib/business-details";
 import "./globals.css";
+import "./light-home.css";
+import "./light-subpages.css";
 
 const instrumentSerif = Instrument_Serif({
   weight: ["400"],
@@ -112,7 +114,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="nl" className="dark">
+    <html lang="nl">
       <head>
         <noscript>
           <style>{`[style*="opacity: 0"], [style*="opacity:0"] { opacity: 1 !important; transform: none !important; }`}</style>
@@ -123,7 +125,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body
-        className={`${inter.variable} ${instrumentSerif.variable} ${geistMono.variable} bg-[#050508] text-white antialiased`}
+        className={`${inter.variable} ${instrumentSerif.variable} ${geistMono.variable} bg-[#fffefa] text-[#101c29] antialiased`}
       >
         <noscript>
           <style>{`[style*="opacity: 0"], [style*="opacity:0"] { opacity: 1 !important; transform: none !important; }`}</style>

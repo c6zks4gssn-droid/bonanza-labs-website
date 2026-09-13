@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-[#050508] text-white flex items-center justify-center px-6">
+    <div className="light-site light-subpage min-h-screen flex items-center justify-center px-6">
       <div className="text-center max-w-md">
         <div className="text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400 mb-4">404</div>
         <h1 className="text-2xl font-bold mb-4">Pagina niet gevonden</h1>

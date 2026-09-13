@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import SiteFooter from "@/components/site-footer";
+import SiteNav from "@/components/site-nav";
 import { X, Menu, ExternalLink, Gamepad2, HeartPulse, ShieldCheck, Store } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -50,61 +51,15 @@ const projects = [
 ];
 
 export default function PortfolioPage() {
-  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <main className="min-h-screen bg-[#050508] text-white overflow-x-hidden">
+    <main id="main-content" className="light-site light-subpage min-h-screen">
       {/* Nav */}
-      <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-[#050508]/80 border-b border-white/5">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between relative">
-          <Link href="/" className="flex items-center gap-2">
-            <img src="/logo-256.png" alt="Bonanza Labs" className="h-8 w-8 rounded" />
-            <span className="font-bold tracking-tight">BonanzaLabs</span>
-          </Link>
-          <button
-            className="md:hidden text-gray-400 hover:text-white"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-          <div
-            className={`nav-links ${menuOpen ? "open" : ""} md:flex items-center gap-6 text-sm text-gray-400`}
-          >
-            <Link href="/" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>
-              Home
-            </Link>
-            <Link href="/tradeflow" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>
-              TradeFlow
-            </Link>
-            <Link href="/serveflow" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>
-              ServeFlow
-            </Link>
-            <Link href="/bonanza-voice" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>
-              Bonanza Voice
-            </Link>
-            <span className="text-white font-medium">Portfolio</span>
-            <Link href="/over-ons" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>
-              Over ons
-            </Link>
-            <Link href="/contact" className="hover:text-white transition" onClick={() => setMenuOpen(false)}>
-              Contact
-            </Link>
-            <Link
-              href="/pricing"
-              className="bg-gradient-to-r from-violet-500 to-cyan-500 px-4 py-1.5 rounded-lg font-semibold text-white hover:opacity-90 transition"
-              onClick={() => setMenuOpen(false)}
-            >
-              Flow Assessment
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <SiteNav />
 
       {/* Hero */}
       <section className="relative pt-36 pb-20 px-6">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/3 w-[500px] h-[500px] bg-violet-600/15 rounded-full blur-[120px]" />
-          <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-cyan-600/10 rounded-full blur-[100px]" />
         </div>
         <div className="relative max-w-4xl mx-auto text-center">
           <motion.div initial="hidden" animate="visible" variants={stagger} className="flex flex-col items-center">
@@ -207,17 +162,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 py-12 px-6">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
-            <img src="/logo-256.png" alt="Bonanza Labs" className="h-6 w-6 rounded" />
-            <span className="font-bold">BonanzaLabs</span>
-          </div>
-          <p className="text-sm text-gray-600">
-            © 2026 BonanzaLabs — AI automatisering voor het MKB
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

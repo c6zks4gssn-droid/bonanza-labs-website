@@ -1,7 +1,7 @@
 # BonanzaLabs Design Guidance
 
-Version: 1.0  
-Last reviewed: 2026-09-01  
+Version: 1.1
+Last reviewed: 2026-09-10
 Applies to: BonanzaLabs website pages, product pages, proposals, reports, social graphics, presentations, and other customer-facing material.
 
 ## Purpose
@@ -60,6 +60,29 @@ Write clear professional Dutch at approximately B1/B2 reading level.
 - Use English UI labels when a clear Dutch term exists.
 
 ## Visual system
+
+### Approved light redesign — public website
+
+The user selected the light editorial direction on 2026-09-08. For migrated
+pages, this section supersedes the legacy dark color roles below. Use the shared
+navigation/footer with their `light` variant and scoped `light-site` styles.
+On 2026-09-10 the user requested extending this design to the remaining site.
+All public marketing, pricing, blog, legal and checkout-result pages now use
+the light styling and shared navigation. The private lead administration is
+outside this visual migration. Production publication remains a separate step.
+
+- Canvas: warm white `#FFFEFA`; alternating sections: mint `#EEF8F3`.
+- Primary text: `#101C29`; supporting text: `#52606C`; border: `#DCE6E1`.
+- Primary CTA and product accent: green `#087B63`, white label; hover `#075D4C`.
+- Editorial headings: Instrument Serif; body and interface: existing Inter.
+- Keep the real logo. The selected hero uses clearly labeled AI-generated
+  illustrative hospitality/installation scenes, never presented as clients or staff.
+- Demos must be explicitly fictional and must not send messages or book appointments.
+- Preserve established prices and payment logic. TradeFlow remains “Op aanvraag”
+  until its commercial price is separately approved; a mockup does not set a price.
+
+The legacy specification below is retained as historical guidance only;
+the approved light palette takes precedence on public pages.
 
 ### Color roles
 

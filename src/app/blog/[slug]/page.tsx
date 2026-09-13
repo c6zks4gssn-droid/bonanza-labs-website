@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SiteFooter from "@/components/site-footer";
+import SiteNav from "@/components/site-nav";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Clock, CalendarDays, CheckCircle2 } from "lucide-react";
 import { blogPosts, getBlogPost, type BlogAccent } from "@/data/blog-posts";
@@ -85,18 +87,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   };
 
   return (
-    <main className="min-h-screen bg-[#070A12] text-white">
+    <main id="main-content" className="light-site light-subpage min-h-screen">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 
-      <header className="border-b border-white/10 bg-[#070A12]/90 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <Link href="/" className="font-bold tracking-tight">BonanzaLabs</Link>
-          <div className="flex items-center gap-5 text-sm text-slate-400">
-            <Link href="/blog" className="hover:text-white">Kennisbank</Link>
-            <Link href="/pricing" className="rounded-xl bg-[#2563EB] px-4 py-2 font-semibold text-white hover:bg-[#1D4ED8]">Flow Assessment</Link>
-          </div>
-        </div>
-      </header>
+      <SiteNav />
 
       <article>
         <section className="relative overflow-hidden border-b border-white/10 px-6 py-20 md:py-28">
@@ -161,9 +155,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
       </section>
 
-      <footer className="border-t border-white/10 px-6 py-10">
-        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-4 text-sm text-slate-500 md:flex-row"><p>© 2026 BonanzaLabs</p><div className="flex gap-5"><Link href="/privacy" className="hover:text-white">Privacy</Link><Link href="/contact" className="hover:text-white">Contact</Link><Link href="/blog" className="hover:text-white">Kennisbank</Link></div></div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

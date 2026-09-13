@@ -50,13 +50,11 @@ const problems = [
 
 export default function OplossingenPage() {
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#050508] text-white">
+    <main id="main-content" className="light-site light-subpage min-h-screen">
       <SiteNav active="/oplossingen" />
 
       <section className="relative px-6 pb-20 pt-36">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute left-1/3 top-1/4 h-[520px] w-[520px] rounded-full bg-violet-600/12 blur-[130px]" />
-          <div className="absolute bottom-1/4 right-1/4 h-[420px] w-[420px] rounded-full bg-amber-600/10 blur-[110px]" />
         </div>
 
         <div className="relative mx-auto max-w-5xl text-center">

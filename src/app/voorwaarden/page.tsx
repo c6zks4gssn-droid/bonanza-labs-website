@@ -1,4 +1,6 @@
 import Link from "next/link";
+import SiteFooter from "@/components/site-footer";
+import SiteNav from "@/components/site-nav";
 import { ArrowLeft, FileCheck2, Mail } from "lucide-react";
 import { businessDetails, fullBusinessAddress } from "@/lib/business-details";
 
@@ -96,13 +98,8 @@ const terms = [
 
 export default function TermsPage() {
   return (
-    <main className="min-h-screen bg-[#070A12] text-white">
-      <header className="border-b border-white/10">
-        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
-          <Link href="/" className="font-bold tracking-tight">BonanzaLabs</Link>
-          <Link href="/pricing" className="rounded-xl bg-amber-400 px-4 py-2 text-sm font-semibold text-black hover:bg-amber-300">Bekijk pilot</Link>
-        </div>
-      </header>
+    <main id="main-content" className="light-site light-subpage min-h-screen">
+      <SiteNav />
 
       <section className="border-b border-white/10 bg-gradient-to-br from-amber-950/25 via-[#070A12] to-blue-950/20 px-6 py-20">
         <div className="mx-auto max-w-4xl">
@@ -143,9 +140,7 @@ export default function TermsPage() {
         </div>
       </div>
 
-      <footer className="border-t border-white/10 px-6 py-10">
-        <div className="mx-auto flex max-w-5xl flex-col justify-between gap-4 text-sm text-slate-500 md:flex-row"><p>© 2026 BonanzaLabs · KvK {businessDetails.kvkNumber}</p><div className="flex gap-5"><Link href="/privacy" className="hover:text-white">Privacy</Link><Link href="/pricing" className="hover:text-white">Prijzen</Link><Link href="/contact" className="hover:text-white">Contact</Link></div></div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

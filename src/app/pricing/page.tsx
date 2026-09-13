@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import SiteFooter from "@/components/site-footer";
+import SiteNav from "@/components/site-nav";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -60,7 +62,6 @@ const pilotScope = [
 ];
 
 export default function PricingPage() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [checkoutProduct, setCheckoutProduct] = useState<string | null>(null);
   const [checkoutError, setCheckoutError] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
@@ -97,29 +98,8 @@ export default function PricingPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#050508] text-white">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050508]/90 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <Link href="/" className="font-bold tracking-tight">BonanzaLabs</Link>
-          <nav className="hidden items-center gap-6 text-sm text-white/60 md:flex">
-            <Link href="/serveflow" className="hover:text-white">ServeFlow</Link>
-            <Link href="/tradeflow" className="hover:text-white">TradeFlow</Link>
-            <Link href="/blog" className="hover:text-white">Kennisbank</Link>
-            <Link href="/contact" className="hover:text-white">Contact</Link>
-          </nav>
-          <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu openen">
-            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
-        {menuOpen && (
-          <div className="space-y-3 border-t border-white/10 px-6 py-4 text-sm md:hidden">
-            <Link href="/serveflow" className="block text-white/70">ServeFlow</Link>
-            <Link href="/tradeflow" className="block text-white/70">TradeFlow</Link>
-            <Link href="/blog" className="block text-white/70">Kennisbank</Link>
-            <Link href="/contact" className="block text-white/70">Contact</Link>
-          </div>
-        )}
-      </header>
+    <main id="main-content" className="light-site light-subpage min-h-screen">
+      <SiteNav />
 
       <section className="border-b border-white/10 bg-gradient-to-br from-amber-950/20 via-[#050508] to-blue-950/20 px-6 py-20">
         <div className="mx-auto max-w-6xl">
@@ -153,6 +133,7 @@ export default function PricingPage() {
               </span>
               <h2 className="mt-5 text-2xl font-black">{offer.name}</h2>
               <p className={`mt-2 text-4xl font-black ${offer.highlighted ? "text-amber-300" : "text-cyan-300"}`}>{offer.price}</p>
+              <p className="mt-1 text-sm text-white/60">Eenmalig, excl. btw</p>
               <p className="mt-4 text-sm leading-relaxed text-white/60">{offer.description}</p>
               <ul className="mt-7 flex-1 space-y-3">
                 {offer.features.map((feature) => (
@@ -223,16 +204,7 @@ export default function PricingPage() {
         </Link>
       </section>
 
-      <footer className="border-t border-white/10 px-6 py-10">
-        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-4 text-sm text-white/40 md:flex-row">
-          <p>© 2026 BonanzaLabs</p>
-          <div className="flex flex-wrap gap-5">
-            <Link href="/voorwaarden" className="hover:text-white">Voorwaarden</Link>
-            <Link href="/privacy" className="hover:text-white">Privacy</Link>
-            <Link href="/contact" className="hover:text-white">Contact</Link>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
