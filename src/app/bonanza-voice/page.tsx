@@ -1,241 +1,74 @@
-"use client";
-
 import Link from "next/link";
-import {
-  ArrowRight,
-  Bot,
-  Check,
-  Headphones,
-  MessageSquareText,
-  PhoneCall,
-  ShieldCheck,
-} from "lucide-react";
-import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
+import SiteFooter from "@/components/site-footer";
+import VoiceRequest from "@/components/voice-request";
+import { faq, steps, transcript } from "./voice-content";
+import "./voice.css";
 
-const useCases = [
-  {
-    icon: PhoneCall,
-    title: "Gemiste oproepen opvangen",
-    text: "Een voice-agent kan afgesproken soorten inkomende gesprekken aannemen wanneer je team niet beschikbaar is.",
-  },
-  {
-    icon: MessageSquareText,
-    title: "Basisvragen beantwoorden",
-    text: "Openingstijden, locatie, eenvoudige dienstinformatie en andere gecontroleerde antwoorden kunnen consistent worden afgehandeld.",
-  },
-  {
-    icon: Headphones,
-    title: "Terugbelverzoeken registreren",
-    text: "Wanneer een medewerker nodig is, verzamelt de flow de relevante gegevens en zet het gesprek door naar een menselijke vervolgactie.",
-  },
-  {
-    icon: Bot,
-    title: "Gesprekken structureren",
-    text: "Samenvattingen en afgesproken velden kunnen na het gesprek worden vastgelegd voor opvolging.",
-  },
-];
-
-const guardrails = [
-  "De agent maakt geen prijsafspraken buiten vooraf gedefinieerde regels.",
-  "Onzekerheid en uitzonderingen gaan naar een medewerker.",
-  "Geen belofte van omzet, bereikbaarheid of foutloze afhandeling.",
-  "Gespreksdata en bewaartermijnen worden per implementatie afgesproken.",
-  "We starten met een beperkte gespreksscope voordat meer functies worden toegevoegd.",
-];
-
-const faq = [
-  {
-    q: "Is Bonanza Voice al een standaardpakket?",
-    a: "Bonanza Voice wordt momenteel als maatwerk of add-on ingezet. We starten met één duidelijke gespreksscope en breiden alleen uit wanneer de praktijk daar aanleiding toe geeft.",
-  },
-  {
-    q: "Kan de voice-agent mijn bestaande telefoonnummer gebruiken?",
-    a: "Dat hangt af van de huidige telefonieprovider en gewenste routering. Tijdens de intake bepalen we of doorschakeling, SIP of een aparte lijn de meest eenvoudige route is.",
-  },
-  {
-    q: "Kan de agent afspraken of reserveringen boeken?",
-    a: "Dat kan technisch mogelijk zijn wanneer de agenda- of reserveringssoftware een geschikte koppeling heeft. We nemen dit alleen op in scope wanneer de integratie betrouwbaar genoeg is.",
-  },
-  {
-    q: "Wat gebeurt er als de agent iets niet weet?",
-    a: "Dan moet de flow kunnen stoppen, verduidelijking vragen of doorzetten naar een medewerker. Onzekerheid hoort bij het ontwerp en wordt niet verborgen.",
-  },
-  {
-    q: "Kan ik eerst een demo krijgen?",
-    a: "Ja. Voor een concrete businesscase kan BonanzaLabs een afgebakende demonstratie laten zien voordat je beslist over implementatie.",
-  },
-];
-
-const serviceSchema = {
+const url = "https://www.bonanza-labs.com/bonanza-voice";
+const schema = {
   "@context": "https://schema.org",
-  "@type": "Service",
-  name: "Bonanza Voice",
-  provider: {
-    "@type": "Organization",
-    name: "BonanzaLabs",
-    url: "https://www.bonanza-labs.com",
-  },
-  areaServed: {
-    "@type": "Country",
-    name: "Netherlands",
-  },
-  serviceType: "AI voice automation for SMEs",
-  url: "https://www.bonanza-labs.com/bonanza-voice",
+  "@graph": [
+    { "@type": "Service", "@id": `${url}#service`, name: "Bonanza Voice", serviceType: "AI-telefonist", description: faq[0][1], url,
+      provider: { "@type": "Organization", name: "BonanzaLabs", url: "https://www.bonanza-labs.com", logo: "https://www.bonanza-labs.com/logo-256.png", email: "info@bonanza-labs.com", address: { "@type": "PostalAddress", addressLocality: "Groningen", addressCountry: "NL" } },
+      areaServed: { "@type": "Country", name: "Netherlands" },
+      offers: { "@type": "Offer", name: "Inrichting Bonanza Voice vanaf €1.495 excl. btw", url, priceSpecification: { "@type": "PriceSpecification", minPrice: 1495, priceCurrency: "EUR", valueAddedTaxIncluded: false } } },
+    { "@type": "FAQPage", mainEntity: faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
+    { "@type": "HowTo", name: "Hoe een Bonanza Voice-implementatie verloopt", step: steps.map(([name, text]) => ({ "@type": "HowToStep", name, text })) },
+    { "@type": "BreadcrumbList", itemListElement: [ ["BonanzaLabs", "https://www.bonanza-labs.com/"], ["Oplossingen", "https://www.bonanza-labs.com/oplossingen"], ["Bonanza Voice", url] ].map(([name, item], i) => ({ "@type": "ListItem", position: i + 1, name, item })) },
+  ],
 };
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faq.map((item) => ({
-    "@type": "Question",
-    name: item.q,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.a,
-    },
-  })),
-};
-
-export default function BonanzaVoicePage() {
-  return (
-    <main id="main-content" className="light-site light-subpage min-h-screen">
-      <SiteNav active="/bonanza-voice" />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
-      <section className="relative px-6 pb-20 pt-36">
-        <div className="absolute inset-0 overflow-hidden">
-        </div>
-
-        <div className="relative mx-auto max-w-5xl text-center">
-          <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-4 py-2 text-sm font-semibold text-emerald-200">
-            <PhoneCall className="h-4 w-4" />
-            Bonanza Voice · maatwerk / add-on
-          </div>
-
-          <h1 className="mx-auto mt-7 max-w-4xl text-4xl font-black tracking-tight md:text-6xl">
-            Laat een drukke telefoon niet automatisch een gemiste klantvraag worden.
-          </h1>
-
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-white/60">
-            Bonanza Voice is een afgebakende voice-automation voor terugkerende telefoontaken.
-            De agent kan gecontroleerde vragen afhandelen, gegevens verzamelen en een menselijke
-            vervolgactie klaarzetten wanneer het gesprek buiten scope valt.
-          </p>
-
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link
-              href="/contact"
-              data-cta="voice-demo"
-              className="inline-flex items-center gap-2 rounded-xl bg-emerald-400 px-7 py-4 font-bold text-black hover:bg-emerald-300"
-            >
-              Vraag een demo aan <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/oplossingen"
-              className="rounded-xl border border-white/15 px-7 py-4 font-semibold hover:bg-white/5"
-            >
-              Bekijk alle oplossingen
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-y border-white/10 bg-[#0A0E18] px-6 py-16">
-        <div className="mx-auto max-w-5xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-300">Direct antwoord</p>
-          <p className="mt-5 max-w-4xl text-lg leading-relaxed text-white/70">
-            Bonanza Voice vervangt niet automatisch je volledige telefoonproces. We kiezen eerst één
-            gesprekstype dat vaak terugkomt en duidelijke grenzen heeft. Denk aan basisvragen,
-            terugbelverzoeken of eenvoudige intake. Wanneer het gesprek afwijkt of onzeker wordt,
-            gaat de vervolgstap naar een medewerker.
-          </p>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-6 py-20">
-        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-300">Mogelijke use-cases</p>
-        <h2 className="mt-4 text-3xl font-black md:text-4xl">Begin met gesprekken die vaak hetzelfde patroon hebben</h2>
-
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {useCases.map((item) => {
-            const Icon = item.icon;
-            return (
-              <article key={item.title} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <Icon className="h-6 w-6 text-emerald-300" />
-                <h3 className="mt-4 font-bold">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/55">{item.text}</p>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="border-y border-white/10 bg-[#0A0E18] px-6 py-20">
-        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[.9fr_1.1fr]">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300">Guardrails</p>
-            <h2 className="mt-4 text-3xl font-black md:text-4xl">Een voice-agent moet weten wanneer hij moet stoppen.</h2>
-            <p className="mt-5 leading-relaxed text-white/60">
-              De eerste versie hoeft niet alles te kunnen. Een goede implementatie is juist sterk
-              doordat uitzonderingen zichtbaar zijn en een medewerker kan overnemen.
-            </p>
-          </div>
-
-          <div className="space-y-3">
-            {guardrails.map((item) => (
-              <div
-                key={item}
-                className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-5"
-              >
-                <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-cyan-300" />
-                <span className="text-sm leading-relaxed text-white/70">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-4xl px-6 py-20">
-        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-300">FAQ</p>
-        <h2 className="mt-4 text-3xl font-black md:text-4xl">Vragen vóór een voice-implementatie</h2>
-        <div className="mt-9 space-y-4">
-          {faq.map((item) => (
-            <details key={item.q} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-              <summary className="cursor-pointer font-semibold">{item.q}</summary>
-              <p className="mt-4 text-sm leading-relaxed text-white/60">{item.a}</p>
-            </details>
-          ))}
-        </div>
-      </section>
-
-      <section className="px-6 pb-20">
-        <div className="mx-auto max-w-4xl rounded-3xl border border-emerald-400/25 bg-emerald-400/5 p-8 text-center md:p-12">
-          <Check className="mx-auto h-8 w-8 text-emerald-300" />
-          <h2 className="mt-5 text-3xl font-black">Eerst horen hoe het werkt?</h2>
-          <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-white/60">
-            Beschrijf het type gesprekken dat je nu mist of handmatig afhandelt.
-            Dan bepalen we of een beperkte voice-demo zinvol is.
-          </p>
-          <Link
-            href="/contact"
-            data-cta="voice-final"
-            className="mt-7 inline-flex items-center gap-2 rounded-xl bg-emerald-400 px-7 py-4 font-bold text-black hover:bg-emerald-300"
-          >
-            Vraag demo aan <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </section>
-
-      <SiteFooter />
-    </main>
-  );
+export default function VoicePage() {
+  return <main id="main-content" className="light-site voice-page">
+    <SiteNav active="/bonanza-voice" />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} />
+    <header className="voice-hero voice-wrap">
+      <p className="voice-eyebrow">Bonanza Voice · AI-telefonist voor horeca, bouw en installatie</p>
+      <h1>Je telefoon gaat, jij staat op de steiger of in de keuken. <em>Bonanza Voice neemt op.</em></h1>
+      <p>{faq[0][1]} We richten het per klant in en testen het voordat het live gaat.</p>
+      <div className="voice-actions"><a className="voice-primary" href="#voice-demo">Probeer Bonanza Voice</a><a className="voice-secondary" href="#voice-aanvraag">Voice-aanvraag doen</a></div>
+    </header>
+    <section id="voice-demo" className="voice-band"><div className="voice-wrap">
+      <p className="voice-eyebrow">Zelf proberen</p><h2>Probeer Bonanza Voice</h2>
+      <p>Probeer de agent via spraak of tekst. De demo beantwoordt vragen over BonanzaLabs; een telefoonflow voor jouw bedrijf richten we apart in.</p>
+      <p>Open de widget linksonder: kies <strong>Start gesprek</strong> voor spraak of <strong>Bericht</strong> voor tekst. Vraag bijvoorbeeld: “Wat kost de ServeFlow-pilot?”</p>
+      <p className="voice-note">Voor spraak is microfoontoegang nodig. Zie je de widget niet? Je kunt hieronder een Voice-aanvraag doen.</p>
+    </div></section>
+    <section className="voice-wrap voice-section">
+      <h2>Zo kan een gesprek lopen</h2><p className="voice-eyebrow">Fictief voorbeeld — geen opname</p>
+      <details className="voice-transcript" open><summary>Voorbeeld: offerteaanvraag voor een badkamer</summary>
+        <dl>{transcript.map(([speaker, text], i) => <div key={i}><dt>{speaker}</dt><dd>{text}</dd></div>)}</dl>
+      </details>
+      <p className="voice-note">Ook Installatiebedrijf Jansen en de beller zijn fictief. De agent stelt intakevragen. De beoordeling, prijs en planning blijven bij een medewerker. Het voorbeeld verstuurt geen aanvraag.</p>
+    </section>
+    <section className="voice-band"><div className="voice-wrap">
+      <h2>Waar je Bonanza Voice kunt inzetten</h2>
+      <div className="voice-grid">
+        <article><h3>Installatie</h3><p>Een klant belt over een nieuwe badkamer of cv-installatie terwijl je bij een andere klant bent. De agent vraagt naar soort werk, plaats, gewenste periode en contactgegevens voor beoordeling door een medewerker.</p><Link href="/tradeflow">Bekijk TradeFlow voor offerteopvolging →</Link></article>
+        <article><h3>Horeca</h3><p>Op een drukke avond beantwoordt de agent afgesproken vragen over openingstijden, locatie en parkeren. Reserveringsverzoeken gaan naar een medewerker voor bevestiging. Direct boeken richten we alleen in met een geschikte, geteste koppeling.</p><Link href="/serveflow">Bekijk ServeFlow voor reserveringen →</Link></article>
+        <article><h3>Bouw</h3><p>Verzamel bij aanvragen voor verbouw of aanbouw het type klus, de locatie, gewenste periode en contactgegevens. De beoordeling en de offerte blijven bij jouw team.</p><Link href="/tradeflow">Bekijk TradeFlow voor intake →</Link></article>
+      </div>
+    </div></section>
+    <section className="voice-wrap voice-section">
+      <h2>Wat het kost</h2><p className="voice-price">Inrichting vanaf <strong>€1.495 excl. btw</strong></p>
+      <p>Bonanza Voice wordt per klant ingericht. Wat daarin zit en wat eventueel doorlopend nodig is, bespreken we tijdens de intake op basis van jouw gesprekstype en telefoniesituatie. Externe gebruikskosten en eventueel beheer spreken we apart af.</p>
+      <p><Link href="/blog/wat-kost-ai-telefonie-voor-een-mkb-bedrijf">Lees ook: wat kost AI-telefonie voor een MKB-bedrijf?</Link></p>
+      <h2 className="voice-spaced">Hoe een implementatie verloopt</h2>
+      <ol className="voice-steps">{steps.map(([name, text]) => <li key={name}><h3>{name}</h3><p>{text}</p></li>)}</ol>
+    </section>
+    <section className="voice-band"><div className="voice-wrap">
+      <h2>Wat de agent wel en niet doet</h2>
+      <table className="voice-table"><thead><tr><th scope="col">Doet wel</th><th scope="col">Doet niet</th></tr></thead><tbody>{[
+        ["Beantwoordt vooraf afgesproken basisvragen.", "Geen antwoorden verzinnen buiten de afgesproken scope."],
+        ["Verzamelt contactgegevens en de vraag voor opvolging.", "Geen prijsafspraken of beoordelingen; dat doet een medewerker."],
+        ["Vraagt bij onzekerheid om verduidelijking of zet de vraag klaar voor een medewerker.", "Geen belofte van omzet, 100% bereikbaarheid of foutloze afhandeling."],
+        ["Legt een gesprekssamenvatting vast zoals per implementatie afgesproken.", "Geen langere bewaring dan afgesproken."],
+        ["Kan doorschakelen of afspraken boeken als dit per klant is ingericht en getest.", "Niet starten met een brede scope: eerst één gesprekstype."],
+      ].map(([yes, no]) => <tr key={yes}><td>{yes}</td><td>{no}</td></tr>)}</tbody></table>
+    </div></section>
+    <section className="voice-wrap voice-section"><h2>Veelgestelde vragen</h2>{faq.map(([q, a]) => <details className="voice-faq" key={q}><summary>{q}</summary><p>{a}</p></details>)}</section>
+    <section id="voice-aanvraag" className="voice-band"><div className="voice-wrap"><h2>Welk telefoontje mis je nu het vaakst?</h2><p>Kies wat het meest lijkt op jouw situatie, dan bespreken we of Bonanza Voice daar past.</p><VoiceRequest /></div></section>
+    <SiteFooter />
+  </main>;
 }

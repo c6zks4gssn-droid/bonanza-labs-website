@@ -351,6 +351,7 @@ export default function ServeFlowPage() {
       </section>
 
       {/* 14. Footer */}
+      <aside className="mx-auto max-w-6xl px-6 pb-16"><Link href="/bonanza-voice" className="font-semibold underline">Bonanza Voice als add-on: AI-telefonist voor reserveringsvragen</Link></aside>
       <SiteFooter />
     </main>
   );
