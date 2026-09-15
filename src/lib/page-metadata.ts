@@ -7,7 +7,7 @@ export function withPageSocialMetadata(metadata: Metadata): Metadata {
   const images = metadata.openGraph?.images ?? ["/og-image.png"];
   return {
     ...metadata,
-    openGraph: { ...metadata.openGraph, images },
+    openGraph: { ...metadata.openGraph, title: title ?? undefined, description, images },
     twitter: {
       card: "summary_large_image",
       ...metadata.twitter,
