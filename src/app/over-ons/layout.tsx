@@ -1,9 +1,10 @@
+import { withPageSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Over BonanzaLabs — Eenmanszaak in Groningen",
+export const metadata: Metadata = withPageSocialMetadata({
+  title: "Over Clarence Etnel en BonanzaLabs in Groningen",
   description:
-    "BonanzaLabs is een Groningse eenmanszaak voor praktische automatisering in horeca, bouw en installatie. KvK 88564517.",
+    "BonanzaLabs is de onderneming van Clarence Etnel in Groningen voor praktische automatisering in horeca, bouw en installatie. KvK 88564517.",
   alternates: {
     canonical: "https://www.bonanza-labs.com/over-ons",
   },
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     siteName: "BonanzaLabs",
     type: "website",
   },
-};
+});
 
 export default function OverOnsLayout({ children }: { children: React.ReactNode }) {
   return children;

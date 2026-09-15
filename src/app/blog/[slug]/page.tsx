@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteFooter from "@/components/site-footer";
@@ -47,7 +48,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!post) return {};
 
   const url = `https://www.bonanza-labs.com/blog/${post.slug}`;
-  return {
+  return withPageSocialMetadata({
     title: post.title,
     description: post.description,
     alternates: { canonical: url },
@@ -59,7 +60,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
     },
-  };
+  });
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -67,6 +68,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const post = getBlogPost(slug);
   if (!post) notFound();
 
+  const service = post.category === "Bonanza Voice" ? { href: "/bonanza-voice", name: "Bonanza Voice" }
+    : post.category === "ServeFlow" ? { href: "/serveflow", name: "ServeFlow" }
+    : post.category === "TradeFlow" ? { href: "/tradeflow", name: "TradeFlow" }
+    : { href: "/oplossingen", name: "onze oplossingen" };
   const style = accentStyles[post.accent];
   const related = blogPosts.filter((item) => item.slug !== post.slug).slice(0, 2);
 
@@ -102,6 +107,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-300">{post.description}</p>
             <div className="mt-8 flex flex-wrap gap-5 text-sm text-slate-500">
               <span className="flex items-center gap-2"><CalendarDays className="h-4 w-4" /> {new Date(post.updatedAt).toLocaleDateString("nl-NL", { day: "numeric", month: "long", year: "numeric" })}</span>
+              <Link href="/over-ons" className="underline">Door BonanzaLabs</Link>
               <span className="flex items-center gap-2"><Clock className="h-4 w-4" /> {post.readTime}</span>
             </div>
           </div>
@@ -134,6 +140,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <aside className="h-fit rounded-2xl border border-white/10 bg-[#0D1220] p-6 lg:sticky lg:top-8">
             <p className={`text-sm font-semibold uppercase tracking-[0.2em] ${style.text}`}>Volgende stap</p>
             <h2 className="mt-4 text-xl font-black">Maak je proces concreet</h2>
+            <Link href={service.href} className="mt-4 inline-flex font-semibold underline">Meer over {service.name}</Link>
             <p className="mt-3 text-sm leading-6 text-slate-400">Tijdens een Flow Assessment brengen we knelpunten, kansen en een realistische implementatievolgorde in kaart.</p>
             <Link href="/pricing" className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-5 py-3 text-sm font-semibold hover:bg-[#1D4ED8]">Bekijk de opties <ArrowRight className="h-4 w-4" /></Link>
           </aside>

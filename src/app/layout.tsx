@@ -1,3 +1,4 @@
+import { withPageSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import { Instrument_Serif, Geist_Mono, Inter } from "next/font/google";
 import { I18nProvider } from "@/i18n/I18nProvider";
@@ -27,7 +28,7 @@ const inter = Inter({
   display: "swap",
 });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: {
     default: "BonanzaLabs — Automatisering voor het MKB",
     template: "%s | BonanzaLabs",
@@ -71,7 +72,7 @@ export const metadata: Metadata = {
     "max-image-preview": "large",
     "max-snippet": -1,
   },
-};
+});
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const telephone = process.env.NEXT_PUBLIC_PHONE_NUMBER || undefined;

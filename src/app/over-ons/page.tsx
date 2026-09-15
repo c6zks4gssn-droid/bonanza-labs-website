@@ -5,7 +5,7 @@ import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
 import { Building2, Check, MapPin, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
-import { businessDetails, fullBusinessAddress } from "@/lib/business-details";
+import { businessDetails } from "@/lib/business-details";
 
 const approach = [
   {
@@ -39,7 +39,7 @@ export default function OverOnsPage() {
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-violet-300">Over BonanzaLabs</p>
           <h1 className="mt-5 text-4xl font-black tracking-tight md:text-6xl">Praktische automatisering vanuit Groningen.</h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/60">
-            BonanzaLabs is een Nederlandse eenmanszaak die kleine en middelgrote bedrijven helpt om één concreet proces slimmer en overzichtelijker in te richten. Geen groot softwareverhaal vooraf, maar klein beginnen en eerst bewijzen wat werkt.
+            BonanzaLabs is de onderneming van Clarence Etnel in Groningen. We helpen kleine en middelgrote bedrijven om één concreet proces slimmer en overzichtelijker in te richten. We beginnen met één afgebakende flow voor horeca, bouw of installatie en testen samen wat werkt.
           </p>
         </motion.div>
       </section>
@@ -59,7 +59,7 @@ export default function OverOnsPage() {
           <article className="rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-8">
             <MapPin className="h-7 w-7 text-cyan-300" />
             <h2 className="mt-4 text-2xl font-black">Hoofdvestiging</h2>
-            <p className="mt-5 text-sm leading-relaxed text-white/65">{fullBusinessAddress}</p>
+            <p className="mt-5 text-sm leading-relaxed text-white/65">{businessDetails.city}, Nederland</p>
             <a href={`mailto:${businessDetails.contactEmail}`} className="mt-5 inline-flex text-sm font-semibold text-cyan-300 hover:text-cyan-200">{businessDetails.contactEmail}</a>
           </article>
         </div>
@@ -67,7 +67,7 @@ export default function OverOnsPage() {
 
       <section className="mx-auto max-w-5xl px-6 py-20">
         <p className="text-sm font-semibold uppercase tracking-[0.25em] text-violet-300">Werkwijze</p>
-        <h2 className="mt-4 text-3xl font-black md:text-4xl">Eerst verkopen en bewijzen, daarna pas uitbreiden</h2>
+        <h2 className="mt-4 text-3xl font-black md:text-4xl">Eerst een werkende flow, daarna pas uitbreiden</h2>
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {approach.map((item) => (
             <article key={item.title} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
