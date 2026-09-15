@@ -1,31 +1,78 @@
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Bonanza Labs",
-  "url": "https://bonanza-labs.com",
-  "sameAs": [
-    "https://github.com/c6zks4gssn-droid"
+  "@type": "ProfessionalService",
+  "@id": "https://www.bonanza-labs.com/#organization",
+  "name": "BonanzaLabs",
+  "url": "https://www.bonanza-labs.com",
+  "email": "info@bonanza-labs.com",
+  "description": "Praktische automatisering voor Nederlandse MKB-bedrijven in horeca, bouw en installatie, vanuit Groningen.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Groningen",
+    "addressCountry": "NL"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Nederland"
+  },
+  "identifier": [
+    {
+      "@type": "PropertyValue",
+      "name": "KvK-nummer",
+      "value": "88564517"
+    }
   ],
+  "sameAs": ["https://github.com/c6zks4gssn-droid"],
   "makesOffer": [
     {
-      "@type": "SoftwareApplication",
-      "name": "Fork Doctor"
+      "@type": "Offer",
+      "name": "ServeFlow — 14-dagen pilot voor één horecalocatie",
+      "url": "https://www.bonanza-labs.com/serveflow",
+      "price": "497",
+      "priceCurrency": "EUR",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "ServeFlow",
+        "description": "Eén reserveringsflow voor één horecalocatie, 14 dagen, zonder automatische verlenging."
+      }
     },
     {
-      "@type": "SoftwareApplication",
-      "name": "FrameForge"
+      "@type": "Offer",
+      "name": "Bonanza Voice — inrichting AI-telefonist",
+      "url": "https://www.bonanza-labs.com/bonanza-voice",
+      "priceCurrency": "EUR",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": "1495",
+        "priceCurrency": "EUR"
+      },
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Bonanza Voice",
+        "description": "AI-telefonist voor afgesproken basisvragen, terugbelverzoeken en offerte-intake, per klant ingericht en getest."
+      }
     },
     {
-      "@type": "SoftwareApplication",
-      "name": "Agent Wallet"
+      "@type": "Offer",
+      "name": "Flow Assessment",
+      "url": "https://www.bonanza-labs.com/pricing",
+      "price": "999",
+      "priceCurrency": "EUR",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Flow Assessment",
+        "description": "Procesonderzoek en implementatieadvies voor één afgebakend proces."
+      }
     },
     {
-      "@type": "SoftwareApplication",
-      "name": "Bonanza Pay"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "name": "Bonanza CLI"
+      "@type": "Offer",
+      "name": "TradeFlow",
+      "url": "https://www.bonanza-labs.com/tradeflow",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "TradeFlow",
+        "description": "Intake, offertevoorbereiding en opvolging voor bouw en installatie. Scope en prijs na intake; de medewerker beoordeelt de offerte."
+      }
     }
   ]
 }
