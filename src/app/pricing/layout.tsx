@@ -1,21 +1,22 @@
+import { withPageSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "ServeFlow 14-dagen pilot — €497",
+export const metadata: Metadata = withPageSocialMetadata({
+  title: "Prijzen — ServeFlow, TradeFlow, Voice en Assessment",
   description:
-    "Test één reserveringsflow voor één horecalocatie gedurende 14 dagen. Geen automatische verlenging en geen gegarandeerde omzet- of no-showclaim.",
+    "ServeFlow-pilot €497, Flow Assessment €999, Bonanza Voice-inrichting vanaf €1.495 en TradeFlow op aanvraag. Alle prijzen excl. btw.",
   alternates: {
     canonical: "https://www.bonanza-labs.com/pricing",
   },
   openGraph: {
-    title: "ServeFlow 14-dagen pilot — €497 | BonanzaLabs",
+    title: "Prijzen — ServeFlow, TradeFlow, Voice en Assessment | BonanzaLabs",
     description:
-      "Eén locatie, één reserveringsflow, 14 dagen en geen automatische verlenging. Voor complexere aanvragen is het Flow Assessment beschikbaar.",
+      "Vergelijk scope en prijzen voor reserveringen, offerteopvolging, AI-telefonie en procesonderzoek. Alle prijzen excl. btw.",
     url: "https://www.bonanza-labs.com/pricing",
     siteName: "BonanzaLabs",
     type: "website",
   },
-};
+});
 
 export default function PricingLayout({ children }: { children: React.ReactNode }) {
   return children;

@@ -1,6 +1,7 @@
+import { withPageSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: "Contact BonanzaLabs | AI-automatisering vanuit Groningen",
   description:
     "Bespreek één concreet proces met BonanzaLabs. ServeFlow voor horeca, TradeFlow voor bouw & installatie en afgebakende voice-automation.",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     url: "https://www.bonanza-labs.com/contact",
     type: "website",
   },
-};
+});
 
 export default function ContactLayout({ children }: { children: React.ReactNode }) {
   return children;

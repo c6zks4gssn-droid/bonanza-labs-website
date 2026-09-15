@@ -105,10 +105,10 @@ export default function PricingPage() {
         <div className="mx-auto max-w-6xl">
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-amber-300">Begin klein en meetbaar</p>
           <h1 className="mt-4 max-w-4xl text-4xl font-black tracking-tight md:text-6xl">
-            Test ServeFlow 14 dagen voor €497.
+            Een helder startpunt voor jouw automatisering.
           </h1>
           <p className="mt-5 max-w-3xl text-lg leading-relaxed text-white/60">
-            Eén locatie, één reserveringsflow en geen automatische verlenging. Voor complexere processen blijft het Flow Assessment beschikbaar.
+            Vergelijk ServeFlow, TradeFlow, Bonanza Voice en het Flow Assessment. Kies een afgebakende pilot, procesonderzoek of een inrichting op maat. Alle prijzen zijn excl. btw.
           </p>
         </div>
       </section>
@@ -175,6 +175,25 @@ export default function PricingPage() {
           </div>
         )}
         <p className="mt-4 text-center text-xs text-white/40">Veilige betaling via Stripe. Na betaling plannen we de intake.</p>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-16" aria-labelledby="maatwerk-prijzen">
+        <h2 id="maatwerk-prijzen" className="mb-8 text-3xl font-black">Inrichting op maat</h2>
+        <div className="grid gap-6 md:grid-cols-2">
+          <article className="rounded-3xl border border-white/10 p-8">
+            <h3 className="text-2xl font-black">TradeFlow</h3>
+            <p className="mt-3 text-3xl font-black">Op aanvraag</p>
+            <p className="mt-4 text-white/60">Intake, offertevoorbereiding en opvolging voor bouw en installatie. We bepalen de scope en prijs na de intake; je team beoordeelt de offerte.</p>
+            <Link href="/tradeflow" className="mt-6 inline-flex items-center gap-2 font-semibold underline">Bekijk TradeFlow <ArrowRight className="h-4 w-4" /></Link>
+          </article>
+          <article className="rounded-3xl border border-white/10 p-8">
+            <h3 className="text-2xl font-black">Bonanza Voice</h3>
+            <p className="mt-3 text-3xl font-black">Vanaf €1.495</p>
+            <p className="mt-1 text-sm text-white/60">Inrichting, excl. btw</p>
+            <p className="mt-4 text-white/60">Een AI-telefonist voor basisvragen en terugbel- of offerteverzoeken. Per klant ingericht en getest. Doorlopende kosten bespreken we op basis van jouw gesprekstype en telefonie.</p>
+            <Link href="/bonanza-voice" className="mt-6 inline-flex items-center gap-2 font-semibold underline">Bekijk Bonanza Voice <ArrowRight className="h-4 w-4" /></Link>
+          </article>
+        </div>
       </section>
 
       <section className="border-y border-white/10 bg-[#0A0E18] px-6 py-16">

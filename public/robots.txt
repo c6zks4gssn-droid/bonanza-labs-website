@@ -1,18 +1,10 @@
-# https://www.robotstxt.org/robotstxt.html
-
-# Allow all major crawlers full access
+# Public pages are crawlable, including by OAI-SearchBot.
+# These crawl rules are not access protection for private routes.
 User-agent: *
 Allow: /
-
-# Block admin routes (none exposed publicly, but defensive)
-Disallow: /admin/
+Disallow: /admin
 Disallow: /api/
 Disallow: /success
+Disallow: /cancel
 
-# Sitemap
 Sitemap: https://www.bonanza-labs.com/sitemap.xml
-Sitemap: https://www.bonanza-labs.com/sitemap.xml
-
-# IndexNow key location (per IndexNow spec)
-# Key: 847e3d95f661518d66260353ec435c35
-# Verify at: https://www.bonanza-labs.com/847e3d95f661518d66260353ec435c35.txt

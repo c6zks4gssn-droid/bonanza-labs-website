@@ -1,6 +1,7 @@
+import { withPageSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: "TradeFlow — offertes en opvolging automatiseren",
   description:
     "TradeFlow helpt bouw- en installatiebedrijven aanvraaginformatie, offertevoorbereiding en opvolging overzichtelijker te maken met menselijke controle op prijs en uitzonderingen.",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     url: "https://www.bonanza-labs.com/tradeflow",
     type: "website",
   },
-};
+});
 
 export default function TradeFlowLayout({ children }: { children: React.ReactNode }) {
   return children;

@@ -1,6 +1,7 @@
+import { withPageSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: "ServeFlow 14-dagen pilot voor horeca",
   description:
     "Test één reserveringsflow voor één horecalocatie gedurende 14 dagen voor €497 ex. btw. Geen automatische verlenging en geen gegarandeerde omzet- of no-showclaim.",
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     siteName: "BonanzaLabs",
     type: "website",
   },
-};
+});
 
 export default function ServeFlowLayout({ children }: { children: React.ReactNode }) {
   return children;

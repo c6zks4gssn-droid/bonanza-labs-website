@@ -1,6 +1,7 @@
+import { withPageSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: "Portfolio — BonanzaLabs",
   description:
     "Zelf gebouwd, zelf gelanceerd. Bekijk projecten die BonanzaLabs heeft gebouwd en exploiteert.",
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     siteName: "BonanzaLabs",
     type: "website",
   },
-};
+});
 
 export default function PortfolioLayout({
   children,

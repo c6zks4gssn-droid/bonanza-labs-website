@@ -1,6 +1,7 @@
+import { withPageSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: "AI-automatisering voor MKB | Oplossingen",
   description:
     "Praktische automatisering voor horeca, bouw & installatie en zakelijke telefonie. BonanzaLabs begint met één concreet proces en meet wat werkt.",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     url: "https://www.bonanza-labs.com/oplossingen",
     type: "website",
   },
-};
+});
 
 export default function OplossingenLayout({ children }: { children: React.ReactNode }) {
   return children;
