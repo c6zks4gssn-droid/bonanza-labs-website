@@ -3,7 +3,26 @@ import Stripe from "stripe";
 import { getStripe, isStripeConfigured } from "@/lib/stripe";
 import { getStripeProduct, STRIPE_PRODUCTS } from "@/lib/stripe-products";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.bonanza-labs.com";
+// De canonieke host voor productie. Op een preview-uitrol moet een testbetaling
+// terugkomen op de preview zelf — anders belandt de bezoeker na betalen op de
+// livesite, waar de betaalconfiguratie niet staat, en lijkt een geslaagde test
+// op een storing. VERCEL_BRANCH_URL is per branch stabiel (VERCEL_URL niet).
+const CANONICAL_URL = "https://www.bonanza-labs.com";
+
+function baseUrl(): string {
+  if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;
+
+  if (process.env.VERCEL_ENV === "preview") {
+    const branchUrl = process.env.VERCEL_BRANCH_URL;
+    if (branchUrl) return `https://${branchUrl}`;
+  }
+
+  if (process.env.VERCEL_ENV === "production") return CANONICAL_URL;
+
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+
+  return CANONICAL_URL;
+}
 
 const automaticTaxEnabled = process.env.STRIPE_AUTOMATIC_TAX_ENABLED === "true";
 const invoiceCreationEnabled = process.env.STRIPE_INVOICE_CREATION_ENABLED === "true";
@@ -63,8 +82,8 @@ export async function POST(req: NextRequest) {
         },
       ],
       metadata,
-      success_url: `${BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${BASE_URL}/pricing`,
+      success_url: `${baseUrl()}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl()}/pricing`,
       custom_text: {
         submit: {
           message:
