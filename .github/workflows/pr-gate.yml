@@ -1,0 +1,34 @@
+name: PR-gate
+
+# Dezelfde controle als scripts/pr-gate.sh, maar automatisch.
+# Doel: geen wijziging naar main zonder geslaagde types en build — of die nu van
+# een mens, GPT of Hermes komt.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Versie komt uit package.json (packageManager) — niet hier hardcoderen,
+      # anders weigert de action met "Multiple versions of pnpm specified".
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Afhankelijkheden
+        run: pnpm install --frozen-lockfile
+
+      - name: Types
+        run: pnpm exec tsc --noEmit
+
+      - name: Productiebuild
+        run: pnpm build
