@@ -26,17 +26,19 @@ done
 cd "$(dirname "$0")/.."
 echo "── PR-gate: $(pwd)"
 
-# pnpm beschikbaar maken zonder globale installatie
+# pnpm beschikbaar maken zonder globale installatie.
+# De versie komt uit package.json (packageManager), zodat lokaal en CI hetzelfde draaien.
 if ! command -v pnpm >/dev/null 2>&1; then
   if command -v corepack >/dev/null 2>&1; then
     corepack enable >/dev/null 2>&1 || true
-    corepack prepare pnpm@10 --activate >/dev/null 2>&1 || true
+    corepack install >/dev/null 2>&1 || true
   fi
 fi
 if ! command -v pnpm >/dev/null 2>&1; then
-  echo "FOUT: pnpm niet gevonden. Installeer met: corepack enable && corepack prepare pnpm@10 --activate" >&2
+  echo "FOUT: pnpm niet gevonden. Zet in package.json een packageManager-veld (nu: pnpm) en draai: corepack enable" >&2
   exit 1
 fi
+echo "── pnpm $(pnpm --version) (verwacht: $(node -p "require('./package.json').packageManager || 'niet vastgepind'" 2>/dev/null || echo '?') )"
 
 if [ "$SNEL" -eq 0 ]; then
   echo "── 1/3 afhankelijkheden (bevroren lockfile)"
