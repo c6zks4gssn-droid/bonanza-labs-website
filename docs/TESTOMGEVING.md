@@ -97,3 +97,32 @@ uitrollen vanuit de juiste commit — bestaande uitrollen pakken nieuwe variabel
 
 Btw en automatische facturen komen later; dat is een keuze over factureren, niet over of
 de reis werkt.
+
+## 8. Waakhond op de mailbezorging
+
+Een groene healthcheck en `notified: true` zeggen alleen dat de verzendpartij het verzoek
+heeft aangenomen. Op 8 september werd een leadnotificatie gebounced, waarna de verzendpartij
+het adres op een onderdrukkingslijst zette — en sindsdien werd er niets meer verstuurd
+terwijl de code succes bleef melden.
+
+Daarom draait er één keer per dag een controle op `/api/cron/mail-watch`, via een cron in
+`vercel.json`. Die kijkt bij de verzendpartij welke verzendingen in de laatste 26 uur zijn
+gebounced, onderdrukt of mislukt, en stuurt daarvan een bericht naar Telegram.
+
+De melding bevat **geen klantgegevens**: alleen het tijdstip, de status en het interne nummer
+van de verzending. Geen namen, geen onderwerpen, geen adressen.
+
+Vereiste variabelen op Production:
+
+```bash
+vercel env add RESEND_API_KEY        production
+vercel env add CRON_SECRET           production   # zelf te kiezen; Vercel stuurt die mee bij de cron
+vercel env add TELEGRAM_BOT_TOKEN    production
+vercel env add TELEGRAM_CHAT_ID      production
+```
+
+Zonder `CRON_SECRET` weigert de route elke aanroep. Zonder Telegram-variabelen wordt er niets
+gemeld maar blijft de uitkomst wel in het antwoord staan.
+
+**Deze waakhond herstelt de mailbezorging niet.** Hij zorgt dat een dichte deur niet meer
+ongemerkt dicht blijft. De bezorging zelf repareren blijft stap 1 tot en met 3 hierboven.
