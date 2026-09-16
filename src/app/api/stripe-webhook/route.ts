@@ -6,6 +6,7 @@ import {
   acquireLock,
   isRedisConfigured,
   redisCommand,
+  storageKey,
   storeJsonRecord,
 } from "@/lib/server-store";
 
@@ -34,7 +35,7 @@ async function processOnce(event: Stripe.Event, work: () => Promise<void>) {
     return true;
   } catch (error) {
     // A failed write must remain retryable when Stripe sends the event again.
-    await redisCommand("DEL", lockKey).catch((unlockError) => {
+    await redisCommand("DEL", storageKey(lockKey)).catch((unlockError) => {
       console.error("Could not release Stripe event lock", unlockError);
     });
     throw error;
