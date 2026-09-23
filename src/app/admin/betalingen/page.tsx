@@ -75,6 +75,24 @@ export default async function BetalingenPage() {
       })
     : [];
 
+  // Totalen over de opgehaalde records. Alleen betaalde sessies tellen mee; het
+  // bedrag kan per muntsoort verschillen, dus groepeer op valuta in plaats van
+  // blind op te tellen.
+  const betaaldeSessies = payments.filter(
+    (payment) => payment.paymentStatus?.trim().toLowerCase() === "paid",
+  );
+  const totalenPerValuta = new Map<string, number>();
+  for (const betaling of betaaldeSessies) {
+    const bedrag = betaling.total;
+    if (typeof bedrag === "number" && Number.isFinite(bedrag)) {
+      const valuta = (betaling.currency || "eur").trim().toUpperCase();
+      totalenPerValuta.set(valuta, (totalenPerValuta.get(valuta) ?? 0) + bedrag);
+    }
+  }
+  const actieveAbonnementen = subscriptions.filter(
+    (abonnement) => abonnement.status?.trim().toLowerCase() === "active",
+  ).length;
+
   return (
     <main className="min-h-screen bg-[#070A12] px-6 py-10 text-white">
       <div className="mx-auto max-w-6xl">
@@ -91,6 +109,45 @@ export default async function BetalingenPage() {
                 Betaalde sessies, mislukte betalingen, facturen en abonnementen,
                 nieuwste eerst.
               </p>
+              {isRedisConfigured ? (
+                <p className="mt-4 text-sm text-slate-300">
+                  <span className="font-semibold text-white">
+                    {betaaldeSessies.length}
+                  </span>{" "}
+                  betaald
+                  {totalenPerValuta.size > 0 ? (
+                    <>
+                      {" · "}
+                      {[...totalenPerValuta.entries()].map(([valuta, bedrag], index) => (
+                        <span key={valuta}>
+                          {index > 0 ? " + " : ""}
+                          <span className="font-semibold text-emerald-200">
+                            {formatteerBedrag(bedrag, valuta)}
+                          </span>
+                        </span>
+                      ))}
+                      {" ontvangen"}
+                    </>
+                  ) : null}
+                  {" · "}
+                  <span className="font-semibold text-white">
+                    {actieveAbonnementen}
+                  </span>{" "}
+                  actief
+                  {" · "}
+                  <span className="font-semibold text-white">{invoices.length}</span>{" "}
+                  {invoices.length === 1 ? "factuur" : "facturen"}
+                  {failedPayments.length > 0 ? (
+                    <>
+                      {" · "}
+                      <span className="font-semibold text-rose-200">
+                        {failedPayments.length}
+                      </span>{" "}
+                      mislukt
+                    </>
+                  ) : null}
+                </p>
+              ) : null}
             </div>
 
             <div className="flex items-center gap-3">
