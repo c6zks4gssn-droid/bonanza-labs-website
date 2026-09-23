@@ -60,6 +60,12 @@ export default async function AdminLeadsPage() {
               JSON export
             </a>
             <Link
+              href="/admin/betalingen"
+              className="rounded-xl border border-white/15 px-4 py-2 text-sm font-semibold hover:border-cyan-300/40"
+            >
+              Betalingen
+            </Link>
+            <Link
               href="/"
               className="rounded-xl bg-[#2563EB] px-4 py-2 text-sm font-semibold hover:bg-[#1D4ED8]"
             >
