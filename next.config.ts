@@ -1,7 +1,54 @@
 import type { NextConfig } from "next";
 
+// Beveiligingsheaders voor elke route.
+//
+// Waarom deze drie: de site heeft een chatwidget, een betaalflow en een
+// adminomgeving. Zonder X-Frame-Options kan de site in een verborgen iframe
+// worden geladen (clickjacking op de betaalknop). Zonder CSP mag elke
+// geïnjecteerde scriptbron draaien. HSTS, nosniff en een referrer-policy zet
+// Vercel al zelf; die staan hier niet dubbel.
+//
+// De CSP is bewust niet maximaal streng: Next.js injecteert inline scripts voor
+// hydratatie en de site gebruikt inline styles. Daarom 'unsafe-inline' voor
+// script en style, en géén frame-ancestors in de CSP zelf (dat doet
+// X-Frame-Options hieronder al).
+const securityHeaders = [
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  {
+    key: "Content-Security-Policy",
+    value: [
+      "default-src 'self'",
+      // Next.js hydratatie en Tailwind gebruiken inline script/style.
+      // unpkg.com is nodig omdat de Bonanza Voice-widget (@elevenlabs/convai-widget-embed)
+      // runtime van daar wordt geladen — zie src/components/BonanzaVoice.tsx.
+      "script-src 'self' 'unsafe-inline' https://unpkg.com https://va.vercel-scripts.com",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: blob: https:",
+      "font-src 'self' data:",
+      // Chatwidget en voice-agent praten met hun eigen backend; Vercel analytics
+      // en de ElevenLabs-agent staan hier expliciet.
+      "connect-src 'self' https://api.elevenlabs.io wss://api.elevenlabs.io https://vitals.vercel-insights.com",
+      "media-src 'self' blob: https://api.elevenlabs.io",
+      // Stripe Checkout is een redirect via window.location.assign, geen iframe
+      // en geen formulier. frame-src is voor het geval Stripe later wel een
+      // element insluit; form-action blijft 'self' omdat de contact- en
+      // voice-formulieren op deze site zelf posten.
+      "frame-src 'self' https://js.stripe.com https://checkout.stripe.com",
+      "form-action 'self'",
+      "base-uri 'self'",
+      "object-src 'none'",
+    ].join("; "),
+  },
+];
+
 const nextConfig: NextConfig = {
   output: "standalone",
+  poweredByHeader: false,
+  async headers() {
+    return [{ source: "/:path*", headers: securityHeaders }];
+  },
   images: {
     // The managed local preview cannot run native Sharp; Vercel production keeps optimization.
     unoptimized: process.env.NODE_ENV === "development",

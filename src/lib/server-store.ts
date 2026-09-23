@@ -80,13 +80,27 @@ export async function acquireLock(key: string, ttlSeconds = 60 * 60 * 24): Promi
   return result === "OK";
 }
 
+// Waarom niet INCR gevolgd door EXPIRE: faalt die EXPIRE (netwerkhapering),
+// dan blijft de sleutel eeuwig staan en zit dat IP permanent op 429. Daarom
+// zetten we de teller eerst op 0 met SET ... NX ... EX — atomair, meteen een
+// vervaltijd — en tellen we daarna pas op. De eerste aanvraag in een venster
+// geeft zo weer 1, precies als voorheen.
 export async function incrementRateLimit(key: string, windowSeconds: number): Promise<number> {
   if (!isRedisConfigured) return 1;
 
-  const count = (await redisCommand<number>("INCR", storageKey(key))) || 1;
-  if (count === 1) {
-    await redisCommand("EXPIRE", storageKey(key), windowSeconds);
+  const storage = storageKey(key);
+
+  // Alleen aanmaken als de sleutel nog niet bestaat, en dan meteen met TTL.
+  await redisCommand("SET", storage, "0", "NX", "EX", windowSeconds);
+
+  const count = (await redisCommand<number>("INCR", storage)) || 1;
+
+  // Vangnet: staat er toch een sleutel zonder vervaltijd (oudere versie van
+  // deze functie, of een handmatige ingreep), zet die dan alsnog.
+  if ((await redisCommand<number>("TTL", storage)) === -1) {
+    await redisCommand("EXPIRE", storage, windowSeconds);
   }
+
   return count;
 }
 
