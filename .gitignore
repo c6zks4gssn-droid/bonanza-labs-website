@@ -32,3 +32,4 @@ dist/
 .turbo/
 .vercel/
 .vercel
+*.tsbuildinfo
