@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { readJsonRecordsFromRecentList } from "@/lib/server-store";
 
 // Waakhond op de mailbezorging.
 //
@@ -27,6 +28,23 @@ interface ResendEmail {
   id?: string;
   last_event?: string;
   created_at?: string;
+}
+
+// Tweede, onafhankelijke detectiebron.
+//
+// Waarom nodig: de controle hierboven kijkt naar mails die de verzendpartij
+// heeft aangenomen en daarna niet aankwamen. Wordt een verzending bij het
+// versturen geweigerd — bijvoorbeeld omdat het afzenderdomein niet geverifieerd
+// is — dan bestaat er geen mailrecord, vindt de controle op last_event nul
+// fouten, en meldt deze route voor altijd dat alles in orde is.
+//
+// Het leadrecord houdt daarom zelf bij of de melding gelukt is. Dat dekt precies
+// het pad dat hierboven onzichtbaar blijft.
+interface LeadRecord {
+  id: string;
+  createdAt: string;
+  notified?: boolean;
+  notificationError?: string | null;
 }
 
 function createdAtMs(value: string | undefined): number {
@@ -79,19 +97,78 @@ export async function GET(req: NextRequest) {
     return Number.isNaN(created) ? true : created >= since;
   });
 
-  if (failed.length === 0) {
-    return NextResponse.json({ ok: true, nietBezorgd: 0 });
+  let mislukteLeads: LeadRecord[] = [];
+  let leadControle = "ok";
+  try {
+    const leads = await readJsonRecordsFromRecentList<LeadRecord>({
+      recentList: "leads:recent",
+      keyPrefix: "lead:",
+      limit: 200,
+    });
+    mislukteLeads = leads.filter((lead) => {
+      // Alleen een expliciete false telt. Oudere records zonder dit veld
+      // blijven buiten beeld, zodat het verleden geen valse melding geeft.
+      if (lead.notified !== false) return false;
+      const created = Date.parse(lead.createdAt);
+      return Number.isNaN(created) ? true : created >= since;
+    });
+  } catch {
+    // Een mislukte leesactie mag niet als "niets aan de hand" doorgaan.
+    leadControle = "mislukt";
   }
 
-  const regels = failed
-    .slice(0, 10)
-    .map((email) => `• ${email.created_at || "tijdstip onbekend"} — ${email.last_event} — ${email.id || "geen nummer"}`);
+  const telegramGeconfigureerd = Boolean(TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID);
+
+  if (failed.length === 0 && mislukteLeads.length === 0 && leadControle === "ok") {
+    return NextResponse.json({
+      ok: true,
+      nietBezorgd: 0,
+      meldingMislukt: 0,
+      telegramGeconfigureerd,
+    });
+  }
+
+  // Geen klantgegevens in de melding: alleen tijdstip, status, intern nummer
+  // en de foutmelding van de verzendpartij.
+  const blokken: string[] = [];
+  if (failed.length > 0) {
+    blokken.push(
+      [
+        `${failed.length} verzending(en) niet bezorgd:`,
+        ...failed
+          .slice(0, 10)
+          .map(
+            (email) =>
+              `• ${email.created_at || "tijdstip onbekend"} — ${email.last_event} — ${email.id || "geen nummer"}`,
+          ),
+      ].join("\n"),
+    );
+  }
+  if (mislukteLeads.length > 0) {
+    blokken.push(
+      [
+        `${mislukteLeads.length} lead(s) waarvan de notificatiemail niet verzonden is:`,
+        ...mislukteLeads
+          .slice(0, 10)
+          .map(
+            (lead) =>
+              `• ${lead.createdAt || "tijdstip onbekend"} — ${lead.id} — ${(lead.notificationError || "onbekende fout").slice(0, 120)}`,
+          ),
+      ].join("\n"),
+    );
+  }
+  if (leadControle === "mislukt") {
+    blokken.push(
+      "Let op: de leadopslag was niet leesbaar, dus onverzonden meldingen zijn nu niet gecontroleerd.",
+    );
+  }
 
   const tekst = [
-    `BonanzaLabs: ${failed.length} verzending(en) niet bezorgd in de laatste ${LOOKBACK_HOURS} uur.`,
-    ...regels,
+    `BonanzaLabs: ${LOOKBACK_HOURS} uur aan meldingen die aandacht vragen.`,
     "",
-    "Dit gaat over de notificatiemail. De aanvraag zelf kan wel opgeslagen zijn; controleer de leadopslag.",
+    ...blokken,
+    "",
+    "Dit gaat over de notificatiemail. De aanvraag zelf kan wel opgeslagen zijn; controleer de leadopslag in /admin/leads.",
   ].join("\n");
 
   let gemeld = false;
@@ -115,5 +192,12 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  return NextResponse.json({ ok: true, nietBezorgd: failed.length, gemeld });
+  return NextResponse.json({
+    ok: true,
+    nietBezorgd: failed.length,
+    meldingMislukt: mislukteLeads.length,
+    leadControle,
+    gemeld,
+    telegramGeconfigureerd,
+  });
 }

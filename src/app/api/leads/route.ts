@@ -15,12 +15,24 @@ interface Lead {
   ip: string;
   userAgent: string;
   createdAt: string;
+  // Uitkomst van de notificatiemail, direct na de verzendpoging bijgewerkt.
+  // Zonder deze velden is een geweigerde verzending spoorloos: Resend maakt
+  // bij een afwijzing geen mailrecord aan, dus de controle op last_event in
+  // de waakhond ziet hem nooit. Zie src/app/api/cron/mail-watch/route.ts.
+  notified: boolean;
+  notificationId: string | null;
+  notificationError: string | null;
+  notifiedAt: string | null;
 }
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
 const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "";
 const LEAD_NOTIFICATION_EMAIL =
   process.env.LEAD_NOTIFICATION_EMAIL || "info@bonanza-labs.com";
+
+// Twee jaar. Ook gebruikt bij het bijwerken van het record na de verzendpoging,
+// zodat de bewaartermijn niet stilletjes verandert.
+const LEAD_TTL_SECONDS = 60 * 60 * 24 * 730;
 
 function clean(value: unknown, maxLength: number): string {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -39,9 +51,32 @@ function escapeHtml(value: string): string {
   });
 }
 
-async function sendLeadNotification(lead: Lead): Promise<boolean> {
-  if (!RESEND_API_KEY || !RESEND_FROM_EMAIL) return false;
+interface NotificationOutcome {
+  ok: boolean;
+  emailId: string | null;
+  error: string | null;
+}
 
+async function sendLeadNotification(lead: Lead): Promise<NotificationOutcome> {
+  if (!RESEND_API_KEY || !RESEND_FROM_EMAIL) {
+    return {
+      ok: false,
+      emailId: null,
+      error: "Resend is niet geconfigureerd: RESEND_API_KEY of RESEND_FROM_EMAIL ontbreekt.",
+    };
+  }
+
+  try {
+    return await postToResend(lead);
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Onbekende fout bij het versturen";
+    console.error("Resend notification error:", message);
+    return { ok: false, emailId: null, error: message };
+  }
+}
+
+async function postToResend(lead: Lead): Promise<NotificationOutcome> {
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -74,11 +109,17 @@ async function sendLeadNotification(lead: Lead): Promise<boolean> {
   });
 
   if (!response.ok) {
-    console.error("Resend notification failed:", await response.text());
-    return false;
+    const detail = (await response.text()).slice(0, 300);
+    console.error("Resend notification failed:", detail);
+    return {
+      ok: false,
+      emailId: null,
+      error: `Resend gaf status ${response.status}: ${detail}`,
+    };
   }
 
-  return true;
+  const payload = (await response.json().catch(() => null)) as { id?: string } | null;
+  return { ok: true, emailId: payload?.id ?? null, error: null };
 }
 
 export async function POST(req: NextRequest) {
@@ -136,12 +177,16 @@ export async function POST(req: NextRequest) {
       ip,
       userAgent: clean(req.headers.get("user-agent"), 500),
       createdAt: new Date().toISOString(),
+      notified: false,
+      notificationId: null,
+      notificationError: null,
+      notifiedAt: null,
     };
 
     const persisted = await storeJsonRecord({
       key: `lead:${lead.id}`,
       value: lead,
-      ttlSeconds: 60 * 60 * 24 * 730,
+      ttlSeconds: LEAD_TTL_SECONDS,
       recentList: "leads:recent",
       recentValue: lead.id,
       recentLimit: 2000,
@@ -155,13 +200,44 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const notified = await sendLeadNotification(lead);
-    console.log("Lead stored", { id: lead.id, source: lead.source, notified });
+    const outcome = await sendLeadNotification(lead);
 
+    // De uitkomst op het record bijwerken. Bewust zonder recentList: dat zou
+    // hetzelfde id een tweede keer in de lijst zetten. Mislukt deze
+    // boekhouding, dan mag dat een geslaagde lead niet tot een fout maken —
+    // de bezoeker heeft zijn aanvraag immers al zien slagen.
+    try {
+      await storeJsonRecord({
+        key: `lead:${lead.id}`,
+        value: {
+          ...lead,
+          notified: outcome.ok,
+          notificationId: outcome.emailId,
+          notificationError: outcome.error,
+          notifiedAt: new Date().toISOString(),
+        },
+        ttlSeconds: LEAD_TTL_SECONDS,
+      });
+    } catch (error) {
+      console.error("Kon notificatiestatus niet bijwerken", lead.id, error);
+    }
+
+    if (!outcome.ok) {
+      console.error("Lead notification failed", { id: lead.id, error: outcome.error });
+    } else {
+      console.log("Lead stored", {
+        id: lead.id,
+        source: lead.source,
+        resendId: outcome.emailId,
+      });
+    }
+
+    // De foutmelding blijft intern: dit endpoint is publiek en een
+    // infrastructuurmelding van de verzendpartij hoort daar niet.
     return NextResponse.json({
       success: true,
       id: lead.id,
-      notified,
+      notified: outcome.ok,
     });
   } catch (error) {
     console.error("Lead API error:", error);
