@@ -29,8 +29,14 @@ const securityHeaders = [
       "font-src 'self' data:",
       // Chatwidget en voice-agent praten met hun eigen backend; Vercel analytics
       // en de ElevenLabs-agent staan hier expliciet.
-      "connect-src 'self' https://api.elevenlabs.io wss://api.elevenlabs.io https://vitals.vercel-insights.com",
-      "media-src 'self' blob: https://api.elevenlabs.io",
+      //
+      // api.us.elevenlabs.io staat erbij omdat de widget zijn configuratie
+      // ophaalt bij het cluster dat bij de agent hoort, niet bij het
+      // hoofddomein. Zonder die host blokkeert connect-src het ophalen, en dat
+      // faalt stil: het element bestaat wel in de DOM, maar blijft 0 bij 0
+      // pixels met een leeg template en zonder consolefout.
+      "connect-src 'self' https://api.elevenlabs.io https://api.us.elevenlabs.io wss://api.elevenlabs.io wss://api.us.elevenlabs.io https://vitals.vercel-insights.com",
+      "media-src 'self' blob: https://api.elevenlabs.io https://api.us.elevenlabs.io",
       // Stripe Checkout is een redirect via window.location.assign, geen iframe
       // en geen formulier. frame-src is voor het geval Stripe later wel een
       // element insluit; form-action blijft 'self' omdat de contact- en
