@@ -2,6 +2,7 @@ import Link from "next/link";
 import SiteNav from "@/components/site-nav";
 import SiteFooter from "@/components/site-footer";
 import VoiceRequest from "@/components/voice-request";
+import VoiceTranscriptAudio from "@/components/voice-transcript-audio";
 import { faq, steps, transcript } from "./voice-content";
 import "./voice.css";
 
@@ -36,11 +37,13 @@ export default function VoicePage() {
       <p className="voice-note">Voor spraak is microfoontoegang nodig. Zie je de widget niet? Je kunt hieronder een Voice-aanvraag doen.</p>
     </div></section>
     <section className="voice-wrap voice-section">
-      <h2>Zo kan een gesprek lopen</h2><p className="voice-eyebrow">Fictief voorbeeld — geen opname</p>
-      <details className="voice-transcript" open><summary>Voorbeeld: offerteaanvraag voor een badkamer</summary>
-        <dl>{transcript.map(([speaker, text], i) => <div key={i}><dt>{speaker}</dt><dd>{text}</dd></div>)}</dl>
-      </details>
-      <p className="voice-note">Ook Installatiebedrijf Jansen en de beller zijn fictief. De agent stelt intakevragen. De beoordeling, prijs en planning blijven bij een medewerker. Het voorbeeld verstuurt geen aanvraag.</p>
+      <h2>Zo kan een gesprek lopen</h2><p className="voice-eyebrow">Fictief voorbeeld — ingesproken met onze tekst-naar-spraakstem</p>
+      <VoiceTranscriptAudio
+        transcript={transcript}
+        src="/audio/bonanza-voice-demo.mp3"
+        duur="1 minuut 7"
+        titel="Offerteaanvraag voor een badkamer"
+      />
     </section>
     <section className="voice-band"><div className="voice-wrap">
       <h2>Waar je Bonanza Voice kunt inzetten</h2>
