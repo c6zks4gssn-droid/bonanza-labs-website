@@ -61,6 +61,28 @@ const pilotScope = [
   { icon: ShieldCheck, title: "Geen verlenging", text: "Er start nooit automatisch een abonnement." },
 ];
 
+// Doorlopend beheer. De bedragen komen overeen met de server-side configuratie
+// (beheer-basis 19700 en beheer-uitgebreid 49700 cent per maand). De scope is
+// bewust niet als opsomming te geven: die stellen we per klant vast in een
+// afzonderlijke overeenkomst, en verzonnen bullets zouden een belofte zijn die
+// niet in de overeenkomst staat.
+const managementTiers = [
+  {
+    id: "beheer-basis",
+    name: "Basis",
+    price: "€197",
+    description:
+      "Doorlopend beheer en optimalisatie van één ingerichte flow, volgens een afzonderlijke overeenkomst.",
+  },
+  {
+    id: "beheer-uitgebreid",
+    name: "Uitgebreid",
+    price: "€497",
+    description:
+      "Uitgebreider doorlopend beheer over meerdere flows of locaties, volgens een afzonderlijke overeenkomst.",
+  },
+];
+
 export default function PricingPage() {
   const [checkoutProduct, setCheckoutProduct] = useState<string | null>(null);
   const [checkoutError, setCheckoutError] = useState("");
@@ -175,6 +197,35 @@ export default function PricingPage() {
           </div>
         )}
         <p className="mt-4 text-center text-xs text-white/40">Veilige betaling via Stripe. Na betaling plannen we de intake.</p>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-16" aria-labelledby="doorlopend-beheer">
+        <h2 id="doorlopend-beheer" className="mb-4 text-3xl font-black">Doorlopend beheer</h2>
+        <p className="max-w-3xl text-white/60">
+          Loopt de flow eenmaal? Dan kun je het beheer bij ons laten. Per maand, na een pilot of inrichting. Je kunt dit ook zelf blijven doen — het is geen verplicht onderdeel van de pilot.
+        </p>
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
+          {managementTiers.map((tier) => (
+            <article key={tier.id} className="rounded-3xl border border-white/10 p-8">
+              <h3 className="text-xl font-black">Beheer en optimalisatie — {tier.name}</h3>
+              <p className="mt-3 text-3xl font-black">
+                {tier.price}
+                <span className="text-base font-semibold text-white/60"> per maand</span>
+              </p>
+              <p className="mt-1 text-sm text-white/60">Excl. btw</p>
+              <p className="mt-4 text-sm leading-relaxed text-white/60">{tier.description}</p>
+              <Link
+                href="/contact"
+                className="mt-6 inline-flex items-center gap-2 font-semibold underline"
+              >
+                Bespreek beheer <ArrowRight className="h-4 w-4" />
+              </Link>
+            </article>
+          ))}
+        </div>
+        <p className="mt-6 text-sm text-white/50">
+          Deze vorm loopt via een afzonderlijke overeenkomst, niet via een knop op deze pagina. Zo leggen we eerst vast wat het beheer precies omvat en wat de looptijd is.
+        </p>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-16" aria-labelledby="maatwerk-prijzen">
