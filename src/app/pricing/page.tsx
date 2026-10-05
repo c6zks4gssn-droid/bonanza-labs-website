@@ -61,25 +61,30 @@ const pilotScope = [
   { icon: ShieldCheck, title: "Geen verlenging", text: "Er start nooit automatisch een abonnement." },
 ];
 
-// Doorlopend beheer. De bedragen komen overeen met de server-side configuratie
-// (beheer-basis 19700 en beheer-uitgebreid 49700 cent per maand). De scope is
-// bewust niet als opsomming te geven: die stellen we per klant vast in een
-// afzonderlijke overeenkomst, en verzonnen bullets zouden een belofte zijn die
-// niet in de overeenkomst staat.
+// Doorlopend beheer. Bedragen en beschrijvingen komen LETTERLIJK uit de
+// server-side configuratie (stripe-products.ts): 19700 / 49700 cent per maand,
+// met description "Maandelijks beheer volgens afzonderlijke overeenkomst." en
+// "Uitgebreid maandelijks beheer volgens afzonderlijke overeenkomst."
+//
+// LET OP: voeg hier GEEN scope toe die de bron niet noemt. Een eerdere versie
+// van deze lijst zei "van één ingerichte flow" en "over meerdere flows of
+// locaties" — dat was verzonnen. De klant zou zich daarop kunnen beroepen
+// terwijl het in geen enkele overeenkomst staat. Bij klantgerichte tekst:
+// vergelijk woord voor woord met de bron, niet alleen de bedragen.
 const managementTiers = [
   {
     id: "beheer-basis",
     name: "Basis",
     price: "€197",
     description:
-      "Doorlopend beheer en optimalisatie van één ingerichte flow, volgens een afzonderlijke overeenkomst.",
+      "Maandelijks beheer volgens afzonderlijke overeenkomst.",
   },
   {
     id: "beheer-uitgebreid",
     name: "Uitgebreid",
     price: "€497",
     description:
-      "Uitgebreider doorlopend beheer over meerdere flows of locaties, volgens een afzonderlijke overeenkomst.",
+      "Uitgebreid maandelijks beheer volgens afzonderlijke overeenkomst.",
   },
 ];
 
@@ -202,12 +207,12 @@ export default function PricingPage() {
       <section className="mx-auto max-w-6xl px-6 pb-16" aria-labelledby="doorlopend-beheer">
         <h2 id="doorlopend-beheer" className="mb-4 text-3xl font-black">Doorlopend beheer</h2>
         <p className="max-w-3xl text-white/60">
-          Loopt de flow eenmaal? Dan kun je het beheer bij ons laten. Per maand, na een pilot of inrichting. Je kunt dit ook zelf blijven doen — het is geen verplicht onderdeel van de pilot.
+          Doorlopend beheer is er in twee vormen, per maand. Dit loopt via een afzonderlijke overeenkomst.
         </p>
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           {managementTiers.map((tier) => (
             <article key={tier.id} className="rounded-3xl border border-white/10 p-8">
-              <h3 className="text-xl font-black">Beheer en optimalisatie — {tier.name}</h3>
+              <h3 className="text-xl font-black">Beheer en Optimalisatie — {tier.name}</h3>
               <p className="mt-3 text-3xl font-black">
                 {tier.price}
                 <span className="text-base font-semibold text-white/60"> per maand</span>
@@ -224,7 +229,7 @@ export default function PricingPage() {
           ))}
         </div>
         <p className="mt-6 text-sm text-white/50">
-          Deze vorm loopt via een afzonderlijke overeenkomst, niet via een knop op deze pagina. Zo leggen we eerst vast wat het beheer precies omvat en wat de looptijd is.
+          Deze vorm gaat via een afzonderlijke overeenkomst, niet via een knop op deze pagina.
         </p>
       </section>
 
