@@ -69,8 +69,8 @@ export default function VoiceInstallateursPage() {
       <p className="voice-price">Inrichting vanaf <strong>€1.495 excl. btw</strong></p>
       <ul className="voice-steps">
         <li><p><strong>Inrichting:</strong> vanaf €1.495 excl. btw, per bedrijf bepaald op basis van gesprekstype en telefonie.</p></li>
-        <li><p><strong>Doorlopend beheer:</strong> €197 of €497 per maand excl. btw, via een afzonderlijke overeenkomst.</p></li>
-        <li><p><strong>Externe gebruikskosten:</strong> kosten van bijvoorbeeld telefonie en gesprekken komen apart en bespreken we vooraf.</p></li>
+        <li><p><strong>Beheer:</strong> vanaf €197 per maand excl. btw, in drie niveaus: Basis €197, Standaard €297 of Uitgebreid €497. Via een afzonderlijke overeenkomst.</p></li>
+        <li><p><strong>Gebruikskosten (belminuten):</strong> komen apart, volgens offerte.</p></li>
       </ul>
       <p>Bekijk alle bedragen op de <Link href="/pricing" className="underline">prijzenpagina</Link> of lees <Link href="/blog/wat-kost-ai-telefonie-voor-een-mkb-bedrijf" className="underline">wat AI-telefonie kost voor een MKB-bedrijf</Link>.</p>
     </section>
