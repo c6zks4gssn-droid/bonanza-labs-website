@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/tradeflow`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/serveflow`, changeFrequency: "weekly", priority: 0.95 },
     { url: `${baseUrl}/bonanza-voice`, changeFrequency: "monthly", priority: 0.75 },
+    { url: `${baseUrl}/bonanza-voice/installateurs`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/pricing`, changeFrequency: "weekly", priority: 0.95 },
     { url: `${baseUrl}/portfolio`, changeFrequency: "monthly", priority: 0.65 },
     { url: `${baseUrl}/over-ons`, changeFrequency: "monthly", priority: 0.7 },
