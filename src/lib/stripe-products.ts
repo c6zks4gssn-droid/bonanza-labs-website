@@ -25,8 +25,8 @@ export const STRIPE_PRODUCTS: Record<string, StripeProductConfig> = {
   "flow-assessment-standaard": {
     name: "Flow Assessment — Complexe aanvraag",
     description:
-      "Uitgebreide procesanalyse en implementatieplan voor meerdere processen, teams of locaties.",
-    amount: 99900,
+      "Uitgebreide procesanalyse en implementatieplan voor meerdere processen, teams of locaties. Verrekend bij implementatie binnen 30 dagen.",
+    amount: 129500,
     mode: "payment",
     offerType: "assessment",
     selfService: true,
@@ -68,6 +68,15 @@ export const STRIPE_PRODUCTS: Record<string, StripeProductConfig> = {
     name: "Beheer en Optimalisatie — Basis",
     description: "Maandelijks beheer volgens afzonderlijke overeenkomst.",
     amount: 19700,
+    mode: "subscription",
+    interval: "month",
+    offerType: "management",
+    selfService: false,
+  },
+  "beheer-standaard": {
+    name: "Beheer en Optimalisatie — Standaard",
+    description: "Maandelijks beheer met evaluatie volgens afzonderlijke overeenkomst.",
+    amount: 29700,
     mode: "subscription",
     interval: "month",
     offerType: "management",

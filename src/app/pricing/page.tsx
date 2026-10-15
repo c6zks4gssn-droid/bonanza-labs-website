@@ -32,13 +32,14 @@ const offers = [
       "Bevestiging, herinnering en annuleren/wijzigen",
       "Interne reserveringssamenvatting",
       "Evaluatie na 14 dagen",
+      "Daarna optioneel beheer vanaf €197 per maand",
     ],
     highlighted: true,
   },
   {
     id: "flow-assessment-standaard",
     name: "Flow Assessment",
-    price: "€999",
+    price: "€1.295",
     label: "Voor complexere aanvragen",
     description:
       "Voor bedrijven met meerdere processen, teams, locaties of integraties die eerst een gedegen implementatieplan nodig hebben.",
@@ -49,6 +50,7 @@ const offers = [
       "Prioriteiten en implementatievolgorde",
       "Rapport met concrete vervolgstappen",
       "Reviewcall met besluitadvies",
+      "Verrekend bij implementatie binnen 30 dagen",
     ],
     highlighted: false,
   },
@@ -61,30 +63,39 @@ const pilotScope = [
   { icon: ShieldCheck, title: "Geen verlenging", text: "Er start nooit automatisch een abonnement." },
 ];
 
-// Doorlopend beheer. Bedragen en beschrijvingen komen LETTERLIJK uit de
-// server-side configuratie (stripe-products.ts): 19700 / 49700 cent per maand,
-// met description "Maandelijks beheer volgens afzonderlijke overeenkomst." en
-// "Uitgebreid maandelijks beheer volgens afzonderlijke overeenkomst."
-//
-// LET OP: voeg hier GEEN scope toe die de bron niet noemt. Een eerdere versie
-// van deze lijst zei "van één ingerichte flow" en "over meerdere flows of
-// locaties" — dat was verzonnen. De klant zou zich daarop kunnen beroepen
-// terwijl het in geen enkele overeenkomst staat. Bij klantgerichte tekst:
-// vergelijk woord voor woord met de bron, niet alleen de bedragen.
+// Doorlopend beheer. Bedragen komen uit stripe-products.ts (19700 / 29700 /
+// 49700 cent per maand). De inhoud per pakket is op 15-10-2026 door de eigenaar
+// goedgekeurd als prijsupdate. Voeg GEEN scope toe die hier niet staat: noem
+// geen aantallen flows, locaties, uren of reactietijden zonder overeenkomst.
 const managementTiers = [
   {
     id: "beheer-basis",
     name: "Basis",
     price: "€197",
-    description:
-      "Maandelijks beheer volgens afzonderlijke overeenkomst.",
+    includes: [
+      "Maandelijks beheer van je ingerichte oplossing",
+      "Kleine aanpassingen aan afgesproken teksten, vragen en antwoorden",
+    ],
+  },
+  {
+    id: "beheer-standaard",
+    name: "Standaard",
+    price: "€297",
+    includes: [
+      "Alles uit Basis",
+      "Maandelijkse evaluatie van hoe de flow loopt",
+      "Verbetervoorstellen op basis van die evaluatie",
+    ],
   },
   {
     id: "beheer-uitgebreid",
     name: "Uitgebreid",
     price: "€497",
-    description:
-      "Uitgebreid maandelijks beheer volgens afzonderlijke overeenkomst.",
+    includes: [
+      "Alles uit Standaard",
+      "Doorvoeren van afgesproken verbeteringen",
+      "Samen uitbreiding bespreken en voorbereiden",
+    ],
   },
 ];
 
@@ -207,9 +218,9 @@ export default function PricingPage() {
       <section className="mx-auto max-w-6xl px-6 pb-16" aria-labelledby="doorlopend-beheer">
         <h2 id="doorlopend-beheer" className="mb-4 text-3xl font-black">Doorlopend beheer</h2>
         <p className="max-w-3xl text-white/60">
-          Doorlopend beheer is er in twee vormen, per maand. Dit loopt via een afzonderlijke overeenkomst.
+          Doorlopend beheer is er in drie vormen, per maand. Dit loopt via een afzonderlijke overeenkomst; de exacte afspraken staan daarin.
         </p>
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
           {managementTiers.map((tier) => (
             <article key={tier.id} className="rounded-3xl border border-white/10 p-8">
               <h3 className="text-xl font-black">Beheer en Optimalisatie — {tier.name}</h3>
@@ -218,7 +229,11 @@ export default function PricingPage() {
                 <span className="text-base font-semibold text-white/60"> per maand</span>
               </p>
               <p className="mt-1 text-sm text-white/60">Excl. btw</p>
-              <p className="mt-4 text-sm leading-relaxed text-white/60">{tier.description}</p>
+              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-white/60">
+                {tier.includes.map((item) => (
+                  <li key={item} className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />{item}</li>
+                ))}
+              </ul>
               <Link
                 href="/contact"
                 className="mt-6 inline-flex items-center gap-2 font-semibold underline"
@@ -238,15 +253,16 @@ export default function PricingPage() {
         <div className="grid gap-6 md:grid-cols-2">
           <article className="rounded-3xl border border-white/10 p-8">
             <h3 className="text-2xl font-black">TradeFlow</h3>
-            <p className="mt-3 text-3xl font-black">Op aanvraag</p>
-            <p className="mt-4 text-white/60">Intake, offertevoorbereiding en opvolging voor bouw en installatie. We bepalen de scope en prijs na de intake; je team beoordeelt de offerte.</p>
+            <p className="mt-3 text-3xl font-black">Vanaf €1.995</p>
+            <p className="mt-1 text-sm text-white/60">Implementatie, excl. btw</p>
+            <p className="mt-4 text-white/60">Intake, offertevoorbereiding en opvolging voor bouw en installatie. De definitieve scope en prijs bepalen we na de intake; je team beoordeelt de offerte.</p>
             <Link href="/tradeflow" className="mt-6 inline-flex items-center gap-2 font-semibold underline">Bekijk TradeFlow <ArrowRight className="h-4 w-4" /></Link>
           </article>
           <article className="rounded-3xl border border-white/10 p-8">
             <h3 className="text-2xl font-black">Bonanza Voice</h3>
             <p className="mt-3 text-3xl font-black">Vanaf €1.495</p>
             <p className="mt-1 text-sm text-white/60">Inrichting, excl. btw</p>
-            <p className="mt-4 text-white/60">Een AI-telefonist voor basisvragen en terugbel- of offerteverzoeken. Per klant ingericht en getest. Doorlopende kosten bespreken we op basis van jouw gesprekstype en telefonie.</p>
+            <p className="mt-4 text-white/60">Een AI-telefonist voor basisvragen en terugbel- of offerteverzoeken. Per klant ingericht en getest. Beheer vanaf €197 per maand. Gebruikskosten (belminuten) komen apart, volgens offerte.</p>
             <Link href="/bonanza-voice" className="mt-6 inline-flex items-center gap-2 font-semibold underline">Bekijk Bonanza Voice <ArrowRight className="h-4 w-4" /></Link>
           </article>
         </div>
