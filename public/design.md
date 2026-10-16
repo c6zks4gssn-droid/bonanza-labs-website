@@ -78,8 +78,8 @@ outside this visual migration. Production publication remains a separate step.
 - Keep the real logo. The selected hero uses clearly labeled AI-generated
   illustrative hospitality/installation scenes, never presented as clients or staff.
 - Demos must be explicitly fictional and must not send messages or book appointments.
-- Preserve established prices and payment logic. TradeFlow remains “Op aanvraag”
-  until its commercial price is separately approved; a mockup does not set a price.
+- Preserve established prices and payment logic. TradeFlow shows “vanaf €1.995 excl. btw” (approved 2026-10-15); previously “Op aanvraag”.
+  A mockup does not set a price.
 
 The legacy specification below is retained as historical guidance only;
 the approved light palette takes precedence on public pages.

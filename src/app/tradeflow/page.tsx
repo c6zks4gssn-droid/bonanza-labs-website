@@ -55,7 +55,7 @@ const faq = [
   },
   {
     q: "Wat kost de implementatie?",
-    a: "Dat hangt af van scope, integraties en het aantal stappen. We bepalen eerst één concreet proces; daarna krijg je een duidelijke implementatiescope en prijs voordat er gebouwd wordt.",
+    a: "De implementatie kost vanaf €1.995 excl. btw. De uiteindelijke prijs hangt af van scope, integraties en het aantal stappen. We bepalen eerst één concreet proces; daarna krijg je een duidelijke implementatiescope en prijs voordat er gebouwd wordt.",
   },
   {
     q: "Wat is een goede eerste TradeFlow-case?",

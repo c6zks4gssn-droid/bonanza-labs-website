@@ -55,7 +55,7 @@ export default function VoicePage() {
     </div></section>
     <section className="voice-wrap voice-section">
       <h2>Wat het kost</h2><p className="voice-price">Inrichting vanaf <strong>€1.495 excl. btw</strong></p>
-      <p>Bonanza Voice wordt per klant ingericht. Wat daarin zit en wat eventueel doorlopend nodig is, bespreken we tijdens de intake op basis van jouw gesprekstype en telefoniesituatie. Externe gebruikskosten en eventueel beheer spreken we apart af.</p>
+      <p>Bonanza Voice wordt per klant ingericht. Wat daarin zit en wat eventueel doorlopend nodig is, bespreken we tijdens de intake op basis van jouw gesprekstype en telefoniesituatie. Beheer kost vanaf €197 per maand excl. btw. Gebruikskosten (belminuten) komen apart, volgens offerte.</p>
       <p><Link href="/blog/wat-kost-ai-telefonie-voor-een-mkb-bedrijf">Lees ook: wat kost AI-telefonie voor een MKB-bedrijf?</Link></p>
       <h2 className="voice-spaced">Hoe een implementatie verloopt</h2>
       <ol className="voice-steps">{steps.map(([name, text]) => <li key={name}><h3>{name}</h3><p>{text}</p></li>)}</ol>

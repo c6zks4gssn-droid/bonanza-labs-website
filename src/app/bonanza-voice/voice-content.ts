@@ -5,7 +5,7 @@ export const faq = [
   ["Kan de agent afspraken of reserveringen boeken?", "Dat is per klant in te richten wanneer de agenda- of reserveringssoftware een geschikte koppeling heeft. We nemen het alleen in scope op als de koppeling in de testfase betrouwbaar blijkt. Anders legt de agent het verzoek vast voor handmatige bevestiging."],
   ["Wat gebeurt er als de agent iets niet weet?", "Dan vraagt hij om verduidelijking of zet hij het gesprek klaar voor een medewerker, met de tot dan toe verzamelde gegevens. Onzekerheid wordt niet verborgen achter een gok."],
   ["Hoe gaan jullie om met gespreksdata?", "Gespreksdata en bewaartermijnen worden per implementatie afgesproken en vastgelegd. De beller wordt aan het begin van het gesprek geïnformeerd dat hij met een digitale assistent spreekt."],
-  ["Is Bonanza Voice een standaardpakket?", "Nee. Bonanza Voice wordt per klant ingericht als maatwerk of als add-on op ServeFlow en TradeFlow. Elke implementatie start met één gesprekstype. Inrichting vanaf €1.495 excl. btw."],
+  ["Is Bonanza Voice een standaardpakket?", "Nee. Bonanza Voice wordt per klant ingericht als maatwerk of als add-on op ServeFlow en TradeFlow. Elke implementatie start met één gesprekstype. Inrichting vanaf €1.495 excl. btw, beheer vanaf €197 per maand; gebruikskosten (belminuten) apart volgens offerte."],
 ];
 export const steps = [
   ["Intake", "We bepalen welk gesprekstype je nu het vaakst mist of handmatig afhandelt."],
