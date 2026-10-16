@@ -2,6 +2,7 @@ import Link from "next/link";
 import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
 import { ArrowLeft, Mail, ShieldCheck } from "lucide-react";
+import LegalConceptNote from "@/components/legal-concept-note";
 import { businessDetails, fullBusinessAddress } from "@/lib/business-details";
 
 const sections = [
@@ -31,8 +32,24 @@ const sections = [
   {
     title: "4. Met welke leveranciers delen we gegevens?",
     paragraphs: [
-      "We gebruiken gespecialiseerde leveranciers voor hosting, betalingen, gegevensopslag, e-mailnotificaties en AI-antwoorden. Dit kunnen onder meer Vercel, Stripe, Upstash, Resend, MiniMax en OpenRouter zijn.",
+      "We gebruiken de volgende leveranciers (subverwerkers). Elke partij ontvangt alleen de gegevens die nodig zijn voor haar taak:",
+      "Vercel Inc. (VS): hosting van de website en serverfuncties, technische logs.",
+      "Stripe Payments Europe Ltd. (Ierland): betalingen en facturen.",
+      "Upstash Inc. (VS): opslag van leadaanvragen en betaalstatus (Redis-database).",
+      "Resend Inc. (VS): versturen van e-mailnotificaties over aanvragen.",
+      "ElevenLabs Inc. (VS): Bonanza Voice, spraak- en tekstgesprekken met de AI-assistent (audio, transcript, technische gegevens).",
+      "MiniMax en OpenRouter Inc. (VS): genereren van antwoorden in de AI-chat op de website.",
+      "Telegram Messenger Inc.: interne storingsmeldingen aan de eigenaar over mislukte e-mails (geen volledige aanvragen). [TODO: controleren welke velden in deze melding staan.]",
+      "Doorgifte naar landen buiten de EER gebeurt alleen met een passende waarborg, zoals het EU-VS Data Privacy Framework of standaardcontractbepalingen van de Europese Commissie.",
       "Deze partijen ontvangen alleen gegevens die nodig zijn voor hun specifieke taak. BonanzaLabs verkoopt geen persoonsgegevens aan adverteerders of databrokers.",
+    ],
+  },
+  {
+    title: "4a. Bonanza Voice en AI (EU AI Act art. 50)",
+    paragraphs: [
+      "Bonanza Voice is een AI-assistent, geen mens. Aan het begin van elk gesprek, op de website en bij telefoonlijnen die we voor klanten inrichten, wordt gemeld dat je met AI spreekt.",
+      "Bij een gesprek worden je stem, het transcript en technische gegevens verwerkt door ElevenLabs. Bij een telefoonlijn van een klant kan ook je telefoonnummer worden verwerkt. Of een gesprek wordt opgenomen, hoor je aan het begin van het gesprek. [TODO: bevestigen of opname/transcriptbewaring in ElevenLabs aan staat en hoe lang.]",
+      "Bij telefoonlijnen die we voor een zakelijke klant inrichten, is die klant de verwerkingsverantwoordelijke en BonanzaLabs de verwerker. Daarvoor sluiten we een verwerkersovereenkomst (zie bonanza-labs.com/verwerkersovereenkomst).",
     ],
   },
   {
@@ -60,7 +77,7 @@ const sections = [
     title: "8. Cookies, analytics en technische opslag",
     paragraphs: [
       "De website kan functionele opslag gebruiken die nodig is voor navigatie, beveiliging en het correct uitvoeren van formulieren en betalingen.",
-      "Niet-noodzakelijke analytics- of marketingcookies worden pas toegevoegd wanneer daarvoor een passende grondslag en, indien vereist, toestemming is geregeld.",
+      "We gebruiken geen analytics- of marketingcookies. Een overzicht van de functionele opslag staat op bonanza-labs.com/cookies.",
     ],
   },
   {
@@ -82,7 +99,8 @@ export default function PrivacyPage() {
           <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm text-cyan-200"><ShieldCheck className="h-4 w-4" /> Privacy en gegevensbescherming</div>
           <h1 className="mt-6 text-4xl font-black tracking-tight md:text-6xl">Privacyverklaring</h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">Duidelijke informatie over welke gegevens we verwerken, waarom we dat doen en welke keuzes en rechten je hebt.</p>
-          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 28 juli 2026</p>
+          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 16 oktober 2026</p>
+          <LegalConceptNote />
         </div>
       </section>
 

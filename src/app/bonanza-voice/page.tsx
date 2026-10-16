@@ -34,6 +34,7 @@ export default function VoicePage() {
       <p className="voice-eyebrow">Zelf proberen</p><h2>Probeer Bonanza Voice</h2>
       <p>Probeer de agent via spraak of tekst. De demo beantwoordt vragen over BonanzaLabs; een telefoonflow voor jouw bedrijf richten we apart in.</p>
       <p>Open de widget linksonder: kies <strong>Start gesprek</strong> voor spraak of <strong>Bericht</strong> voor tekst. Vraag bijvoorbeeld: “Wat kost de ServeFlow-pilot?”</p>
+      <p className="voice-note"><strong>Je praat met een AI-assistent, niet met een mens.</strong> Je stem en het transcript worden verwerkt door ElevenLabs; zie de <Link href="/privacy">privacyverklaring</Link>. Bij elke telefoonlijn die we inrichten, meldt Bonanza Voice aan het begin van het gesprek dat de beller met AI spreekt.</p>
       <p className="voice-note">Voor spraak is microfoontoegang nodig. Zie je de widget niet? Je kunt hieronder een Voice-aanvraag doen.</p>
     </div></section>
     <section className="voice-wrap voice-section">
