@@ -32,22 +32,44 @@ export default function VoiceDemo() {
       const v = window.speechSynthesis.getVoices();
       const nl = v.find((x) => x.lang?.toLowerCase().replace("_", "-") === "nl-nl") || v.find((x) => x.lang?.toLowerCase().startsWith("nl"));
       voice.current = nl ?? null;
-      if (nl) setSpeech("ok");
-      else if (v.length) setSpeech("no-voice");
+      // Geen Nederlandse stem gevonden? Dan alsnog voorlezen met lang=nl-NL en de standaardstem.
+      if (nl || v.length) setSpeech("ok");
     };
     pick();
     window.speechSynthesis.addEventListener?.("voiceschanged", pick);
-    const t = window.setTimeout(() => setSpeech((s) => (s === "checking" ? "no-voice" : s)), 1500);
+    // Safari laadt stemmen soms traag of meldt er nooit; spreken kan dan toch met lang=nl-NL.
+    const t = window.setTimeout(() => setSpeech((s) => (s === "checking" ? "ok" : s)), 1500);
     return () => { window.clearTimeout(t); window.speechSynthesis.removeEventListener?.("voiceschanged", pick); };
   }, []);
   useEffect(() => () => clearAll(), []);
 
+  // Refs zodat timers (gescripte regels) altijd de actuele keuze zien, geen verouderde closure.
+  const speakRef = useRef(false);
+  const speechRef = useRef(speech);
+  speechRef.current = speech;
+
   function say(text: string) {
-    if (!speak || speech !== "ok" || !voice.current) return;
+    if (!speakRef.current || speechRef.current !== "ok") return;
+    const synth = window.speechSynthesis;
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = voice.current.lang;
-    u.voice = voice.current;
-    window.speechSynthesis.speak(u);
+    u.lang = voice.current?.lang?.replace("_", "-") || "nl-NL";
+    if (voice.current) u.voice = voice.current;
+    if (synth.paused) synth.resume();
+    synth.speak(u);
+  }
+
+  // iOS/Safari staan spraak pas toe na een eerste speak() binnen een gebruikersactie.
+  function toggleSpeak(on: boolean) {
+    speakRef.current = on;
+    setSpeak(on);
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    if (on) {
+      const u = new SpeechSynthesisUtterance("Voorlezen staat aan.");
+      u.lang = voice.current?.lang?.replace("_", "-") || "nl-NL";
+      if (voice.current) u.voice = voice.current;
+      window.speechSynthesis.speak(u);
+    }
   }
 
   function clearAll() {
@@ -153,11 +175,11 @@ export default function VoiceDemo() {
         </div>
         <div className="mt-3">
           <label className="dm-toggle">
-            <input type="checkbox" checked={speak && speech === "ok"} disabled={speech !== "ok"} onChange={(e) => setSpeak(e.target.checked)} aria-describedby="voice-tts-note" data-testid="tts" />
+            <input type="checkbox" checked={speak && speech === "ok"} disabled={speech !== "ok"} onChange={(e) => toggleSpeak(e.target.checked)} aria-describedby="voice-tts-note" data-testid="tts" />
             Voorlezen (browserstem)
           </label>
           <p id="voice-tts-note" className="text-xs" data-testid="tts-note">
-            {speech === "ok" ? "Gebruikt de Nederlandse stem van uw browser; dat is niet de stem van Bonanza Voice." : speech === "checking" ? "Bezig met controleren of uw browser kan voorlezen…" : speech === "unsupported" ? "Voorlezen is niet beschikbaar: deze browser ondersteunt geen spraak." : "Voorlezen is niet beschikbaar: deze browser heeft geen Nederlandse stem."}
+            {speech === "ok" ? "Gebruikt de stem van uw browser (Nederlands indien beschikbaar); dat is niet de stem van Bonanza Voice. Zet het geluid van uw apparaat aan (op iPhone: stille modus uit)." : speech === "checking" ? "Bezig met controleren of uw browser kan voorlezen…" : speech === "unsupported" ? "Voorlezen is niet beschikbaar: deze browser ondersteunt geen spraak." : "Voorlezen is niet beschikbaar: deze browser heeft geen Nederlandse stem."}
           </p>
         </div>
 
