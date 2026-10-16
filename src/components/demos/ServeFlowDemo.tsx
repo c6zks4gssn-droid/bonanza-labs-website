@@ -1,87 +1,93 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { CalendarCheck, RotateCcw, Send } from "lucide-react";
+import { CalendarCheck, RotateCcw, Send, Store, User } from "lucide-react";
+import ChatLog, { type ChatItem } from "./ChatLog";
 import { initialState, respond, RESTAURANT, type Reply } from "@/lib/demos/serveflow-demo";
 
-type Msg = { from: "gast" | "restaurant"; text: string };
-const welcome: Msg = { from: "restaurant", text: "Welkom bij De Voorbeeldkeuken! Ik kan een tafel voor u reserveren of vragen beantwoorden over openingstijden, het menu en allergenen." };
-const suggestions = ["Ik wil een tafel reserveren", "Zaterdag om 19:00 met 4 personen", "Wat zijn jullie openingstijden?", "Wat kan ik eten zonder melk?", "Hebben jullie vegetarische gerechten?"];
+const WELCOME = "Welkom bij De Voorbeeldkeuken! Ik kan een tafel voor u reserveren of vragen beantwoorden over openingstijden, het menu en allergenen.";
+const CHIPS: { label: string; text: string }[] = [
+  { label: "Tafel reserveren", text: "Ik wil een tafel reserveren" },
+  { label: "Openingstijden", text: "Wat zijn jullie openingstijden?" },
+  { label: "Menu", text: "Wat staat er op het menu?" },
+  { label: "Allergenen", text: "Welke allergenen zitten in de gerechten?" },
+];
+const wrap = (me: boolean, text: string): ChatItem => ({ me, text, srLabel: me ? "U" : "Restaurant" });
 
 export default function ServeFlowDemo() {
-  const [msgs, setMsgs] = useState<Msg[]>([welcome]);
+  const [msgs, setMsgs] = useState<ChatItem[]>([wrap(false, WELCOME)]);
   const [state, setState] = useState(initialState());
   const [input, setInput] = useState("");
+  const [typing, setTyping] = useState(false);
   const [conf, setConf] = useState<Reply["confirmation"]>();
-  const endRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    endRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
-  }, [msgs, conf]);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const timer = useRef<number | undefined>(undefined);
+  useEffect(() => () => window.clearTimeout(timer.current), []);
 
-  function send(text: string) {
-    if (!text.trim()) return;
-    const r = respond(text, state);
-    setMsgs((m) => [...m, { from: "gast", text }, { from: "restaurant", text: r.text }]);
-    setState(r.state);
-    if (r.confirmation) setConf(r.confirmation);
+  function send(text: string, focus = true) {
+    const clean = text.trim();
+    if (!clean || typing) return;
+    const r = respond(clean, state);
+    setMsgs((m) => [...m, wrap(true, clean)]);
     setInput("");
+    setTyping(true);
+    setState(r.state);
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    timer.current = window.setTimeout(() => {
+      setMsgs((m) => [...m, wrap(false, r.text)]);
+      setTyping(false);
+      if (r.confirmation) setConf(r.confirmation);
+      if (focus) inputRef.current?.focus();
+    }, reduce ? 150 : 650 + Math.min(r.text.length * 4, 600));
   }
 
   function reset() {
-    setMsgs([welcome]);
+    window.clearTimeout(timer.current);
+    setMsgs([wrap(false, WELCOME)]);
     setState(initialState());
     setConf(undefined);
+    setTyping(false);
+    setInput("");
+    inputRef.current?.focus();
   }
 
   return (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
-      <div className="flex min-w-0 flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-5 md:p-6">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <p className="font-bold">{RESTAURANT}</p>
-          <button type="button" onClick={reset} className="inline-flex items-center gap-1 rounded-lg border border-white/15 px-3 py-1.5 text-sm"><RotateCcw className="h-4 w-4" aria-hidden /> Opnieuw</button>
+    <div className="dm-grid">
+      <div className="dm-card">
+        <div className="dm-head">
+          <div><p className="dm-title">{RESTAURANT}</p><p className="dm-sub">Chat · voorbeeldgegevens</p></div>
+          <button type="button" onClick={reset} className="dm-btn ghost sm" data-testid="restart"><RotateCcw className="h-4 w-4" aria-hidden /> Opnieuw beginnen</button>
         </div>
-        <div className="mt-4 h-[400px] overflow-y-auto rounded-xl border border-white/10 bg-black/20 p-4" aria-live="polite" aria-label="Chatgesprek">
-          <ul className="space-y-3">
-            {msgs.map((m, i) => (
-              <li key={i} className={`flex ${m.from === "gast" ? "justify-end" : ""}`}>
-                <div className={`max-w-[85%] rounded-2xl px-4 py-2 text-sm leading-relaxed ${m.from === "gast" ? "bg-amber-400 text-black" : "bg-white/10"}`}>
-                  <span className="sr-only">{m.from === "gast" ? "U: " : "Restaurant: "}</span>
-                  {m.text}
-                </div>
-              </li>
-            ))}
-          </ul>
-          <div ref={endRef} />
-        </div>
-        <div className="mt-3 flex flex-wrap gap-2" aria-label="Voorbeeldvragen">
-          {suggestions.map((s) => (
-            <button key={s} type="button" onClick={() => send(s)} className="rounded-full border border-white/15 px-3 py-1.5 text-xs hover:bg-white/5">{s}</button>
+        <ChatLog items={msgs} typing={typing} label="Chatgesprek met het restaurant" typingLabel="Restaurant typt…" meIcon={<User className="h-4 w-4" />} otherIcon={<Store className="h-4 w-4" />} />
+        <div className="dm-chips" role="group" aria-label="Snelle vragen">
+          {CHIPS.map((c) => (
+            <button key={c.label} type="button" disabled={typing} onClick={() => send(c.text)} className="dm-chip">{c.label}</button>
           ))}
         </div>
-        <form onSubmit={(e) => { e.preventDefault(); send(input); }} className="mt-3 flex gap-2">
+        <form onSubmit={(e) => { e.preventDefault(); send(input); }} className="dm-form">
           <label htmlFor="serveflow-input" className="sr-only">Uw bericht</label>
-          <input id="serveflow-input" value={input} onChange={(e) => setInput(e.target.value)} maxLength={200} placeholder="Typ uw vraag of reservering…" className="min-w-0 flex-1 rounded-xl border border-white/15 bg-transparent px-4 py-3 text-sm" autoComplete="off" />
-          <button type="submit" className="inline-flex items-center gap-1 rounded-xl bg-amber-400 px-5 py-3 text-sm font-bold text-black hover:bg-amber-300"><Send className="h-4 w-4" aria-hidden /> Stuur</button>
+          <input ref={inputRef} id="serveflow-input" value={input} onChange={(e) => setInput(e.target.value)} maxLength={200} placeholder="Bijv. zaterdag om 19:00 met 4 personen" className="dm-input" autoComplete="off" enterKeyHint="send" />
+          <button type="submit" className="dm-btn" disabled={typing || !input.trim()}><Send className="h-4 w-4" aria-hidden /> Stuur</button>
         </form>
       </div>
 
-      <aside className="rounded-2xl border border-amber-500/30 bg-amber-500/[0.06] p-5 md:p-6" aria-label="Reserveringsbevestiging">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-300">Reserveringsbevestiging</p>
+      <aside className="dm-side" aria-labelledby="sf-conf-title">
+        <p id="sf-conf-title" className="dm-eyebrow">Reserveringsbevestiging</p>
         {!conf ? (
-          <p className="mt-4 text-sm text-gray-400">Rond een reservering af in de chat. Hier ziet u dan de bevestiging die de gast zou krijgen.</p>
+          <p className="mt-3 text-sm">Rond een reservering af in de chat. Hier ziet u dan de bevestiging die de gast zou krijgen.</p>
         ) : (
-          <div className="mt-4" data-testid="serveflow-confirmation">
-            <CalendarCheck className="h-8 w-8 text-amber-300" aria-hidden />
-            <dl className="mt-3 space-y-2 text-sm">
-              <div><dt className="text-gray-400">Naam</dt><dd className="font-semibold">{conf.name}</dd></div>
-              <div><dt className="text-gray-400">Datum</dt><dd className="font-semibold">{conf.label}</dd></div>
-              <div><dt className="text-gray-400">Tijd</dt><dd className="font-semibold">{conf.time}</dd></div>
-              <div><dt className="text-gray-400">Personen</dt><dd className="font-semibold">{conf.persons}</dd></div>
-              <div><dt className="text-gray-400">Code</dt><dd className="font-mono font-semibold">{conf.code}</dd></div>
+          <div className="mt-3" data-testid="serveflow-confirmation" role="status">
+            <CalendarCheck className="h-8 w-8" style={{ color: "#087b63" }} aria-hidden />
+            <dl>
+              <div><dt>Naam</dt><dd>{conf.name}</dd></div>
+              <div><dt>Datum</dt><dd>{conf.label}</dd></div>
+              <div><dt>Tijd</dt><dd>{conf.time}</dd></div>
+              <div><dt>Personen</dt><dd>{conf.persons}</dd></div>
+              <div><dt>Code</dt><dd className="font-mono">{conf.code}</dd></div>
             </dl>
           </div>
         )}
-        <p className="mt-6 text-xs text-gray-400">Demo met een fictief restaurant en voorbeeldgegevens. Er wordt niets gereserveerd, opgeslagen of verstuurd.</p>
+        <p className="dm-note">Demo met voorbeeldgegevens en een fictief restaurant. Er wordt niets gereserveerd, opgeslagen of verstuurd.</p>
       </aside>
     </div>
   );

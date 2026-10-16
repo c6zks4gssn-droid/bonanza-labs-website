@@ -45,3 +45,14 @@ test("serveflow closed day, faq, allergens", () => {
   let st = respond("reserveren", initialState(), today).state;
   assert.match(respond("wat staat er op het menu?", st, today).text, /Op de kaart/);
 });
+
+test("serveflow accepts 'ja' for suggested alternative", () => {
+  let st = respond("zaterdag om 19:00 met 2 personen", initialState(), today).state;
+  assert.equal(st.alt, "19:30");
+  const r = respond("ja graag", st, today);
+  assert.match(r.text, /om 19:30 is er plek voor 2 personen/);
+  st = respond("Wat zijn jullie openingstijden?", initialState(), today).state;
+  assert.match(respond("ja", st, today).text, /weet ik in deze demo niet/);
+  assert.match(respond("Welke allergenen zitten in de gerechten?", initialState(), today).text, /Per gerecht/);
+  assert.match(respond("Wat staat er op het menu?", initialState(), today).text, /Op de kaart/);
+});

@@ -23,7 +23,7 @@ export const MENU = [
 ];
 
 export type Reservation = { date?: string; time?: string; persons?: number; name?: string };
-export type State = { stage: "idle" | "collecting" | "name" | "done"; res: Reservation };
+export type State = { stage: "idle" | "collecting" | "name" | "done"; res: Reservation; alt?: string };
 export type Reply = { text: string; state: State; confirmation?: Required<Reservation> & { code: string; label: string } };
 
 export const initialState = (): State => ({ stage: "idle", res: {} });
@@ -99,8 +99,13 @@ function code(res: Reservation) {
 }
 
 export function respond(input: string, state: State, today = new Date()): Reply {
-  const t = input.toLowerCase().trim();
+  let t = input.toLowerCase().trim();
   const s: State = { stage: state.stage, res: { ...state.res } };
+  // "ja" op een voorgesteld alternatief tijdstip
+  if (s.stage === "collecting" && state.alt && /^(ja|jazeker|graag|prima|goed|is goed|oké|oke|ok|doe maar)\b/.test(t)) {
+    s.res.time = state.alt;
+    t = state.alt;
+  }
 
   if (s.stage === "name") {
     if (!t) return { text: "Op welke naam mag ik de reservering zetten?", state: s };
@@ -108,7 +113,7 @@ export function respond(input: string, state: State, today = new Date()): Reply 
     s.stage = "done";
     const r = s.res as Required<Reservation>;
     return {
-      text: `Dank u, ${r.name}. Uw demo-reservering staat hieronder. In het echt ontvangt de gast nu een bevestiging en 24 uur van tevoren een herinnering.`,
+      text: `Dank u, ${r.name}. Uw demo-reservering staat hieronder. In een echte opstelling kan de gast hiervan een bevestiging ontvangen, afhankelijk van hoe het restaurant het inricht.`,
       state: s,
       confirmation: { ...r, code: code(r), label: dateLabel(r.date) },
     };
@@ -134,7 +139,8 @@ export function respond(input: string, state: State, today = new Date()): Reply 
       if (av.reason.startsWith("Op ") && av.reason.includes("gesloten")) delete s.res.date;
       else if (av.alternative || av.reason.includes("tussen")) delete s.res.time;
       else delete s.res.persons;
-      return { text: av.reason + (av.alternative ? ` Om ${av.alternative} is er nog plek. Zal ik dat noteren? Typ dan '${av.alternative}'.` : " Wat wordt het?"), state: s };
+      if (av.alternative) s.alt = av.alternative;
+      return { text: av.reason + (av.alternative ? ` Om ${av.alternative} is er nog plek. Zal ik dat noteren? Antwoord met 'ja' of kies een andere tijd.` : " Wat wordt het?"), state: s };
     }
     s.stage = "name";
     return { text: `Goed nieuws: op ${dateLabel(s.res.date!)} om ${s.res.time} is er plek voor ${s.res.persons} ${s.res.persons === 1 ? "persoon" : "personen"}. Op welke naam mag ik de reservering zetten?`, state: s };
