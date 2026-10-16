@@ -47,7 +47,7 @@ const painPoints = [
   {
     icon: Phone,
     title: "Telefoon rinkelt tijdens bediening",
-    text: "Personeel kan niet tegelijk serveren en reserveren aannemen. Gemiste oproepen kosten €20–€40 per boeking.",
+    text: "Personeel kan niet tegelijk serveren en reserveren aannemen. Een gemiste oproep kan een gemiste reservering betekenen.",
   },
   {
     icon: Clock3,
@@ -70,7 +70,17 @@ const faqs = [
   {
     question: "Wat kost de ServeFlow pilot precies?",
     answer:
-      "De pilot kost €497 ex. btw, eenmalig. Er is geen abonnement en geen automatische verlenging. Na de 14 dagen kiest u: stoppen, of door met een service-abonnement vanaf €197/maand.",
+      "De pilot kost €497 ex. btw, eenmalig. Er is geen abonnement en geen automatische verlenging. Na de 14 dagen kiest u: stoppen, of door met beheer vanaf €197/maand excl. btw.",
+  },
+  {
+    question: "Wat zit er in de pilot?",
+    answer:
+      "Eén horecalocatie en één reserveringsflow. Intake en inrichting door BonanzaLabs, bevestiging, herinnering en annuleren/wijzigen, een interne reserveringssamenvatting en een evaluatie na 14 dagen.",
+  },
+  {
+    question: "Wat zit er in beheer na de pilot?",
+    answer:
+      "Beheer Basis (€197/maand excl. btw) omvat maandelijks beheer van je ingerichte oplossing en kleine aanpassingen aan afgesproken teksten, vragen en antwoorden. Daarnaast zijn er Standaard (€297) en Uitgebreid (€497); zie de prijzenpagina. Beheer loopt via een afzonderlijke overeenkomst.",
   },
   {
     question: "Wat gebeurt er na de 14 dagen?",

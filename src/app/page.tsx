@@ -8,7 +8,7 @@ import "./light-home.css";
 
 const services = [
  {name:"ServeFlow",title:"Reserveringen regelen",text:"Van online aanvraag tot bevestiging in één duidelijke flow. Minder handwerk rond je reserveringen.",href:"/serveflow",icon:Utensils,price:"€497",scope:"14 dagen · één locatie · één flow",note:"eenmalig"},
- {name:"TradeFlow",title:"Offerteaanvragen opvolgen",text:"Van aanvraag tot opvolging in één overzichtelijke flow. Je team houdt controle over de offerte.",href:"/tradeflow",icon:Hammer,price:"Op aanvraag",scope:"Implementatie na intake en scopeafspraak",note:""},
+ {name:"TradeFlow",title:"Offerteaanvragen opvolgen",text:"Van aanvraag tot opvolging in één overzichtelijke flow. Je team houdt controle over de offerte.",href:"/tradeflow",icon:Hammer,price:"Vanaf €1.995",scope:"Implementatie na intake en scopeafspraak",note:""},
  {name:"Bonanza Voice",title:"Telefoontjes opvangen",text:"AI vangt oproepen op, beantwoordt basisvragen en noteert terugbelverzoeken. Ook buiten openingstijden in te richten.",href:"/bonanza-voice",icon:Mic,price:"Vanaf €1.495",scope:"Inrichting op basis van jouw gesprekstype",note:""},
 ];
 export default function Home(){return <div className="light-site"><SiteNav light/><main id="main-content">
