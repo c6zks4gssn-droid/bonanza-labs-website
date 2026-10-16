@@ -192,6 +192,13 @@ export default function ServeFlowPage() {
             >
               Eerst een vraag stellen
             </Link>
+            <Link
+              href="/demo/serveflow"
+              className="rounded-xl border border-white/15 px-7 py-4 font-semibold hover:bg-white/5"
+              data-cta="serveflow-demo"
+            >
+              Probeer de demo
+            </Link>
           </div>
         </div>
       </section>

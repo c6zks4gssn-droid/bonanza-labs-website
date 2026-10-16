@@ -48,7 +48,7 @@ export default function VoicePage() {
     <section className="voice-band"><div className="voice-wrap">
       <h2>Waar je Bonanza Voice kunt inzetten</h2>
       <div className="voice-grid">
-        <article><h3>Installatie</h3><p>Een klant belt over een nieuwe badkamer of cv-installatie terwijl je bij een andere klant bent. De agent vraagt naar soort werk, plaats, gewenste periode en contactgegevens voor beoordeling door een medewerker.</p><Link href="/tradeflow">Bekijk TradeFlow voor offerteopvolging →</Link></article>
+        <article><h3>Installatie</h3><p>Een klant belt over een nieuwe badkamer of cv-installatie terwijl je bij een andere klant bent. De agent vraagt naar soort werk, plaats, gewenste periode en contactgegevens voor beoordeling door een medewerker.</p><Link href="/tradeflow">Bekijk TradeFlow voor offerteopvolging →</Link> <Link href="/demo/bonanza-voice">Probeer de demo voor installateurs →</Link></article>
         <article><h3>Horeca</h3><p>Op een drukke avond beantwoordt de agent afgesproken vragen over openingstijden, locatie en parkeren. Reserveringsverzoeken gaan naar een medewerker voor bevestiging. Direct boeken richten we alleen in met een geschikte, geteste koppeling.</p><Link href="/serveflow">Bekijk ServeFlow voor reserveringen →</Link></article>
         <article><h3>Bouw</h3><p>Verzamel bij aanvragen voor verbouw of aanbouw het type klus, de locatie, gewenste periode en contactgegevens. De beoordeling en de offerte blijven bij jouw team.</p><Link href="/tradeflow">Bekijk TradeFlow voor intake →</Link></article>
       </div>
