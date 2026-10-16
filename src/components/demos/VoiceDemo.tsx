@@ -19,7 +19,9 @@ export default function VoiceDemo() {
   const endRef = useRef<HTMLDivElement>(null);
   const canSpeak = typeof window !== "undefined" && "speechSynthesis" in window;
 
-  useEffect(() => endRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" }), [lines, summary]);
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, [lines, summary]);
   useEffect(() => () => stop(), []);
 
   function say(text: string) {
@@ -90,8 +92,8 @@ export default function VoiceDemo() {
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
-      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 md:p-6">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+      <div className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-6">
         <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Kies een manier">
           <button type="button" onClick={() => { reset(); setMode("kies"); }} aria-pressed={mode === "kies"} className={`rounded-full px-4 py-2 text-sm font-semibold ${mode === "kies" ? "bg-amber-400 text-black" : "border border-white/15"}`}>Voorbeeldgesprek</button>
           <button type="button" onClick={startSelf} aria-pressed={mode === "zelf"} className={`rounded-full px-4 py-2 text-sm font-semibold ${mode === "zelf" ? "bg-amber-400 text-black" : "border border-white/15"}`}>Zelf de beller zijn</button>

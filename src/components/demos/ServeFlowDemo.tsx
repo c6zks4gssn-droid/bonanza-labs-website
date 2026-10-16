@@ -14,7 +14,9 @@ export default function ServeFlowDemo() {
   const [input, setInput] = useState("");
   const [conf, setConf] = useState<Reply["confirmation"]>();
   const endRef = useRef<HTMLDivElement>(null);
-  useEffect(() => endRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" }), [msgs, conf]);
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, [msgs, conf]);
 
   function send(text: string) {
     if (!text.trim()) return;
@@ -32,9 +34,9 @@ export default function ServeFlowDemo() {
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
-      <div className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-5 md:p-6">
-        <div className="flex items-center justify-between gap-2">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+      <div className="flex min-w-0 flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-5 md:p-6">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="font-bold">{RESTAURANT}</p>
           <button type="button" onClick={reset} className="inline-flex items-center gap-1 rounded-lg border border-white/15 px-3 py-1.5 text-sm"><RotateCcw className="h-4 w-4" aria-hidden /> Opnieuw</button>
         </div>
