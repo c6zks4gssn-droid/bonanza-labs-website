@@ -99,6 +99,57 @@ const managementTiers = [
   },
 ];
 
+// CONCEPT-abonnementen (21-10-2026). Nog NIET goedgekeurd en NIET in Stripe.
+// Prijzen en inhoud zijn een voorstel; zie PR-beschrijving voor onderbouwing.
+// TODO: per-minuutkosten (ElevenLabs + telefonie) narekenen vóór livegang.
+const subscriptionTiers = [
+  {
+    id: "abonnement-start",
+    name: "Start",
+    price: "€199",
+    minutes: "300 belminuten per maand",
+    extra: "Extra minuut €0,35",
+    includes: [
+      "Bonanza Voice óf één ServeFlow-reserveringsflow",
+      "Eén locatie, één telefoonnummer",
+      "Beantwoordt afgesproken vragen en noteert terugbelverzoeken",
+      "Samenvatting per gesprek per e-mail",
+      "Kleine tekstaanpassingen per maand",
+      "Support per e-mail",
+    ],
+  },
+  {
+    id: "abonnement-groei",
+    name: "Groei",
+    price: "€349",
+    minutes: "800 belminuten per maand",
+    extra: "Extra minuut €0,30",
+    highlighted: true,
+    includes: [
+      "Bonanza Voice én ServeFlow samen",
+      "Eén locatie",
+      "Afspraken of reserveringen doorzetten naar je agenda of reserveringssysteem (als koppeling mogelijk is)",
+      "Doorverbinden naar jou of een collega",
+      "Maandelijkse evaluatie met verbetervoorstellen (tot 1 uur)",
+      "Support per e-mail en telefoon",
+    ],
+  },
+  {
+    id: "abonnement-pro",
+    name: "Pro",
+    price: "€499",
+    minutes: "1.000 belminuten per maand",
+    extra: "Extra minuut €0,25",
+    includes: [
+      "Alles uit Groei",
+      "Tot drie locaties of telefoonnummers",
+      "Koppeling met je eigen systeem, volgens afspraak",
+      "Afgesproken verbeteringen doorvoeren, tot 2 uur per maand",
+      "Voorrang bij support en aanpassingen",
+    ],
+  },
+];
+
 export default function PricingPage() {
   const [checkoutProduct, setCheckoutProduct] = useState<string | null>(null);
   const [checkoutError, setCheckoutError] = useState("");
@@ -213,6 +264,38 @@ export default function PricingPage() {
           </div>
         )}
         <p className="mt-4 text-center text-xs text-white/40">Veilige betaling via Stripe. Na betaling plannen we de intake.</p>
+      </section>
+
+      <section id="abonnementen" className="mx-auto max-w-6xl px-6 pb-16" aria-labelledby="abonnementen-titel">
+        <p className="w-fit rounded-full border border-amber-300/40 bg-amber-300/10 px-3 py-1 text-xs font-semibold text-amber-200">Concept — prijzen nog niet definitief</p>
+        <h2 id="abonnementen-titel" className="mt-4 mb-4 text-3xl font-black">Abonnementen voor Bonanza Voice en ServeFlow</h2>
+        <p className="max-w-3xl text-white/60">
+          Voor horeca, bouw en installatie. Wij richten alles in, testen het met je en houden het daarna bij. Belminuten zitten in het maandbedrag. Eenmalige inrichting €495 (Start en Groei); bij Pro volgens offerte. Minimale looptijd 3 maanden, daarna maandelijks opzegbaar. Niet gebruikte minuten vervallen aan het eind van de maand; zie de <Link href="/voorwaarden" className="underline">voorwaarden</Link>. Alle prijzen excl. btw.
+        </p>
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {subscriptionTiers.map((tier) => (
+            <article key={tier.id} className={`flex flex-col rounded-3xl border p-8 ${tier.highlighted ? "border-amber-400/50 bg-amber-500/5" : "border-white/10"}`}>
+              <h3 className="text-xl font-black">{tier.name}</h3>
+              <p className="mt-3 text-3xl font-black">
+                {tier.price}
+                <span className="text-base font-semibold text-white/60"> per maand</span>
+              </p>
+              <p className="mt-1 text-sm text-white/60">Excl. btw · {tier.minutes}</p>
+              <p className="text-sm text-white/60">{tier.extra}</p>
+              <ul className="mt-5 flex-1 space-y-2 text-sm leading-relaxed text-white/70">
+                {tier.includes.map((item) => (
+                  <li key={item} className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />{item}</li>
+                ))}
+              </ul>
+              <Link href="/contact" className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 px-5 py-3 font-semibold hover:bg-white/5">
+                Vraag {tier.name} aan <ArrowRight className="h-4 w-4" />
+              </Link>
+            </article>
+          ))}
+        </div>
+        <p className="mt-6 text-sm text-white/50">
+          Een gesprek duurt vaak een paar minuten; hoeveel gesprekken in een bundel passen hangt af van je bellers. Bij elk gesprek meldt de assistent dat de beller met AI spreekt. Afsluiten gaat via een afzonderlijke overeenkomst, niet via een knop op deze pagina.
+        </p>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-16" aria-labelledby="doorlopend-beheer">

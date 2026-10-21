@@ -19,8 +19,8 @@ const terms = [
     title: "1a. Flow Assessment",
     paragraphs: [
       "Het Flow Assessment kost €1.295 exclusief btw en omvat procesonderzoek, een rapport met prioriteiten en implementatievolgorde en een reviewcall. Betaling vindt vooraf plaats via Stripe.",
-      "Na betaling plannen we samen de intake. De klant kan een geplande afspraak kosteloos verzetten tot 24 uur vooraf. Bij later verzetten of niet verschijnen plannen we één keer opnieuw; daarna kan BonanzaLabs de gereserveerde tijd in rekening brengen. [TODO: termijn 24 uur bevestigen.]",
-      "Annuleren vóór de intake: volledige terugbetaling. Annuleren na de intake maar vóór oplevering van het rapport: terugbetaling minus de al bestede uren tegen het geldende uurtarief, met een maximum van 50% van de prijs. Na oplevering van het rapport is er geen terugbetaling. [TODO: percentages en uurtarief bevestigen.]",
+      "Na betaling plannen we samen de intake. De klant kan een geplande afspraak kosteloos verzetten tot 24 uur vooraf. Bij later verzetten of niet verschijnen plannen we één keer opnieuw; daarna kan BonanzaLabs de gereserveerde tijd in rekening brengen.",
+      "Annuleren vóór de intake: volledige terugbetaling. Annuleren na de intake maar vóór oplevering van het rapport: terugbetaling minus de al bestede uren tegen het geldende uurtarief, met een maximum van 50% van de prijs. Na oplevering van het rapport is er geen terugbetaling. [TODO: uurtarief bevestigen.]",
       "Wordt binnen 30 dagen na oplevering een implementatie bij BonanzaLabs afgenomen, dan wordt het betaalde bedrag van het Flow Assessment met die implementatie verrekend.",
     ],
   },
@@ -33,10 +33,23 @@ const terms = [
     ],
   },
   {
-    title: "3. Geen automatische verlenging",
+    title: "3. Geen automatische verlenging van de pilot",
     paragraphs: [
       "De ServeFlow-pilot eindigt automatisch na de afgesproken pilotperiode. Er ontstaat geen abonnement en er worden geen vervolgkosten geïncasseerd zonder een nieuwe, uitdrukkelijke overeenkomst.",
-      "Een vervolgimplementatie, beheerabonnement of uitbreiding wordt afzonderlijk besproken en geprijsd.",
+      "Een vervolgimplementatie, beheerabonnement of uitbreiding wordt afzonderlijk besproken en geprijsd. Kiest de klant uitdrukkelijk voor een abonnement, dan gelden de afspraken in artikel 3a.",
+    ],
+  },
+  {
+    title: "3a. Abonnementen Bonanza Voice en ServeFlow (concept, laat juridisch toetsen)",
+    paragraphs: [
+      "Abonnementen (Start, Groei, Pro) worden schriftelijk afgesloten voor bedrijven. Het herroepingsrecht voor consumenten is niet van toepassing.",
+      "Looptijd: minimaal 3 maanden vanaf de livegangsdatum. Daarna loopt het abonnement per kalendermaand door en is het maandelijks opzegbaar met een opzegtermijn van één kalendermaand, per e-mail aan BonanzaLabs.",
+      "Inrichting: de eenmalige inrichtingskosten worden vooraf gefactureerd en niet terugbetaald nadat de inrichting is gestart, tenzij de leveringsgarantie van toepassing is.",
+      "Belminuten: elk pakket bevat een maandelijks aantal belminuten. Niet gebruikte minuten vervallen aan het einde van de maand en worden niet meegenomen naar een volgende maand. Minuten boven de bundel worden achteraf per maand gefactureerd tegen het tarief van het pakket. Een minuut telt per begonnen minuut gespreksduur van de AI-assistent, inclusief doorverbonden tijd zolang de assistent in het gesprek is.",
+      "Telefoonkosten van de klant zelf, zoals doorschakelen van het eigen nummer naar het nummer van Bonanza Voice, vallen onder het abonnement van de klant bij zijn eigen provider.",
+      "Wijzigen van pakket kan per de eerstvolgende kalendermaand. Prijzen kunnen eenmaal per jaar worden aangepast, met minimaal 30 dagen vooraankondiging; de klant mag dan per de ingangsdatum opzeggen.",
+      "Bij betalingsachterstand van meer dan 14 dagen na herinnering mag BonanzaLabs de dienst opschorten.",
+      "Na beëindiging zet BonanzaLabs de assistent uit en verwijdert of retourneert de gegevens volgens de verwerkersovereenkomst.",
     ],
   },
   {
