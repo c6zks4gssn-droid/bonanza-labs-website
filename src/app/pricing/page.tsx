@@ -121,7 +121,7 @@ const subscriptionTiers = [
   {
     id: "abonnement-groei",
     name: "Groei",
-    price: "€329",
+    price: "€349",
     minutes: "800 belminuten per maand",
     extra: "Extra minuut €0,30",
     highlighted: true,
@@ -130,21 +130,21 @@ const subscriptionTiers = [
       "Eén locatie",
       "Afspraken of reserveringen doorzetten naar je agenda of reserveringssysteem (als koppeling mogelijk is)",
       "Doorverbinden naar jou of een collega",
-      "Maandelijkse evaluatie met verbetervoorstellen",
+      "Maandelijkse evaluatie met verbetervoorstellen (tot 1 uur)",
       "Support per e-mail en telefoon",
     ],
   },
   {
     id: "abonnement-pro",
     name: "Pro",
-    price: "€499",
-    minutes: "2.000 belminuten per maand",
+    price: "€649",
+    minutes: "1.500 belminuten per maand",
     extra: "Extra minuut €0,25",
     includes: [
       "Alles uit Groei",
       "Tot drie locaties of telefoonnummers",
       "Koppeling met je eigen systeem, volgens afspraak",
-      "Afgesproken verbeteringen doorvoeren we elke maand",
+      "Afgesproken verbeteringen doorvoeren, tot 2 uur per maand",
       "Voorrang bij support en aanpassingen",
     ],
   },
@@ -270,7 +270,7 @@ export default function PricingPage() {
         <p className="w-fit rounded-full border border-amber-300/40 bg-amber-300/10 px-3 py-1 text-xs font-semibold text-amber-200">Concept — prijzen nog niet definitief</p>
         <h2 id="abonnementen-titel" className="mt-4 mb-4 text-3xl font-black">Abonnementen voor Bonanza Voice en ServeFlow</h2>
         <p className="max-w-3xl text-white/60">
-          Voor horeca, bouw en installatie. Wij richten alles in, testen het met je en houden het daarna bij. Belminuten zitten in het maandbedrag. Eenmalige inrichting €495 (Start en Groei); bij Pro volgens offerte. Minimale looptijd 3 maanden, daarna maandelijks opzegbaar. Alle prijzen excl. btw.
+          Voor horeca, bouw en installatie. Wij richten alles in, testen het met je en houden het daarna bij. Belminuten zitten in het maandbedrag. Eenmalige inrichting €495 (Start en Groei); bij Pro volgens offerte. Minimale looptijd 3 maanden, daarna maandelijks opzegbaar. Niet gebruikte minuten vervallen aan het eind van de maand; zie de <Link href="/voorwaarden" className="underline">voorwaarden</Link>. Alle prijzen excl. btw.
         </p>
         <div className="mt-8 grid gap-6 md:grid-cols-3">
           {subscriptionTiers.map((tier) => (

@@ -40,6 +40,19 @@ const terms = [
     ],
   },
   {
+    title: "3a. Abonnementen Bonanza Voice en ServeFlow (concept, laat juridisch toetsen)",
+    paragraphs: [
+      "Abonnementen (Start, Groei, Pro) worden schriftelijk afgesloten voor bedrijven. Het herroepingsrecht voor consumenten is niet van toepassing.",
+      "Looptijd: minimaal 3 maanden vanaf de livegangsdatum. Daarna loopt het abonnement per kalendermaand door en is het maandelijks opzegbaar met een opzegtermijn van één kalendermaand, per e-mail aan BonanzaLabs.",
+      "Inrichting: de eenmalige inrichtingskosten worden vooraf gefactureerd en niet terugbetaald nadat de inrichting is gestart, tenzij de leveringsgarantie van toepassing is.",
+      "Belminuten: elk pakket bevat een maandelijks aantal belminuten. Niet gebruikte minuten vervallen aan het einde van de maand en worden niet meegenomen naar een volgende maand. Minuten boven de bundel worden achteraf per maand gefactureerd tegen het tarief van het pakket. Een minuut telt per begonnen minuut gespreksduur van de AI-assistent, inclusief doorverbonden tijd zolang de assistent in het gesprek is.",
+      "Telefoonkosten van de klant zelf, zoals doorschakelen van het eigen nummer naar het nummer van Bonanza Voice, vallen onder het abonnement van de klant bij zijn eigen provider.",
+      "Wijzigen van pakket kan per de eerstvolgende kalendermaand. Prijzen kunnen eenmaal per jaar worden aangepast, met minimaal 30 dagen vooraankondiging; de klant mag dan per de ingangsdatum opzeggen.",
+      "Bij betalingsachterstand van meer dan 14 dagen na herinnering mag BonanzaLabs de dienst opschorten.",
+      "Na beëindiging zet BonanzaLabs de assistent uit en verwijdert of retourneert de gegevens volgens de verwerkersovereenkomst.",
+    ],
+  },
+  {
     title: "4. Wat niet onder de standaardpilot valt",
     paragraphs: [
       "Tenzij schriftelijk anders overeengekomen vallen een complete nieuwe website, meerdere locaties, meerdere reserveringsflows, AI-telefonie, uitgebreide CRM-migratie, onbeperkte koppelingen en onbeperkte wijzigingen niet onder de standaardpilot.",
