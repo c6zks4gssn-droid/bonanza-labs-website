@@ -20,7 +20,7 @@ const terms = [
     paragraphs: [
       "Het Flow Assessment kost €1.295 exclusief btw en omvat procesonderzoek, een rapport met prioriteiten en implementatievolgorde en een reviewcall. Betaling vindt vooraf plaats via Stripe.",
       "Na betaling plannen we samen de intake. De klant kan een geplande afspraak kosteloos verzetten tot 24 uur vooraf. Bij later verzetten of niet verschijnen plannen we één keer opnieuw; daarna kan BonanzaLabs de gereserveerde tijd in rekening brengen.",
-      "Annuleren vóór de intake: volledige terugbetaling. Annuleren na de intake maar vóór oplevering van het rapport: terugbetaling minus de al bestede uren tegen het geldende uurtarief, met een maximum van 50% van de prijs. Na oplevering van het rapport is er geen terugbetaling. [TODO: uurtarief bevestigen.]",
+      "Annuleren vóór de intake: volledige terugbetaling. Annuleren na de intake maar vóór oplevering van het rapport: terugbetaling minus de al bestede uren tegen een uurtarief van €95 per uur exclusief btw, met een maximum van 50% van de prijs. Na oplevering van het rapport is er geen terugbetaling.",
       "Wordt binnen 30 dagen na oplevering een implementatie bij BonanzaLabs afgenomen, dan wordt het betaalde bedrag van het Flow Assessment met die implementatie verrekend.",
     ],
   },
