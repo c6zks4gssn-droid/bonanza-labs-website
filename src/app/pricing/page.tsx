@@ -137,8 +137,8 @@ const subscriptionTiers = [
   {
     id: "abonnement-pro",
     name: "Pro",
-    price: "€649",
-    minutes: "1.500 belminuten per maand",
+    price: "€499",
+    minutes: "1.000 belminuten per maand",
     extra: "Extra minuut €0,25",
     includes: [
       "Alles uit Groei",
