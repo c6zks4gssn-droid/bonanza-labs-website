@@ -2,6 +2,7 @@ import Link from "next/link";
 import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
 import { ArrowLeft, FileCheck2, Mail } from "lucide-react";
+import LegalConceptNote from "@/components/legal-concept-note";
 import { businessDetails, fullBusinessAddress } from "@/lib/business-details";
 
 const terms = [
@@ -9,8 +10,18 @@ const terms = [
     title: "1. Onderneming en toepasselijkheid",
     paragraphs: [
       `${businessDetails.tradeName} is een geregistreerde handelsnaam van een eenmanszaak, ingeschreven bij de Kamer van Koophandel onder nummer ${businessDetails.kvkNumber}. Het vestigingsnummer is ${businessDetails.branchNumber}.`,
-      "Deze voorwaarden gelden voor de ServeFlow 14-dagen pilot, Flow Assessments en andere diensten die BonanzaLabs schriftelijk aanbiedt. Afwijkingen gelden alleen wanneer ze schriftelijk zijn bevestigd.",
+      "Deze voorwaarden gelden voor de ServeFlow 14-dagen pilot, Flow Assessments, Bonanza Voice en andere diensten die BonanzaLabs schriftelijk aanbiedt. Afwijkingen gelden alleen wanneer ze schriftelijk zijn bevestigd.",
       "Bij tegenstrijdigheid gaat de individuele offerte of schriftelijk bevestigde pilotscope vóór op deze algemene voorwaarden.",
+      "Onze diensten zijn uitsluitend bedoeld voor bedrijven en professionals die handelen in de uitoefening van hun beroep of bedrijf. Het wettelijke herroepingsrecht voor consumenten (14 dagen bedenktijd) is daarom niet van toepassing.",
+    ],
+  },
+  {
+    title: "1a. Flow Assessment",
+    paragraphs: [
+      "Het Flow Assessment kost €1.295 exclusief btw en omvat procesonderzoek, een rapport met prioriteiten en implementatievolgorde en een reviewcall. Betaling vindt vooraf plaats via Stripe.",
+      "Na betaling plannen we samen de intake. De klant kan een geplande afspraak kosteloos verzetten tot 24 uur vooraf. Bij later verzetten of niet verschijnen plannen we één keer opnieuw; daarna kan BonanzaLabs de gereserveerde tijd in rekening brengen. [TODO: termijn 24 uur bevestigen.]",
+      "Annuleren vóór de intake: volledige terugbetaling. Annuleren na de intake maar vóór oplevering van het rapport: terugbetaling minus de al bestede uren tegen het geldende uurtarief, met een maximum van 50% van de prijs. Na oplevering van het rapport is er geen terugbetaling. [TODO: percentages en uurtarief bevestigen.]",
+      "Wordt binnen 30 dagen na oplevering een implementatie bij BonanzaLabs afgenomen, dan wordt het betaalde bedrag van het Flow Assessment met die implementatie verrekend.",
     ],
   },
   {
@@ -73,6 +84,15 @@ const terms = [
     ],
   },
   {
+    title: "9a. Bonanza Voice en AI-transparantie",
+    paragraphs: [
+      "Bonanza Voice is een AI-assistent. Conform artikel 50 van de EU AI-verordening (AI Act) hoort elke beller aan het begin van ieder gesprek dat hij met een AI-assistent spreekt. Deze melding staat standaard aan en de klant laat haar niet uitschakelen.",
+      "Wordt een gesprek opgenomen of getranscribeerd, dan wordt dat aan het begin van het gesprek gemeld. Gegevens van bellers (zoals telefoonnummer, naam, gespreksinhoud) worden alleen verwerkt om het gesprek af te handelen en de klant te informeren.",
+      "Voor de verwerking van gegevens van bellers en gasten van de klant sluiten partijen een verwerkersovereenkomst; het model staat op bonanza-labs.com/verwerkersovereenkomst.",
+      "AI kan fouten maken. De klant controleert de ingerichte antwoorden en blijft verantwoordelijk voor afspraken die aan bellers worden bevestigd.",
+    ],
+  },
+  {
     title: "10. Aansprakelijkheid",
     paragraphs: [
       "BonanzaLabs is niet aansprakelijk voor indirecte schade, gemiste winst, gemiste reserveringen of bedrijfsstagnatie, behalve wanneer uitsluiting wettelijk niet is toegestaan.",
@@ -105,9 +125,10 @@ export default function TermsPage() {
         <div className="mx-auto max-w-4xl">
           <Link href="/pricing" className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white"><ArrowLeft className="h-4 w-4" /> Terug naar prijzen</Link>
           <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-amber-300/20 bg-amber-300/10 px-4 py-2 text-sm text-amber-200"><FileCheck2 className="h-4 w-4" /> Zakelijke pilotvoorwaarden</div>
-          <h1 className="mt-6 text-4xl font-black tracking-tight md:text-6xl">Voorwaarden ServeFlow-pilot</h1>
+          <h1 className="mt-6 text-4xl font-black tracking-tight md:text-6xl">Algemene voorwaarden</h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">De scope, garantie, betaling en verantwoordelijkheden vóórdat een pilot wordt geboekt.</p>
-          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 28 juli 2026</p>
+          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 16 oktober 2026</p>
+          <LegalConceptNote />
         </div>
       </section>
 
