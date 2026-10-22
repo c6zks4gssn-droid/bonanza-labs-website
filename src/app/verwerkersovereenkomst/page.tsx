@@ -44,7 +44,7 @@ export default function DpaPage() {
           "Bij Bonanza Voice hoort elke beller aan het begin van het gesprek dat hij met een AI-assistent spreekt, en of het gesprek wordt opgenomen. De Klant mag deze melding niet laten uitschakelen.",
         ] },
         { title: "7. Bewaren, verwijderen en audit", paragraphs: [
-          "Na afloop van de dienst verwijdert BonanzaLabs de gegevens, of geeft ze terug, binnen 30 dagen, tenzij de wet langer bewaren verplicht. [TODO: bewaartermijn gespreksopnames/transcripts per klant vastleggen.]",
+          "Na afloop van de dienst verwijdert BonanzaLabs de gegevens, of geeft ze terug, binnen 30 dagen, tenzij de wet langer bewaren verplicht. De bewaartermijn van gespreksopnames en transcripts wordt per klant schriftelijk vastgelegd.",
           "De Klant kan redelijke informatie opvragen om naleving te controleren.",
         ] },
         { title: "8. Aansprakelijkheid en recht", paragraphs: [

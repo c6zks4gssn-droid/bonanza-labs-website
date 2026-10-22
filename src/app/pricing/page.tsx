@@ -157,7 +157,7 @@ export default function PricingPage() {
 
   const startCheckout = async (product: string) => {
     if (!termsAccepted) {
-      setCheckoutError("Bevestig eerst dat je de pilotvoorwaarden en privacyverklaring hebt gelezen.");
+      setCheckoutError("Ga eerst akkoord met de algemene voorwaarden en bevestig dat je de privacyverklaring hebt gelezen.");
       return;
     }
 
@@ -254,7 +254,7 @@ export default function PricingPage() {
             className="mt-1 h-4 w-4 accent-amber-400"
           />
           <span>
-            Ik heb de <Link href="/voorwaarden" className="text-cyan-300 underline">voorwaarden</Link> en de <Link href="/privacy" className="text-cyan-300 underline">privacyverklaring</Link> gelezen. Ik begrijp dat de ServeFlow-pilot geen omzet, reserveringen of een specifieke daling van no-shows garandeert.
+            Ik ga akkoord met de <Link href="/voorwaarden" className="text-cyan-300 underline">algemene voorwaarden</Link> (<a href="/algemene-voorwaarden-bonanzalabs.pdf" download className="text-cyan-300 underline">PDF</a>) en heb de <Link href="/privacy" className="text-cyan-300 underline">privacyverklaring</Link> gelezen. Ik begrijp dat de ServeFlow-pilot geen omzet, reserveringen of een specifieke daling van no-shows garandeert.
           </span>
         </label>
 

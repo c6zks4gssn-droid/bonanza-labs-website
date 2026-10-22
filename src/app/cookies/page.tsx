@@ -22,7 +22,7 @@ export default function CookiesPage() {
           "Het beheergedeelte (/admin) gebruikt HTTP-authenticatie van de browser en plaatst daarvoor geen trackingcookie.",
         ] },
         { title: "2. Diensten van derden", paragraphs: [
-          "Bonanza Voice (de spraakwidget) wordt geladen van ElevenLabs via unpkg.com. Wanneer je de widget opent of een gesprek start, kan ElevenLabs functionele opslag gebruiken om het gesprek te laten werken. [TODO: exacte cookies/opslag van de ElevenLabs-widget controleren en hier opsommen.]",
+          "Bonanza Voice (de spraakwidget van ElevenLabs) wordt niet automatisch geladen. Pas wanneer je op de knop 'Praat met Bonanza Voice' klikt, laadt je browser de widget van ElevenLabs via unpkg.com. Vanaf dat moment kan ElevenLabs functionele opslag gebruiken om het gesprek te laten werken. Zolang je niet klikt, maakt deze site geen verbinding met ElevenLabs of unpkg.com.",
           "Betalen gebeurt op de betaalpagina van Stripe (checkout.stripe.com). Stripe plaatst daar eigen cookies voor betaling en fraudepreventie, volgens het cookiebeleid van Stripe.",
         ] },
         { title: "3. Geen tracking", paragraphs: [

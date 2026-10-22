@@ -1,7 +1,7 @@
 import Link from "next/link";
 import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
-import { ArrowLeft, FileCheck2, Mail } from "lucide-react";
+import { ArrowLeft, Download, FileCheck2, Mail } from "lucide-react";
 import LegalConceptNote from "@/components/legal-concept-note";
 import { businessDetails, fullBusinessAddress } from "@/lib/business-details";
 
@@ -20,7 +20,7 @@ const terms = [
     paragraphs: [
       "Het Flow Assessment kost €1.295 exclusief btw en omvat procesonderzoek, een rapport met prioriteiten en implementatievolgorde en een reviewcall. Betaling vindt vooraf plaats via Stripe.",
       "Na betaling plannen we samen de intake. De klant kan een geplande afspraak kosteloos verzetten tot 24 uur vooraf. Bij later verzetten of niet verschijnen plannen we één keer opnieuw; daarna kan BonanzaLabs de gereserveerde tijd in rekening brengen.",
-      "Annuleren vóór de intake: volledige terugbetaling. Annuleren na de intake maar vóór oplevering van het rapport: terugbetaling minus de al bestede uren tegen een uurtarief van €95 per uur exclusief btw, met een maximum van 50% van de prijs. Na oplevering van het rapport is er geen terugbetaling.",
+      "Annuleren vóór de intake: volledige terugbetaling. Annuleren na de intake maar vóór oplevering van het rapport: de terugbetaling bedraagt de prijs minus de bestede uren à €95 per uur excl. btw, maar nooit meer dan 50% van de prijs. Na oplevering van het rapport is er geen terugbetaling.",
       "Wordt binnen 30 dagen na oplevering een implementatie bij BonanzaLabs afgenomen, dan wordt het betaalde bedrag van het Flow Assessment met die implementatie verrekend.",
     ],
   },
@@ -85,8 +85,17 @@ const terms = [
   {
     title: "8. Betaling en btw",
     paragraphs: [
-      "Bedragen op de zakelijke website zijn exclusief btw tenzij uitdrukkelijk anders vermeld. Betaling via Stripe vindt vooraf plaats.",
+      "Bedragen op de zakelijke website zijn exclusief btw tenzij uitdrukkelijk anders vermeld. Eenmalige aankopen (de ServeFlow-pilot, het Flow Assessment en eenmalige inrichtingskosten) worden vooraf betaald via Stripe. Abonnementen en meerminuten worden gefactureerd volgens artikel 8a.",
       "Na betaling ontvangt de klant een bevestiging en neemt BonanzaLabs contact op voor de intake. Een betaling is geen stilzwijgende instemming met werk buiten de beschreven aanbieding.",
+    ],
+  },
+  {
+    title: "8a. Facturatie van abonnementen en meerminuten",
+    paragraphs: [
+      "Abonnementen (artikel 3a) en meerminuten worden maandelijks gefactureerd. Het abonnementsbedrag wordt per kalendermaand gefactureerd; meerminuten worden achteraf over de afgelopen kalendermaand gefactureerd.",
+      "Meerminuten worden berekend tegen het tarief van het gekozen pakket: Start €0,35, Groei €0,30 en Pro €0,25 per extra minuut, exclusief btw.",
+      "De betalingstermijn van facturen is 14 dagen na factuurdatum.",
+      "Betaalt de klant niet binnen de betalingstermijn, dan is de klant zonder nadere ingebrekestelling de wettelijke handelsrente verschuldigd op grond van artikel 6:119a van het Burgerlijk Wetboek.",
     ],
   },
   {
@@ -114,6 +123,13 @@ const terms = [
     ],
   },
   {
+    title: "10a. Overmacht",
+    paragraphs: [
+      "BonanzaLabs is niet gehouden tot het nakomen van een verplichting wanneer zij daartoe verhinderd is door overmacht. Onder overmacht valt iedere omstandigheid buiten de wil van BonanzaLabs, waaronder storingen, uitval of beperkingen bij leveranciers en externe diensten zoals ElevenLabs, Telnyx of Twilio (telefonie), Vercel (hosting), betaal- en e-maildiensten, en storingen in internet- of telefoonnetwerken.",
+      "Tijdens overmacht worden de verplichtingen van BonanzaLabs opgeschort. Duurt de overmacht langer dan 30 dagen, dan mogen beide partijen de overeenkomst schriftelijk beëindigen voor het deel dat nog niet is uitgevoerd, zonder verplichting tot schadevergoeding.",
+    ],
+  },
+  {
     title: "11. Intellectuele eigendom en gebruik",
     paragraphs: [
       "De klant mag de specifiek voor hem opgeleverde configuratie gebruiken volgens de schriftelijke afspraak. Rechten op algemene software, componenten, methoden en herbruikbare templates blijven bij BonanzaLabs of de betreffende licentiegever.",
@@ -125,6 +141,7 @@ const terms = [
     paragraphs: [
       "Klachten worden zo snel mogelijk na ontdekking schriftelijk gemeld, met voldoende informatie om het probleem te onderzoeken.",
       "Op de overeenkomst is Nederlands recht van toepassing. Partijen proberen een geschil eerst in overleg op te lossen voordat zij verdere stappen nemen.",
+      "Geschillen worden voorgelegd aan de bevoegde rechter van de Rechtbank Noord-Nederland.",
     ],
   },
 ];
@@ -140,8 +157,9 @@ export default function TermsPage() {
           <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-amber-300/20 bg-amber-300/10 px-4 py-2 text-sm text-amber-200"><FileCheck2 className="h-4 w-4" /> Zakelijke pilotvoorwaarden</div>
           <h1 className="mt-6 text-4xl font-black tracking-tight md:text-6xl">Algemene voorwaarden</h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">De scope, garantie, betaling en verantwoordelijkheden vóórdat een pilot wordt geboekt.</p>
-          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 16 oktober 2026</p>
+          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 22 oktober 2026</p>
           <LegalConceptNote />
+          <a href="/algemene-voorwaarden-bonanzalabs.pdf" download className="mt-6 inline-flex items-center gap-2 rounded-xl border border-white/15 px-4 py-2 text-sm font-semibold hover:bg-white/10"><Download className="h-4 w-4" /> Download als PDF</a>
         </div>
       </section>
 
