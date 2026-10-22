@@ -39,7 +39,7 @@ const sections = [
       "Resend Inc. (VS): versturen van e-mailnotificaties over aanvragen.",
       "ElevenLabs Inc. (VS): Bonanza Voice, spraak- en tekstgesprekken met de AI-assistent (audio, transcript, technische gegevens).",
       "MiniMax en OpenRouter Inc. (VS): genereren van antwoorden in de AI-chat op de website.",
-      "Telegram Messenger Inc.: interne storingsmeldingen aan de eigenaar over mislukte e-mails (geen volledige aanvragen). [TODO: controleren welke velden in deze melding staan.]",
+      "Telegram Messenger Inc.: interne storingsmeldingen aan de eigenaar over mislukte e-mails. Zo'n melding bevat alleen het tijdstip, de verzendstatus, een intern nummer en de foutmelding van de verzendpartij; geen namen, e-mailadressen of inhoud van aanvragen.",
       "Doorgifte naar landen buiten de EER gebeurt alleen met een passende waarborg, zoals het EU-VS Data Privacy Framework of standaardcontractbepalingen van de Europese Commissie.",
       "Deze partijen ontvangen alleen gegevens die nodig zijn voor hun specifieke taak. BonanzaLabs verkoopt geen persoonsgegevens aan adverteerders of databrokers.",
     ],
@@ -48,7 +48,7 @@ const sections = [
     title: "4a. Bonanza Voice en AI (EU AI Act art. 50)",
     paragraphs: [
       "Bonanza Voice is een AI-assistent, geen mens. Aan het begin van elk gesprek, op de website en bij telefoonlijnen die we voor klanten inrichten, wordt gemeld dat je met AI spreekt.",
-      "Bij een gesprek worden je stem, het transcript en technische gegevens verwerkt door ElevenLabs. Bij een telefoonlijn van een klant kan ook je telefoonnummer worden verwerkt. Of een gesprek wordt opgenomen, hoor je aan het begin van het gesprek. [TODO: bevestigen of opname/transcriptbewaring in ElevenLabs aan staat en hoe lang.]",
+      "Bij een gesprek worden je stem, het transcript en technische gegevens verwerkt door ElevenLabs. Bij een telefoonlijn van een klant kan ook je telefoonnummer worden verwerkt. Of een gesprek wordt opgenomen, hoor je aan het begin van het gesprek. Hoe lang ElevenLabs opnames en transcripts bewaart, hangt af van de instellingen van de assistent; vraag ons gerust naar de actuele bewaartermijn.",
       "Bij telefoonlijnen die we voor een zakelijke klant inrichten, is die klant de verwerkingsverantwoordelijke en BonanzaLabs de verwerker. Daarvoor sluiten we een verwerkersovereenkomst (zie bonanza-labs.com/verwerkersovereenkomst).",
     ],
   },
