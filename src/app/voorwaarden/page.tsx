@@ -85,7 +85,7 @@ const terms = [
   {
     title: "8. Betaling en btw",
     paragraphs: [
-      "Bedragen op de zakelijke website zijn exclusief btw tenzij uitdrukkelijk anders vermeld. Betaling via Stripe vindt vooraf plaats.",
+      "Bedragen op de zakelijke website zijn exclusief btw tenzij uitdrukkelijk anders vermeld. Eenmalige aankopen (de ServeFlow-pilot, het Flow Assessment en eenmalige inrichtingskosten) worden vooraf betaald via Stripe. Abonnementen en meerminuten worden gefactureerd volgens artikel 8a.",
       "Na betaling ontvangt de klant een bevestiging en neemt BonanzaLabs contact op voor de intake. Een betaling is geen stilzwijgende instemming met werk buiten de beschreven aanbieding.",
     ],
   },
@@ -157,7 +157,7 @@ export default function TermsPage() {
           <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-amber-300/20 bg-amber-300/10 px-4 py-2 text-sm text-amber-200"><FileCheck2 className="h-4 w-4" /> Zakelijke pilotvoorwaarden</div>
           <h1 className="mt-6 text-4xl font-black tracking-tight md:text-6xl">Algemene voorwaarden</h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">De scope, garantie, betaling en verantwoordelijkheden vóórdat een pilot wordt geboekt.</p>
-          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 16 oktober 2026</p>
+          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 22 oktober 2026</p>
           <LegalConceptNote />
           <a href="/algemene-voorwaarden-bonanzalabs.pdf" download className="mt-6 inline-flex items-center gap-2 rounded-xl border border-white/15 px-4 py-2 text-sm font-semibold hover:bg-white/10"><Download className="h-4 w-4" /> Download als PDF</a>
         </div>
