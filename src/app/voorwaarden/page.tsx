@@ -53,6 +53,22 @@ const terms = [
     ],
   },
   {
+    title: "3b. Subsidiehulp (concept, laat juridisch toetsen)",
+    paragraphs: [
+      "Bij subsidiehulp ondersteunt BonanzaLabs de klant bij het voorbereiden van een subsidieaanvraag. De klant dient de aanvraag zelf in, is verantwoordelijk voor de juistheid en volledigheid van de gegevens en bepaalt zelf of hij de aanvraag indient.",
+      "BonanzaLabs geeft geen garantie dat subsidie wordt verleend of vastgesteld. Daarover beslist uitsluitend de subsidieverstrekker, zoals SNN. Een afwijzing, een lager bedrag of een uitgeput budget geeft geen recht op terugbetaling van de vaste vergoeding.",
+      "Een succesfee is alleen verschuldigd na een besluit tot subsidieverlening en wordt berekend over het verleende bedrag. Wordt de subsidie later lager vastgesteld, dan verrekent BonanzaLabs het verschil in de succesfee.",
+    ],
+  },
+  {
+    title: "3c. Review-automatisering (concept, laat juridisch toetsen)",
+    paragraphs: [
+      "Bij review-automatisering verstuurt BonanzaLabs namens de klant reviewverzoeken aan diens klanten. De klant zorgt ervoor dat hij deze klanten op basis van de wet mag benaderen en levert alleen gegevens aan van klanten die een bezoek of opdracht hebben afgerond.",
+      "Verzoeken worden aan alle klanten gelijk verstuurd, zonder selectie op tevredenheid en zonder beloning, in lijn met het beleid van Google. BonanzaLabs belooft geen aantal reviews of beoordelingsscore.",
+      "De dienst is maandelijks opzegbaar met een opzegtermijn van één kalendermaand. Facturatie gebeurt volgens artikel 8a.",
+    ],
+  },
+  {
     title: "4. Wat niet onder de standaardpilot valt",
     paragraphs: [
       "Tenzij schriftelijk anders overeengekomen vallen een complete nieuwe website, meerdere locaties, meerdere reserveringsflows, AI-telefonie, uitgebreide CRM-migratie, onbeperkte koppelingen en onbeperkte wijzigingen niet onder de standaardpilot.",

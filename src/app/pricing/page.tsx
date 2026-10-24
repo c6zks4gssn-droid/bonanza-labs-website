@@ -331,6 +331,44 @@ export default function PricingPage() {
         </p>
       </section>
 
+      <section className="mx-auto max-w-6xl px-6 pb-16" aria-labelledby="extra-diensten">
+        <h2 id="extra-diensten" className="mb-4 text-3xl font-black">Subsidiehulp en review-automatisering</h2>
+        <p className="max-w-3xl text-white/60">
+          Twee losse diensten naast onze automatiseringen. Alle prijzen excl. btw. Je boekt ze via een kennismaking, niet via een knop op deze pagina.
+        </p>
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
+          <article id="subsidiehulp" className="rounded-3xl border border-white/10 p-8">
+            <h3 className="text-xl font-black">Subsidiehulp</h3>
+            <p className="mt-3 text-sm leading-relaxed text-white/60">
+              Hulp bij het voorbereiden en indienen van een aanvraag voor een digitaliseringssubsidie, zoals de SNN-regeling Mkb digitalisering en robotisering 2.0.
+            </p>
+            <ul className="mt-4 space-y-2 text-sm leading-relaxed text-white/60">
+              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" /><span><strong>Subsidiecheck: €195</strong>. We kijken samen of je bedrijf en je plan binnen de voorwaarden van de regeling lijken te vallen. Neem je daarna aanvraaghulp af, dan verrekenen we dit bedrag.</span></li>
+              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" /><span><strong>Aanvraaghulp: €695 vast</strong>. Hulp bij projectplan, begroting en het invullen van de aanvraag. Jij dient de aanvraag zelf in, op naam van je bedrijf.</span></li>
+              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" /><span><strong>Succesfee: 8% van de verleende subsidie</strong>, maximaal €2.500. Alleen verschuldigd als de subsidie wordt verleend.</span></li>
+            </ul>
+            <p className="mt-4 text-sm text-white/50">
+              Geen garantie op toekenning: de subsidieverstrekker (bijvoorbeeld SNN) beslist over je aanvraag, en budgetten kunnen op raken voordat een regeling sluit.
+            </p>
+          </article>
+          <article id="review-automatisering" className="rounded-3xl border border-white/10 p-8">
+            <h3 className="text-xl font-black">Review-automatisering</h3>
+            <p className="mt-3 text-sm leading-relaxed text-white/60">
+              Na een bezoek of een afgeronde klus krijgt je klant automatisch een vriendelijk verzoek om een Google-review te schrijven, met een directe link naar je bedrijfsprofiel.
+            </p>
+            <p className="mt-3 text-3xl font-black">€59<span className="text-base font-semibold text-white/60"> per maand</span></p>
+            <p className="mt-1 text-sm text-white/60">Plus €149 eenmalige inrichting. Excl. btw.</p>
+            <ul className="mt-4 space-y-2 text-sm leading-relaxed text-white/60">
+              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />Eén locatie, verzoeken per e-mail (sms of WhatsApp volgens afspraak)</li>
+              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />Eén herinnering, en geen nieuwe verzoeken na een afmelding</li>
+              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />Iedere klant krijgt hetzelfde verzoek: we filteren niet op tevreden klanten en bieden geen beloning voor een review, conform de regels van Google</li>
+              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />Maandelijks opzegbaar</li>
+            </ul>
+            <p className="mt-4 text-sm text-white/50">We beloven geen aantal reviews of hogere score.</p>
+          </article>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-6xl px-6 pb-16" aria-labelledby="maatwerk-prijzen">
         <h2 id="maatwerk-prijzen" className="mb-8 text-3xl font-black">Inrichting op maat</h2>
         <div className="grid gap-6 md:grid-cols-2">
