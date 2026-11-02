@@ -55,7 +55,7 @@ const faq = [
   },
   {
     q: "Wat kost de implementatie?",
-    a: "Dat hangt af van scope, integraties en het aantal stappen. We bepalen eerst één concreet proces; daarna krijg je een duidelijke implementatiescope en prijs voordat er gebouwd wordt.",
+    a: "De implementatie kost vanaf €1.995 excl. btw. De uiteindelijke prijs hangt af van scope, integraties en het aantal stappen. We bepalen eerst één concreet proces; daarna krijg je een duidelijke implementatiescope en prijs voordat er gebouwd wordt.",
   },
   {
     q: "Wat is een goede eerste TradeFlow-case?",
@@ -134,12 +134,6 @@ export default function TradeFlowPage() {
               className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 px-7 py-4 font-bold text-white hover:opacity-90"
             >
               Bespreek je offerteproces <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/portfolio"
-              className="rounded-xl border border-white/15 px-7 py-4 font-semibold hover:bg-white/5"
-            >
-              Bekijk portfolio
             </Link>
           </div>
         </div>
@@ -260,7 +254,7 @@ export default function TradeFlowPage() {
             data-cta="tradeflow-final"
             className="mt-7 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 px-7 py-4 font-bold text-white hover:opacity-90"
           >
-            Plan kennismaking <ArrowRight className="h-4 w-4" />
+            Vraag gratis quickscan aan <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>

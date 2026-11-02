@@ -34,6 +34,7 @@ export default function VoicePage() {
       <p className="voice-eyebrow">Zelf proberen</p><h2>Probeer Bonanza Voice</h2>
       <p>Probeer de agent via spraak of tekst. De demo beantwoordt vragen over BonanzaLabs; een telefoonflow voor jouw bedrijf richten we apart in.</p>
       <p>Open de widget linksonder: kies <strong>Start gesprek</strong> voor spraak of <strong>Bericht</strong> voor tekst. Vraag bijvoorbeeld: “Wat kost de ServeFlow-pilot?”</p>
+      <p className="voice-note"><strong>Je praat met een AI-assistent, niet met een mens.</strong> Je stem en het transcript worden verwerkt door ElevenLabs; zie de <Link href="/privacy">privacyverklaring</Link>. Bij elke telefoonlijn die we inrichten, meldt Bonanza Voice aan het begin van het gesprek dat de beller met AI spreekt.</p>
       <p className="voice-note">Voor spraak is microfoontoegang nodig. Zie je de widget niet? Je kunt hieronder een Voice-aanvraag doen.</p>
     </div></section>
     <section className="voice-wrap voice-section">
@@ -48,14 +49,14 @@ export default function VoicePage() {
     <section className="voice-band"><div className="voice-wrap">
       <h2>Waar je Bonanza Voice kunt inzetten</h2>
       <div className="voice-grid">
-        <article><h3>Installatie</h3><p>Een klant belt over een nieuwe badkamer of cv-installatie terwijl je bij een andere klant bent. De agent vraagt naar soort werk, plaats, gewenste periode en contactgegevens voor beoordeling door een medewerker.</p><Link href="/tradeflow">Bekijk TradeFlow voor offerteopvolging →</Link><br /><Link href="/bonanza-voice/installateurs">Bonanza Voice voor installateurs →</Link></article>
+        <article><h3>Installatie</h3><p>Een klant belt over een nieuwe badkamer of cv-installatie terwijl je bij een andere klant bent. De agent vraagt naar soort werk, plaats, gewenste periode en contactgegevens voor beoordeling door een medewerker.</p><Link href="/tradeflow">Bekijk TradeFlow voor offerteopvolging →</Link> <Link href="/demo/bonanza-voice">Probeer de demo voor installateurs →</Link><br /><Link href="/bonanza-voice/installateurs">Bonanza Voice voor installateurs →</Link></article>
         <article><h3>Horeca</h3><p>Op een drukke avond beantwoordt de agent afgesproken vragen over openingstijden, locatie en parkeren. Reserveringsverzoeken gaan naar een medewerker voor bevestiging. Direct boeken richten we alleen in met een geschikte, geteste koppeling.</p><Link href="/serveflow">Bekijk ServeFlow voor reserveringen →</Link></article>
         <article><h3>Bouw</h3><p>Verzamel bij aanvragen voor verbouw of aanbouw het type klus, de locatie, gewenste periode en contactgegevens. De beoordeling en de offerte blijven bij jouw team.</p><Link href="/tradeflow">Bekijk TradeFlow voor intake →</Link></article>
       </div>
     </div></section>
     <section className="voice-wrap voice-section">
       <h2>Wat het kost</h2><p className="voice-price">Inrichting vanaf <strong>€1.495 excl. btw</strong></p>
-      <p>Bonanza Voice wordt per klant ingericht. Wat daarin zit en wat eventueel doorlopend nodig is, bespreken we tijdens de intake op basis van jouw gesprekstype en telefoniesituatie. Externe gebruikskosten en eventueel beheer spreken we apart af.</p>
+      <p>Bonanza Voice wordt per klant ingericht. Wat daarin zit en wat eventueel doorlopend nodig is, bespreken we tijdens de intake op basis van jouw gesprekstype en telefoniesituatie. Beheer kost vanaf €197 per maand excl. btw. Gebruikskosten (belminuten) komen apart, volgens offerte.</p>
       <p><Link href="/blog/wat-kost-ai-telefonie-voor-een-mkb-bedrijf">Lees ook: wat kost AI-telefonie voor een MKB-bedrijf?</Link></p>
       <h2 className="voice-spaced">Hoe een implementatie verloopt</h2>
       <ol className="voice-steps">{steps.map(([name, text]) => <li key={name}><h3>{name}</h3><p>{text}</p></li>)}</ol>

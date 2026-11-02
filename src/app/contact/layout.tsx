@@ -2,16 +2,16 @@ import { withPageSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = withPageSocialMetadata({
-  title: "Contact BonanzaLabs | AI-automatisering vanuit Groningen",
+  title: "Gratis quickscan en contact | AI-automatisering vanuit Groningen",
   description:
-    "Bespreek één concreet proces met BonanzaLabs. ServeFlow voor horeca, TradeFlow voor bouw & installatie en afgebakende voice-automation.",
+    "Vraag een gratis quickscan van 30 minuten aan: we bekijken samen één proces en je krijgt binnen vijf werkdagen een kort verslag met een advies voor de eerste stap.",
   alternates: {
     canonical: "https://www.bonanza-labs.com/contact",
   },
   openGraph: {
     title: "Contact BonanzaLabs",
     description:
-      "Vertel waar je team onnodig tijd verliest en bespreek of een kleine automatiseringsflow zinvol is.",
+      "Gratis quickscan van 30 minuten: één proces bekijken, kort verslag binnen vijf werkdagen, zonder verplichting.",
     url: "https://www.bonanza-labs.com/contact",
     type: "website",
   },

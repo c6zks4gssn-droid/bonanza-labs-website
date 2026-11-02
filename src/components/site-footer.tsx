@@ -3,13 +3,13 @@ import Image from "next/image";
 import { businessDetails } from "@/lib/business-details";
 
 export default function SiteFooter({ light = true }: { light?: boolean }) {
-  if(light) return <footer className="bl-footer"><div className="bl-container bl-footer-inner"><div><Link className="bl-brand" href="/"><Image src="/logo-256.png" alt="" width={32} height={32}/>BonanzaLabs</Link><p>Groningen · KvK {businessDetails.kvkNumber}</p></div><div className="bl-footer-links"><a href={`mailto:${businessDetails.contactEmail}`}>{businessDetails.contactEmail}</a><Link href="/privacy">Privacy</Link><Link href="/voorwaarden">Voorwaarden</Link><Link href="/contact">Contact</Link></div></div></footer>;
+  if(light) return <footer className="bl-footer"><div className="bl-container bl-footer-inner"><div><Link className="bl-brand" href="/"><Image src="/logo-mark-256.png" alt="" width={32} height={32}/>BonanzaLabs</Link><p>Groningen · KvK {businessDetails.kvkNumber}</p></div><div className="bl-footer-links"><a href={`mailto:${businessDetails.contactEmail}`}>{businessDetails.contactEmail}</a><Link href="/privacy">Privacy</Link><Link href="/voorwaarden">Voorwaarden</Link><Link href="/cookies">Cookies</Link><Link href="/verwerkersovereenkomst">Verwerkersovereenkomst</Link><Link href="/contact">Contact</Link></div></div></footer>;
   return (
     <footer className="border-t border-white/10 px-6 py-12">
       <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1.2fr_.8fr_.8fr]">
         <div>
           <div className="flex items-center gap-2">
-            <img src="/logo-256.png" alt="BonanzaLabs" className="h-7 w-7 rounded" />
+            <img src="/logo-mark-256.png" alt="BonanzaLabs" className="h-7 w-7 rounded" />
             <span className="font-bold">BonanzaLabs</span>
           </div>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/45">
@@ -26,6 +26,7 @@ export default function SiteFooter({ light = true }: { light?: boolean }) {
           <div className="mt-4 flex flex-col gap-3 text-sm text-white/55">
             <Link href="/serveflow" className="hover:text-white">ServeFlow</Link>
             <Link href="/tradeflow" className="hover:text-white">TradeFlow</Link>
+            <Link href="/onderhoudsherinneringen" className="hover:text-white">TradeFlow Onderhoud</Link>
             <Link href="/bonanza-voice" className="hover:text-white">Bonanza Voice</Link>
             <Link href="/oplossingen" className="hover:text-white">Alle oplossingen</Link>
           </div>
@@ -35,10 +36,11 @@ export default function SiteFooter({ light = true }: { light?: boolean }) {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/35">Bedrijf</p>
           <div className="mt-4 flex flex-col gap-3 text-sm text-white/55">
             <Link href="/over-ons" className="hover:text-white">Over ons</Link>
-            <Link href="/portfolio" className="hover:text-white">Portfolio</Link>
             <Link href="/contact" className="hover:text-white">Contact</Link>
             <Link href="/privacy" className="hover:text-white">Privacy</Link>
             <Link href="/voorwaarden" className="hover:text-white">Voorwaarden</Link>
+            <Link href="/cookies" className="hover:text-white">Cookies</Link>
+            <Link href="/verwerkersovereenkomst" className="hover:text-white">Verwerkersovereenkomst</Link>
           </div>
         </div>
       </div>

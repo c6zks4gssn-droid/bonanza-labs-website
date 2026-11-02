@@ -7,12 +7,13 @@ BonanzaLabs is de onderneming van Clarence Etnel. We richten één afgebakend pr
 ## Diensten
 - [ServeFlow](https://www.bonanza-labs.com/serveflow): 14-dagen pilot voor één horecalocatie en één reserveringsflow. €497 eenmalig excl. btw, zonder automatische verlenging.
 - [TradeFlow](https://www.bonanza-labs.com/tradeflow): intake, offertevoorbereiding en opvolging voor bouw en installatie. Implementatie en prijs na intake en scopeafspraak. De medewerker beoordeelt de offerte.
-- [Bonanza Voice](https://www.bonanza-labs.com/bonanza-voice): AI-telefonist voor afgesproken basisvragen, terugbelverzoeken en offerte-intake. Inrichting vanaf €1.495 excl. btw. Telefonie, koppelingen en eventuele doorlopende kosten worden per klant afgesproken en getest.
-- [Flow Assessment en prijzen](https://www.bonanza-labs.com/pricing): procesonderzoek en implementatieadvies, €999 eenmalig excl. btw. Overzicht van alle diensten.
+- [TradeFlow Onderhoud](https://www.bonanza-labs.com/onderhoudsherinneringen): onderhoudsherinneringen en planning voor installateurs (cv-ketel, warmtepomp, airco). Klant kiest zelf een moment; wie niet reageert komt op een belijst. Inrichting vanaf €995 excl. btw, beheer vanaf €197 per maand excl. btw.
+- [Bonanza Voice](https://www.bonanza-labs.com/bonanza-voice): AI-telefonist voor afgesproken basisvragen, terugbelverzoeken en offerte-intake. Als abonnement: eenmalige inrichting €495 (Start en Groei; bij Pro volgens offerte) plus €199, €349 of €499 per maand, minimaal 3 maanden. Inrichting op maat vanaf €1.495. Alle prijzen excl. btw. Telefonie, koppelingen en eventuele doorlopende kosten worden per klant afgesproken en getest.
+- [Flow Assessment en prijzen](https://www.bonanza-labs.com/pricing): procesonderzoek en implementatieplan voor meerdere processen, teams of locaties, €1.295 eenmalig excl. btw, verrekend bij implementatie binnen 30 dagen. Overzicht van alle diensten.
+- [Gratis quickscan](https://www.bonanza-labs.com/contact): gesprek van 30 minuten over één proces, telefonisch of online, met binnen vijf werkdagen een verslag van één pagina. Gratis en zonder verplichting.
 
 ## Bedrijf en informatie
 - [Over BonanzaLabs](https://www.bonanza-labs.com/over-ons): Clarence Etnel, Groningen, Nederland. KvK 88564517.
-- [Ons werk](https://www.bonanza-labs.com/portfolio)
 - [Kennisbank](https://www.bonanza-labs.com/blog)
 - [Contact](https://www.bonanza-labs.com/contact): info@bonanza-labs.com
 - [Voorwaarden](https://www.bonanza-labs.com/voorwaarden)

@@ -43,7 +43,7 @@ export default function VoiceInstallateursPage() {
         <article><h3>Basisvragen beantwoorden</h3><p>Vragen die je vooraf met ons afspreekt, zoals je werkgebied of welke soort klussen je doet, beantwoordt de agent. Buiten die scope zet hij de vraag klaar voor een medewerker.</p></article>
         <article><h3>Doorschakelen of afspraken</h3><p>Doorschakelen of afspraken inplannen kan alleen als dit voor jouw bedrijf is ingericht en getest. Anders legt de agent het verzoek vast voor opvolging.</p></article>
       </div>
-      <p>Na de intake kun je de offerteopvolging regelen met <Link href="/tradeflow" className="underline">TradeFlow</Link>.</p>
+      <p>Na de intake kun je de offerteopvolging regelen met <Link href="/tradeflow" className="underline">TradeFlow</Link>. Onderhoudsklanten op tijd herinneren en laten inplannen doe je met <Link href="/onderhoudsherinneringen" className="underline">TradeFlow Onderhoud</Link>.</p>
     </section>
 
     <section className="voice-band"><div className="voice-wrap">
