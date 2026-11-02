@@ -8,15 +8,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: baseUrl, changeFrequency: "weekly", priority: 1 },
     { url: `${baseUrl}/oplossingen`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/tradeflow`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/onderhoudsherinneringen`, changeFrequency: "monthly", priority: 0.75 },
     { url: `${baseUrl}/serveflow`, changeFrequency: "weekly", priority: 0.95 },
     { url: `${baseUrl}/bonanza-voice`, changeFrequency: "monthly", priority: 0.75 },
     { url: `${baseUrl}/pricing`, changeFrequency: "weekly", priority: 0.95 },
-    { url: `${baseUrl}/portfolio`, changeFrequency: "monthly", priority: 0.65 },
     { url: `${baseUrl}/over-ons`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/contact`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/blog`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${baseUrl}/voorwaarden`, changeFrequency: "yearly", priority: 0.35 },
     { url: `${baseUrl}/privacy`, changeFrequency: "yearly", priority: 0.35 },
+    { url: `${baseUrl}/cookies`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${baseUrl}/verwerkersovereenkomst`, changeFrequency: "yearly", priority: 0.2 },
   ];
 
   const articles: MetadataRoute.Sitemap = blogPosts.map((post) => ({

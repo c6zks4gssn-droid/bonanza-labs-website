@@ -1,7 +1,8 @@
 import Link from "next/link";
 import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
-import { ArrowLeft, FileCheck2, Mail } from "lucide-react";
+import { ArrowLeft, Download, FileCheck2, Mail } from "lucide-react";
+import LegalConceptNote from "@/components/legal-concept-note";
 import { businessDetails, fullBusinessAddress } from "@/lib/business-details";
 
 const terms = [
@@ -9,8 +10,18 @@ const terms = [
     title: "1. Onderneming en toepasselijkheid",
     paragraphs: [
       `${businessDetails.tradeName} is een geregistreerde handelsnaam van een eenmanszaak, ingeschreven bij de Kamer van Koophandel onder nummer ${businessDetails.kvkNumber}. Het vestigingsnummer is ${businessDetails.branchNumber}.`,
-      "Deze voorwaarden gelden voor de ServeFlow 14-dagen pilot, Flow Assessments en andere diensten die BonanzaLabs schriftelijk aanbiedt. Afwijkingen gelden alleen wanneer ze schriftelijk zijn bevestigd.",
+      "Deze voorwaarden gelden voor de ServeFlow 14-dagen pilot, Flow Assessments, Bonanza Voice en andere diensten die BonanzaLabs schriftelijk aanbiedt. Afwijkingen gelden alleen wanneer ze schriftelijk zijn bevestigd.",
       "Bij tegenstrijdigheid gaat de individuele offerte of schriftelijk bevestigde pilotscope vóór op deze algemene voorwaarden.",
+      "Onze diensten zijn uitsluitend bedoeld voor bedrijven en professionals die handelen in de uitoefening van hun beroep of bedrijf. Het wettelijke herroepingsrecht voor consumenten (14 dagen bedenktijd) is daarom niet van toepassing.",
+    ],
+  },
+  {
+    title: "1a. Flow Assessment",
+    paragraphs: [
+      "Het Flow Assessment kost €1.295 exclusief btw en omvat procesonderzoek, een rapport met prioriteiten en implementatievolgorde en een reviewcall. Betaling vindt vooraf plaats via Stripe.",
+      "Na betaling plannen we samen de intake. De klant kan een geplande afspraak kosteloos verzetten tot 24 uur vooraf. Bij later verzetten of niet verschijnen plannen we één keer opnieuw; daarna kan BonanzaLabs de gereserveerde tijd in rekening brengen.",
+      "Annuleren vóór de intake: volledige terugbetaling. Annuleren na de intake maar vóór oplevering van het rapport: de terugbetaling bedraagt de prijs minus de bestede uren à €95 per uur excl. btw, maar nooit meer dan 50% van de prijs. Na oplevering van het rapport is er geen terugbetaling.",
+      "Wordt binnen 30 dagen na oplevering een implementatie bij BonanzaLabs afgenomen, dan wordt het betaalde bedrag van het Flow Assessment met die implementatie verrekend.",
     ],
   },
   {
@@ -22,10 +33,48 @@ const terms = [
     ],
   },
   {
-    title: "3. Geen automatische verlenging",
+    title: "3. Geen automatische verlenging van de pilot",
     paragraphs: [
       "De ServeFlow-pilot eindigt automatisch na de afgesproken pilotperiode. Er ontstaat geen abonnement en er worden geen vervolgkosten geïncasseerd zonder een nieuwe, uitdrukkelijke overeenkomst.",
-      "Een vervolgimplementatie, beheerabonnement of uitbreiding wordt afzonderlijk besproken en geprijsd.",
+      "Een vervolgimplementatie, beheerabonnement of uitbreiding wordt afzonderlijk besproken en geprijsd. Kiest de klant uitdrukkelijk voor een abonnement, dan gelden de afspraken in artikel 3a.",
+    ],
+  },
+  {
+    title: "3a. Abonnementen Bonanza Voice en ServeFlow (concept, laat juridisch toetsen)",
+    paragraphs: [
+      "Abonnementen (Start, Groei, Pro) worden schriftelijk afgesloten voor bedrijven. Het herroepingsrecht voor consumenten is niet van toepassing.",
+      "Looptijd: minimaal 3 maanden vanaf de livegangsdatum. Daarna loopt het abonnement per kalendermaand door en is het maandelijks opzegbaar met een opzegtermijn van één kalendermaand, per e-mail aan BonanzaLabs.",
+      "Inrichting: de eenmalige inrichtingskosten worden vooraf gefactureerd en niet terugbetaald nadat de inrichting is gestart, tenzij de leveringsgarantie van toepassing is.",
+      "Belminuten: elk pakket bevat een maandelijks aantal belminuten. Niet gebruikte minuten vervallen aan het einde van de maand en worden niet meegenomen naar een volgende maand. Minuten boven de bundel worden achteraf per maand gefactureerd tegen het tarief van het pakket. Een minuut telt per begonnen minuut gespreksduur van de AI-assistent, inclusief doorverbonden tijd zolang de assistent in het gesprek is.",
+      "Telefoonkosten van de klant zelf, zoals doorschakelen van het eigen nummer naar het nummer van Bonanza Voice, vallen onder het abonnement van de klant bij zijn eigen provider.",
+      "Wijzigen van pakket kan per de eerstvolgende kalendermaand. Prijzen kunnen eenmaal per jaar worden aangepast, met minimaal 30 dagen vooraankondiging; de klant mag dan per de ingangsdatum opzeggen.",
+      "Bij betalingsachterstand van meer dan 14 dagen na herinnering mag BonanzaLabs de dienst opschorten.",
+      "Na beëindiging zet BonanzaLabs de assistent uit en verwijdert of retourneert de gegevens volgens de verwerkersovereenkomst.",
+    ],
+  },
+  {
+    title: "3b. Subsidiehulp (concept, laat juridisch toetsen)",
+    paragraphs: [
+      "Bij subsidiehulp ondersteunt BonanzaLabs de klant bij het voorbereiden van een subsidieaanvraag. De klant dient de aanvraag zelf in, is verantwoordelijk voor de juistheid en volledigheid van de gegevens en bepaalt zelf of hij de aanvraag indient.",
+      "BonanzaLabs geeft geen garantie dat subsidie wordt verleend of vastgesteld. Daarover beslist uitsluitend de subsidieverstrekker, zoals SNN. Een afwijzing, een lager bedrag of een uitgeput budget geeft geen recht op terugbetaling van de vaste vergoeding.",
+      "Een succesfee is alleen verschuldigd na een besluit tot subsidieverlening en wordt berekend over het verleende bedrag. Wordt de subsidie later lager vastgesteld, dan verrekent BonanzaLabs het verschil in de succesfee.",
+    ],
+  },
+  {
+    title: "3c. Review-automatisering (concept, laat juridisch toetsen)",
+    paragraphs: [
+      "Bij review-automatisering verstuurt BonanzaLabs namens de klant reviewverzoeken aan diens klanten. De klant zorgt ervoor dat hij deze klanten op basis van de wet mag benaderen en levert alleen gegevens aan van klanten die een bezoek of opdracht hebben afgerond.",
+      "Verzoeken worden aan alle klanten gelijk verstuurd, zonder selectie op tevredenheid en zonder beloning, in lijn met het beleid van Google. BonanzaLabs belooft geen aantal reviews of beoordelingsscore.",
+      "De dienst is maandelijks opzegbaar met een opzegtermijn van één kalendermaand. Facturatie gebeurt volgens artikel 8a.",
+    ],
+  },
+  {
+    title: "3d. TradeFlow Onderhoud (concept, laat juridisch toetsen)",
+    paragraphs: [
+      "Bij TradeFlow Onderhoud verstuurt BonanzaLabs namens de klant (de installateur) onderhoudsherinneringen aan de klanten van de installateur en helpt het hen een afspraak te kiezen.",
+      "De installateur is verwerkingsverantwoordelijke voor de gegevens van zijn eigen klanten. Hij is ervoor verantwoordelijk dat hij een geldige grondslag heeft om hen te benaderen, zoals een bestaande klantrelatie of toestemming, in overeenstemming met artikel 11.7 van de Telecommunicatiewet. BonanzaLabs treedt op als verwerker volgens de verwerkersovereenkomst.",
+      "Elk bericht bevat een duidelijke afmeldmogelijkheid. Na een afmelding ontvangt de betrokken klant geen herinneringen meer.",
+      "BonanzaLabs geeft geen garantie op het aantal afspraken of reacties. Kosten voor sms of WhatsApp en eventuele koppelingen worden per klant afgesproken. Facturatie gebeurt volgens artikel 8a.",
     ],
   },
   {
@@ -61,8 +110,17 @@ const terms = [
   {
     title: "8. Betaling en btw",
     paragraphs: [
-      "Bedragen op de zakelijke website zijn exclusief btw tenzij uitdrukkelijk anders vermeld. Betaling via Stripe vindt vooraf plaats.",
+      "Bedragen op de zakelijke website zijn exclusief btw tenzij uitdrukkelijk anders vermeld. Eenmalige aankopen (de ServeFlow-pilot, het Flow Assessment en eenmalige inrichtingskosten) worden vooraf betaald via Stripe. Abonnementen en meerminuten worden gefactureerd volgens artikel 8a.",
       "Na betaling ontvangt de klant een bevestiging en neemt BonanzaLabs contact op voor de intake. Een betaling is geen stilzwijgende instemming met werk buiten de beschreven aanbieding.",
+    ],
+  },
+  {
+    title: "8a. Facturatie van abonnementen en meerminuten",
+    paragraphs: [
+      "Abonnementen (artikel 3a) en meerminuten worden maandelijks gefactureerd. Het abonnementsbedrag wordt per kalendermaand gefactureerd; meerminuten worden achteraf over de afgelopen kalendermaand gefactureerd.",
+      "Meerminuten worden berekend tegen het tarief van het gekozen pakket: Start €0,35, Groei €0,30 en Pro €0,25 per extra minuut, exclusief btw.",
+      "De betalingstermijn van facturen is 14 dagen na factuurdatum.",
+      "Betaalt de klant niet binnen de betalingstermijn, dan is de klant zonder nadere ingebrekestelling de wettelijke handelsrente verschuldigd op grond van artikel 6:119a van het Burgerlijk Wetboek.",
     ],
   },
   {
@@ -73,11 +131,27 @@ const terms = [
     ],
   },
   {
+    title: "9a. Bonanza Voice en AI-transparantie",
+    paragraphs: [
+      "Bonanza Voice is een AI-assistent. Conform artikel 50 van de EU AI-verordening (AI Act) hoort elke beller aan het begin van ieder gesprek dat hij met een AI-assistent spreekt. Deze melding staat standaard aan en de klant laat haar niet uitschakelen.",
+      "Wordt een gesprek opgenomen of getranscribeerd, dan wordt dat aan het begin van het gesprek gemeld. Gegevens van bellers (zoals telefoonnummer, naam, gespreksinhoud) worden alleen verwerkt om het gesprek af te handelen en de klant te informeren.",
+      "Voor de verwerking van gegevens van bellers en gasten van de klant sluiten partijen een verwerkersovereenkomst; het model staat op bonanza-labs.com/verwerkersovereenkomst.",
+      "AI kan fouten maken. De klant controleert de ingerichte antwoorden en blijft verantwoordelijk voor afspraken die aan bellers worden bevestigd.",
+    ],
+  },
+  {
     title: "10. Aansprakelijkheid",
     paragraphs: [
       "BonanzaLabs is niet aansprakelijk voor indirecte schade, gemiste winst, gemiste reserveringen of bedrijfsstagnatie, behalve wanneer uitsluiting wettelijk niet is toegestaan.",
       "Voor zover wettelijk toegestaan is de totale aansprakelijkheid beperkt tot het bedrag dat voor de betreffende opdracht is betaald.",
       "De klant blijft verantwoordelijk voor definitieve klantcommunicatie, openingstijden, beschikbaarheid, prijzen, huisregels en de feitelijke uitvoering van reserveringen en diensten.",
+    ],
+  },
+  {
+    title: "10a. Overmacht",
+    paragraphs: [
+      "BonanzaLabs is niet gehouden tot het nakomen van een verplichting wanneer zij daartoe verhinderd is door overmacht. Onder overmacht valt iedere omstandigheid buiten de wil van BonanzaLabs, waaronder storingen, uitval of beperkingen bij leveranciers en externe diensten zoals ElevenLabs, Telnyx of Twilio (telefonie), Vercel (hosting), betaal- en e-maildiensten, en storingen in internet- of telefoonnetwerken.",
+      "Tijdens overmacht worden de verplichtingen van BonanzaLabs opgeschort. Duurt de overmacht langer dan 30 dagen, dan mogen beide partijen de overeenkomst schriftelijk beëindigen voor het deel dat nog niet is uitgevoerd, zonder verplichting tot schadevergoeding.",
     ],
   },
   {
@@ -92,6 +166,7 @@ const terms = [
     paragraphs: [
       "Klachten worden zo snel mogelijk na ontdekking schriftelijk gemeld, met voldoende informatie om het probleem te onderzoeken.",
       "Op de overeenkomst is Nederlands recht van toepassing. Partijen proberen een geschil eerst in overleg op te lossen voordat zij verdere stappen nemen.",
+      "Geschillen worden voorgelegd aan de bevoegde rechter van de Rechtbank Noord-Nederland.",
     ],
   },
 ];
@@ -105,9 +180,11 @@ export default function TermsPage() {
         <div className="mx-auto max-w-4xl">
           <Link href="/pricing" className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white"><ArrowLeft className="h-4 w-4" /> Terug naar prijzen</Link>
           <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-amber-300/20 bg-amber-300/10 px-4 py-2 text-sm text-amber-200"><FileCheck2 className="h-4 w-4" /> Zakelijke pilotvoorwaarden</div>
-          <h1 className="mt-6 text-4xl font-black tracking-tight md:text-6xl">Voorwaarden ServeFlow-pilot</h1>
+          <h1 className="mt-6 text-4xl font-black tracking-tight md:text-6xl">Algemene voorwaarden</h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">De scope, garantie, betaling en verantwoordelijkheden vóórdat een pilot wordt geboekt.</p>
-          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 28 juli 2026</p>
+          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 22 oktober 2026</p>
+          <LegalConceptNote />
+          <a href="/algemene-voorwaarden-bonanzalabs.pdf" download className="mt-6 inline-flex items-center gap-2 rounded-xl border border-white/15 px-4 py-2 text-sm font-semibold hover:bg-white/10"><Download className="h-4 w-4" /> Download als PDF</a>
         </div>
       </section>
 

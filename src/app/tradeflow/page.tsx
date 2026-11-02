@@ -135,12 +135,6 @@ export default function TradeFlowPage() {
             >
               Bespreek je offerteproces <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link
-              href="/portfolio"
-              className="rounded-xl border border-white/15 px-7 py-4 font-semibold hover:bg-white/5"
-            >
-              Bekijk portfolio
-            </Link>
           </div>
         </div>
       </section>
@@ -260,7 +254,7 @@ export default function TradeFlowPage() {
             data-cta="tradeflow-final"
             className="mt-7 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 px-7 py-4 font-bold text-white hover:opacity-90"
           >
-            Plan kennismaking <ArrowRight className="h-4 w-4" />
+            Vraag gratis quickscan aan <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>

@@ -3,6 +3,8 @@ import {
   ArrowRight,
   Building2,
   CheckCircle2,
+  FileText,
+  Star,
   Clock3,
   PhoneCall,
   UtensilsCrossed,
@@ -31,6 +33,15 @@ const solutions = [
     icon: Building2,
   },
   {
+    name: "TradeFlow Onderhoud",
+    audience: "Installatie",
+    description:
+      "Voor onderhoudsklanten die op tijd een herinnering krijgen en zelf een moment kiezen, met een belijst voor wie niet reageert.",
+    href: "/onderhoudsherinneringen",
+    accent: "border-violet-400/25 bg-violet-400/5",
+    icon: Clock3,
+  },
+  {
     name: "Bonanza Voice",
     audience: "Telefonie",
     description:
@@ -38,6 +49,24 @@ const solutions = [
     href: "/bonanza-voice",
     accent: "border-emerald-400/25 bg-emerald-400/5",
     icon: PhoneCall,
+  },
+  {
+    name: "Subsidiehulp",
+    audience: "Digitaliseringssubsidies",
+    description:
+      "Hulp bij het voorbereiden van een subsidieaanvraag voor digitalisering. De subsidieverstrekker beslist; toekenning is niet gegarandeerd.",
+    href: "/pricing#subsidiehulp",
+    accent: "border-sky-400/25 bg-sky-400/5",
+    icon: FileText,
+  },
+  {
+    name: "Review-automatisering",
+    audience: "Horeca & bouw",
+    description:
+      "Automatisch een eerlijk verzoek om een Google-review na een bezoek of afgeronde klus, voor elke klant.",
+    href: "/pricing#review-automatisering",
+    accent: "border-rose-400/25 bg-rose-400/5",
+    icon: Star,
   },
 ];
 
@@ -76,12 +105,6 @@ export default function OplossingenPage() {
               className="inline-flex items-center gap-2 rounded-xl bg-amber-400 px-7 py-4 font-bold text-black hover:bg-amber-300"
             >
               Bespreek je proces <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/portfolio"
-              className="rounded-xl border border-white/15 px-7 py-4 font-semibold hover:bg-white/5"
-            >
-              Bekijk wat we bouwen
             </Link>
           </div>
         </div>
@@ -178,7 +201,7 @@ export default function OplossingenPage() {
             href="/contact"
             className="mt-7 inline-flex items-center gap-2 rounded-xl bg-amber-400 px-7 py-4 font-bold text-black hover:bg-amber-300"
           >
-            Plan een kennismaking <ArrowRight className="h-4 w-4" />
+            Vraag gratis quickscan aan <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>

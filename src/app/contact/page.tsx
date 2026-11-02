@@ -10,6 +10,7 @@ import {
   MessageCircle,
   Phone,
   UserRound,
+  Check,
   CheckCircle,
 } from "lucide-react";
 import SiteFooter from "@/components/site-footer";
@@ -103,14 +104,28 @@ export default function ContactPage() {
       <section className="relative px-6 pb-14 pt-36 text-center">
 
         <div className="relative mx-auto max-w-4xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-amber-300">Contact</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-amber-300">Gratis quickscan</p>
           <h1 className="mt-5 text-4xl font-black md:text-6xl">
-            Eerst één proces scherp krijgen.
+            Gratis quickscan: één proces, dertig minuten.
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/55">
-            Vertel waar je team nu onnodig tijd verliest. We kijken eerst of het probleem
-            concreet genoeg is voor ServeFlow, TradeFlow, Bonanza Voice of een kleine maatwerkflow.
+            Vertel waar je team nu onnodig tijd verliest. In een gratis gesprek kijken we samen naar
+            één proces. Daarna krijg je een kort verslag: wat je kunt automatiseren, wat beter
+            handmatig blijft en wat een logische eerste stap is.
           </p>
+
+          <ul className="mx-auto mt-6 flex w-fit max-w-full flex-col items-start gap-2 text-left text-sm text-white/60 sm:w-auto sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6">
+            {[
+              "30 minuten, telefonisch of online",
+              "Verslag van één pagina binnen vijf werkdagen",
+              "Gratis en zonder verplichting",
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-2">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" aria-hidden="true" />
+                {item}
+              </li>
+            ))}
+          </ul>
 
           {BOOKING_URL && (
             <a
@@ -121,7 +136,7 @@ export default function ContactPage() {
               className="mt-7 inline-flex items-center gap-2 rounded-xl bg-amber-400 px-7 py-4 font-bold text-black hover:bg-amber-300"
             >
               <CalendarDays className="h-5 w-5" />
-              Plan 15 minuten
+              Plan je quickscan (30 min)
             </a>
           )}
         </div>
@@ -200,8 +215,7 @@ export default function ContactPage() {
                 <CheckCircle className="mx-auto h-10 w-10 text-emerald-700" aria-hidden="true" />
                 <h2 className="mt-4 text-2xl font-black text-emerald-300">Bericht ontvangen</h2>
                 <p className="mt-3 text-sm text-white/55">
-                  We reageren doorgaans binnen één werkdag. We starten met een korte
-                  kwalificatie van het probleem voordat we een implementatie voorstellen.
+                  We reageren doorgaans binnen één werkdag om je gratis quickscan in te plannen.
                 </p>
                 <Link
                   href="/oplossingen"
@@ -295,7 +309,7 @@ export default function ContactPage() {
                   disabled={submitting}
                   className="w-full rounded-xl bg-amber-400 py-3.5 text-sm font-bold text-black hover:bg-amber-300 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  {submitting ? "Versturen…" : "Verstuur je situatie"}
+                  {submitting ? "Versturen…" : "Vraag gratis quickscan aan"}
                 </button>
               </form>
             )}
@@ -308,9 +322,9 @@ export default function ContactPage() {
           <h2 className="text-2xl font-black">Wat gebeurt er daarna?</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {[
-              ["1", "Korte kwalificatie", "We bepalen of het probleem concreet genoeg is om zinvol te automatiseren."],
-              ["2", "Scope", "We spreken één proces, grenzen, data en menselijke controle af."],
-              ["3", "Voorstel", "Alleen als er een duidelijke fit is krijg je een concrete vervolgstap en prijs."],
+              ["1", "Gesprek van 30 minuten", "We bespreken één proces: wie wat doet, welke tools je gebruikt en waar het vastloopt."],
+              ["2", "Kort verslag", "Binnen vijf werkdagen krijg je één pagina met kansen, grenzen en een advies voor de eerste stap."],
+              ["3", "Jij beslist", "Past een pilot of implementatie, dan krijg je een concrete prijs. Past het niet, dan zeggen we dat ook."],
             ].map(([number, title, text]) => (
               <div key={number} className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
                 <p className="text-sm font-black text-amber-300">{number}</p>

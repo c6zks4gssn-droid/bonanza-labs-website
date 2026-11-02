@@ -2,9 +2,9 @@ import { withPageSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = withPageSocialMetadata({
-  title: "Voorwaarden ServeFlow-pilot",
+  title: "Algemene voorwaarden",
   description:
-    "Voorwaarden voor de ServeFlow 14-dagen pilot en overige diensten van BonanzaLabs.",
+    "Voorwaarden voor de ServeFlow-pilot, Flow Assessment, Bonanza Voice en overige diensten van BonanzaLabs.",
   alternates: { canonical: "/voorwaarden" },
 });
 

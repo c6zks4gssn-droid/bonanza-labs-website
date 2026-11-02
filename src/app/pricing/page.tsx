@@ -99,6 +99,57 @@ const managementTiers = [
   },
 ];
 
+// CONCEPT-abonnementen (21-10-2026). Nog NIET goedgekeurd en NIET in Stripe.
+// Prijzen en inhoud zijn een voorstel; zie PR-beschrijving voor onderbouwing.
+// TODO: per-minuutkosten (ElevenLabs + telefonie) narekenen vóór livegang.
+const subscriptionTiers = [
+  {
+    id: "abonnement-start",
+    name: "Start",
+    price: "€199",
+    minutes: "300 belminuten per maand",
+    extra: "Extra minuut €0,35",
+    includes: [
+      "Bonanza Voice óf één ServeFlow-reserveringsflow",
+      "Eén locatie, één telefoonnummer",
+      "Beantwoordt afgesproken vragen en noteert terugbelverzoeken",
+      "Samenvatting per gesprek per e-mail",
+      "Kleine tekstaanpassingen per maand",
+      "Support per e-mail",
+    ],
+  },
+  {
+    id: "abonnement-groei",
+    name: "Groei",
+    price: "€349",
+    minutes: "800 belminuten per maand",
+    extra: "Extra minuut €0,30",
+    highlighted: true,
+    includes: [
+      "Bonanza Voice én ServeFlow samen",
+      "Eén locatie",
+      "Afspraken of reserveringen doorzetten naar je agenda of reserveringssysteem (als koppeling mogelijk is)",
+      "Doorverbinden naar jou of een collega",
+      "Maandelijkse evaluatie met verbetervoorstellen (tot 1 uur)",
+      "Support per e-mail en telefoon",
+    ],
+  },
+  {
+    id: "abonnement-pro",
+    name: "Pro",
+    price: "€499",
+    minutes: "1.000 belminuten per maand",
+    extra: "Extra minuut €0,25",
+    includes: [
+      "Alles uit Groei",
+      "Tot drie locaties of telefoonnummers",
+      "Koppeling met je eigen systeem, volgens afspraak",
+      "Afgesproken verbeteringen doorvoeren, tot 2 uur per maand",
+      "Voorrang bij support en aanpassingen",
+    ],
+  },
+];
+
 export default function PricingPage() {
   const [checkoutProduct, setCheckoutProduct] = useState<string | null>(null);
   const [checkoutError, setCheckoutError] = useState("");
@@ -106,7 +157,7 @@ export default function PricingPage() {
 
   const startCheckout = async (product: string) => {
     if (!termsAccepted) {
-      setCheckoutError("Bevestig eerst dat je de pilotvoorwaarden en privacyverklaring hebt gelezen.");
+      setCheckoutError("Ga eerst akkoord met de algemene voorwaarden en bevestig dat je de privacyverklaring hebt gelezen.");
       return;
     }
 
@@ -203,7 +254,7 @@ export default function PricingPage() {
             className="mt-1 h-4 w-4 accent-amber-400"
           />
           <span>
-            Ik heb de <Link href="/voorwaarden" className="text-cyan-300 underline">voorwaarden</Link> en de <Link href="/privacy" className="text-cyan-300 underline">privacyverklaring</Link> gelezen. Ik begrijp dat de ServeFlow-pilot geen omzet, reserveringen of een specifieke daling van no-shows garandeert.
+            Ik ga akkoord met de <Link href="/voorwaarden" className="text-cyan-300 underline">algemene voorwaarden</Link> (<a href="/algemene-voorwaarden-bonanzalabs.pdf" download className="text-cyan-300 underline">PDF</a>) en heb de <Link href="/privacy" className="text-cyan-300 underline">privacyverklaring</Link> gelezen. Ik begrijp dat de ServeFlow-pilot geen omzet, reserveringen of een specifieke daling van no-shows garandeert.
           </span>
         </label>
 
@@ -213,6 +264,38 @@ export default function PricingPage() {
           </div>
         )}
         <p className="mt-4 text-center text-xs text-white/40">Veilige betaling via Stripe. Na betaling plannen we de intake.</p>
+      </section>
+
+      <section id="abonnementen" className="mx-auto max-w-6xl px-6 pb-16" aria-labelledby="abonnementen-titel">
+        <p className="w-fit rounded-full border border-amber-300/40 bg-amber-300/10 px-3 py-1 text-xs font-semibold text-amber-200">Concept — prijzen nog niet definitief</p>
+        <h2 id="abonnementen-titel" className="mt-4 mb-4 text-3xl font-black">Abonnementen voor Bonanza Voice en ServeFlow</h2>
+        <p className="max-w-3xl text-white/60">
+          Voor horeca, bouw en installatie. Wij richten alles in, testen het met je en houden het daarna bij. Belminuten zitten in het maandbedrag. Eenmalige inrichting €495 (Start en Groei); bij Pro volgens offerte. Minimale looptijd 3 maanden, daarna maandelijks opzegbaar. Niet gebruikte minuten vervallen aan het eind van de maand; zie de <Link href="/voorwaarden" className="underline">voorwaarden</Link>. Alle prijzen excl. btw.
+        </p>
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {subscriptionTiers.map((tier) => (
+            <article key={tier.id} className={`flex flex-col rounded-3xl border p-8 ${tier.highlighted ? "border-amber-400/50 bg-amber-500/5" : "border-white/10"}`}>
+              <h3 className="text-xl font-black">{tier.name}</h3>
+              <p className="mt-3 text-3xl font-black">
+                {tier.price}
+                <span className="text-base font-semibold text-white/60"> per maand</span>
+              </p>
+              <p className="mt-1 text-sm text-white/60">Excl. btw · {tier.minutes}</p>
+              <p className="text-sm text-white/60">{tier.extra}</p>
+              <ul className="mt-5 flex-1 space-y-2 text-sm leading-relaxed text-white/70">
+                {tier.includes.map((item) => (
+                  <li key={item} className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />{item}</li>
+                ))}
+              </ul>
+              <Link href="/contact" className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 px-5 py-3 font-semibold hover:bg-white/5">
+                Vraag {tier.name} aan <ArrowRight className="h-4 w-4" />
+              </Link>
+            </article>
+          ))}
+        </div>
+        <p className="mt-6 text-sm text-white/50">
+          Een gesprek duurt vaak een paar minuten; hoeveel gesprekken in een bundel passen hangt af van je bellers. Bij elk gesprek meldt de assistent dat de beller met AI spreekt. Afsluiten gaat via een afzonderlijke overeenkomst, niet via een knop op deze pagina.
+        </p>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-16" aria-labelledby="doorlopend-beheer">
@@ -246,6 +329,44 @@ export default function PricingPage() {
         <p className="mt-6 text-sm text-white/50">
           Deze vorm gaat via een afzonderlijke overeenkomst, niet via een knop op deze pagina.
         </p>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-16" aria-labelledby="extra-diensten">
+        <h2 id="extra-diensten" className="mb-4 text-3xl font-black">Subsidiehulp en review-automatisering</h2>
+        <p className="max-w-3xl text-white/60">
+          Twee losse diensten naast onze automatiseringen. Alle prijzen excl. btw. Je boekt ze via een kennismaking, niet via een knop op deze pagina.
+        </p>
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
+          <article id="subsidiehulp" className="rounded-3xl border border-white/10 p-8">
+            <h3 className="text-xl font-black">Subsidiehulp</h3>
+            <p className="mt-3 text-sm leading-relaxed text-white/60">
+              Hulp bij het voorbereiden en indienen van een aanvraag voor een digitaliseringssubsidie, zoals de SNN-regeling Mkb digitalisering en robotisering 2.0.
+            </p>
+            <ul className="mt-4 space-y-2 text-sm leading-relaxed text-white/60">
+              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" /><span><strong>Subsidiecheck: €195</strong>. In de gratis quickscan bespreken we kort of subsidie voor jou interessant kan zijn. De subsidiecheck is het uitzoekwerk daarna: we toetsen je bedrijf en je plan aan de voorwaarden van de regeling. Neem je daarna aanvraaghulp af, dan verrekenen we dit bedrag.</span></li>
+              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" /><span><strong>Aanvraaghulp: €695 vast</strong>. Hulp bij projectplan, begroting en het invullen van de aanvraag. Jij dient de aanvraag zelf in, op naam van je bedrijf.</span></li>
+              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" /><span><strong>Succesfee: 8% van de verleende subsidie</strong>, maximaal €2.500. Alleen verschuldigd als de subsidie wordt verleend.</span></li>
+            </ul>
+            <p className="mt-4 text-sm text-white/50">
+              Geen garantie op toekenning: de subsidieverstrekker (bijvoorbeeld SNN) beslist over je aanvraag, en budgetten kunnen op raken voordat een regeling sluit.
+            </p>
+          </article>
+          <article id="review-automatisering" className="rounded-3xl border border-white/10 p-8">
+            <h3 className="text-xl font-black">Review-automatisering</h3>
+            <p className="mt-3 text-sm leading-relaxed text-white/60">
+              Na een bezoek of een afgeronde klus krijgt je klant automatisch een vriendelijk verzoek om een Google-review te schrijven, met een directe link naar je bedrijfsprofiel.
+            </p>
+            <p className="mt-3 text-3xl font-black">€59<span className="text-base font-semibold text-white/60"> per maand</span></p>
+            <p className="mt-1 text-sm text-white/60">Plus €149 eenmalige inrichting. Excl. btw.</p>
+            <ul className="mt-4 space-y-2 text-sm leading-relaxed text-white/60">
+              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />Eén locatie, verzoeken per e-mail (sms of WhatsApp volgens afspraak)</li>
+              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />Eén herinnering, en geen nieuwe verzoeken na een afmelding</li>
+              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />Iedere klant krijgt hetzelfde verzoek: we filteren niet op tevreden klanten en bieden geen beloning voor een review, conform de regels van Google</li>
+              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />Maandelijks opzegbaar</li>
+            </ul>
+            <p className="mt-4 text-sm text-white/50">We beloven geen aantal reviews of hogere score.</p>
+          </article>
+        </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-16" aria-labelledby="maatwerk-prijzen">
@@ -289,9 +410,9 @@ export default function PricingPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-16 text-center">
         <h2 className="text-3xl font-black">Twijfel je welke route past?</h2>
-        <p className="mt-4 text-white/60">De pilot is voor één concrete horeca-flow. Voor meerdere processen, locaties of complexe koppelingen kies je het Flow Assessment.</p>
+        <p className="mt-4 text-white/60">De pilot is voor één concrete horeca-flow. Voor meerdere processen, locaties of complexe koppelingen kies je het Flow Assessment. Weet je het nog niet? Begin met een gratis quickscan van 30 minuten; je krijgt binnen vijf werkdagen een kort verslag met advies.</p>
         <Link href="/contact" className="mt-7 inline-flex items-center gap-2 rounded-xl border border-white/15 px-6 py-3 font-semibold hover:bg-white/5">
-          Bespreek je situatie <ArrowRight className="h-4 w-4" />
+          Vraag gratis quickscan aan <ArrowRight className="h-4 w-4" />
         </Link>
       </section>
 

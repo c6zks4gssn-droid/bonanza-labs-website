@@ -56,12 +56,12 @@
       "@type": "Offer",
       "name": "Flow Assessment",
       "url": "https://www.bonanza-labs.com/pricing",
-      "price": "999",
+      "price": "1295",
       "priceCurrency": "EUR",
       "itemOffered": {
         "@type": "Service",
         "name": "Flow Assessment",
-        "description": "Procesonderzoek en implementatieadvies voor één afgebakend proces."
+        "description": "Procesonderzoek en implementatieplan voor bedrijven met meerdere processen, teams, locaties of integraties."
       }
     },
     {
