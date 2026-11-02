@@ -157,7 +157,7 @@ export default function VoiceDemo() {
             Voorlezen (browserstem)
           </label>
           <p id="voice-tts-note" className="text-xs" data-testid="tts-note">
-            {speech === "ok" ? "Gebruikt de Nederlandse stem van uw browser; dat is niet de stem van Bonanza Voice." : speech === "checking" ? "Bezig met controleren of uw browser kan voorlezen…" : speech === "unsupported" ? "Voorlezen is niet beschikbaar: deze browser ondersteunt geen spraak." : "Voorlezen is niet beschikbaar: deze browser heeft geen Nederlandse stem."}
+            {speech === "ok" ? "Gebruikt de Nederlandse stem van je browser; dat is niet de stem van Bonanza Voice." : speech === "checking" ? "Bezig met controleren of je browser kan voorlezen…" : speech === "unsupported" ? "Voorlezen is niet beschikbaar: deze browser ondersteunt geen spraak." : "Voorlezen is niet beschikbaar: deze browser heeft geen Nederlandse stem."}
           </p>
         </div>
 
@@ -174,7 +174,7 @@ export default function VoiceDemo() {
         {mode === "zelf" && step < QUESTIONS.length && (
           <>
             <form onSubmit={(e) => { e.preventDefault(); answer(input); }} className="dm-form">
-              <label htmlFor="voice-answer" className="sr-only">Uw antwoord als beller</label>
+              <label htmlFor="voice-answer" className="sr-only">Je antwoord als beller</label>
               <input ref={inputRef} id="voice-answer" value={input} onChange={(e) => setInput(e.target.value)} placeholder={QUESTIONS[step].placeholder} maxLength={160} className="dm-input" autoComplete="off" enterKeyHint="send" />
               <button type="submit" className="dm-btn" disabled={typing}><Send className="h-4 w-4" aria-hidden /> Antwoord</button>
             </form>

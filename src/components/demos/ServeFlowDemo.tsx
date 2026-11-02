@@ -12,7 +12,7 @@ const CHIPS: { label: string; text: string }[] = [
   { label: "Menu", text: "Wat staat er op het menu?" },
   { label: "Allergenen", text: "Welke allergenen zitten in de gerechten?" },
 ];
-const wrap = (me: boolean, text: string): ChatItem => ({ me, text, srLabel: me ? "U" : "Restaurant" });
+const wrap = (me: boolean, text: string): ChatItem => ({ me, text, srLabel: me ? "Jij" : "Restaurant" });
 
 export default function ServeFlowDemo() {
   const [msgs, setMsgs] = useState<ChatItem[]>([wrap(false, WELCOME)]);
@@ -65,7 +65,7 @@ export default function ServeFlowDemo() {
           ))}
         </div>
         <form onSubmit={(e) => { e.preventDefault(); send(input); }} className="dm-form">
-          <label htmlFor="serveflow-input" className="sr-only">Uw bericht</label>
+          <label htmlFor="serveflow-input" className="sr-only">Je bericht</label>
           <input ref={inputRef} id="serveflow-input" value={input} onChange={(e) => setInput(e.target.value)} maxLength={200} placeholder="Bijv. zaterdag om 19:00 met 4 personen" className="dm-input" autoComplete="off" enterKeyHint="send" />
           <button type="submit" className="dm-btn" disabled={typing || !input.trim()}><Send className="h-4 w-4" aria-hidden /> Stuur</button>
         </form>
@@ -74,7 +74,7 @@ export default function ServeFlowDemo() {
       <aside className="dm-side" aria-labelledby="sf-conf-title">
         <p id="sf-conf-title" className="dm-eyebrow">Reserveringsbevestiging</p>
         {!conf ? (
-          <p className="mt-3 text-sm">Rond een reservering af in de chat. Hier ziet u dan de bevestiging die de gast zou krijgen.</p>
+          <p className="mt-3 text-sm">Rond een reservering af in de chat. Hier zie je dan de bevestiging die de gast zou krijgen.</p>
         ) : (
           <div className="mt-3" data-testid="serveflow-confirmation" role="status">
             <CalendarCheck className="h-8 w-8" style={{ color: "#087b63" }} aria-hidden />
