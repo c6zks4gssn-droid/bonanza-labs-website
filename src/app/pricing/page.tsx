@@ -343,7 +343,7 @@ export default function PricingPage() {
               Hulp bij het voorbereiden en indienen van een aanvraag voor een digitaliseringssubsidie, zoals de SNN-regeling Mkb digitalisering en robotisering 2.0.
             </p>
             <ul className="mt-4 space-y-2 text-sm leading-relaxed text-white/60">
-              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" /><span><strong>Subsidiecheck: €195</strong>. We kijken samen of je bedrijf en je plan binnen de voorwaarden van de regeling lijken te vallen. Neem je daarna aanvraaghulp af, dan verrekenen we dit bedrag.</span></li>
+              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" /><span><strong>Subsidiecheck: €195</strong>. In de gratis quickscan bespreken we kort of subsidie voor jou interessant kan zijn. De subsidiecheck is het uitzoekwerk daarna: we toetsen je bedrijf en je plan aan de voorwaarden van de regeling. Neem je daarna aanvraaghulp af, dan verrekenen we dit bedrag.</span></li>
               <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" /><span><strong>Aanvraaghulp: €695 vast</strong>. Hulp bij projectplan, begroting en het invullen van de aanvraag. Jij dient de aanvraag zelf in, op naam van je bedrijf.</span></li>
               <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" /><span><strong>Succesfee: 8% van de verleende subsidie</strong>, maximaal €2.500. Alleen verschuldigd als de subsidie wordt verleend.</span></li>
             </ul>
@@ -410,7 +410,7 @@ export default function PricingPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-16 text-center">
         <h2 className="text-3xl font-black">Twijfel je welke route past?</h2>
-        <p className="mt-4 text-white/60">De pilot is voor één concrete horeca-flow. Voor meerdere processen, locaties of complexe koppelingen kies je het Flow Assessment. Weet je het nog niet? Begin met een gratis quickscan van 30 minuten; je krijgt binnen twee werkdagen een kort verslag met advies.</p>
+        <p className="mt-4 text-white/60">De pilot is voor één concrete horeca-flow. Voor meerdere processen, locaties of complexe koppelingen kies je het Flow Assessment. Weet je het nog niet? Begin met een gratis quickscan van 30 minuten; je krijgt binnen vijf werkdagen een kort verslag met advies.</p>
         <Link href="/contact" className="mt-7 inline-flex items-center gap-2 rounded-xl border border-white/15 px-6 py-3 font-semibold hover:bg-white/5">
           Vraag gratis quickscan aan <ArrowRight className="h-4 w-4" />
         </Link>

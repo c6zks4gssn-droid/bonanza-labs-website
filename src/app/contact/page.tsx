@@ -117,7 +117,7 @@ export default function ContactPage() {
           <ul className="mx-auto mt-6 flex w-fit max-w-full flex-col items-start gap-2 text-left text-sm text-white/60 sm:w-auto sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6">
             {[
               "30 minuten, telefonisch of online",
-              "Verslag van één pagina binnen twee werkdagen",
+              "Verslag van één pagina binnen vijf werkdagen",
               "Gratis en zonder verplichting",
             ].map((item) => (
               <li key={item} className="flex items-start gap-2">
@@ -323,7 +323,7 @@ export default function ContactPage() {
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {[
               ["1", "Gesprek van 30 minuten", "We bespreken één proces: wie wat doet, welke tools je gebruikt en waar het vastloopt."],
-              ["2", "Kort verslag", "Binnen twee werkdagen krijg je één pagina met kansen, grenzen en een advies voor de eerste stap."],
+              ["2", "Kort verslag", "Binnen vijf werkdagen krijg je één pagina met kansen, grenzen en een advies voor de eerste stap."],
               ["3", "Jij beslist", "Past een pilot of implementatie, dan krijg je een concrete prijs. Past het niet, dan zeggen we dat ook."],
             ].map(([number, title, text]) => (
               <div key={number} className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">

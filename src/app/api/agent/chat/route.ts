@@ -52,13 +52,13 @@ Flow Assessment (/pricing)
 
 Gratis quickscan (/contact)
 - Gesprek van 30 minuten over één proces, telefonisch of online
-- Binnen twee werkdagen een verslag van één pagina met kansen, grenzen en advies voor de eerste stap
+- Binnen vijf werkdagen een verslag van één pagina met kansen, grenzen en advies voor de eerste stap
 - Gratis en zonder verplichting. Dit is de aangewezen eerste stap voor wie twijfelt welke dienst past
 
 Doorlopend beheer: Basis €197, Standaard €297 of Uitgebreid €497 per maand, via een afzonderlijke overeenkomst.
 
 Losse diensten (via een kennismaking):
-- Subsidiehulp voor digitaliseringssubsidies: subsidiecheck €195, aanvraaghulp €695, succesfee 8% van de verleende subsidie (maximaal €2.500). De subsidieverstrekker beslist; toekenning is niet gegarandeerd
+- Subsidiehulp voor digitaliseringssubsidies: subsidiecheck €195, aanvraaghulp €695, succesfee 8% van de verleende subsidie (maximaal €2.500). De subsidieverstrekker beslist; toekenning is niet gegarandeerd. In de gratis quickscan komt kort aan bod of subsidie interessant kan zijn; de betaalde subsidiecheck is het uitzoekwerk daarna
 - Review-automatisering: €59 per maand plus €149 inrichting. Elke klant krijgt hetzelfde verzoek om een Google-review; we filteren niet op tevreden klanten en beloven geen aantal reviews
 
 Werkwijze:
