@@ -45,19 +45,19 @@ const scope = [
 
 const painPoints = [
   {
-    icon: Phone,
-    title: "Telefoon rinkelt tijdens bediening",
-    text: "Personeel kan niet tegelijk serveren en reserveren aannemen. Een gemiste oproep kan een gemiste reservering betekenen.",
-  },
-  {
     icon: Clock3,
-    title: "Na sluitingstijd onbereikbaar",
-    text: "Gasten die 's avonds willen reserveren krijgen een voicemail. Velen bellen gewoon ergens anders.",
+    title: "Bevestigen tijdens de dienst",
+    text: "Elke aanvraag handmatig terugmailen of -appen, terwijl er gasten aan tafel zitten.",
   },
   {
     icon: X,
-    title: "No-shows zonder overzicht",
-    text: "Wie komt niet opdagen? Hoe vaak? U weet het niet tot de tafel leeg blijft.",
+    title: "No-shows zonder herinnering",
+    text: "Zonder herinnering vergeten gasten hun reservering sneller. U ziet het pas als de tafel leeg blijft.",
+  },
+  {
+    icon: Phone,
+    title: "Wijzigingen via losse kanalen",
+    text: "Een uur later, of twee personen meer: het komt binnen via telefoon, mail of WhatsApp en u houdt het zelf bij.",
   },
   {
     icon: MessageCircle,
@@ -228,6 +228,10 @@ export default function ServeFlowPage() {
             </article>
           ))}
         </div>
+        <p className="mt-8 text-center text-sm text-white/55">
+          Mist u vooral telefoontjes tijdens de bediening of na sluitingstijd? Dat valt buiten deze pilot.{" "}
+          <Link href="/bonanza-voice" className="font-semibold underline">Bekijk Bonanza Voice</Link>.
+        </p>
       </section>
 
       {/* 4. Wat ServeFlow daadwerkelijk doet */}

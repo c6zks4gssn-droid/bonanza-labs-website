@@ -4,14 +4,14 @@ import type { Metadata } from "next";
 export const metadata: Metadata = withPageSocialMetadata({
   title: "Portfolio — BonanzaLabs",
   description:
-    "Zelf gebouwd, zelf gelanceerd. Bekijk projecten die BonanzaLabs heeft gebouwd en exploiteert.",
+    "Eigen projecten van BonanzaLabs: een webshop met checkout, een productlancering en open-source beveiliging voor AI-koppelingen.",
   alternates: {
     canonical: "https://www.bonanza-labs.com/portfolio",
   },
   openGraph: {
     title: "Portfolio — BonanzaLabs",
     description:
-      "Zelf gebouwd, zelf gelanceerd. Bekijk projecten die BonanzaLabs heeft gebouwd en exploiteert.",
+      "Eigen projecten van BonanzaLabs: een webshop met checkout, een productlancering en open-source beveiliging voor AI-koppelingen.",
     url: "https://www.bonanza-labs.com/portfolio",
     siteName: "BonanzaLabs",
     type: "website",

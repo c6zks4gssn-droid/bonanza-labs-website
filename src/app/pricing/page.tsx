@@ -102,6 +102,8 @@ const managementTiers = [
 // CONCEPT-abonnementen (21-10-2026). Nog NIET goedgekeurd en NIET in Stripe.
 // Prijzen en inhoud zijn een voorstel; zie PR-beschrijving voor onderbouwing.
 // TODO: per-minuutkosten (ElevenLabs + telefonie) narekenen vóór livegang.
+// Verborgen op de live site tot de prijzen definitief zijn; zet op true om te tonen.
+const SHOW_SUBSCRIPTIONS = false;
 const subscriptionTiers = [
   {
     id: "abonnement-start",
@@ -266,6 +268,7 @@ export default function PricingPage() {
         <p className="mt-4 text-center text-xs text-white/40">Veilige betaling via Stripe. Na betaling plannen we de intake.</p>
       </section>
 
+      {SHOW_SUBSCRIPTIONS && (
       <section id="abonnementen" className="mx-auto max-w-6xl px-6 pb-16" aria-labelledby="abonnementen-titel">
         <p className="w-fit rounded-full border border-amber-300/40 bg-amber-300/10 px-3 py-1 text-xs font-semibold text-amber-200">Concept — prijzen nog niet definitief</p>
         <h2 id="abonnementen-titel" className="mt-4 mb-4 text-3xl font-black">Abonnementen voor Bonanza Voice en ServeFlow</h2>
@@ -297,6 +300,7 @@ export default function PricingPage() {
           Een gesprek duurt vaak een paar minuten; hoeveel gesprekken in een bundel passen hangt af van je bellers. Bij elk gesprek meldt de assistent dat de beller met AI spreekt. Afsluiten gaat via een afzonderlijke overeenkomst, niet via een knop op deze pagina.
         </p>
       </section>
+      )}
 
       <section className="mx-auto max-w-6xl px-6 pb-16" aria-labelledby="doorlopend-beheer">
         <h2 id="doorlopend-beheer" className="mb-4 text-3xl font-black">Doorlopend beheer</h2>
