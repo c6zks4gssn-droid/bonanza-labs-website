@@ -9,7 +9,7 @@ const sections = [
   {
     title: "1. Wie verwerkt je gegevens?",
     paragraphs: [
-      `${businessDetails.tradeName}, een eenmanszaak ingeschreven bij de Kamer van Koophandel onder nummer ${businessDetails.kvkNumber}, is verantwoordelijk voor de verwerking van persoonsgegevens via bonanza-labs.com, het contactformulier, de chat, de ServeFlow-pilot en betaalprocessen.`,
+      `${businessDetails.tradeName}, een eenmanszaak ingeschreven bij de Kamer van Koophandel onder nummer ${businessDetails.kvkNumber}, is verantwoordelijk voor de verwerking van persoonsgegevens via bonanza-labs.com, het contactformulier, Bonanza Voice, de ServeFlow-pilot en betaalprocessen.`,
       `Voor privacyvragen of verzoeken kun je contact opnemen via ${businessDetails.contactEmail}.`,
     ],
   },
@@ -19,7 +19,6 @@ const sections = [
       "Afhankelijk van hoe je de website gebruikt, verwerken we je naam, e-mailadres, telefoonnummer, bedrijfsinformatie, berichtinhoud, bronpagina, IP-adres, browserinformatie en technische loggegevens.",
       "Voor een ServeFlow-pilot kunnen we daarnaast informatie verwerken over de locatie, reserveringsroute, openingstijden, gewenste berichtinhoud en contactpersonen die nodig zijn om de afgesproken flow in te richten.",
       "Bij een Stripe-betaling ontvangen we betaalstatus, het gekozen product, bedrag, valuta, klantidentificatie en contactgegevens. Volledige kaartgegevens worden door Stripe verwerkt en niet door BonanzaLabs opgeslagen.",
-      "Wanneer je de AI-chat gebruikt, worden de berichten die je invoert verwerkt om een antwoord te genereren. Deel via de chat geen wachtwoorden, betaalgegevens, gezondheidsgegevens of andere gevoelige informatie.",
     ],
   },
   {
@@ -38,7 +37,6 @@ const sections = [
       "Upstash Inc. (VS): opslag van leadaanvragen en betaalstatus (Redis-database).",
       "Resend Inc. (VS): versturen van e-mailnotificaties over aanvragen.",
       "ElevenLabs Inc. (VS): Bonanza Voice, spraak- en tekstgesprekken met de AI-assistent (audio, transcript, technische gegevens).",
-      "MiniMax en OpenRouter Inc. (VS): genereren van antwoorden in de AI-chat op de website.",
       "Telegram Messenger Inc.: interne storingsmeldingen aan de eigenaar over mislukte e-mails. Zo'n melding bevat alleen het tijdstip, de verzendstatus, een intern nummer en de foutmelding van de verzendpartij; geen namen, e-mailadressen of inhoud van aanvragen.",
       "Doorgifte naar landen buiten de EER gebeurt alleen met een passende waarborg, zoals het EU-VS Data Privacy Framework of standaardcontractbepalingen van de Europese Commissie.",
       "Deze partijen ontvangen alleen gegevens die nodig zijn voor hun specifieke taak. BonanzaLabs verkoopt geen persoonsgegevens aan adverteerders of databrokers.",
@@ -99,7 +97,7 @@ export default function PrivacyPage() {
           <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm text-cyan-200"><ShieldCheck className="h-4 w-4" /> Privacy en gegevensbescherming</div>
           <h1 className="mt-6 text-4xl font-black tracking-tight md:text-6xl">Privacyverklaring</h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">Duidelijke informatie over welke gegevens we verwerken, waarom we dat doen en welke keuzes en rechten je hebt.</p>
-          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 16 oktober 2026</p>
+          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 2 november 2026</p>
           <LegalConceptNote />
         </div>
       </section>
