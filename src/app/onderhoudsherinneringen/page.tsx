@@ -330,7 +330,7 @@ export default function OnderhoudsherinneringenPage() {
             data-cta="onderhoud-final"
             className="mt-7 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 px-7 py-4 font-bold text-white hover:opacity-90"
           >
-            Plan kennismaking <ArrowRight className="h-4 w-4" />
+            Vraag gratis quickscan aan <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>

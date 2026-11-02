@@ -17,13 +17,13 @@ const links = [
 export default function SiteNav({ active, light = true }: { active?: string; light?: boolean }) {
   const [open, setOpen] = useState(false);
 
-  if (light) return <><a href="#main-content" className="bl-skip">Naar de inhoud</a><nav className="bl-nav" aria-label="Hoofdnavigatie"><div className="bl-container bl-nav-inner"><Link href="/" className="bl-brand"><Image src="/logo-256.png" alt="" width={34} height={34}/>BonanzaLabs</Link><button type="button" className="bl-menu-button" aria-expanded={open} aria-controls="light-navigation" aria-label={open?"Menu sluiten":"Menu openen"} onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button><div id="light-navigation" className="bl-nav-links" data-open={open} onKeyDown={e=>{if(e.key==="Escape")setOpen(false);}}>{[["/#oplossingen","Oplossingen"],["/#werkwijze","Werkwijze"],["/pricing","Prijzen"],["/blog","Kennisbank"],["/over-ons","Over ons"]].map(([href,label])=><Link key={href} href={href} aria-current={active===href?"page":undefined} onClick={()=>setOpen(false)}>{label}</Link>)}<Link href="/contact" className="bl-button" onClick={()=>setOpen(false)}>Gratis quickscan</Link></div></div></nav></>;
+  if (light) return <><a href="#main-content" className="bl-skip">Naar de inhoud</a><nav className="bl-nav" aria-label="Hoofdnavigatie"><div className="bl-container bl-nav-inner"><Link href="/" className="bl-brand"><Image src="/logo-mark-256.png" alt="" width={34} height={34}/>BonanzaLabs</Link><button type="button" className="bl-menu-button" aria-expanded={open} aria-controls="light-navigation" aria-label={open?"Menu sluiten":"Menu openen"} onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button><div id="light-navigation" className="bl-nav-links" data-open={open} onKeyDown={e=>{if(e.key==="Escape")setOpen(false);}}>{[["/#oplossingen","Oplossingen"],["/#werkwijze","Werkwijze"],["/pricing","Prijzen"],["/blog","Kennisbank"],["/over-ons","Over ons"]].map(([href,label])=><Link key={href} href={href} aria-current={active===href?"page":undefined} onClick={()=>setOpen(false)}>{label}</Link>)}<Link href="/contact" className="bl-button" onClick={()=>setOpen(false)}>Gratis quickscan</Link></div></div></nav></>;
 
   return (
     <nav className="fixed top-0 z-50 w-full border-b border-white/5 bg-[#050508]/88 backdrop-blur-xl">
       <div className="relative mx-auto flex h-14 max-w-6xl items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2 font-bold tracking-tight">
-          <img src="/logo-256.png" alt="BonanzaLabs" className="h-8 w-8 rounded" />
+          <img src="/logo-mark-256.png" alt="BonanzaLabs" className="h-8 w-8 rounded" />
           BonanzaLabs
         </Link>
 

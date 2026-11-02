@@ -7,7 +7,7 @@ import { ArrowRight, Check, Clock3, MapPin, RefreshCcw, ShieldCheck, X, Phone, M
 export const metadata: Metadata = {
   title: "ServeFlow — AI reserveringsflow voor horeca",
   description:
-    "ServeFlow richt één reserveringsflow in voor uw restaurant met automatische bevestiging, herinnering en annulering via WhatsApp. 14-dagen pilot, €497 ex. btw, geen abonnement.",
+    "ServeFlow richt één reserveringsflow in voor je restaurant met automatische bevestiging, herinnering en annulering via WhatsApp. 14-dagen pilot, €497 ex. btw, geen abonnement.",
   alternates: { canonical: "https://www.bonanza-labs.com/serveflow" },
   openGraph: {
     title: "ServeFlow — AI reserveringsflow voor horeca",
@@ -52,12 +52,12 @@ const painPoints = [
   {
     icon: X,
     title: "No-shows zonder herinnering",
-    text: "Zonder herinnering vergeten gasten hun reservering sneller. U ziet het pas als de tafel leeg blijft.",
+    text: "Zonder herinnering vergeten gasten hun reservering sneller. Je ziet het pas als de tafel leeg blijft.",
   },
   {
     icon: Phone,
     title: "Wijzigingen via losse kanalen",
-    text: "Een uur later, of twee personen meer: het komt binnen via telefoon, mail of WhatsApp en u houdt het zelf bij.",
+    text: "Een uur later, of twee personen meer: het komt binnen via telefoon, mail of WhatsApp en je houdt het zelf bij.",
   },
   {
     icon: MessageCircle,
@@ -70,7 +70,7 @@ const faqs = [
   {
     question: "Wat kost de ServeFlow pilot precies?",
     answer:
-      "De pilot kost €497 ex. btw, eenmalig. Er is geen abonnement en geen automatische verlenging. Na de 14 dagen kiest u: stoppen, of door met beheer vanaf €197/maand excl. btw.",
+      "De pilot kost €497 ex. btw, eenmalig. Er is geen abonnement en geen automatische verlenging. Na de 14 dagen kies je: stoppen, of door met beheer vanaf €197/maand excl. btw.",
   },
   {
     question: "Wat zit er in de pilot?",
@@ -85,12 +85,12 @@ const faqs = [
   {
     question: "Wat gebeurt er na de 14 dagen?",
     answer:
-      "We evalueren samen wat de flow heeft opgeleverd: hoeveel reserveringen automatisch zijn verwerkt, hoeveel herinneringen zijn verstuurd, en of de flow past bij uw werkwijze. Bij positief resultaat kunt u door met een maandelijkse service-overeenkomst.",
+      "We evalueren samen wat de flow heeft opgeleverd: hoeveel reserveringen automatisch zijn verwerkt, hoeveel herinneringen zijn verstuurd, en of de flow past bij je werkwijze. Bij een positief resultaat kun je doorgaan met een maandelijkse service-overeenkomst.",
   },
   {
     question: "Werkt ServeFlow met WhatsApp?",
     answer:
-      "Ja. ServeFlow kan reserveringen via WhatsApp afhandelen, maar werkt ook met telefoon en e-mail. We kiezen tijdens de intake welk kanaal het beste past bij uw gasten en personeel.",
+      "Ja. ServeFlow kan reserveringen via WhatsApp afhandelen, maar werkt ook met telefoon en e-mail. We kiezen tijdens de intake welk kanaal het beste past bij je gasten en personeel.",
   },
   {
     question: "Wat als de flow niet werkt?",
@@ -110,7 +110,7 @@ const serviceSchema = {
   name: "ServeFlow",
   serviceType: "Reserveringsautomatisering voor horeca",
   description:
-    "ServeFlow richt één reserveringsflow in voor uw restaurant met automatische bevestiging, herinnering en annulering via WhatsApp. 14-dagen pilot, €497 ex. btw.",
+    "ServeFlow richt één reserveringsflow in voor je restaurant met automatische bevestiging, herinnering en annulering via WhatsApp. 14-dagen pilot, €497 ex. btw.",
   provider: {
     "@type": "LocalBusiness",
     name: "BonanzaLabs",
@@ -229,7 +229,7 @@ export default function ServeFlowPage() {
           ))}
         </div>
         <p className="mt-8 text-center text-sm text-white/55">
-          Mist u vooral telefoontjes tijdens de bediening of na sluitingstijd? Dat valt buiten deze pilot.{" "}
+          Mis je vooral telefoontjes tijdens de bediening of na sluitingstijd? Dat valt buiten deze pilot.{" "}
           <Link href="/bonanza-voice" className="font-semibold underline">Bekijk Bonanza Voice</Link>.
         </p>
       </section>
@@ -240,7 +240,7 @@ export default function ServeFlowPage() {
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-amber-300">Wat ServeFlow doet</p>
           <h2 className="mt-4 text-3xl font-black md:text-4xl">Eén flow, van aanvraag tot herinnering</h2>
           <p className="mt-4 max-w-2xl text-gray-400">
-            ServeFlow vervangt niet uw hele website of reserveringssysteem. Het richt één specifieke flow in — van eerste aanvraag tot bevestiging, herinnering en eventuele annulering — zodat uw personeel niet meer zelf hoeft te bellen, typen of herinneren.
+            ServeFlow vervangt niet je hele website of reserveringssysteem. Het richt één specifieke flow in — van eerste aanvraag tot bevestiging, herinnering en eventuele annulering — zodat je personeel niet meer zelf hoeft te bellen, typen of herinneren.
           </p>
           <div className="mt-10 grid gap-5 md:grid-cols-4">
             {scope.map(({ icon: Icon, title, text }) => (
@@ -257,7 +257,7 @@ export default function ServeFlowPage() {
       {/* 5. Concrete deliverables + 7. Wat niet beloofd wordt */}
       <section className="mx-auto grid max-w-6xl gap-8 px-6 py-20 md:grid-cols-2">
         <article className="rounded-3xl border border-amber-400/25 bg-amber-400/5 p-8">
-          <h2 className="text-2xl font-black">Wat u krijgt</h2>
+          <h2 className="text-2xl font-black">Wat je krijgt</h2>
           <ul className="mt-6 space-y-4">
             {pilotIncludes.map((item) => (
               <li key={item} className="flex items-start gap-3 text-sm text-white/75">
@@ -298,7 +298,7 @@ export default function ServeFlowPage() {
             </article>
             <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
               <h3 className="font-bold">Terugbetaling-garantie</h3>
-              <p className="mt-2 text-sm text-white/55">Werkt de afgesproken flow niet? Dan krijgt u het pilotbedrag terug.</p>
+              <p className="mt-2 text-sm text-white/55">Werkt de afgesproken flow niet? Dan krijg je het pilotbedrag terug.</p>
             </article>
           </div>
         </div>
