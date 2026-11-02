@@ -114,7 +114,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         value: businessDetails.branchNumber,
       },
     ],
-    sameAs: ["https://github.com/c6zks4gssn-droid"],
+    sameAs: ["https://github.com/c6zks4gssn-droid", "https://www.youtube.com/@Bonanza-Labs"],
   };
 
   return (

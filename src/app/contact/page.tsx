@@ -169,7 +169,7 @@ export default function ContactPage() {
               </div>
               <div className="mt-5 flex items-start gap-2 text-sm text-white/50">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" />
-                <span>{businessDetails.city}, {businessDetails.country}</span>
+                <span>{businessDetails.streetAddress}, {businessDetails.postalCode} {businessDetails.city}</span>
               </div>
             </div>
 
