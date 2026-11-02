@@ -2,6 +2,7 @@ export const businessDetails = {
   tradeName: process.env.NEXT_PUBLIC_LEGAL_NAME || "BonanzaLabs",
   legalForm: process.env.NEXT_PUBLIC_LEGAL_FORM || "Eenmanszaak",
   kvkNumber: process.env.NEXT_PUBLIC_KVK_NUMBER || "88564517",
+  vatNumber: process.env.NEXT_PUBLIC_VAT_NUMBER || "NL004627152B36",
   branchNumber: process.env.NEXT_PUBLIC_BRANCH_NUMBER || "000054418089",
   streetAddress: process.env.NEXT_PUBLIC_STREET_ADDRESS || "Bloedkoraalstraat 49",
   postalCode: process.env.NEXT_PUBLIC_POSTAL_CODE || "9743 KB",

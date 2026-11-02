@@ -53,6 +53,7 @@ export default function OverOnsPage() {
               <p><strong className="text-white">Handelsnaam:</strong> {businessDetails.tradeName}</p>
               <p><strong className="text-white">Rechtsvorm:</strong> {businessDetails.legalForm}</p>
               <p><strong className="text-white">KvK:</strong> {businessDetails.kvkNumber}</p>
+              <p><strong className="text-white">Btw:</strong> {businessDetails.vatNumber}</p>
               <p><strong className="text-white">Vestigingsnummer:</strong> {businessDetails.branchNumber}</p>
             </div>
           </article>

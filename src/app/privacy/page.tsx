@@ -107,6 +107,7 @@ export default function PrivacyPage() {
           <p><strong>Verwerkingsverantwoordelijke:</strong> {businessDetails.tradeName}</p>
           <p><strong>Rechtsvorm:</strong> {businessDetails.legalForm}</p>
           <p><strong>KvK-nummer:</strong> {businessDetails.kvkNumber}</p>
+          <p><strong>Btw-identificatienummer:</strong> {businessDetails.vatNumber}</p>
           <p><strong>Vestigingsnummer:</strong> {businessDetails.branchNumber}</p>
           <p><strong>Hoofdvestiging:</strong> {fullBusinessAddress}</p>
           <p><strong>Contact:</strong> {businessDetails.contactEmail}</p>
