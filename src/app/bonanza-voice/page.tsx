@@ -1,3 +1,4 @@
+import YouTubeEmbed from "@/components/youtube-embed";
 import Link from "next/link";
 import SiteNav from "@/components/site-nav";
 import SiteFooter from "@/components/site-footer";
@@ -37,6 +38,7 @@ export default function VoicePage() {
       <p className="voice-note"><strong>Je praat met een AI-assistent, niet met een mens.</strong> Je stem en het transcript worden verwerkt door ElevenLabs; zie de <Link href="/privacy">privacyverklaring</Link>. Bij elke telefoonlijn die we inrichten, meldt Bonanza Voice aan het begin van het gesprek dat de beller met AI spreekt.</p>
       <p className="voice-note">Voor spraak is microfoontoegang nodig. Zie je de widget niet? Je kunt hieronder een Voice-aanvraag doen.</p>
     </div></section>
+    <section className="voice-wrap voice-section" aria-labelledby="voice-video"><h2 id="voice-video">Wat kost een AI-telefonist?</h2><p>In ruim drie minuten: de vier kostenblokken, wanneer het iets oplevert, en wat altijd naar een mens gaat.</p><div style={{ maxWidth: 880, marginTop: 28 }}><YouTubeEmbed id="sBnPc_qw5-U" title="Wat kost een AI-telefonist voor je bedrijf? (eerlijke uitleg)" poster="/video/yt-wat-kost-ai-telefonist.jpg" /></div></section>
     <section className="voice-wrap voice-section">
       <h2>Zo kan een gesprek lopen</h2><p className="voice-eyebrow">Fictief voorbeeld — ingesproken met onze tekst-naar-spraakstem</p>
       <VoiceTranscriptAudio

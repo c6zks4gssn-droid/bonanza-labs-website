@@ -41,7 +41,8 @@ const securityHeaders = [
       // en geen formulier. frame-src is voor het geval Stripe later wel een
       // element insluit; form-action blijft 'self' omdat de contact- en
       // voice-formulieren op deze site zelf posten.
-      "frame-src 'self' https://js.stripe.com https://checkout.stripe.com",
+      // youtube-nocookie.com: de video-embeds (src/components/youtube-embed.tsx), pas na een klik geladen.
+      "frame-src 'self' https://js.stripe.com https://checkout.stripe.com https://www.youtube-nocookie.com",
       "form-action 'self'",
       "base-uri 'self'",
       "object-src 'none'",

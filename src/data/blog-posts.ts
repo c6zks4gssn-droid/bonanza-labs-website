@@ -18,6 +18,8 @@ export interface BlogPost {
   accent: BlogAccent;
   intro: string;
   sections: BlogSection[];
+  /** Optionele YouTube-video onder de intro (id van youtu.be/<id>, lokale poster in /public). */
+  video?: { id: string; title: string; poster: string };
 }
 
 export const blogPosts: BlogPost[] = [
@@ -188,6 +190,7 @@ export const blogPosts: BlogPost[] = [
     updatedAt: "2026-07-28",
     readTime: "6 min",
     accent: "amber",
+    video: { id: "lwMP32CDZOM", title: "No-shows verminderen zonder je gasten te irriteren", poster: "/video/yt-no-shows-verminderen.jpg" },
     intro:
       "No-showpreventie werkt het beste wanneer gasten duidelijkheid en controle krijgen. Een reeks agressieve herinneringen helpt niet. Een goede bevestiging, één passend herinneringsmoment en eenvoudig annuleren vaak wel.",
     sections: [
@@ -256,6 +259,7 @@ export const blogPosts: BlogPost[] = [
     updatedAt: "2026-07-28",
     readTime: "7 min",
     accent: "emerald",
+    video: { id: "sBnPc_qw5-U", title: "Wat kost een AI-telefonist voor je bedrijf? (eerlijke uitleg)", poster: "/video/yt-wat-kost-ai-telefonist.jpg" },
     intro:
       "De prijs van AI-telefonie bestaat niet alleen uit minuten. De echte kosten worden bepaald door ontwerp, integraties, gespreksvolume, uitzonderingen en het gewenste serviceniveau.",
     sections: [

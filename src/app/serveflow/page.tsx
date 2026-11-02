@@ -4,6 +4,7 @@ import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
 import { ArrowRight, Check, Clock3, MapPin, RefreshCcw, ShieldCheck, X, Phone, MessageCircle, Star } from "lucide-react";
 import { withPageSocialMetadata } from "@/lib/page-metadata";
+import YouTubeEmbed from "@/components/youtube-embed";
 
 export const metadata: Metadata = withPageSocialMetadata({
   title: "ServeFlow — AI reserveringsflow voor horeca",
@@ -252,6 +253,15 @@ export default function ServeFlowPage() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Video: no-shows verminderen */}
+      <section className="mx-auto max-w-4xl px-6 pt-20" aria-labelledby="sf-video">
+        <h2 id="sf-video" className="text-3xl font-black md:text-4xl">No-shows verminderen zonder je gasten te irriteren</h2>
+        <p className="mt-4 max-w-2xl text-gray-400">Een complete bevestiging, één goed gekozen herinnering en makkelijk annuleren, in ruim twee minuten uitgelegd.</p>
+        <div className="mt-8">
+          <YouTubeEmbed id="lwMP32CDZOM" title="No-shows verminderen zonder je gasten te irriteren" poster="/video/yt-no-shows-verminderen.jpg" />
         </div>
       </section>
 
