@@ -3,7 +3,7 @@ import Image from "next/image";
 import { businessDetails } from "@/lib/business-details";
 
 export default function SiteFooter({ light = true }: { light?: boolean }) {
-  if(light) return <footer className="bl-footer"><div className="bl-container bl-footer-inner"><div><Link className="bl-brand" href="/"><Image src="/logo-mark-256.png" alt="" width={32} height={32}/>BonanzaLabs</Link><p>Groningen · KvK {businessDetails.kvkNumber}</p></div><div className="bl-footer-links"><a href={`mailto:${businessDetails.contactEmail}`}>{businessDetails.contactEmail}</a><Link href="/privacy">Privacy</Link><Link href="/voorwaarden">Voorwaarden</Link><Link href="/cookies">Cookies</Link><Link href="/verwerkersovereenkomst">Verwerkersovereenkomst</Link><Link href="/contact">Contact</Link></div></div></footer>;
+  if(light) return <footer className="bl-footer"><div className="bl-container bl-footer-inner"><div><Link className="bl-brand" href="/"><Image src="/logo-mark-256.png" alt="" width={32} height={32}/>BonanzaLabs</Link><p>Groningen · KvK {businessDetails.kvkNumber}</p></div><div className="bl-footer-links"><a href={`mailto:${businessDetails.contactEmail}`}>{businessDetails.contactEmail}</a><Link href="/privacy">Privacy</Link><Link href="/voorwaarden">Voorwaarden</Link><Link href="/cookies">Cookies</Link><Link href="/verwerkersovereenkomst">Verwerkersovereenkomst</Link><Link href="/contact">Contact</Link><a href="https://www.youtube.com/@Bonanza-Labs" target="_blank" rel="noopener noreferrer">YouTube</a></div></div></footer>;
   return (
     <footer className="border-t border-white/10 px-6 py-12">
       <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1.2fr_.8fr_.8fr]">
@@ -37,6 +37,7 @@ export default function SiteFooter({ light = true }: { light?: boolean }) {
           <div className="mt-4 flex flex-col gap-3 text-sm text-white/55">
             <Link href="/over-ons" className="hover:text-white">Over ons</Link>
             <Link href="/contact" className="hover:text-white">Contact</Link>
+            <a href="https://www.youtube.com/@Bonanza-Labs" target="_blank" rel="noopener noreferrer" className="hover:text-white">YouTube</a>
             <Link href="/privacy" className="hover:text-white">Privacy</Link>
             <Link href="/voorwaarden" className="hover:text-white">Voorwaarden</Link>
             <Link href="/cookies" className="hover:text-white">Cookies</Link>

@@ -1,3 +1,4 @@
+import YouTubeEmbed from "@/components/youtube-embed";
 import { withPageSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -116,6 +117,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 lg:grid-cols-[minmax(0,1fr)_280px]">
           <div className="max-w-3xl">
             <p className={`border-l-2 pl-6 text-xl font-medium leading-relaxed text-slate-200 ${style.border}`}>{post.intro}</p>
+
+            {post.video && (
+              <div className="mt-10">
+                <YouTubeEmbed id={post.video.id} title={post.video.title} poster={post.video.poster} />
+              </div>
+            )}
 
             <div className="mt-14 space-y-14">
               {post.sections.map((section) => (
