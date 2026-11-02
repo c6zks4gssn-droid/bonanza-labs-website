@@ -51,7 +51,6 @@ Open-source tools alleen als technisch bewijs onder Portfolio/Over ons.
 9. Afsluitende CTA
 
 ## Portfolio (bewijs)
-- SilverJStore — e-commerce met payments
 - OsmoseWaters — affiliate vergelijkingssite
 - JJ Brothers — game + AI content pipeline
 

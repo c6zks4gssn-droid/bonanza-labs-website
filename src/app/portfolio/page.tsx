@@ -3,7 +3,7 @@
 import Link from "next/link";
 import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
-import { X, Menu, ExternalLink, Gamepad2, HeartPulse, ShieldCheck, Store } from "lucide-react";
+import { X, Menu, ExternalLink, Gamepad2, HeartPulse, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 
 const fadeUp = {
@@ -24,12 +24,6 @@ const stagger = {
 };
 
 const projects = [
-  {
-    icon: Store,
-    name: "SilverJStore",
-    description: "Webshop voor 925 sterling zilveren kettingen en armbanden, met een duidelijke collectie en checkoutflow.",
-    url: "https://silverjstore.com",
-  },
   {
     icon: HeartPulse,
     name: "BonanzaVitals",
@@ -94,7 +88,7 @@ export default function PortfolioPage() {
       {/* Projects */}
       <section className="py-12 px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {projects.map((project, i) => (
               <motion.a
                 key={project.name}
