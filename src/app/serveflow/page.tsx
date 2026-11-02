@@ -3,8 +3,9 @@ import Link from "next/link";
 import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
 import { ArrowRight, Check, Clock3, MapPin, RefreshCcw, ShieldCheck, X, Phone, MessageCircle, Star } from "lucide-react";
+import { withPageSocialMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageSocialMetadata({
   title: "ServeFlow — AI reserveringsflow voor horeca",
   description:
     "ServeFlow richt één reserveringsflow in voor je restaurant met automatische bevestiging, herinnering en annulering via WhatsApp. 14-dagen pilot, €497 ex. btw, geen abonnement.",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     url: "https://www.bonanza-labs.com/serveflow",
     type: "website",
   },
-};
+});
 
 const pilotIncludes = [
   "Intake op jullie huidige reserveringsroute",
