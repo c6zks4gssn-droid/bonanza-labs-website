@@ -9,6 +9,7 @@ BonanzaLabs is de onderneming van Clarence Etnel. We richten één afgebakend pr
 - [TradeFlow](https://www.bonanza-labs.com/tradeflow): intake, offertevoorbereiding en opvolging voor bouw en installatie. Implementatie en prijs na intake en scopeafspraak. De medewerker beoordeelt de offerte.
 - [Bonanza Voice](https://www.bonanza-labs.com/bonanza-voice): AI-telefonist voor afgesproken basisvragen, terugbelverzoeken en offerte-intake. Als abonnement: eenmalige inrichting €495 (Start en Groei; bij Pro volgens offerte) plus €199, €349 of €499 per maand, minimaal 3 maanden. Inrichting op maat vanaf €1.495. Alle prijzen excl. btw. Telefonie, koppelingen en eventuele doorlopende kosten worden per klant afgesproken en getest.
 - [Flow Assessment en prijzen](https://www.bonanza-labs.com/pricing): procesonderzoek en implementatieplan voor meerdere processen, teams of locaties, €1.295 eenmalig excl. btw, verrekend bij implementatie binnen 30 dagen. Overzicht van alle diensten.
+- [Gratis quickscan](https://www.bonanza-labs.com/contact): gesprek van 30 minuten over één proces, telefonisch of online, met binnen vijf werkdagen een verslag van één pagina. Gratis en zonder verplichting.
 
 ## Bedrijf en informatie
 - [Over BonanzaLabs](https://www.bonanza-labs.com/over-ons): Clarence Etnel, Groningen, Nederland. KvK 88564517.
