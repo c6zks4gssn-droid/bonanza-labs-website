@@ -12,7 +12,6 @@ BonanzaLabs is de onderneming van Clarence Etnel. We richten één afgebakend pr
 
 ## Bedrijf en informatie
 - [Over BonanzaLabs](https://www.bonanza-labs.com/over-ons): Clarence Etnel, Groningen, Nederland. KvK 88564517.
-- [Ons werk](https://www.bonanza-labs.com/portfolio)
 - [Kennisbank](https://www.bonanza-labs.com/blog)
 - [Contact](https://www.bonanza-labs.com/contact): info@bonanza-labs.com
 - [Voorwaarden](https://www.bonanza-labs.com/voorwaarden)

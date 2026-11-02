@@ -67,16 +67,18 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // Oude productpagina's → portfolio
-      { source: "/frameforge", destination: "/portfolio", permanent: true },
-      { source: "/frameforge/:path*", destination: "/portfolio", permanent: true },
-      { source: "/ugc", destination: "/portfolio", permanent: true },
-      { source: "/firewall", destination: "/portfolio", permanent: true },
-      { source: "/firewall/:path*", destination: "/portfolio", permanent: true },
-      { source: "/mcp-guard", destination: "/portfolio", permanent: true },
-      { source: "/mcp-guard/:path*", destination: "/portfolio", permanent: true },
-      { source: "/gasvrij", destination: "/portfolio", permanent: true },
-      { source: "/gasvrij/:path*", destination: "/portfolio", permanent: true },
+      // Oude productpagina's en portfolio → home
+      { source: "/portfolio", destination: "/", permanent: true },
+      { source: "/portfolio/:path*", destination: "/", permanent: true },
+      { source: "/frameforge", destination: "/", permanent: true },
+      { source: "/frameforge/:path*", destination: "/", permanent: true },
+      { source: "/ugc", destination: "/", permanent: true },
+      { source: "/firewall", destination: "/", permanent: true },
+      { source: "/firewall/:path*", destination: "/", permanent: true },
+      { source: "/mcp-guard", destination: "/", permanent: true },
+      { source: "/mcp-guard/:path*", destination: "/", permanent: true },
+      { source: "/gasvrij", destination: "/", permanent: true },
+      { source: "/gasvrij/:path*", destination: "/", permanent: true },
 
       // Oude toolpagina's → home
       { source: "/quiz", destination: "/", permanent: true },
