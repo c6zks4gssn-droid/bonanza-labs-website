@@ -3,7 +3,7 @@ import Image from "next/image";
 import { businessDetails } from "@/lib/business-details";
 
 export default function SiteFooter({ light = true }: { light?: boolean }) {
-  if(light) return <footer className="bl-footer"><div className="bl-container bl-footer-inner"><div><Link className="bl-brand" href="/"><Image src="/logo-mark-256.png" alt="" width={32} height={32}/>BonanzaLabs</Link><p>Groningen · KvK {businessDetails.kvkNumber}</p></div><div className="bl-footer-links"><a href={`mailto:${businessDetails.contactEmail}`}>{businessDetails.contactEmail}</a><Link href="/privacy">Privacy</Link><Link href="/voorwaarden">Voorwaarden</Link><Link href="/cookies">Cookies</Link><Link href="/verwerkersovereenkomst">Verwerkersovereenkomst</Link><Link href="/contact">Contact</Link><a href="https://www.youtube.com/@Bonanza-Labs" target="_blank" rel="noopener noreferrer">YouTube</a></div></div></footer>;
+  if(light) return <footer className="bl-footer"><div className="bl-container bl-footer-inner"><div><Link className="bl-brand" href="/"><Image src="/logo-mark-256.png" alt="" width={32} height={32}/>BonanzaLabs</Link><p>Groningen · KvK {businessDetails.kvkNumber}</p></div><div className="bl-footer-links"><a href={`mailto:${businessDetails.contactEmail}`}>{businessDetails.contactEmail}</a><Link href="/privacy">Privacy</Link><Link href="/voorwaarden">Voorwaarden</Link><Link href="/cookies">Cookies</Link><Link href="/verwerkersovereenkomst">Verwerkersovereenkomst</Link><Link href="/contact">Contact</Link><a href="https://www.youtube.com/@Bonanza-Labs" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style={{display:"inline",verticalAlign:"-2px",marginRight:6}}><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>YouTube</a></div></div></footer>;
   return (
     <footer className="border-t border-white/10 px-6 py-12">
       <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1.2fr_.8fr_.8fr]">
@@ -37,7 +37,7 @@ export default function SiteFooter({ light = true }: { light?: boolean }) {
           <div className="mt-4 flex flex-col gap-3 text-sm text-white/55">
             <Link href="/over-ons" className="hover:text-white">Over ons</Link>
             <Link href="/contact" className="hover:text-white">Contact</Link>
-            <a href="https://www.youtube.com/@Bonanza-Labs" target="_blank" rel="noopener noreferrer" className="hover:text-white">YouTube</a>
+            <a href="https://www.youtube.com/@Bonanza-Labs" target="_blank" rel="noopener noreferrer" className="hover:text-white"><svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style={{display:"inline",verticalAlign:"-2px",marginRight:6}}><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>YouTube</a>
             <Link href="/privacy" className="hover:text-white">Privacy</Link>
             <Link href="/voorwaarden" className="hover:text-white">Voorwaarden</Link>
             <Link href="/cookies" className="hover:text-white">Cookies</Link>
