@@ -35,7 +35,6 @@ export default function SiteFooter({ light = true }: { light?: boolean }) {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/35">Bedrijf</p>
           <div className="mt-4 flex flex-col gap-3 text-sm text-white/55">
             <Link href="/over-ons" className="hover:text-white">Over ons</Link>
-            <Link href="/portfolio" className="hover:text-white">Portfolio</Link>
             <Link href="/contact" className="hover:text-white">Contact</Link>
             <Link href="/privacy" className="hover:text-white">Privacy</Link>
             <Link href="/voorwaarden" className="hover:text-white">Voorwaarden</Link>
