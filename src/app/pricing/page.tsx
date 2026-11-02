@@ -99,9 +99,9 @@ const managementTiers = [
   },
 ];
 
-// CONCEPT-abonnementen (21-10-2026). Nog NIET goedgekeurd en NIET in Stripe.
-// Prijzen en inhoud zijn een voorstel; zie PR-beschrijving voor onderbouwing.
-// TODO: per-minuutkosten (ElevenLabs + telefonie) narekenen vóór livegang.
+// Abonnementen (voorgesteld 21-10-2026, goedgekeurd 02-11-2026). Niet in Stripe:
+// afsluiten gaat via een afzonderlijke overeenkomst.
+// TODO: per-minuutkosten (ElevenLabs + telefonie) blijven narekenen tegen de bundels.
 const subscriptionTiers = [
   {
     id: "abonnement-start",
@@ -267,8 +267,7 @@ export default function PricingPage() {
       </section>
 
       <section id="abonnementen" className="mx-auto max-w-6xl px-6 pb-16" aria-labelledby="abonnementen-titel">
-        <p className="w-fit rounded-full border border-amber-300/40 bg-amber-300/10 px-3 py-1 text-xs font-semibold text-amber-200">Concept — prijzen nog niet definitief</p>
-        <h2 id="abonnementen-titel" className="mt-4 mb-4 text-3xl font-black">Abonnementen voor Bonanza Voice en ServeFlow</h2>
+        <h2 id="abonnementen-titel" className="mb-4 text-3xl font-black">Abonnementen voor Bonanza Voice en ServeFlow</h2>
         <p className="max-w-3xl text-white/60">
           Voor horeca, bouw en installatie. Wij richten alles in, testen het met je en houden het daarna bij. Belminuten zitten in het maandbedrag. Eenmalige inrichting €495 (Start en Groei); bij Pro volgens offerte. Minimale looptijd 3 maanden, daarna maandelijks opzegbaar. Niet gebruikte minuten vervallen aan het eind van de maand; zie de <Link href="/voorwaarden" className="underline">voorwaarden</Link>. Alle prijzen excl. btw.
         </p>
