@@ -410,9 +410,9 @@ export default function PricingPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-16 text-center">
         <h2 className="text-3xl font-black">Twijfel je welke route past?</h2>
-        <p className="mt-4 text-white/60">De pilot is voor één concrete horeca-flow. Voor meerdere processen, locaties of complexe koppelingen kies je het Flow Assessment.</p>
+        <p className="mt-4 text-white/60">De pilot is voor één concrete horeca-flow. Voor meerdere processen, locaties of complexe koppelingen kies je het Flow Assessment. Weet je het nog niet? Begin met een gratis quickscan van 30 minuten; je krijgt binnen twee werkdagen een kort verslag met advies.</p>
         <Link href="/contact" className="mt-7 inline-flex items-center gap-2 rounded-xl border border-white/15 px-6 py-3 font-semibold hover:bg-white/5">
-          Bespreek je situatie <ArrowRight className="h-4 w-4" />
+          Vraag gratis quickscan aan <ArrowRight className="h-4 w-4" />
         </Link>
       </section>
 
