@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 const WIDGET_SCRIPT_URL = "https://unpkg.com/@elevenlabs/convai-widget-embed";
-const WIDGET_AVATAR_URL = "https://www.bonanza-labs.com/logo-256.png";
+const WIDGET_AVATAR_URL = "https://www.bonanza-labs.com/logo-mark-256.png";
 
 /**
  * Bonanza Voice — ElevenLabs voice agent, embedded site-wide.
