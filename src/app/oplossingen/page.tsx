@@ -33,6 +33,15 @@ const solutions = [
     icon: Building2,
   },
   {
+    name: "TradeFlow Onderhoud",
+    audience: "Installatie",
+    description:
+      "Voor onderhoudsklanten die op tijd een herinnering krijgen en zelf een moment kiezen, met een belijst voor wie niet reageert.",
+    href: "/onderhoudsherinneringen",
+    accent: "border-violet-400/25 bg-violet-400/5",
+    icon: Clock3,
+  },
+  {
     name: "Bonanza Voice",
     audience: "Telefonie",
     description:

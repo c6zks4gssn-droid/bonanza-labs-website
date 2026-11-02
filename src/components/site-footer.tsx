@@ -26,6 +26,7 @@ export default function SiteFooter({ light = true }: { light?: boolean }) {
           <div className="mt-4 flex flex-col gap-3 text-sm text-white/55">
             <Link href="/serveflow" className="hover:text-white">ServeFlow</Link>
             <Link href="/tradeflow" className="hover:text-white">TradeFlow</Link>
+            <Link href="/onderhoudsherinneringen" className="hover:text-white">TradeFlow Onderhoud</Link>
             <Link href="/bonanza-voice" className="hover:text-white">Bonanza Voice</Link>
             <Link href="/oplossingen" className="hover:text-white">Alle oplossingen</Link>
           </div>
