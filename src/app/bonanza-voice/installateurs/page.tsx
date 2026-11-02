@@ -26,7 +26,7 @@ export default function VoiceInstallateursPage() {
     <header className="voice-hero voice-wrap">
       <p className="voice-eyebrow">Bonanza Voice · AI-telefonist voor installatiebedrijven</p>
       <h1>AI-telefonist voor installateurs: jij staat bij de klant, <em>Bonanza Voice neemt op</em></h1>
-      <p>Bonanza Voice is een AI-telefonist voor installateurs en kleine installatiebedrijven. De agent neemt op als jij niet kunt, stelt vooraf afgesproken intakevragen en zet de offerteaanvraag klaar voor een medewerker. Inrichting vanaf <strong>€1.495 excl. btw</strong>, per bedrijf ingericht en getest.</p>
+      <p>Bonanza Voice is een AI-telefonist voor installateurs en kleine installatiebedrijven. De agent neemt op als jij niet kunt, stelt vooraf afgesproken intakevragen en zet de offerteaanvraag klaar voor een medewerker. Als abonnement vanaf <strong>€199 per maand excl. btw</strong>, of op maat vanaf €1.495. Altijd per bedrijf ingericht en getest.</p>
       <div className="voice-actions"><Link className="voice-primary" href="/contact">Bespreek je telefoonsituatie</Link><Link className="voice-secondary" href="/bonanza-voice">Probeer de demo</Link></div>
     </header>
 
@@ -66,7 +66,15 @@ export default function VoiceInstallateursPage() {
 
     <section className="voice-wrap voice-section">
       <h2>Wat kost het?</h2>
-      <p className="voice-price">Inrichting vanaf <strong>€1.495 excl. btw</strong></p>
+      <p className="voice-price">Abonnement vanaf <strong>€199 per maand excl. btw</strong>, belminuten inbegrepen</p>
+      <h3 className="voice-spaced">Abonnement</h3>
+      <div className="voice-grid">
+        <article><h3>Start</h3><p className="voice-price"><strong>€199</strong> per maand</p><p className="voice-note">300 belminuten per maand, extra minuut €0,35</p><p>Eén telefoonnummer. Beantwoordt afgesproken vragen, noteert terugbelverzoeken en mailt per gesprek een samenvatting.</p></article>
+        <article><h3>Groei</h3><p className="voice-price"><strong>€349</strong> per maand</p><p className="voice-note">800 belminuten per maand, extra minuut €0,30</p><p>Alles uit Start, plus doorverbinden naar jou of een collega en afspraken doorzetten naar je agenda als een koppeling mogelijk is. Maandelijkse evaluatie.</p></article>
+        <article><h3>Pro</h3><p className="voice-price"><strong>€499</strong> per maand</p><p className="voice-note">1.000 belminuten per maand, extra minuut €0,25</p><p>Alles uit Groei, voor tot drie locaties of telefoonnummers, met koppeling aan je eigen systeem volgens afspraak.</p></article>
+      </div>
+      <p className="voice-note">Eenmalige inrichting €495 bij Start en Groei, bij Pro volgens offerte. Minimale looptijd 3 maanden, daarna maandelijks opzegbaar. Niet gebruikte minuten vervallen aan het eind van de maand. Afsluiten gaat via een afzonderlijke overeenkomst. Alle prijzen excl. btw.</p>
+      <h3 className="voice-spaced">Inrichting op maat</h3>
       <ul className="voice-steps">
         <li><p><strong>Inrichting:</strong> vanaf €1.495 excl. btw, per bedrijf bepaald op basis van gesprekstype en telefonie.</p></li>
         <li><p><strong>Beheer:</strong> vanaf €197 per maand excl. btw, in drie niveaus: Basis €197, Standaard €297 of Uitgebreid €497. Via een afzonderlijke overeenkomst.</p></li>
