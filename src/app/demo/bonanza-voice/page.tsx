@@ -12,7 +12,7 @@ export const metadata: Metadata = withPageSocialMetadata({
 
 export default function Page() {
   return (
-    <DemoShell badge="Bonanza Voice" title="Zo neemt de assistent een aanvraag aan" intro="Kies een voorbeeldgesprek of speel zelf de beller. De assistent vraagt de gegevens uit, en u ziet de samenvatting die de installateur krijgt. Een medewerker belt daarna terug." productHref="/bonanza-voice" productLabel="Meer over Bonanza Voice">
+    <DemoShell badge="Bonanza Voice" title="Zo neemt de assistent een aanvraag aan" intro="Kies een voorbeeldgesprek of speel zelf de beller. De assistent vraagt de gegevens uit, en je ziet de samenvatting die de installateur krijgt. Een medewerker belt daarna terug." productHref="/bonanza-voice" productLabel="Meer over Bonanza Voice">
       <VoiceDemo />
     </DemoShell>
   );

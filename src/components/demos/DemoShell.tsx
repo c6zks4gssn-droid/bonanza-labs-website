@@ -18,8 +18,8 @@ export default function DemoShell({ badge, title, intro, productHref, productLab
       <section className="px-4 pb-16 sm:px-6">{children}</section>
       <section className="border-t border-white/10 px-6 py-16">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-2xl font-black md:text-3xl">Wilt u dit voor uw eigen bedrijf?</h2>
-          <p className="mt-4 text-gray-400">We bespreken eerst uw huidige werkwijze en richten daarna één afgesproken flow in.</p>
+          <h2 className="text-2xl font-black md:text-3xl">Wil je dit voor je eigen bedrijf?</h2>
+          <p className="mt-4 text-gray-400">We bespreken eerst je huidige werkwijze en richten daarna één afgesproken flow in.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link href="/contact" className="inline-flex items-center gap-2 rounded-xl bg-amber-400 px-7 py-4 font-bold text-black hover:bg-amber-300" data-cta="demo-contact">Neem contact op <ArrowRight className="h-4 w-4" aria-hidden /></Link>
             <Link href={productHref} className="rounded-xl border border-white/15 px-7 py-4 font-semibold hover:bg-white/5" data-cta="demo-product">{productLabel}</Link>
