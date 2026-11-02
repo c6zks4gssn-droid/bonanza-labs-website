@@ -15,7 +15,7 @@ export default function CookiesPage() {
       eyebrow="Cookies"
       title="Cookies en lokale opslag"
       intro="BonanzaLabs gebruikt geen analytics- of marketingcookies. Hieronder staat welke functionele opslag de website wel gebruikt."
-      updated="16 oktober 2026"
+      updated="2 november 2026"
       sections={[
         { title: "1. Functionele opslag van BonanzaLabs", paragraphs: [
           "bl-lang (localStorage, blijft tot je hem wist): onthoudt de taal die je kiest. Noodzakelijk voor de gevraagde functie; hiervoor is geen toestemming nodig.",
@@ -24,6 +24,7 @@ export default function CookiesPage() {
         { title: "2. Diensten van derden", paragraphs: [
           "Bonanza Voice (de spraakwidget van ElevenLabs) wordt niet automatisch geladen. Pas wanneer je op de knop 'Praat met Bonanza Voice' klikt, laadt je browser de widget van ElevenLabs via unpkg.com. Vanaf dat moment kan ElevenLabs functionele opslag gebruiken om het gesprek te laten werken. Zolang je niet klikt, maakt deze site geen verbinding met ElevenLabs of unpkg.com.",
           "Betalen gebeurt op de betaalpagina van Stripe (checkout.stripe.com). Stripe plaatst daar eigen cookies voor betaling en fraudepreventie, volgens het cookiebeleid van Stripe.",
+          "Op sommige pagina's staan YouTube-video's. Die laden pas als je op afspelen klikt; YouTube (Google) kan dan cookies of vergelijkbare gegevens opslaan volgens het eigen privacybeleid. We gebruiken daarvoor de privacyvriendelijkere variant youtube-nocookie.com.",
         ] },
         { title: "3. Geen tracking", paragraphs: [
           "We gebruiken geen Google Analytics, advertentiepixels of andere tracking. Als dat verandert, vragen we eerst je toestemming via een cookiemelding en passen we deze pagina aan.",
