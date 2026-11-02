@@ -11,7 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/serveflow`, changeFrequency: "weekly", priority: 0.95 },
     { url: `${baseUrl}/bonanza-voice`, changeFrequency: "monthly", priority: 0.75 },
     { url: `${baseUrl}/pricing`, changeFrequency: "weekly", priority: 0.95 },
-    { url: `${baseUrl}/portfolio`, changeFrequency: "monthly", priority: 0.65 },
     { url: `${baseUrl}/over-ons`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/contact`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/blog`, changeFrequency: "weekly", priority: 0.8 },

@@ -32,12 +32,12 @@ Zelfstandig EN add-on voor TradeFlow/ServeFlow.
 - Telefonie/AI verbruik: apart
 
 ## Navigatie
-Home — TradeFlow — ServeFlow — Bonanza Voice — Portfolio — Over ons — Contact
+Home — TradeFlow — ServeFlow — Bonanza Voice — Over ons — Contact
 
 ## Wat WEG van de MKB site
 Spending Firewall, Agent Wallet, mcp-guard, Fork Doctor, FrameForge, AiToEarn, PyPI packages, technische pricing tiers, developer install commands, Web3/MCP jargon.
 
-Open-source tools alleen als technisch bewijs onder Portfolio/Over ons.
+Open-source tools en eigen projecten worden niet als portfolio getoond zolang ze niet af zijn.
 
 ## Homepage volgorde
 1. Hero met duidelijke uitkomst
@@ -45,14 +45,9 @@ Open-source tools alleen als technisch bewijs onder Portfolio/Over ons.
 3. TradeFlow, ServeFlow, Bonanza Voice
 4. Hoe het Flow Assessment werkt
 5. Werkwijze: analyse → ontwerp → implementatie → optimalisatie
-6. Portfolio en bewijs
-7. Prijsindicaties
-8. FAQ
-9. Afsluitende CTA
-
-## Portfolio (bewijs)
-- OsmoseWaters — affiliate vergelijkingssite
-- JJ Brothers — game + AI content pipeline
+6. Prijsindicaties
+7. FAQ
+8. Afsluitende CTA
 
 ## Toon
 Helder professioneel Nederlands. Geen overdreven AI-beloftes, vage marketingtaal, of technische details die een ondernemer niet nodig heeft.

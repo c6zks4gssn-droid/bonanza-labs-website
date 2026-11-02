@@ -276,7 +276,7 @@ export default function ServeFlowPage() {
         </article>
       </section>
 
-      {/* 10. Vertrouwen / portfolio */}
+      {/* 10. Vertrouwen */}
       <section className="border-y border-white/10 bg-[#0A0E18] px-6 py-16">
         <div className="mx-auto max-w-6xl">
           <div className="flex items-center gap-3">
@@ -296,11 +296,6 @@ export default function ServeFlowPage() {
               <h3 className="font-bold">Terugbetaling-garantie</h3>
               <p className="mt-2 text-sm text-white/55">Werkt de afgesproken flow niet? Dan krijgt u het pilotbedrag terug.</p>
             </article>
-          </div>
-          <div className="mt-8">
-            <Link href="/portfolio" className="text-sm font-semibold text-amber-300 hover:text-amber-200" data-cta="serveflow-portfolio">
-              Bekijk ons portfolio →
-            </Link>
           </div>
         </div>
       </section>

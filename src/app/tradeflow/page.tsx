@@ -135,12 +135,6 @@ export default function TradeFlowPage() {
             >
               Bespreek je offerteproces <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link
-              href="/portfolio"
-              className="rounded-xl border border-white/15 px-7 py-4 font-semibold hover:bg-white/5"
-            >
-              Bekijk portfolio
-            </Link>
           </div>
         </div>
       </section>
