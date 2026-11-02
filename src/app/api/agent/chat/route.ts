@@ -39,12 +39,6 @@ TradeFlow — intake, offertevoorbereiding en opvolging voor bouw en installatie
 - Prijzen, uitzonderingen en het versturen van offertes blijven bij een medewerker; TradeFlow maakt geen offertes zonder controle
 - Implementatie vanaf €1.995. Definitieve scope en prijs na een intake
 
-TradeFlow Onderhoud — onderhoudsherinneringen voor installateurs (/onderhoudsherinneringen)
-- Onderhoudsklanten (cv-ketel, warmtepomp, airco) krijgen op tijd een herinnering en kiezen zelf een moment uit tijden die de installateur vrijgeeft
-- Bevestiging en herinnering een dag vooraf; wie na één herinnering niet reageert, komt op een belijst voor het team
-- Vervangt geen planningssoftware of boekhouding en maakt geen prijzen of facturen
-- Inrichting vanaf €995, beheer vanaf €197 per maand. Vaste prijs na intake
-
 Bonanza Voice — AI-telefonist (/bonanza-voice)
 - Beantwoordt afgesproken basisvragen, noteert terugbelverzoeken en offerte-intake, ook buiten openingstijden in te richten
 - Bij elk gesprek meldt de assistent dat de beller met AI spreekt
