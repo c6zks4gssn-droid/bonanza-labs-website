@@ -69,6 +69,15 @@ const terms = [
     ],
   },
   {
+    title: "3d. TradeFlow Onderhoud (concept, laat juridisch toetsen)",
+    paragraphs: [
+      "Bij TradeFlow Onderhoud verstuurt BonanzaLabs namens de klant (de installateur) onderhoudsherinneringen aan de klanten van de installateur en helpt het hen een afspraak te kiezen.",
+      "De installateur is verwerkingsverantwoordelijke voor de gegevens van zijn eigen klanten. Hij is ervoor verantwoordelijk dat hij een geldige grondslag heeft om hen te benaderen, zoals een bestaande klantrelatie of toestemming, in overeenstemming met artikel 11.7 van de Telecommunicatiewet. BonanzaLabs treedt op als verwerker volgens de verwerkersovereenkomst.",
+      "Elk bericht bevat een duidelijke afmeldmogelijkheid. Na een afmelding ontvangt de betrokken klant geen herinneringen meer.",
+      "BonanzaLabs geeft geen garantie op het aantal afspraken of reacties. Kosten voor sms of WhatsApp en eventuele koppelingen worden per klant afgesproken. Facturatie gebeurt volgens artikel 8a.",
+    ],
+  },
+  {
     title: "4. Wat niet onder de standaardpilot valt",
     paragraphs: [
       "Tenzij schriftelijk anders overeengekomen vallen een complete nieuwe website, meerdere locaties, meerdere reserveringsflows, AI-telefonie, uitgebreide CRM-migratie, onbeperkte koppelingen en onbeperkte wijzigingen niet onder de standaardpilot.",

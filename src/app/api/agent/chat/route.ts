@@ -55,6 +55,11 @@ Gratis quickscan (/contact)
 - Binnen vijf werkdagen een verslag van één pagina met kansen, grenzen en advies voor de eerste stap
 - Gratis en zonder verplichting. Dit is de aangewezen eerste stap voor wie twijfelt welke dienst past
 
+TradeFlow Onderhoud — onderhoudsherinneringen voor installateurs (/onderhoudsherinneringen)
+- Herinneringen voor onderhoud van cv-ketel, warmtepomp of airco; de klant kiest zelf een moment
+- Per e-mail, sms of WhatsApp volgens afspraak; elk bericht heeft een afmeldmogelijkheid
+- Inrichting vanaf €995, daarna optioneel beheer vanaf €197 per maand. Sms-kosten en koppelingen per klant. Geen garantie op aantallen afspraken
+
 Doorlopend beheer: Basis €197, Standaard €297 of Uitgebreid €497 per maand, via een afzonderlijke overeenkomst.
 
 Losse diensten (via een kennismaking):
