@@ -3,13 +3,13 @@ import Image from "next/image";
 import { businessDetails } from "@/lib/business-details";
 
 export default function SiteFooter({ light = true }: { light?: boolean }) {
-  if(light) return <footer className="bl-footer"><div className="bl-container bl-footer-inner"><div><Link className="bl-brand" href="/"><Image src="/logo-256.png" alt="" width={32} height={32}/>BonanzaLabs</Link><p>Groningen · KvK {businessDetails.kvkNumber}</p></div><div className="bl-footer-links"><a href={`mailto:${businessDetails.contactEmail}`}>{businessDetails.contactEmail}</a><Link href="/privacy">Privacy</Link><Link href="/voorwaarden">Voorwaarden</Link><Link href="/cookies">Cookies</Link><Link href="/verwerkersovereenkomst">Verwerkersovereenkomst</Link><Link href="/contact">Contact</Link></div></div></footer>;
+  if(light) return <footer className="bl-footer"><div className="bl-container bl-footer-inner"><div><Link className="bl-brand" href="/"><Image src="/logo-mark-256.png" alt="" width={32} height={32}/>BonanzaLabs</Link><p>Groningen · KvK {businessDetails.kvkNumber}</p></div><div className="bl-footer-links"><a href={`mailto:${businessDetails.contactEmail}`}>{businessDetails.contactEmail}</a><Link href="/privacy">Privacy</Link><Link href="/voorwaarden">Voorwaarden</Link><Link href="/cookies">Cookies</Link><Link href="/verwerkersovereenkomst">Verwerkersovereenkomst</Link><Link href="/contact">Contact</Link></div></div></footer>;
   return (
     <footer className="border-t border-white/10 px-6 py-12">
       <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1.2fr_.8fr_.8fr]">
         <div>
           <div className="flex items-center gap-2">
-            <img src="/logo-256.png" alt="BonanzaLabs" className="h-7 w-7 rounded" />
+            <img src="/logo-mark-256.png" alt="BonanzaLabs" className="h-7 w-7 rounded" />
             <span className="font-bold">BonanzaLabs</span>
           </div>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/45">

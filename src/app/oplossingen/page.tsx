@@ -201,7 +201,7 @@ export default function OplossingenPage() {
             href="/contact"
             className="mt-7 inline-flex items-center gap-2 rounded-xl bg-amber-400 px-7 py-4 font-bold text-black hover:bg-amber-300"
           >
-            Plan een kennismaking <ArrowRight className="h-4 w-4" />
+            Vraag gratis quickscan aan <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>

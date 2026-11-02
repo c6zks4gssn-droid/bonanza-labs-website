@@ -60,8 +60,11 @@ export const metadata: Metadata = withPageSocialMetadata({
     images: ["/og-image.png"],
   },
   icons: {
-    icon: "/logo-256.png",
-    apple: "/logo-256.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/logo-mark-256.png", type: "image/png", sizes: "256x256" },
+    ],
+    apple: "/apple-touch-icon.png",
   },
   alternates: {
     canonical: "https://www.bonanza-labs.com",

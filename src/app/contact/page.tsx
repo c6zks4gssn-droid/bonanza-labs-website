@@ -136,7 +136,7 @@ export default function ContactPage() {
               className="mt-7 inline-flex items-center gap-2 rounded-xl bg-amber-400 px-7 py-4 font-bold text-black hover:bg-amber-300"
             >
               <CalendarDays className="h-5 w-5" />
-              Plan 15 minuten
+              Plan je quickscan (30 min)
             </a>
           )}
         </div>
