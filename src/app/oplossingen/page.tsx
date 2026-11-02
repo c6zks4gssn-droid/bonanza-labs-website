@@ -3,6 +3,8 @@ import {
   ArrowRight,
   Building2,
   CheckCircle2,
+  FileText,
+  Star,
   Clock3,
   PhoneCall,
   UtensilsCrossed,
@@ -38,6 +40,24 @@ const solutions = [
     href: "/bonanza-voice",
     accent: "border-emerald-400/25 bg-emerald-400/5",
     icon: PhoneCall,
+  },
+  {
+    name: "Subsidiehulp",
+    audience: "Digitaliseringssubsidies",
+    description:
+      "Hulp bij het voorbereiden van een subsidieaanvraag voor digitalisering. De subsidieverstrekker beslist; toekenning is niet gegarandeerd.",
+    href: "/pricing#subsidiehulp",
+    accent: "border-sky-400/25 bg-sky-400/5",
+    icon: FileText,
+  },
+  {
+    name: "Review-automatisering",
+    audience: "Horeca & bouw",
+    description:
+      "Automatisch een eerlijk verzoek om een Google-review na een bezoek of afgeronde klus, voor elke klant.",
+    href: "/pricing#review-automatisering",
+    accent: "border-rose-400/25 bg-rose-400/5",
+    icon: Star,
   },
 ];
 
