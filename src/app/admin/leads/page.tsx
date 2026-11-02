@@ -3,12 +3,14 @@ import {
   isRedisConfigured,
   readJsonRecordsFromRecentList,
 } from "@/lib/server-store";
+import { aiToolsLabel } from "@/lib/ai-tools-question";
 
 interface LeadRecord {
   id: string;
   name: string;
   email: string;
   message: string;
+  aiTools?: string | null;
   source: "contact-form" | "chat-widget" | "unknown";
   page: string;
   ip: string;
@@ -114,6 +116,12 @@ export default async function AdminLeadsPage() {
                 </div>
 
                 <dl className="mt-5 grid gap-3 text-xs text-slate-500 md:grid-cols-2">
+                  {lead.source === "contact-form" && (
+                    <div className="md:col-span-2">
+                      <dt className="font-semibold text-slate-400">Gebruikt AI-tools die zelf iets doen</dt>
+                      <dd className="mt-1">{aiToolsLabel(lead.aiTools) || "Niet beantwoord"}</dd>
+                    </div>
+                  )}
                   <div>
                     <dt className="font-semibold text-slate-400">Bronpagina</dt>
                     <dd className="mt-1 break-all">{lead.page || "Onbekend"}</dd>

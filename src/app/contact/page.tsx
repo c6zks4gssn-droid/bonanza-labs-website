@@ -16,6 +16,7 @@ import {
 import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
 import { businessDetails } from "@/lib/business-details";
+import { AI_TOOLS_OPTIONS, AI_TOOLS_QUESTION } from "@/lib/ai-tools-question";
 import "../light-home.css";
 import "./light-contact.css";
 
@@ -29,7 +30,7 @@ const WHATSAPP_MESSAGE = encodeURIComponent(
 );
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: "", email: "", message: "", company: "" });
+  const [form, setForm] = useState({ name: "", email: "", message: "", company: "", aiTools: "" });
   const [honeypot, setHoneypot] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -75,6 +76,7 @@ export default function ContactPage() {
           name: form.name,
           email: form.email,
           message: form.message,
+          aiTools: form.aiTools,
           source: "contact-form",
           page: window.location.href,
           company: form.company,
@@ -297,6 +299,30 @@ export default function ContactPage() {
                     placeholder="Bijvoorbeeld: gemiste telefoontjes, reserveringen via drie kanalen, incomplete offerteaanvragen of opvolging via losse WhatsApps."
                   />
                 </div>
+
+                <fieldset>
+                  <legend className="mb-2 block text-sm text-white/55">
+                    {AI_TOOLS_QUESTION} <span className="text-white/35">(optioneel)</span>
+                  </legend>
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    {AI_TOOLS_OPTIONS.map((option) => (
+                      <label
+                        key={option.value}
+                        className="flex cursor-pointer items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/70"
+                      >
+                        <input
+                          type="radio"
+                          name="ai-tools"
+                          value={option.value}
+                          checked={form.aiTools === option.value}
+                          onChange={() => setForm({ ...form, aiTools: option.value })}
+                          className="h-4 w-4 accent-amber-400"
+                        />
+                        {option.label}
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
 
                 <p className="text-xs leading-relaxed text-white/35">
                   Door te versturen ga je akkoord met verwerking volgens onze{" "}

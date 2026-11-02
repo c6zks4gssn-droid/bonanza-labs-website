@@ -4,12 +4,15 @@ import {
   isRedisConfigured,
   storeJsonRecord,
 } from "@/lib/server-store";
+import { type AiToolsAnswer, aiToolsLabel, parseAiToolsAnswer } from "@/lib/ai-tools-question";
 
 interface Lead {
   id: string;
   name: string;
   email: string;
   message: string;
+  // Optionele vraag in het quickscanformulier; null als die niet is beantwoord.
+  aiTools: AiToolsAnswer | null;
   source: "contact-form" | "chat-widget" | "unknown";
   page: string;
   ip: string;
@@ -97,6 +100,7 @@ async function postToResend(lead: Lead): Promise<NotificationOutcome> {
         <p><strong>Pagina:</strong> ${escapeHtml(lead.page || "onbekend")}</p>
         <p><strong>Bericht:</strong></p>
         <p>${escapeHtml(lead.message || "Geen bericht ingevuld").replace(/\n/g, "<br />")}</p>
+        <p><strong>AI-tools:</strong> ${escapeHtml(aiToolsLabel(lead.aiTools) || "niet beantwoord")}</p>
       `,
       text: [
         `Nieuwe lead via ${lead.source}`,
@@ -104,6 +108,7 @@ async function postToResend(lead: Lead): Promise<NotificationOutcome> {
         `E-mail: ${lead.email}`,
         `Pagina: ${lead.page || "onbekend"}`,
         `Bericht: ${lead.message || "Geen bericht ingevuld"}`,
+        `AI-tools: ${aiToolsLabel(lead.aiTools) || "niet beantwoord"}`,
       ].join("\n"),
     }),
   });
@@ -133,6 +138,7 @@ export async function POST(req: NextRequest) {
     const name = clean(body.name, 120);
     const email = clean(body.email, 254).toLowerCase();
     const message = clean(body.message, 5000);
+    const aiTools = parseAiToolsAnswer(body.aiTools);
     const page = clean(body.page, 500);
     const source =
       body.source === "contact-form" || body.source === "chat-widget"
@@ -172,6 +178,7 @@ export async function POST(req: NextRequest) {
       name,
       email,
       message,
+      aiTools,
       source,
       page,
       ip,
