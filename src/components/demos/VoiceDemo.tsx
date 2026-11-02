@@ -179,7 +179,7 @@ export default function VoiceDemo() {
             Voorlezen (browserstem)
           </label>
           <p id="voice-tts-note" className="text-xs" data-testid="tts-note">
-            {speech === "ok" ? "Gebruikt de stem van uw browser (Nederlands indien beschikbaar); dat is niet de stem van Bonanza Voice. Zet het geluid van uw apparaat aan (op iPhone: stille modus uit)." : speech === "checking" ? "Bezig met controleren of uw browser kan voorlezen…" : speech === "unsupported" ? "Voorlezen is niet beschikbaar: deze browser ondersteunt geen spraak." : "Voorlezen is niet beschikbaar: deze browser heeft geen Nederlandse stem."}
+            {speech === "ok" ? "Gebruikt de stem van je browser (Nederlands als die er is); dat is niet de stem van Bonanza Voice. Zet het geluid van je apparaat aan (op iPhone: stille modus uit)." : speech === "checking" ? "Bezig met controleren of je browser kan voorlezen…" : speech === "unsupported" ? "Voorlezen is niet beschikbaar: deze browser ondersteunt geen spraak." : "Voorlezen is niet beschikbaar: deze browser heeft geen Nederlandse stem."}
           </p>
         </div>
 
