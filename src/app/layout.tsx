@@ -30,14 +30,14 @@ const inter = Inter({
 
 export const metadata: Metadata = withPageSocialMetadata({
   title: {
-    default: "BonanzaLabs — Automatisering voor het MKB",
+    default: "Automatisering voor horeca, bouw en installatie | BonanzaLabs",
     template: "%s | BonanzaLabs",
   },
   description:
     "BonanzaLabs in Groningen bouwt praktische automatiseringssystemen voor horeca, bouw en installatie, met ServeFlow als 14-dagen pilot voor lokale horecazaken.",
   metadataBase: new URL("https://www.bonanza-labs.com"),
   openGraph: {
-    title: "BonanzaLabs — Automatisering voor het MKB",
+    title: "Automatisering voor horeca, bouw en installatie | BonanzaLabs",
     description:
       "Praktische automatisering voor horeca, bouw en installatie. Start met de ServeFlow 14-dagen pilot.",
     url: "https://www.bonanza-labs.com",
@@ -54,7 +54,7 @@ export const metadata: Metadata = withPageSocialMetadata({
   },
   twitter: {
     card: "summary_large_image",
-    title: "BonanzaLabs — Automatisering voor het MKB",
+    title: "Automatisering voor horeca, bouw en installatie | BonanzaLabs",
     description:
       "Praktische automatisering voor horeca, bouw en installatie vanuit Groningen.",
     images: ["/og-bonanzalabs.png"],
