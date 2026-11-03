@@ -8,6 +8,9 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Clock, CalendarDays, CheckCircle2 } from "lucide-react";
 import { blogPosts, getBlogPost, type BlogAccent } from "@/data/blog-posts";
 
+// Alle kennisbankartikelen zijn geschreven door de eigenaar; zichtbaar en in BlogPosting-schema.
+const AUTHOR = { name: "Clarence Etnel", url: "https://www.bonanza-labs.com/over-ons" };
+
 const accentStyles: Record<BlogAccent, { text: string; badge: string; border: string; glow: string; callout: string }> = {
   cyan: {
     text: "text-cyan-300",
@@ -53,6 +56,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: post.title,
     description: post.description,
     alternates: { canonical: url },
+    authors: [{ name: AUTHOR.name, url: AUTHOR.url }],
     openGraph: {
       title: post.title,
       description: post.description,
@@ -60,6 +64,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       type: "article",
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
+      authors: [AUTHOR.url],
     },
   });
 }
@@ -83,7 +88,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     description: post.description,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt,
-    author: { "@type": "Organization", name: "BonanzaLabs" },
+    author: {
+      "@type": "Person",
+      name: AUTHOR.name,
+      url: AUTHOR.url,
+      worksFor: { "@type": "Organization", name: "BonanzaLabs", url: "https://www.bonanza-labs.com" },
+    },
     publisher: {
       "@type": "Organization",
       name: "BonanzaLabs",
@@ -108,7 +118,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-300">{post.description}</p>
             <div className="mt-8 flex flex-wrap gap-5 text-sm text-slate-500">
               <span className="flex items-center gap-2"><CalendarDays className="h-4 w-4" /> {new Date(post.updatedAt).toLocaleDateString("nl-NL", { day: "numeric", month: "long", year: "numeric" })}</span>
-              <Link href="/over-ons" className="underline">Door BonanzaLabs</Link>
+              <span>Door <Link href="/over-ons" className="underline" rel="author">{AUTHOR.name}</Link>, BonanzaLabs</span>
               <span className="flex items-center gap-2"><Clock className="h-4 w-4" /> {post.readTime}</span>
             </div>
           </div>
