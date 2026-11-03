@@ -44,7 +44,7 @@ export const metadata: Metadata = withPageSocialMetadata({
     siteName: "BonanzaLabs",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-bonanzalabs.png",
         width: 1200,
         height: 630,
         alt: "BonanzaLabs — Automatisering voor het MKB",
@@ -57,7 +57,7 @@ export const metadata: Metadata = withPageSocialMetadata({
     title: "BonanzaLabs — Automatisering voor het MKB",
     description:
       "Praktische automatisering voor horeca, bouw en installatie vanuit Groningen.",
-    images: ["/og-image.png"],
+    images: ["/og-bonanzalabs.png"],
   },
   icons: {
     icon: [
@@ -90,7 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       "Praktische automatiseringsoplossingen voor horeca, bouw en installatie in Nederland.",
     url: "https://www.bonanza-labs.com",
     logo: "https://www.bonanza-labs.com/logo-256.png",
-    image: "https://www.bonanza-labs.com/og-image.png",
+    image: "https://www.bonanza-labs.com/og-bonanzalabs.png",
     email: businessDetails.contactEmail,
     ...(telephone ? { telephone } : {}),
     address: {
