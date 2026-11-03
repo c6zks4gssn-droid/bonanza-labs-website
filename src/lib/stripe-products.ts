@@ -58,8 +58,8 @@ export const STRIPE_PRODUCTS: Record<string, StripeProductConfig> = {
   },
   "bonanza-voice-implementatie": {
     name: "Bonanza Voice Implementatie",
-    description: "Implementatie van AI-telefonie volgens afgesproken scope.",
-    amount: 149500,
+    description: "Eenmalige inrichting van Bonanza Voice. Maatwerk, extra koppelingen of meerdere locaties volgens offerte.",
+    amount: 49500,
     mode: "payment",
     offerType: "implementation",
     selfService: false,
