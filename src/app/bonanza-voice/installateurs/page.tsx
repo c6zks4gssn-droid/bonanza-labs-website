@@ -26,7 +26,7 @@ export default function VoiceInstallateursPage() {
     <header className="voice-hero voice-wrap">
       <p className="voice-eyebrow">Bonanza Voice · AI-telefonist voor installatiebedrijven</p>
       <h1>AI-telefonist voor installateurs: jij staat bij de klant, <em>Bonanza Voice neemt op</em></h1>
-      <p>Bonanza Voice is een AI-telefonist voor installateurs en kleine installatiebedrijven. De agent neemt op als jij niet kunt, stelt vooraf afgesproken intakevragen en zet de offerteaanvraag klaar voor een medewerker. Als abonnement vanaf <strong>€199 per maand excl. btw</strong>, of op maat vanaf €1.495. Altijd per bedrijf ingericht en getest.</p>
+      <p>Bonanza Voice is een AI-telefonist voor installateurs en kleine installatiebedrijven. De agent neemt op als jij niet kunt, stelt vooraf afgesproken intakevragen en zet de offerteaanvraag klaar voor een medewerker. Als abonnement vanaf <strong>€199 per maand excl. btw</strong>, plus €495 inrichting; maatwerk volgens offerte. Altijd per bedrijf ingericht en getest.</p>
       <div className="voice-actions"><Link className="voice-primary" href="/contact">Bespreek je telefoonsituatie</Link><Link className="voice-secondary" href="/bonanza-voice">Probeer de demo</Link></div>
     </header>
 
@@ -76,7 +76,7 @@ export default function VoiceInstallateursPage() {
       <p className="voice-note">Eenmalige inrichting €495 bij Start en Groei, bij Pro volgens offerte. Minimale looptijd 3 maanden, daarna maandelijks opzegbaar. Niet gebruikte minuten vervallen aan het eind van de maand. Afsluiten gaat via een afzonderlijke overeenkomst. Alle prijzen excl. btw.</p>
       <h3 className="voice-spaced">Inrichting op maat</h3>
       <ul className="voice-steps">
-        <li><p><strong>Inrichting:</strong> vanaf €1.495 excl. btw, per bedrijf bepaald op basis van gesprekstype en telefonie.</p></li>
+        <li><p><strong>Inrichting:</strong> volgens offerte, per bedrijf bepaald op basis van gesprekstype en telefonie. Maatwerk, extra koppelingen of meerdere locaties.</p></li>
         <li><p><strong>Beheer:</strong> vanaf €197 per maand excl. btw, in drie niveaus: Basis €197, Standaard €297 of Uitgebreid €497. Via een afzonderlijke overeenkomst.</p></li>
         <li><p><strong>Gebruikskosten (belminuten):</strong> komen apart, volgens offerte.</p></li>
       </ul>

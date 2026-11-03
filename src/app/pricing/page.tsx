@@ -380,9 +380,9 @@ export default function PricingPage() {
           </article>
           <article className="rounded-3xl border border-white/10 p-8">
             <h3 className="text-2xl font-black">Bonanza Voice</h3>
-            <p className="mt-3 text-3xl font-black">Vanaf €1.495</p>
-            <p className="mt-1 text-sm text-white/60">Inrichting, excl. btw</p>
-            <p className="mt-4 text-white/60">Een AI-telefonist voor basisvragen en terugbel- of offerteverzoeken. Per klant ingericht en getest. Beheer vanaf €197 per maand. Gebruikskosten (belminuten) komen apart, volgens offerte.</p>
+            <p className="mt-3 text-3xl font-black">€495</p>
+            <p className="mt-1 text-sm text-white/60">€495 inrichting, excl. btw</p>
+            <p className="mt-4 text-white/60">Een AI-telefonist voor basisvragen en terugbel- of offerteverzoeken. Per klant ingericht en getest. Daarbij hoort een abonnement: Start €199, Groei €349 of Pro €499 per maand, met belminuten inbegrepen; minimaal 3 maanden. Maatwerk, extra koppelingen of meerdere locaties volgens offerte.</p>
             <Link href="/bonanza-voice" className="mt-6 inline-flex items-center gap-2 font-semibold underline">Bekijk Bonanza Voice <ArrowRight className="h-4 w-4" /></Link>
           </article>
         </div>
