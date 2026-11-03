@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export function withPageSocialMetadata(metadata: Metadata): Metadata {
   const title = metadata.openGraph?.title ?? metadata.title;
   const description = metadata.openGraph?.description ?? metadata.description ?? undefined;
-  const images = metadata.openGraph?.images ?? ["/og-image.png"];
+  const images = metadata.openGraph?.images ?? ["/og-bonanzalabs.png"];
   return {
     ...metadata,
     openGraph: { ...metadata.openGraph, title: title ?? undefined, description, images },
@@ -13,7 +13,7 @@ export function withPageSocialMetadata(metadata: Metadata): Metadata {
       ...metadata.twitter,
       title: title ?? undefined,
       description,
-      images: ["/og-image.png"],
+      images: ["/og-bonanzalabs.png"],
     },
   };
 }

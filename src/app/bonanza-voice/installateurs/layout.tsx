@@ -10,7 +10,7 @@ export const metadata: Metadata = withPageSocialMetadata({
   description,
   alternates: { canonical: url },
   robots: { index: true, follow: true },
-  openGraph: { title, description, url, type: "website", locale: "nl_NL", images: ["https://www.bonanza-labs.com/og-image.png"] },
+  openGraph: { title, description, url, type: "website", locale: "nl_NL", images: ["https://www.bonanza-labs.com/og-bonanzalabs.png"] },
 });
 
 export default function InstallateursLayout({ children }: { children: React.ReactNode }) {

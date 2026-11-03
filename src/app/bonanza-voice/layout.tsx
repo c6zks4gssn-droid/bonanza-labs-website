@@ -6,7 +6,7 @@ export const metadata: Metadata = withPageSocialMetadata({
   title,
   description: "Bonanza Voice is een AI-telefonist voor horeca, bouw en installatie. Basisvragen, terugbel- en offerteverzoeken. Per klant ingericht en getest. €495 inrichting, excl. btw; maatwerk volgens offerte.",
   alternates: { canonical: "https://www.bonanza-labs.com/bonanza-voice" },
-  openGraph: { title, description, url: "https://www.bonanza-labs.com/bonanza-voice", type: "website", images: ["https://www.bonanza-labs.com/og-image.png"] },
-  twitter: { card: "summary_large_image", title, description, images: ["https://www.bonanza-labs.com/og-image.png"] },
+  openGraph: { title, description, url: "https://www.bonanza-labs.com/bonanza-voice", type: "website", images: ["https://www.bonanza-labs.com/og-bonanzalabs.png"] },
+  twitter: { card: "summary_large_image", title, description, images: ["https://www.bonanza-labs.com/og-bonanzalabs.png"] },
 });
 export default function VoiceLayout({ children }: { children: React.ReactNode }) { return children; }
