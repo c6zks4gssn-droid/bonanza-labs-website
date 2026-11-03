@@ -53,7 +53,7 @@ types kloppen en de productiebuild slaagt. Pas daarna gaat het naar `main`.
 - **Taal:** Nederlands in alle zichtbare tekst, tenzij een pagina expliciet Engelstalig is.
 - **Naam en URL:** altijd `BonanzaLabs`, canonieke host `https://www.bonanza-labs.com`
   (met `www`). Geen `bonanza-labs.com` zonder `www` in metadata, canonical of schema.
-- **Prijzen:** ServeFlow €497, Flow Assessment €999, Bonanza Voice vanaf €1.495, TradeFlow op
+- **Prijzen:** ServeFlow €497, Flow Assessment €999, Bonanza Voice inrichting €495 (maatwerk volgens offerte), TradeFlow op
   aanvraag — alle excl. btw. Staat een prijs in de tekst, dan moet hetzelfde getal ook in
   `public/schema.json` en in de metadata staan.
 - **Geen beloftes die we niet kunnen bewijzen.** Geen gegarandeerde omzet, geen "foutloze

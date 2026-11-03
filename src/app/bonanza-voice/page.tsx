@@ -14,7 +14,7 @@ const schema = {
     { "@type": "Service", "@id": `${url}#service`, name: "Bonanza Voice", serviceType: "AI-telefonist", description: faq[0][1], url,
       provider: { "@type": "Organization", name: "BonanzaLabs", url: "https://www.bonanza-labs.com", logo: "https://www.bonanza-labs.com/logo-256.png", email: "info@bonanza-labs.com", address: { "@type": "PostalAddress", addressLocality: "Groningen", addressCountry: "NL" } },
       areaServed: { "@type": "Country", name: "Netherlands" },
-      offers: { "@type": "Offer", name: "Inrichting Bonanza Voice vanaf €1.495 excl. btw", url, priceSpecification: { "@type": "PriceSpecification", minPrice: 1495, priceCurrency: "EUR", valueAddedTaxIncluded: false } } },
+      offers: { "@type": "Offer", name: "Inrichting Bonanza Voice €495 excl. btw", url, priceSpecification: { "@type": "PriceSpecification", minPrice: 495, priceCurrency: "EUR", valueAddedTaxIncluded: false } } },
     { "@type": "FAQPage", mainEntity: faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
     { "@type": "HowTo", name: "Hoe een Bonanza Voice-implementatie verloopt", step: steps.map(([name, text]) => ({ "@type": "HowToStep", name, text })) },
     { "@type": "BreadcrumbList", itemListElement: [ ["BonanzaLabs", "https://www.bonanza-labs.com/"], ["Oplossingen", "https://www.bonanza-labs.com/oplossingen"], ["Bonanza Voice", url] ].map(([name, item], i) => ({ "@type": "ListItem", position: i + 1, name, item })) },
@@ -57,8 +57,8 @@ export default function VoicePage() {
       </div>
     </div></section>
     <section className="voice-wrap voice-section">
-      <h2>Wat het kost</h2><p className="voice-price">Inrichting vanaf <strong>€1.495 excl. btw</strong></p>
-      <p>Bonanza Voice wordt per klant ingericht. Wat daarin zit en wat eventueel doorlopend nodig is, bespreken we tijdens de intake op basis van jouw gesprekstype en telefoniesituatie. Beheer kost vanaf €197 per maand excl. btw. Gebruikskosten (belminuten) komen apart, volgens offerte.</p>
+      <h2>Wat het kost</h2><p className="voice-price"><strong>€495 inrichting</strong>, excl. btw</p>
+      <p>Bonanza Voice wordt per klant ingericht. Wat daarin zit en wat eventueel doorlopend nodig is, bespreken we tijdens de intake op basis van jouw gesprekstype en telefoniesituatie. Daarbij hoort een abonnement: Start €199, Groei €349 of Pro €499 per maand, met belminuten inbegrepen; minimaal 3 maanden. Alle prijzen excl. btw. Maatwerk, extra koppelingen of meerdere locaties volgens offerte.</p>
       <p><Link href="/blog/wat-kost-ai-telefonie-voor-een-mkb-bedrijf">Lees ook: wat kost AI-telefonie voor een MKB-bedrijf?</Link></p>
       <h2 className="voice-spaced">Hoe een implementatie verloopt</h2>
       <ol className="voice-steps">{steps.map(([name, text]) => <li key={name}><h3>{name}</h3><p>{text}</p></li>)}</ol>

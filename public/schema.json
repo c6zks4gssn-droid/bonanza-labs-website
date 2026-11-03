@@ -43,7 +43,7 @@
       "priceCurrency": "EUR",
       "priceSpecification": {
         "@type": "PriceSpecification",
-        "minPrice": "1495",
+        "minPrice": "495",
         "priceCurrency": "EUR"
       },
       "itemOffered": {

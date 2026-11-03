@@ -1,11 +1,11 @@
 // Inhoud voor /bonanza-voice/installateurs.
 // Prijzen komen uit /pricing: abonnementen Start/Groei/Pro (€199/€349/€499 per maand,
-// inrichting €495) en maatwerk (inrichting vanaf €1.495, beheer €197/€297/€497 per maand).
+// inrichting €495) en maatwerk (volgens offerte; beheer €197/€297/€497 per maand).
 // FAQ-tekst wordt zowel zichtbaar getoond als in FAQPage-schema gebruikt: houd ze identiek.
 
 export const faq = [
   ["Wat is een AI-telefonist voor installateurs?", "Een AI-telefonist neemt inkomende gesprekken aan als jij of je team niet kan opnemen. Bij een installatiebedrijf stelt Bonanza Voice vooraf afgesproken intakevragen, zoals het soort werk, de plaats, de gewenste periode en contactgegevens. Een medewerker beoordeelt de aanvraag daarna en neemt contact op."],
-  ["Wat kost Bonanza Voice?", "Als abonnement kost Bonanza Voice €199 (Start), €349 (Groei) of €499 (Pro) per maand excl. btw, met belminuten inbegrepen en een eenmalige inrichting van €495 bij Start en Groei. De minimale looptijd is 3 maanden. Op maat kost de inrichting vanaf €1.495 excl. btw, met beheer vanaf €197 per maand en belminuten volgens offerte. Afsluiten gaat via een afzonderlijke overeenkomst."],
+  ["Wat kost Bonanza Voice?", "Als abonnement kost Bonanza Voice €199 (Start), €349 (Groei) of €499 (Pro) per maand excl. btw, met belminuten inbegrepen en een eenmalige inrichting van €495 bij Start en Groei. De minimale looptijd is 3 maanden. Maatwerk, extra koppelingen of meerdere locaties volgens offerte. Afsluiten gaat via een afzonderlijke overeenkomst."],
   ["Geeft de AI prijzen of offertes aan bellers?", "Nee. De agent noemt geen prijzen, doet geen offertes en zegt geen planning toe. Hij legt de aanvraag vast; prijs, beoordeling en planning blijven bij een medewerker."],
   ["Wat als de beller iets vraagt dat de agent niet weet?", "Dan vraagt de agent om verduidelijking of zet hij de vraag klaar voor een medewerker, met de gegevens die tot dan toe zijn verzameld. De agent verzint geen antwoorden buiten de afgesproken scope."],
   ["Kan Bonanza Voice doorschakelen of afspraken inplannen?", "Alleen als dit voor jouw bedrijf is ingericht en getest. Standaard legt de agent de aanvraag vast voor opvolging door een medewerker."],
@@ -34,6 +34,6 @@ export const comparison = [
   ["Wie neemt op", "Een AI-agent die zich voorstelt als digitale assistent.", "Een medewerker van de telefoonservice."],
   ["Wat er gebeurt", "Vaste intakevragen en afgesproken basisvragen; de aanvraag wordt klaargezet.", "Afhankelijk van de afspraken: een bericht aannemen of meer, met menselijk inschattingsvermogen."],
   ["Inrichting", "Per bedrijf ingericht en getest, gestart met één gesprekstype.", "Afhankelijk van de aanbieder; vaak een script of belnotitie."],
-  ["Kosten", "Abonnement vanaf €199 per maand excl. btw met belminuten inbegrepen, of op maat vanaf €1.495 inrichting.", "Afhankelijk van de aanbieder en het aantal gesprekken."],
+  ["Kosten", "Abonnement vanaf €199 per maand excl. btw met belminuten inbegrepen, plus €495 inrichting; maatwerk volgens offerte.", "Afhankelijk van de aanbieder en het aantal gesprekken."],
   ["Past goed als", "Je vooral steeds dezelfde soort aanvragen mist en die gestructureerd wilt vastleggen.", "Bellers vaak complexe of gevoelige vragen hebben die een mens moet inschatten."],
 ] as const;
