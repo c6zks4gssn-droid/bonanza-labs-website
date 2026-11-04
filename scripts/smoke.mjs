@@ -96,6 +96,19 @@ async function main() {
     }
   });
 
+  await check("GET /api/leadflow/auth/session geeft een veilige sessiestatus", async () => {
+    const response = await request("/api/leadflow/auth/session");
+    if (response.status !== 200) throw new Error(`status ${response.status}`);
+    const body = await readJson(response);
+    if (typeof body.authenticated !== "boolean") throw new Error("authenticated-flag ontbreekt");
+    if (body.authenticated && !body.session) throw new Error("sessiegegevens ontbreken");
+  });
+
+  await check("LeadFlow lead-API weigert anonieme toegang", async () => {
+    const response = await request("/api/leadflow/leads");
+    if (response.status !== 401) throw new Error(`verwacht 401, kreeg ${response.status}`);
+  });
+
   await check("GET /api/checkout bevat ServeFlow-pilot", async () => {
     const response = await request("/api/checkout");
     if (response.status !== 200) throw new Error(`status ${response.status}`);
