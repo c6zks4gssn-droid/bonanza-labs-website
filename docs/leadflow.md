@@ -18,7 +18,7 @@ LeadFlow is the multi-tenant lead workspace integrated into the BonanzaLabs Next
 
 - Next.js 15 App Router on the existing Vercel project `bonanza-labs-site`.
 - Existing Upstash Redis REST integration in `src/lib/server-store.ts`.
-- The existing `STORAGE_NAMESPACE` prefix also applies to LeadFlow keys, so preview/test namespaces remain separate when configured.
+- The existing `STORAGE_NAMESPACE` prefix also applies to LeadFlow keys. The Vercel preview environment for `feat/bonanzalabs-leadflow-saas` is explicitly scoped to `leadflow-preview`, so preview accounts and leads cannot mix with production Redis records.
 - Lead records expire after 24 months from their last write. Account/workspace records have a 10-year storage TTL. Session records expire after 30 days.
 - No new database or external dependency is required for manual entry, login, pipeline, or CSV operations.
 
