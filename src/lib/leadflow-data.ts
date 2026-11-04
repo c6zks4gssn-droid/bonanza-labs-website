@@ -42,7 +42,7 @@ export function scoreLead(lead: Pick<LeadRecord, "industry" | "province" | "emai
   if (provinces.includes(lead.province)) { score += 20; reasons.push("In een primaire doelprovincie"); }
   if (lead.email || lead.phone) { score += 10; reasons.push("Direct contactgegeven beschikbaar"); }
   if (lead.website) { score += 10; reasons.push("Website beschikbaar"); }
-  return { score: Math.min(100, score), reasons };
+  return { score: Math.min(100, score), scoreReasons: reasons };
 }
 
 function clean(value: unknown, max = 500) { return typeof value === "string" ? value.trim().slice(0, max) : ""; }
