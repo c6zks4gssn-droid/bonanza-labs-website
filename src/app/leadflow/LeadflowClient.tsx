@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import {
   Activity, ArrowDownToLine, ArrowRight, Building2, Check, ChevronDown, CircleHelp,
   Clipboard, Filter, Globe2, LayoutDashboard, LogOut, Mail, MapPin, Menu, Plus,
@@ -134,7 +134,7 @@ export default function LeadflowClient() {
     average: leads.length ? Math.round(leads.reduce((sum, l) => sum + l.score, 0) / leads.length) : 0,
   }), [leads]);
 
-  async function submitAuth(event: React.FormEvent) {
+  async function submitAuth(event: FormEvent) {
     event.preventDefault(); setError(""); setAuthBusy(true);
     try {
       const endpoint = authMode === "signup" ? "/api/leadflow/auth/signup" : "/api/leadflow/auth/login";
@@ -149,7 +149,7 @@ export default function LeadflowClient() {
     setSession(null); setLeads([]); setAuth({ name: "", companyName: "", email: "", password: "" });
   }
 
-  async function saveLead(event: React.FormEvent) {
+  async function saveLead(event: FormEvent) {
     event.preventDefault(); setSaving(true); setError("");
     try {
       await api("/api/leadflow/leads", { method: "POST", body: JSON.stringify(leadForm) });
@@ -251,6 +251,7 @@ export default function LeadflowClient() {
       </aside>
       <section className="lf-main">
         <header className="lf-topbar"><div className="lf-breadcrumb">BonanzaLabs <span>/</span> LeadFlow <span>/</span> {section === "dashboard" ? "Overzicht" : section === "leads" ? "Leads" : "Bedrijven zoeken"}</div><div className="lf-top-actions"><span className="lf-live-dot"/> Werkruimte actief <button onClick={() => setShowLeadForm(true)} className="lf-primary lf-small"><Plus size={16}/> Nieuwe lead</button></div></header>
+        <nav className="lf-mobile-nav" aria-label="LeadFlow navigatie"><button className={section === "dashboard" ? "active" : ""} onClick={() => setSection("dashboard")}><LayoutDashboard size={15}/> Overzicht</button><button className={section === "leads" ? "active" : ""} onClick={() => setSection("leads")}><Users size={15}/> Leads</button><button className={section === "discover" ? "active" : ""} onClick={() => setSection("discover")}><Target size={15}/> Zoeken</button></nav>
         <div className="lf-content">
           {error && <div className="lf-alert error"><span>{error}</span><button onClick={() => setError("")}><X size={16}/></button></div>}
           {notice && <div className="lf-alert success"><Check size={16}/><span>{notice}</span><button onClick={() => setNotice("")}><X size={16}/></button></div>}
@@ -288,5 +289,5 @@ export default function LeadflowClient() {
 
 function LeadTable({ leads, onStatus, onDelete, onDraft }: { leads: Lead[]; onStatus: (lead: Lead, status: Status) => void; onDelete: (lead: Lead) => void; onDraft: (lead: Lead) => void }) {
   if (!leads.length) return <div className="lf-empty"><span><Users size={23}/></span><h3>Nog geen leads in dit overzicht</h3><p>Voeg een bedrijf toe of importeer je bestaande contacten via CSV.</p></div>;
-  return <div className="lf-table-wrap"><table className="lf-table"><thead><tr><th>Bedrijf</th><th>Product</th><th>Leadscore</th><th>Status</th><th>Contact</th><th></th></tr></thead><tbody>{leads.map((lead) => <tr key={lead.id}><td><div className="lf-company-cell"><span className="lf-company-avatar">{lead.company.slice(0,1).toUpperCase()}</span><span><strong>{lead.company}</strong><small>{[lead.industry, lead.city].filter(Boolean).join(" · ") || "Branche niet ingevuld"}</small></span></div></td><td><span className="lf-product-pill">{lead.product}</span></td><td><div className="lf-score-cell"><strong>{lead.score}</strong><span><i style={{ width: lead.score + "%" }}/></span></div></td><td><select className={"lf-status-select status-" + lead.status} value={lead.status} onChange={(e) => onStatus(lead, e.target.value as Status)}>{statuses.map((s) => <option key={s} value={s}>{statusLabels[s]}</option>)}</select></td><td><div className="lf-contact-cell">{lead.email && <a href={"mailto:" + lead.email}><Mail size={13}/>{lead.email}</a>}{lead.phone && <span>{lead.phone}</span>}{!lead.email && !lead.phone && <span>Geen contactgegevens</span>}</div></td><td><div className="lf-row-actions"><button title="Maak conceptbericht" onClick={() => onDraft(lead)}><Sparkles size={16}/></button><button title="Verwijder lead" onClick={() => onDelete(lead)}><Trash2 size={16}/></button></div></td></tr>)}</tbody></table></div>;
+  return <div className="lf-table-wrap"><table className="lf-table"><thead><tr><th>Bedrijf</th><th>Product</th><th>Leadscore</th><th>Status</th><th>Contact</th><th></th></tr></thead><tbody>{leads.map((lead) => <tr key={lead.id}><td><div className="lf-company-cell"><span className="lf-company-avatar">{lead.company.slice(0,1).toUpperCase()}</span><span><strong>{lead.company}</strong><small>{[lead.industry, lead.city].filter(Boolean).join(" · ") || "Branche niet ingevuld"}</small></span></div></td><td><span className="lf-product-pill">{lead.product}</span></td><td><div className="lf-score-cell"><strong title={lead.scoreReasons.join(" · ") || "Basisscore; vul branche en contactgegevens aan"}>{lead.score}</strong><span title={lead.scoreReasons.join(" · ")}><i style={{ width: lead.score + "%" }}/></span></div></td><td><select className={"lf-status-select status-" + lead.status} value={lead.status} onChange={(e) => onStatus(lead, e.target.value as Status)}>{statuses.map((s) => <option key={s} value={s}>{statusLabels[s]}</option>)}</select></td><td><div className="lf-contact-cell">{lead.email && <a href={"mailto:" + lead.email}><Mail size={13}/>{lead.email}</a>}{lead.phone && <span>{lead.phone}</span>}{!lead.email && !lead.phone && <span>Geen contactgegevens</span>}</div></td><td><div className="lf-row-actions"><button title="Maak conceptbericht" onClick={() => onDraft(lead)}><Sparkles size={16}/></button><button title="Verwijder lead" onClick={() => onDelete(lead)}><Trash2 size={16}/></button></div></td></tr>)}</tbody></table></div>;
 }
