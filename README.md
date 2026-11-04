@@ -46,6 +46,15 @@ De overige geregistreerde handelsnamen worden bewust niet op de BonanzaLabs-site
 - `/admin/leads` — beveiligd leadoverzicht
 - `/blog` — Nederlandse MKB-kennisbank
 
+## LeadFlow SaaS (MVP)
+
+- `/leadflow` — self-service multi-tenant leadwerkruimte.
+- Accountregistratie, login, leadbeheer, leadscore, salespipeline en CSV-import/export.
+- Optionele bedrijfszoekfunctie via Google Places (`GOOGLE_MAPS_API_KEY`).
+- Architectuur, API-routes, bewaartermijnen en resterende launch-gates: [`docs/leadflow.md`](docs/leadflow.md).
+
+LeadFlow gebruikt de bestaande Upstash Redis-opslag. De huidige MVP bevat nog geen abonnementen/billing, e-mailverificatie, wachtwoordherstel, teamuitnodigingen of geautomatiseerde outreach. Productiepublicatie volgt pas na de PR-gate, previewcontrole en privacy/security-review.
+
 ## Productievoorzieningen
 
 - Stripe Checkout en webhookvalidatie
