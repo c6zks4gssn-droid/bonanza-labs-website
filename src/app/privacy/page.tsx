@@ -17,6 +17,7 @@ const sections = [
     title: "2. Welke persoonsgegevens verwerken we?",
     paragraphs: [
       "Afhankelijk van hoe je de website gebruikt, verwerken we je naam, e-mailadres, telefoonnummer, bedrijfsinformatie, berichtinhoud, bronpagina, IP-adres, browserinformatie en technische loggegevens.",
+      "Bij een LeadFlow-account verwerken we daarnaast je naam, zakelijke e-mailadres, bedrijfsnaam, een gehashte wachtwoordverificatie en sessiegegevens. In je LeadFlow-werkruimte kun je bedrijfsnamen, contactpersonen, zakelijke e-mailadressen, telefoonnummers, websites, branche, regio, productinteresse, salesstatus en eigen notities opslaan.",
       "Voor een ServeFlow-pilot kunnen we daarnaast informatie verwerken over de locatie, reserveringsroute, openingstijden, gewenste berichtinhoud en contactpersonen die nodig zijn om de afgesproken flow in te richten.",
       "Bij een Stripe-betaling ontvangen we betaalstatus, het gekozen product, bedrag, valuta, klantidentificatie en contactgegevens. Volledige kaartgegevens worden door Stripe verwerkt en niet door BonanzaLabs opgeslagen.",
     ],
@@ -24,7 +25,7 @@ const sections = [
   {
     title: "3. Waarom verwerken we deze gegevens?",
     paragraphs: [
-      "We gebruiken persoonsgegevens om vragen te beantwoorden, pilots en Flow Assessments te plannen, betalingen af te handelen, de afgesproken dienst te leveren, misbruik te voorkomen en onze website en processen te verbeteren.",
+      "We gebruiken persoonsgegevens om vragen te beantwoorden, pilots en Flow Assessments te plannen, betalingen af te handelen, de afgesproken dienst te leveren, LeadFlow-accounts te beheren, leads op te slaan en te ordenen, een indicatieve fit-score te berekenen, misbruik te voorkomen en onze website en processen te verbeteren.",
       "De verwerking is gebaseerd op het uitvoeren van een overeenkomst of voorbereidende stappen, ons gerechtvaardigd belang om aanvragen veilig en zorgvuldig af te handelen, wettelijke administratieve verplichtingen en — waar nodig — toestemming.",
     ],
   },
@@ -34,7 +35,8 @@ const sections = [
       "We gebruiken de volgende leveranciers (subverwerkers). Elke partij ontvangt alleen de gegevens die nodig zijn voor haar taak:",
       "Vercel Inc. (VS): hosting van de website en serverfuncties, technische logs.",
       "Stripe Payments Europe Ltd. (Ierland): betalingen en facturen.",
-      "Upstash Inc. (VS): opslag van leadaanvragen en betaalstatus (Redis-database).",
+      "Upstash Inc. (VS): opslag van leadaanvragen, LeadFlow-accountgegevens, LeadFlow-werkruimtes en betaalstatus (Redis-database).",
+      "Google LLC (VS): bedrijfsinformatie via Google Places, uitsluitend wanneer de bedrijfszoekfunctie in LeadFlow is geactiveerd en een gebruiker daar zelf een zoekopdracht uitvoert.",
       "Resend Inc. (VS): versturen van e-mailnotificaties over aanvragen.",
       "ElevenLabs Inc. (VS): Bonanza Voice, spraak- en tekstgesprekken met de AI-assistent (audio, transcript, technische gegevens).",
       "Telegram Messenger Inc.: interne storingsmeldingen aan de eigenaar over mislukte e-mails. Zo'n melding bevat alleen het tijdstip, de verzendstatus, een intern nummer en de foutmelding van de verzendpartij; geen namen, e-mailadressen of inhoud van aanvragen.",
@@ -53,7 +55,7 @@ const sections = [
   {
     title: "5. Hoe lang bewaren we gegevens?",
     paragraphs: [
-      "Leadaanvragen bewaren we in beginsel maximaal 24 maanden na het laatste inhoudelijke contact, tenzij de gegevens eerder niet meer nodig zijn of een langere bewaartermijn noodzakelijk is voor een lopende overeenkomst of geschil.",
+      "Leadaanvragen bewaren we in beginsel maximaal 24 maanden na het laatste inhoudelijke contact. LeadFlow-leadrecords worden maximaal 24 maanden na de laatste wijziging bewaard. Account- en werkruimtegegevens bewaren we zolang het account actief is en verwijderen we op verzoek, behoudens wettelijke bewaarplichten. LeadFlow-sessies verlopen na maximaal 30 dagen. Voor een lopende overeenkomst of geschil kan een langere bewaartermijn noodzakelijk zijn.",
       "Betaal- en administratieve gegevens bewaren we zolang dit nodig is voor de uitvoering van de overeenkomst en de toepasselijke wettelijke administratieplicht. Technische beveiligingslogs bewaren we zo kort mogelijk en alleen zolang ze nodig zijn voor veiligheid en storingsonderzoek.",
     ],
   },
@@ -61,13 +63,13 @@ const sections = [
     title: "6. Beveiliging",
     paragraphs: [
       "We beperken toegang tot persoonsgegevens, gebruiken versleutelde verbindingen en bewaren geheime sleutels uitsluitend in beveiligde serveromgevingen. Geen enkel digitaal systeem is volledig risicovrij, maar we nemen passende technische en organisatorische maatregelen om misbruik, verlies en onbevoegde toegang te beperken.",
-      "Het interne leadoverzicht en de bijbehorende API zijn beschermd met server-side authenticatie. Zonder ingestelde beheercredentials blijven deze routes gesloten.",
+      "Het interne leadoverzicht en de bijbehorende API zijn beschermd met server-side authenticatie. LeadFlow gebruikt afzonderlijke klantwerkruimtes; API-verzoeken lezen en wijzigen alleen records die bij de ingelogde werkruimte horen. Wachtwoorden worden niet als leesbare tekst opgeslagen maar met een salted scrypt-afleiding gehasht. Sessiecookies zijn HttpOnly en verlopen na maximaal 30 dagen. Deze maatregelen vervangen geen onafhankelijke beveiligingsaudit of periodieke toegangscontrole.",
     ],
   },
   {
     title: "7. Jouw privacyrechten",
     paragraphs: [
-      "Je kunt vragen om inzage, correctie, verwijdering, beperking, overdracht of bezwaar tegen bepaalde verwerkingen. Waar verwerking op toestemming is gebaseerd, kun je die toestemming intrekken.",
+      "Je kunt vragen om inzage, correctie, verwijdering, beperking, overdracht of bezwaar tegen bepaalde verwerkingen. Voor gegevens die je zelf in LeadFlow invoert, blijf je verantwoordelijk voor een geldige grondslag, transparantie richting je contactpersonen en het tijdig verwijderen van gegevens die je niet meer nodig hebt. Waar verwerking op toestemming is gebaseerd, kun je die toestemming intrekken.",
       `Stuur je verzoek naar ${businessDetails.contactEmail}. We kunnen aanvullende informatie vragen om je identiteit te controleren, maar vragen niet meer gegevens dan daarvoor nodig zijn. Je kunt ook een klacht indienen bij de Autoriteit Persoonsgegevens.`,
     ],
   },
