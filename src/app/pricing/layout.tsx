@@ -1,10 +1,11 @@
 import { withPageSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
+import { PRICES, formatEuro } from "@/lib/pricing";
 
 export const metadata: Metadata = withPageSocialMetadata({
   title: "Prijzen — ServeFlow, TradeFlow, Voice en Assessment",
   description:
-    "ServeFlow-pilot €497, Flow Assessment €1.295, Bonanza Voice-inrichting €495 en TradeFlow vanaf €1.995, beheer vanaf €197 per maand. Alle prijzen excl. btw.",
+    `ServeFlow-pilot ${formatEuro(PRICES.serveflowPilot)}, Flow Assessment ${formatEuro(PRICES.flowAssessment)}, Bonanza Voice-inrichting ${formatEuro(PRICES.bonanzaVoiceSetup)} en TradeFlow vanaf ${formatEuro(PRICES.tradeflowImplementation)}, beheer vanaf ${formatEuro(PRICES.beheerBasis)} per maand. Alle prijzen excl. btw.`,
   alternates: {
     canonical: "https://www.bonanza-labs.com/pricing",
   },

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Instrument_Serif, Geist_Mono, Inter } from "next/font/google";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import BonanzaVoice from "@/components/BonanzaVoice";
+import AnalyticsTracker from "@/components/analytics-tracker";
 import { businessDetails } from "@/lib/business-details";
 import "./globals.css";
 import "./light-home.css";
@@ -136,6 +137,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </noscript>
         <I18nProvider>
           {children}
+          <AnalyticsTracker />
           <BonanzaVoice />
         </I18nProvider>
       </body>

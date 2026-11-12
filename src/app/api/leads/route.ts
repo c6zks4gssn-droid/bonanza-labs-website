@@ -4,6 +4,7 @@ import {
   isRedisConfigured,
   storeJsonRecord,
 } from "@/lib/server-store";
+import { storeAnalyticsEvent } from "@/lib/analytics-store";
 import { type AiToolsAnswer, aiToolsLabel, parseAiToolsAnswer } from "@/lib/ai-tools-question";
 
 interface Lead {
@@ -198,6 +199,11 @@ export async function POST(req: NextRequest) {
       recentValue: lead.id,
       recentLimit: 2000,
     });
+
+    // Meetpunt: hoeveel aanvragen komen er daadwerkelijk binnen per bron.
+    // Bewust ná het honeypot- en validatiepoort, zodat een bot of een leeg
+    // formulier niet als lead meetelt.
+    await storeAnalyticsEvent("lead_submit", source, page.split("?")[0] || undefined);
 
     if (!persisted) {
       console.error("Lead storage is not configured", lead);

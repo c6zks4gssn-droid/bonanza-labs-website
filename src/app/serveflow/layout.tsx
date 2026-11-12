@@ -1,10 +1,11 @@
 import { withPageSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
+import { PRICES, formatEuro } from "@/lib/pricing";
 
 export const metadata: Metadata = withPageSocialMetadata({
   title: "ServeFlow 14-dagen pilot voor horeca",
   description:
-    "Test één reserveringsflow voor één horecalocatie gedurende 14 dagen voor €497 ex. btw. Geen automatische verlenging en geen gegarandeerde omzet- of no-showclaim.",
+    "Test één reserveringsflow voor één horecalocatie gedurende 14 dagen voor ${formatEuro(PRICES.serveflowPilot)} ex. btw. Geen automatische verlenging en geen gegarandeerde omzet- of no-showclaim.",
   alternates: {
     canonical: "https://www.bonanza-labs.com/serveflow",
   },

@@ -1,3 +1,4 @@
+import { PRICES, formatEuro } from "@/lib/pricing";
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteFooter from "@/components/site-footer";
@@ -9,12 +10,12 @@ import YouTubeEmbed from "@/components/youtube-embed";
 export const metadata: Metadata = withPageSocialMetadata({
   title: "ServeFlow — AI reserveringsflow voor horeca",
   description:
-    "ServeFlow richt één reserveringsflow in voor je restaurant met automatische bevestiging, herinnering en annulering via WhatsApp. 14-dagen pilot, €497 ex. btw, geen abonnement.",
+    "ServeFlow richt één reserveringsflow in voor je restaurant met automatische bevestiging, herinnering en annulering via WhatsApp. 14-dagen pilot, ${formatEuro(PRICES.serveflowPilot)} ex. btw, geen abonnement.",
   alternates: { canonical: "https://www.bonanza-labs.com/serveflow" },
   openGraph: {
     title: "ServeFlow — AI reserveringsflow voor horeca",
     description:
-      "Eén reserveringsflow. Veertien dagen. Geen automatische verlenging. €497 ex. btw.",
+      "Eén reserveringsflow. Veertien dagen. Geen automatische verlenging. {formatEuro(PRICES.serveflowPilot)} ex. btw.",
     url: "https://www.bonanza-labs.com/serveflow",
     type: "website",
   },
@@ -72,7 +73,7 @@ const faqs = [
   {
     question: "Wat kost de ServeFlow pilot precies?",
     answer:
-      "De pilot kost €497 ex. btw, eenmalig. Er is geen abonnement en geen automatische verlenging. Na de 14 dagen kies je: stoppen, of door met beheer vanaf €197/maand excl. btw.",
+      `De pilot kost ${formatEuro(PRICES.serveflowPilot)} ex. btw, eenmalig. Er is geen abonnement en geen automatische verlenging. Na de 14 dagen kies je: stoppen, of door met beheer vanaf ${formatEuro(PRICES.beheerBasis)}/maand excl. btw.`,
   },
   {
     question: "Wat zit er in de pilot?",
@@ -82,7 +83,7 @@ const faqs = [
   {
     question: "Wat zit er in beheer na de pilot?",
     answer:
-      "Beheer Basis (€197/maand excl. btw) omvat maandelijks beheer van je ingerichte oplossing en kleine aanpassingen aan afgesproken teksten, vragen en antwoorden. Daarnaast zijn er Standaard (€297) en Uitgebreid (€497); zie de prijzenpagina. Beheer loopt via een afzonderlijke overeenkomst.",
+      "Beheer Basis ({formatEuro(PRICES.beheerBasis)}/maand excl. btw) omvat maandelijks beheer van je ingerichte oplossing en kleine aanpassingen aan afgesproken teksten, vragen en antwoorden. Daarnaast zijn er Standaard ({formatEuro(PRICES.beheerStandaard)}) en Uitgebreid ({formatEuro(PRICES.beheerUitgebreid)}); zie de prijzenpagina. Beheer loopt via een afzonderlijke overeenkomst.",
   },
   {
     question: "Wat gebeurt er na de 14 dagen?",
@@ -112,7 +113,7 @@ const serviceSchema = {
   name: "ServeFlow",
   serviceType: "Reserveringsautomatisering voor horeca",
   description:
-    "ServeFlow richt één reserveringsflow in voor je restaurant met automatische bevestiging, herinnering en annulering via WhatsApp. 14-dagen pilot, €497 ex. btw.",
+    "ServeFlow richt één reserveringsflow in voor je restaurant met automatische bevestiging, herinnering en annulering via WhatsApp. 14-dagen pilot, ${formatEuro(PRICES.serveflowPilot)} ex. btw.",
   provider: {
     "@type": "LocalBusiness",
     name: "BonanzaLabs",
@@ -178,17 +179,17 @@ export default function ServeFlowPage() {
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-gray-400 md:text-xl">
             Laat gasten hun reservering duidelijk bevestigen, wijzigen of annuleren. BonanzaLabs richt de flow in en evalueert na veertien dagen wat praktisch werkt.
           </p>
-          <div className="mt-7 text-4xl font-black text-amber-300">€497 ex. btw</div>
+          <div className="mt-7 text-4xl font-black text-amber-300">{formatEuro(PRICES.serveflowPilot)} ex. btw</div>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
-              href="/pricing"
+              href="/pricing" data-track="serveflow-prijzen"
               className="inline-flex items-center gap-2 rounded-xl bg-amber-400 px-7 py-4 font-bold text-black hover:bg-amber-300"
               data-cta="serveflow-pilot-book"
             >
               Boek de pilot <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              href="/contact"
+              href="/contact" data-track="serveflow-bespreek"
               className="rounded-xl border border-white/15 px-7 py-4 font-semibold hover:bg-white/5"
               data-cta="serveflow-question"
             >
@@ -210,7 +211,7 @@ export default function ServeFlowPage() {
         <div className="mx-auto max-w-3xl">
           <h2 className="sr-only">Wat is ServeFlow?</h2>
           <p className="text-lg leading-relaxed text-gray-200">
-            <strong className="text-white">ServeFlow</strong> is een 14-dagen pilot voor horecaondernemers die één reserveringsflow inricht met automatische bevestiging, herinnering en annulering via WhatsApp. BonanzaLabs neemt de setup uit handen, meet 14 dagen wat het oplevert, en deelt resultaten zonder verplichtingen daarna. De pilot kost <strong className="text-amber-300">€497 ex. btw</strong> — geen abonnement, geen automatische verlenging.
+            <strong className="text-white">ServeFlow</strong> is een 14-dagen pilot voor horecaondernemers die één reserveringsflow inricht met automatische bevestiging, herinnering en annulering via WhatsApp. BonanzaLabs neemt de setup uit handen, meet 14 dagen wat het oplevert, en deelt resultaten zonder verplichtingen daarna. De pilot kost <strong className="text-amber-300">{formatEuro(PRICES.serveflowPilot)} ex. btw</strong> — geen abonnement, geen automatische verlenging.
           </p>
         </div>
       </section>
@@ -336,7 +337,7 @@ export default function ServeFlowPage() {
           <p className="mt-4 text-white/55">Stuur een bericht. We reageren doorgaans binnen één werkdag.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
-              href="/contact"
+              href="/contact" data-track="serveflow-bespreek"
               className="inline-flex items-center gap-2 rounded-xl border border-white/15 px-7 py-4 font-semibold hover:bg-white/5"
               data-cta="serveflow-contact-form"
             >
@@ -368,11 +369,11 @@ export default function ServeFlowPage() {
           <h2 className="text-3xl font-black md:text-4xl">Klaar om één flow echt te testen?</h2>
           <p className="mt-4 text-white/55">Boek de pilot via Stripe. Na betaling plannen we eerst de intake; de meetperiode start pas wanneer de afgesproken flow live staat.</p>
           <Link
-            href="/pricing"
+            href="/pricing" data-track="serveflow-prijzen"
             className="mt-8 inline-flex items-center gap-2 rounded-xl bg-amber-400 px-8 py-4 font-bold text-black hover:bg-amber-300"
             data-cta="serveflow-final-cta"
           >
-            Start ServeFlow voor €497 <ArrowRight className="h-4 w-4" />
+            Start ServeFlow voor {formatEuro(PRICES.serveflowPilot)} <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
