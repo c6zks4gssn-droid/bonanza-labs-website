@@ -1,5 +1,6 @@
 "use client";
 
+import { PRICES, formatEuro } from "@/lib/pricing";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -55,7 +56,7 @@ const faq = [
   },
   {
     q: "Wat kost de implementatie?",
-    a: "De implementatie kost vanaf €1.995 excl. btw. De uiteindelijke prijs hangt af van scope, integraties en het aantal stappen. We bepalen eerst één concreet proces; daarna krijg je een duidelijke implementatiescope en prijs voordat er gebouwd wordt.",
+    a: `De implementatie kost vanaf ${formatEuro(PRICES.tradeflowImplementation)} excl. btw. De uiteindelijke prijs hangt af van scope, integraties en het aantal stappen. We bepalen eerst één concreet proces; daarna krijg je een duidelijke implementatiescope en prijs voordat er gebouwd wordt.`,
   },
   {
     q: "Wat is een goede eerste TradeFlow-case?",
@@ -129,7 +130,7 @@ export default function TradeFlowPage() {
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
-              href="/contact"
+              href="/contact" data-track="tradeflow-bespreek"
               data-cta="tradeflow-intro"
               className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 px-7 py-4 font-bold text-white hover:opacity-90"
             >
@@ -250,7 +251,7 @@ export default function TradeFlowPage() {
             Geen softwarevervanging als eerste reflex.
           </p>
           <Link
-            href="/contact"
+            href="/contact" data-track="tradeflow-bespreek"
             data-cta="tradeflow-final"
             className="mt-7 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 px-7 py-4 font-bold text-white hover:opacity-90"
           >

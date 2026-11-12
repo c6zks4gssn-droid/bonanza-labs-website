@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
+import { PRICES, formatEuro } from "@/lib/pricing";
 
 const painPoints = [
   {
@@ -92,7 +93,7 @@ const faq = [
   },
   {
     q: "Wat kost TradeFlow Onderhoud?",
-    a: "De inrichting kost vanaf €995 excl. btw. Daarna kun je kiezen voor beheer vanaf €197 per maand excl. btw. Sms-kosten en koppelingen spreken we per klant af. Na de intake krijg je een vaste prijs voordat we iets bouwen.",
+    a: "De inrichting kost vanaf ${formatEuro(PRICES.tradeflowOnderhoud)} excl. btw. Daarna kun je kiezen voor beheer vanaf ${formatEuro(PRICES.beheerBasis)} per maand excl. btw. Sms-kosten en koppelingen spreken we per klant af. Na de intake krijg je een vaste prijs voordat we iets bouwen.",
   },
   {
     q: "Kan dit samen met TradeFlow of Bonanza Voice?",
@@ -298,7 +299,7 @@ export default function OnderhoudsherinneringenPage() {
         <p className="text-sm font-semibold uppercase tracking-[0.25em] text-violet-300">Prijs</p>
         <h2 className="mt-4 text-3xl font-black md:text-4xl">Inrichting vanaf €995 excl. btw</h2>
         <p className="mt-5 leading-relaxed text-white/60">
-          Daarna optioneel beheer vanaf €197 per maand excl. btw. Sms-kosten en eventuele koppelingen
+          Daarna optioneel beheer vanaf {formatEuro(PRICES.beheerBasis)} per maand excl. btw. Sms-kosten en eventuele koppelingen
           spreken we per klant af. Na de intake krijg je een vaste prijs, voordat we iets bouwen.
         </p>
       </section>

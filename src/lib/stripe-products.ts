@@ -1,3 +1,12 @@
+import { PRICES } from "@/lib/pricing";
+
+// De bedragen komen uit /src/lib/pricing.ts. Die is de canonieke bron.
+// Hier staat alleen wat Stripe nodig heeft om een checkout te kunnen maken:
+// de naam, de omschrijving, het bedrag en of het self-service is.
+//
+// De browser stuurt alleen een product-id. Namen, prijzen en toegank blijven
+// server-side bepaald.
+
 export type StripeProductConfig = {
   name: string;
   description: string;
@@ -9,14 +18,12 @@ export type StripeProductConfig = {
   selfService: boolean;
 };
 
-// The browser submits only a product identifier. Names, prices and purchase
-// eligibility remain controlled by the server.
 export const STRIPE_PRODUCTS: Record<string, StripeProductConfig> = {
   "serveflow-pilot-14-days": {
     name: "ServeFlow — 14-dagen pilot",
     description:
       "Eén horecalocatie, één reserveringsflow, 14 dagen, geen automatische verlenging.",
-    amount: 49700,
+    amount: PRICES.serveflowPilot,
     mode: "payment",
     offerType: "pilot",
     durationDays: 14,
@@ -26,7 +33,7 @@ export const STRIPE_PRODUCTS: Record<string, StripeProductConfig> = {
     name: "Flow Assessment — Complexe aanvraag",
     description:
       "Uitgebreide procesanalyse en implementatieplan voor meerdere processen, teams of locaties. Verrekend bij implementatie binnen 30 dagen.",
-    amount: 129500,
+    amount: PRICES.flowAssessment,
     mode: "payment",
     offerType: "assessment",
     selfService: true,
@@ -43,7 +50,7 @@ export const STRIPE_PRODUCTS: Record<string, StripeProductConfig> = {
   "tradeflow-implementatie": {
     name: "TradeFlow Implementatie",
     description: "Maatwerkimplementatie op basis van een bevestigde scope.",
-    amount: 250000,
+    amount: PRICES.tradeflowImplementation,
     mode: "payment",
     offerType: "implementation",
     selfService: false,
@@ -51,7 +58,7 @@ export const STRIPE_PRODUCTS: Record<string, StripeProductConfig> = {
   "serveflow-implementatie": {
     name: "ServeFlow Implementatie",
     description: "Uitgebreide horeca-implementatie na pilot of assessment.",
-    amount: 250000,
+    amount: PRICES.tradeflowImplementation,
     mode: "payment",
     offerType: "implementation",
     selfService: false,
@@ -59,7 +66,7 @@ export const STRIPE_PRODUCTS: Record<string, StripeProductConfig> = {
   "bonanza-voice-implementatie": {
     name: "Bonanza Voice Implementatie",
     description: "Eenmalige inrichting van Bonanza Voice. Maatwerk, extra koppelingen of meerdere locaties volgens offerte.",
-    amount: 49500,
+    amount: PRICES.bonanzaVoiceSetup,
     mode: "payment",
     offerType: "implementation",
     selfService: false,
@@ -67,7 +74,7 @@ export const STRIPE_PRODUCTS: Record<string, StripeProductConfig> = {
   "beheer-basis": {
     name: "Beheer en Optimalisatie — Basis",
     description: "Maandelijks beheer volgens afzonderlijke overeenkomst.",
-    amount: 19700,
+    amount: PRICES.beheerBasis,
     mode: "subscription",
     interval: "month",
     offerType: "management",
@@ -76,7 +83,7 @@ export const STRIPE_PRODUCTS: Record<string, StripeProductConfig> = {
   "beheer-standaard": {
     name: "Beheer en Optimalisatie — Standaard",
     description: "Maandelijks beheer met evaluatie volgens afzonderlijke overeenkomst.",
-    amount: 29700,
+    amount: PRICES.beheerStandaard,
     mode: "subscription",
     interval: "month",
     offerType: "management",
@@ -85,7 +92,7 @@ export const STRIPE_PRODUCTS: Record<string, StripeProductConfig> = {
   "beheer-uitgebreid": {
     name: "Beheer en Optimalisatie — Uitgebreid",
     description: "Uitgebreid maandelijks beheer volgens afzonderlijke overeenkomst.",
-    amount: 49700,
+    amount: PRICES.beheerUitgebreid,
     mode: "subscription",
     interval: "month",
     offerType: "management",

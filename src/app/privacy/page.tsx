@@ -72,10 +72,11 @@ const sections = [
     ],
   },
   {
-    title: "8. Cookies, analytics en technische opslag",
+    title: "8. Cookies, meting en technische opslag",
     paragraphs: [
       "De website kan functionele opslag gebruiken die nodig is voor navigatie, beveiliging en het correct uitvoeren van formulieren en betalingen.",
-      "We gebruiken geen analytics- of marketingcookies. Een overzicht van de functionele opslag staat op bonanza-labs.com/cookies.",
+      "We plaatsen geen trackingcookies en gebruiken geen advertentiepixels. Om te zien welke pagina's werken, tellen we gebeurtenissen op onze eigen server, zonder cookie, IP-adres of apparaatherkenning. We bewaren dus alleen hoe vaak iets voorkomt, niet wie het doet.",
+      "Een overzicht van de functionele opslag en van wat we meten staat op bonanza-labs.com/cookies.",
     ],
   },
   {
@@ -97,7 +98,7 @@ export default function PrivacyPage() {
           <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm text-cyan-200"><ShieldCheck className="h-4 w-4" /> Privacy en gegevensbescherming</div>
           <h1 className="mt-6 text-4xl font-black tracking-tight md:text-6xl">Privacyverklaring</h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">Duidelijke informatie over welke gegevens we verwerken, waarom we dat doen en welke keuzes en rechten je hebt.</p>
-          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 2 november 2026</p>
+          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 12 november 2026</p>
           <LegalConceptNote />
         </div>
       </section>

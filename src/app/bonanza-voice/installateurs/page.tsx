@@ -1,3 +1,4 @@
+import { PRICES, VOICE_MINUTES, formatEuro, formatEuroPerMinute } from "@/lib/pricing";
 import Link from "next/link";
 import SiteNav from "@/components/site-nav";
 import SiteFooter from "@/components/site-footer";
@@ -26,7 +27,7 @@ export default function VoiceInstallateursPage() {
     <header className="voice-hero voice-wrap">
       <p className="voice-eyebrow">Bonanza Voice · AI-telefonist voor installatiebedrijven</p>
       <h1>AI-telefonist voor installateurs: jij staat bij de klant, <em>Bonanza Voice neemt op</em></h1>
-      <p>Bonanza Voice is een AI-telefonist voor installateurs en kleine installatiebedrijven. De agent neemt op als jij niet kunt, stelt vooraf afgesproken intakevragen en zet de offerteaanvraag klaar voor een medewerker. Als abonnement vanaf <strong>€199 per maand excl. btw</strong>, plus €495 inrichting; maatwerk volgens offerte. Altijd per bedrijf ingericht en getest.</p>
+      <p>Bonanza Voice is een AI-telefonist voor installateurs en kleine installatiebedrijven. De agent neemt op als jij niet kunt, stelt vooraf afgesproken intakevragen en zet de offerteaanvraag klaar voor een medewerker. Als abonnement vanaf <strong>{formatEuro(PRICES.abonnementStart)} per maand excl. btw</strong>, plus {formatEuro(PRICES.bonanzaVoiceSetup)} inrichting; maatwerk volgens offerte. Altijd per bedrijf ingericht en getest.</p>
       <div className="voice-actions"><Link className="voice-primary" href="/contact">Bespreek je telefoonsituatie</Link><Link className="voice-secondary" href="/bonanza-voice">Probeer de demo</Link></div>
     </header>
 
@@ -66,18 +67,18 @@ export default function VoiceInstallateursPage() {
 
     <section className="voice-wrap voice-section">
       <h2>Wat kost het?</h2>
-      <p className="voice-price">Abonnement vanaf <strong>€199 per maand excl. btw</strong>, belminuten inbegrepen</p>
+      <p className="voice-price">Abonnement vanaf <strong>{formatEuro(PRICES.abonnementStart)} per maand excl. btw</strong>, belminuten inbegrepen</p>
       <h3 className="voice-spaced">Abonnement</h3>
       <div className="voice-grid">
-        <article><h3>Start</h3><p className="voice-price"><strong>€199</strong> per maand</p><p className="voice-note">300 belminuten per maand, extra minuut €0,35</p><p>Eén telefoonnummer. Beantwoordt afgesproken vragen, noteert terugbelverzoeken en mailt per gesprek een samenvatting.</p></article>
-        <article><h3>Groei</h3><p className="voice-price"><strong>€349</strong> per maand</p><p className="voice-note">800 belminuten per maand, extra minuut €0,30</p><p>Alles uit Start, plus doorverbinden naar jou of een collega en afspraken doorzetten naar je agenda als een koppeling mogelijk is. Maandelijkse evaluatie.</p></article>
-        <article><h3>Pro</h3><p className="voice-price"><strong>€499</strong> per maand</p><p className="voice-note">1.000 belminuten per maand, extra minuut €0,25</p><p>Alles uit Groei, voor tot drie locaties of telefoonnummers, met koppeling aan je eigen systeem volgens afspraak.</p></article>
+        <article><h3>Start</h3><p className="voice-price"><strong>{formatEuro(PRICES.abonnementStart)}</strong> per maand</p><p className="voice-note">{VOICE_MINUTES.start.minutes} belminuten per maand, extra minuut {formatEuroPerMinute(VOICE_MINUTES.start.extraPerMinute)}</p><p>Eén telefoonnummer. Beantwoordt afgesproken vragen, noteert terugbelverzoeken en mailt per gesprek een samenvatting.</p></article>
+        <article><h3>Groei</h3><p className="voice-price"><strong>{formatEuro(PRICES.abonnementGroei)}</strong> per maand</p><p className="voice-note">{VOICE_MINUTES.groei.minutes} belminuten per maand, extra minuut {formatEuroPerMinute(VOICE_MINUTES.groei.extraPerMinute)}</p><p>Alles uit Start, plus doorverbinden naar jou of een collega en afspraken doorzetten naar je agenda als een koppeling mogelijk is. Maandelijkse evaluatie.</p></article>
+        <article><h3>Pro</h3><p className="voice-price"><strong>{formatEuro(PRICES.abonnementPro)}</strong> per maand</p><p className="voice-note">{VOICE_MINUTES.pro.minutes} belminuten per maand, extra minuut {formatEuroPerMinute(VOICE_MINUTES.pro.extraPerMinute)}</p><p>Alles uit Groei, voor tot drie locaties of telefoonnummers, met koppeling aan je eigen systeem volgens afspraak.</p></article>
       </div>
-      <p className="voice-note">Eenmalige inrichting €495 bij Start en Groei, bij Pro volgens offerte. Minimale looptijd 3 maanden, daarna maandelijks opzegbaar. Niet gebruikte minuten vervallen aan het eind van de maand. Afsluiten gaat via een afzonderlijke overeenkomst. Alle prijzen excl. btw.</p>
+      <p className="voice-note">Eenmalige inrichting {formatEuro(PRICES.bonanzaVoiceSetup)} bij Start en Groei, bij Pro volgens offerte. Minimale looptijd 3 maanden, daarna maandelijks opzegbaar. Niet gebruikte minuten vervallen aan het eind van de maand. Afsluiten gaat via een afzonderlijke overeenkomst. Alle prijzen excl. btw.</p>
       <h3 className="voice-spaced">Inrichting op maat</h3>
       <ul className="voice-steps">
         <li><p><strong>Inrichting:</strong> volgens offerte, per bedrijf bepaald op basis van gesprekstype en telefonie. Maatwerk, extra koppelingen of meerdere locaties.</p></li>
-        <li><p><strong>Beheer:</strong> vanaf €197 per maand excl. btw, in drie niveaus: Basis €197, Standaard €297 of Uitgebreid €497. Via een afzonderlijke overeenkomst.</p></li>
+        <li><p><strong>Beheer:</strong> vanaf {formatEuro(PRICES.beheerBasis)} per maand excl. btw, in drie niveaus: Basis {formatEuro(PRICES.beheerBasis)}, Standaard {formatEuro(PRICES.beheerStandaard)} of Uitgebreid {formatEuro(PRICES.beheerUitgebreid)}. Via een afzonderlijke overeenkomst.</p></li>
         <li><p><strong>Gebruikskosten (belminuten):</strong> komen apart, volgens offerte.</p></li>
       </ul>
       <p>Bekijk alle bedragen op de <Link href="/pricing" className="underline">prijzenpagina</Link> of lees <Link href="/blog/wat-kost-ai-telefonie-voor-een-mkb-bedrijf" className="underline">wat AI-telefonie kost voor een MKB-bedrijf</Link>.</p>

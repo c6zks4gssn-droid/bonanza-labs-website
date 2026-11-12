@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getStripe, isStripeConfigured } from "@/lib/stripe";
 import { getStripeProduct, STRIPE_PRODUCTS } from "@/lib/stripe-products";
+import { storeAnalyticsEvent } from "@/lib/analytics-store";
 
 // De canonieke host voor productie. Op een preview-uitrol moet een testbetaling
 // terugkomen op de preview zelf — anders belandt de bezoeker na betalen op de
@@ -27,6 +28,20 @@ function baseUrl(): string {
 const automaticTaxEnabled = process.env.STRIPE_AUTOMATIC_TAX_ENABLED === "true";
 const invoiceCreationEnabled = process.env.STRIPE_INVOICE_CREATION_ENABLED === "true";
 
+// Meetpunt op de betaalstroom. Fouten worden gelogen, nooit doorgegeven aan
+// de bezoeker: analytics mag de checkout nooit hinderen.
+async function recordCheckoutEvent(
+  name: "checkout_start" | "checkout_error",
+  product: string,
+  label: string,
+): Promise<void> {
+  try {
+    await storeAnalyticsEvent(name, `${label}:${product}`);
+  } catch {
+    // Bewust genegeerd.
+  }
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { product } = (await req.json()) as { product?: string };
@@ -37,10 +52,12 @@ export async function POST(req: NextRequest) {
 
     const productConfig = getStripeProduct(product);
     if (!productConfig) {
+      await recordCheckoutEvent("checkout_error", product, "invalid-product");
       return NextResponse.json({ error: "Invalid product" }, { status: 400 });
     }
 
     if (!productConfig.selfService) {
+      await recordCheckoutEvent("checkout_error", product, "requires-agreement");
       return NextResponse.json(
         { error: "Dit aanbod vereist eerst een bevestigde offerte of overeenkomst." },
         { status: 403 },
@@ -48,6 +65,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (!isStripeConfigured) {
+      await recordCheckoutEvent("checkout_error", product, "not-configured");
       return NextResponse.json({ error: "Stripe not configured" }, { status: 503 });
     }
 
@@ -104,8 +122,14 @@ export async function POST(req: NextRequest) {
 
     const session = await getStripe().checkout.sessions.create(sessionParams);
     if (!session.url) {
+      await recordCheckoutEvent("checkout_error", product, "no-url");
       return NextResponse.json({ error: "Payment setup failed" }, { status: 500 });
     }
+
+    // Het checkout-startpunt is het belangrijkste meetpunt van de site: hier
+    // zie je of iemand daadwerkelijk op "Boek en betaal" klikt. Zonder deze
+    // teller is onbekend hoeveel bezoekers op de betaalpagina belanden.
+    await recordCheckoutEvent("checkout_start", product, productConfig.offerType);
 
     return NextResponse.json({ url: session.url });
   } catch (error) {

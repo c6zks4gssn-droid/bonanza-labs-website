@@ -6,6 +6,7 @@ import SiteNav from "@/components/site-nav";
 import { Building2, Check, MapPin, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { businessDetails } from "@/lib/business-details";
+import { PRICES, formatEuro } from "@/lib/pricing";
 
 const approach = [
   {
@@ -88,7 +89,7 @@ export default function OverOnsPage() {
         <div className="mx-auto max-w-3xl rounded-3xl border border-amber-400/20 bg-amber-400/5 p-10">
           <h2 className="text-3xl font-black">Start met één ServeFlow-pilot</h2>
           <p className="mt-4 text-white/60">Eén locatie, één reserveringsflow, veertien dagen en geen automatische verlenging.</p>
-          <Link href="/pricing" className="mt-7 inline-flex rounded-xl bg-amber-400 px-7 py-4 font-bold text-black hover:bg-amber-300">Bekijk de pilot van €497</Link>
+          <Link href="/pricing" className="mt-7 inline-flex rounded-xl bg-amber-400 px-7 py-4 font-bold text-black hover:bg-amber-300">Bekijk de pilot van {formatEuro(PRICES.serveflowPilot)}</Link>
         </div>
       </section>
 

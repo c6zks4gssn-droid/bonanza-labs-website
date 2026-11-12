@@ -334,6 +334,8 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={submitting}
+                  data-track="lead-versturen"
+                  data-track-label="quickscan"
                   className="w-full rounded-xl bg-amber-400 py-3.5 text-sm font-bold text-black hover:bg-amber-300 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {submitting ? "Versturen…" : "Vraag gratis quickscan aan"}

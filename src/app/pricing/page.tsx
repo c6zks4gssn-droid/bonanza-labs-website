@@ -16,12 +16,17 @@ import {
   ShieldCheck,
   X,
 } from "lucide-react";
+import { PRICES, VOICE_MINUTES, formatEuro, formatEuroPerMinute } from "@/lib/pricing";
+
+// De prijzen komen uit /src/lib/pricing.ts, dezelfde bron als Stripe.
+// Zo kan de tekst op deze pagina niet meer uit de winkelprijs lopen.
+// Zie dat bestand voor de onderbouwing.
 
 const offers = [
   {
     id: "serveflow-pilot-14-days",
     name: "ServeFlow 14-dagen pilot",
-    price: "€497",
+    price: formatEuro(PRICES.serveflowPilot),
     label: "Primaire pilot voor horeca",
     description:
       "Test één duidelijke reserveringsflow in je eigen zaak, zonder abonnement of automatische verlenging.",
@@ -32,14 +37,14 @@ const offers = [
       "Bevestiging, herinnering en annuleren/wijzigen",
       "Interne reserveringssamenvatting",
       "Evaluatie na 14 dagen",
-      "Daarna optioneel beheer vanaf €197 per maand",
+      `Daarna optioneel beheer vanaf ${formatEuro(PRICES.beheerBasis)} per maand`,
     ],
     highlighted: true,
   },
   {
     id: "flow-assessment-standaard",
     name: "Flow Assessment",
-    price: "€1.295",
+    price: formatEuro(PRICES.flowAssessment),
     label: "Voor complexere aanvragen",
     description:
       "Voor bedrijven met meerdere processen, teams, locaties of integraties die eerst een gedegen implementatieplan nodig hebben.",
@@ -71,7 +76,7 @@ const managementTiers = [
   {
     id: "beheer-basis",
     name: "Basis",
-    price: "€197",
+    price: formatEuro(PRICES.beheerBasis),
     includes: [
       "Maandelijks beheer van je ingerichte oplossing",
       "Kleine aanpassingen aan afgesproken teksten, vragen en antwoorden",
@@ -80,7 +85,7 @@ const managementTiers = [
   {
     id: "beheer-standaard",
     name: "Standaard",
-    price: "€297",
+    price: formatEuro(PRICES.beheerStandaard),
     includes: [
       "Alles uit Basis",
       "Maandelijkse evaluatie van hoe de flow loopt",
@@ -90,7 +95,7 @@ const managementTiers = [
   {
     id: "beheer-uitgebreid",
     name: "Uitgebreid",
-    price: "€497",
+    price: formatEuro(PRICES.beheerUitgebreid),
     includes: [
       "Alles uit Standaard",
       "Doorvoeren van afgesproken verbeteringen",
@@ -106,9 +111,9 @@ const subscriptionTiers = [
   {
     id: "abonnement-start",
     name: "Start",
-    price: "€199",
+    price: formatEuro(PRICES.abonnementStart),
     minutes: "300 belminuten per maand",
-    extra: "Extra minuut €0,35",
+    extra: `Extra minuut ${formatEuroPerMinute(VOICE_MINUTES.start.extraPerMinute)}`,
     includes: [
       "Bonanza Voice óf één ServeFlow-reserveringsflow",
       "Eén locatie, één telefoonnummer",
@@ -121,9 +126,9 @@ const subscriptionTiers = [
   {
     id: "abonnement-groei",
     name: "Groei",
-    price: "€349",
+    price: formatEuro(PRICES.abonnementGroei),
     minutes: "800 belminuten per maand",
-    extra: "Extra minuut €0,30",
+    extra: `Extra minuut ${formatEuroPerMinute(VOICE_MINUTES.groei.extraPerMinute)}`,
     highlighted: true,
     includes: [
       "Bonanza Voice én ServeFlow samen",
@@ -137,9 +142,9 @@ const subscriptionTiers = [
   {
     id: "abonnement-pro",
     name: "Pro",
-    price: "€499",
+    price: formatEuro(PRICES.abonnementPro),
     minutes: "1.000 belminuten per maand",
-    extra: "Extra minuut €0,25",
+    extra: `Extra minuut ${formatEuroPerMinute(VOICE_MINUTES.pro.extraPerMinute)}`,
     includes: [
       "Alles uit Groei",
       "Tot drie locaties of telefoonnummers",
@@ -235,6 +240,8 @@ export default function PricingPage() {
               <button
                 onClick={() => startCheckout(offer.id)}
                 disabled={checkoutProduct !== null}
+                data-track="boek-en-betaal"
+                data-track-label={offer.id}
                 className={`mt-8 inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 font-semibold transition disabled:cursor-wait disabled:opacity-60 ${
                   offer.highlighted ? "bg-amber-400 text-black hover:bg-amber-300" : "bg-[#2563EB] hover:bg-[#1D4ED8]"
                 }`}
@@ -269,7 +276,7 @@ export default function PricingPage() {
       <section id="abonnementen" className="mx-auto max-w-6xl px-6 pb-16" aria-labelledby="abonnementen-titel">
         <h2 id="abonnementen-titel" className="mb-4 text-3xl font-black">Abonnementen voor Bonanza Voice en ServeFlow</h2>
         <p className="max-w-3xl text-white/60">
-          Voor horeca, bouw en installatie. Wij richten alles in, testen het met je en houden het daarna bij. Belminuten zitten in het maandbedrag. Eenmalige inrichting €495 (Start en Groei); bij Pro volgens offerte. Minimale looptijd 3 maanden, daarna maandelijks opzegbaar. Niet gebruikte minuten vervallen aan het eind van de maand; zie de <Link href="/voorwaarden" className="underline">voorwaarden</Link>. Alle prijzen excl. btw.
+          Voor horeca, bouw en installatie. Wij richten alles in, testen het met je en houden het daarna bij. Belminuten zitten in het maandbedrag. Eenmalige inrichting {formatEuro(PRICES.bonanzaVoiceSetup)} (Start en Groei); bij Pro volgens offerte. Minimale looptijd 3 maanden, daarna maandelijks opzegbaar. Niet gebruikte minuten vervallen aan het eind van de maand; zie de <Link href="/voorwaarden" className="underline">voorwaarden</Link>. Alle prijzen excl. btw.
         </p>
         <div className="mt-8 grid gap-6 md:grid-cols-3">
           {subscriptionTiers.map((tier) => (
@@ -286,7 +293,7 @@ export default function PricingPage() {
                   <li key={item} className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />{item}</li>
                 ))}
               </ul>
-              <Link href="/contact" className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 px-5 py-3 font-semibold hover:bg-white/5">
+              <Link href="/contact" className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 px-5 py-3 font-semibold hover:bg-white/5" data-track="prijzen-bespreek" data-track-label={tier.id}>
                 Vraag {tier.name} aan <ArrowRight className="h-4 w-4" />
               </Link>
             </article>
@@ -373,16 +380,16 @@ export default function PricingPage() {
         <div className="grid gap-6 md:grid-cols-2">
           <article className="rounded-3xl border border-white/10 p-8">
             <h3 className="text-2xl font-black">TradeFlow</h3>
-            <p className="mt-3 text-3xl font-black">Vanaf €1.995</p>
+            <p className="mt-3 text-3xl font-black">Vanaf {formatEuro(PRICES.tradeflowImplementation)}</p>
             <p className="mt-1 text-sm text-white/60">Implementatie, excl. btw</p>
             <p className="mt-4 text-white/60">Intake, offertevoorbereiding en opvolging voor bouw en installatie. De definitieve scope en prijs bepalen we na de intake; je team beoordeelt de offerte.</p>
             <Link href="/tradeflow" className="mt-6 inline-flex items-center gap-2 font-semibold underline">Bekijk TradeFlow <ArrowRight className="h-4 w-4" /></Link>
           </article>
           <article className="rounded-3xl border border-white/10 p-8">
             <h3 className="text-2xl font-black">Bonanza Voice</h3>
-            <p className="mt-3 text-3xl font-black">€495</p>
-            <p className="mt-1 text-sm text-white/60">€495 inrichting, excl. btw</p>
-            <p className="mt-4 text-white/60">Een AI-telefonist voor basisvragen en terugbel- of offerteverzoeken. Per klant ingericht en getest. Daarbij hoort een abonnement: Start €199, Groei €349 of Pro €499 per maand, met belminuten inbegrepen; minimaal 3 maanden. Maatwerk, extra koppelingen of meerdere locaties volgens offerte.</p>
+            <p className="mt-3 text-3xl font-black">{formatEuro(PRICES.bonanzaVoiceSetup)}</p>
+            <p className="mt-1 text-sm text-white/60">{formatEuro(PRICES.bonanzaVoiceSetup)} inrichting, excl. btw</p>
+            <p className="mt-4 text-white/60">Een AI-telefonist voor basisvragen en terugbel- of offerteverzoeken. Per klant ingericht en getest. Daarbij hoort een abonnement: Start {formatEuro(PRICES.abonnementStart)}, Groei {formatEuro(PRICES.abonnementGroei)} of Pro {formatEuro(PRICES.abonnementPro)} per maand, met belminuten inbegrepen; minimaal 3 maanden. Maatwerk, extra koppelingen of meerdere locaties volgens offerte.</p>
             <Link href="/bonanza-voice" className="mt-6 inline-flex items-center gap-2 font-semibold underline">Bekijk Bonanza Voice <ArrowRight className="h-4 w-4" /></Link>
           </article>
         </div>
@@ -410,7 +417,7 @@ export default function PricingPage() {
       <section className="mx-auto max-w-4xl px-6 py-16 text-center">
         <h2 className="text-3xl font-black">Twijfel je welke route past?</h2>
         <p className="mt-4 text-white/60">De pilot is voor één concrete horeca-flow. Voor meerdere processen, locaties of complexe koppelingen kies je het Flow Assessment. Weet je het nog niet? Begin met een gratis quickscan van 30 minuten; je krijgt binnen vijf werkdagen een kort verslag met advies.</p>
-        <Link href="/contact" className="mt-7 inline-flex items-center gap-2 rounded-xl border border-white/15 px-6 py-3 font-semibold hover:bg-white/5">
+        <Link href="/contact" className="mt-7 inline-flex items-center gap-2 rounded-xl border border-white/15 px-6 py-3 font-semibold hover:bg-white/5" data-track="prijzen-einde-bespreek">
           Vraag gratis quickscan aan <ArrowRight className="h-4 w-4" />
         </Link>
       </section>
