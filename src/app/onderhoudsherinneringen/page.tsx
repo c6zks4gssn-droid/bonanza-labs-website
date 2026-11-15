@@ -55,9 +55,9 @@ const exampleSteps = [
   },
   {
     step: "Stap 4",
-    title: "Geen reactie? Op je belijst",
-    text: "Na één herinnering zonder reactie zet de flow de klant op een belijst voor je team.",
-    message: "Nog in te plannen: 7 klanten · bekijk belijst",
+    title: "Geen reactie? Op je bellijst",
+    text: "Na één herinnering zonder reactie zet de flow de klant op een bellijst voor je team.",
+    message: "Nog in te plannen: 7 klanten · bekijk bellijst",
   },
 ];
 
@@ -67,7 +67,7 @@ const deliverables = [
   "Herinnering per e-mail (sms of WhatsApp volgens afspraak)",
   "Klant kiest een moment uit de tijden die jij vrijgeeft",
   "Bevestiging en herinnering een dag vooraf",
-  "Belijst van klanten die niet reageren",
+  "Bellijst van klanten die niet reageren",
   "Evaluatie na de eerste maand",
 ];
 
@@ -85,7 +85,7 @@ const faq = [
   },
   {
     q: "Wat gebeurt er als een klant niet reageert?",
-    a: "De klant krijgt één herinnering. Komt er daarna nog geen reactie, dan zet de flow de klant op een belijst, zodat je team zelf contact kan opnemen. We blijven niet eindeloos berichten sturen.",
+    a: "De klant krijgt één herinnering. Komt er daarna nog geen reactie, dan zet de flow de klant op een bellijst, zodat je team zelf contact kan opnemen. We blijven niet eindeloos berichten sturen.",
   },
   {
     q: "Mag ik mijn klanten zomaar een bericht sturen?",
@@ -93,7 +93,7 @@ const faq = [
   },
   {
     q: "Wat kost TradeFlow Onderhoud?",
-    a: "De inrichting kost vanaf ${formatEuro(PRICES.tradeflowOnderhoud)} excl. btw. Daarna kun je kiezen voor beheer vanaf ${formatEuro(PRICES.beheerBasis)} per maand excl. btw. Sms-kosten en koppelingen spreken we per klant af. Na de intake krijg je een vaste prijs voordat we iets bouwen.",
+    a: `De inrichting kost vanaf ${formatEuro(PRICES.tradeflowOnderhoud)} excl. btw. Daarna kun je kiezen voor beheer vanaf ${formatEuro(PRICES.beheerBasis)} per maand excl. btw. Sms-kosten en koppelingen spreken we per klant af. Na de intake krijg je een vaste prijs voordat we iets bouwen.`,
   },
   {
     q: "Kan dit samen met TradeFlow of Bonanza Voice?",
@@ -191,7 +191,7 @@ export default function OnderhoudsherinneringenPage() {
           <p className="mt-5 max-w-4xl text-lg leading-relaxed text-white/70">
             TradeFlow Onderhoud is een afgebakende flow rond één terugkerende taak: onderhoudsklanten
             op tijd herinneren en laten inplannen. Jij bepaalt welke tijden beschikbaar zijn en welke
-            klanten een bericht krijgen. Klanten die niet reageren, komen op een belijst voor je team.
+            klanten een bericht krijgen. Klanten die niet reageren, komen op een bellijst voor je team.
           </p>
         </div>
       </section>

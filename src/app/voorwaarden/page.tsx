@@ -1,4 +1,4 @@
-import { VOICE_MINUTES, formatEuroPerMinute } from "@/lib/pricing";
+import { PRICES, VOICE_MINUTES, formatEuro, formatEuroPerMinute } from "@/lib/pricing";
 import Link from "next/link";
 import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
@@ -19,7 +19,7 @@ const terms = [
   {
     title: "1a. Flow Assessment",
     paragraphs: [
-      "Het Flow Assessment kost ${formatEuro(PRICES.flowAssessment)} exclusief btw en omvat procesonderzoek, een rapport met prioriteiten en implementatievolgorde en een reviewcall. Betaling vindt vooraf plaats via Stripe.",
+      `Het Flow Assessment kost ${formatEuro(PRICES.flowAssessment)} exclusief btw en omvat procesonderzoek, een rapport met prioriteiten en implementatievolgorde en een reviewcall. Betaling vindt vooraf plaats via Stripe.`,
       "Na betaling plannen we samen de intake. De klant kan een geplande afspraak kosteloos verzetten tot 24 uur vooraf. Bij later verzetten of niet verschijnen plannen we één keer opnieuw; daarna kan BonanzaLabs de gereserveerde tijd in rekening brengen.",
       "Annuleren vóór de intake: volledige terugbetaling. Annuleren na de intake maar vóór oplevering van het rapport: de terugbetaling bedraagt de prijs minus de bestede uren à €95 per uur excl. btw, maar nooit meer dan 50% van de prijs. Na oplevering van het rapport is er geen terugbetaling.",
       "Wordt binnen 30 dagen na oplevering een implementatie bij BonanzaLabs afgenomen, dan wordt het betaalde bedrag van het Flow Assessment met die implementatie verrekend.",
@@ -28,7 +28,7 @@ const terms = [
   {
     title: "2. ServeFlow 14-dagen pilot",
     paragraphs: [
-      "De standaardpilot kost ${formatEuro(PRICES.serveflowPilot)} exclusief btw en omvat één horecalocatie en één vooraf schriftelijk afgesproken reserveringsflow.",
+      `De standaardpilot kost ${formatEuro(PRICES.serveflowPilot)} exclusief btw en omvat één horecalocatie en één vooraf schriftelijk afgesproken reserveringsflow.`,
       "De pilot kan bestaan uit een intake, inrichting van de flow, reserveringsbevestiging, herinnering, mogelijkheid tot wijzigen of annuleren, een interne samenvatting en een evaluatie na veertien dagen.",
       "De meetperiode van veertien dagen start op de schriftelijk bevestigde livegangsdatum en niet automatisch op de betaaldatum.",
     ],
