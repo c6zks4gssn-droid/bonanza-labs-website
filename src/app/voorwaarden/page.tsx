@@ -151,7 +151,7 @@ const terms = [
   {
     title: "10a. Overmacht",
     paragraphs: [
-      "BonanzaLabs is niet gehouden tot het nakomen van een verplichting wanneer zij daartoe verhinderd is door overmacht. Onder overmacht valt iedere omstandigheid buiten de wil van BonanzaLabs, waaronder storingen, uitval of beperkingen bij leveranciers en externe diensten zoals ElevenLabs, Telnyx of Twilio (telefonie), Vercel (hosting), betaal- en e-maildiensten, en storingen in internet- of telefoonnetwerken.",
+      "BonanzaLabs is niet gehouden tot het nakomen van een verplichting wanneer zij daartoe verhinderd is door overmacht. Onder overmacht valt iedere omstandigheid buiten de wil van BonanzaLabs, waaronder storingen, uitval of beperkingen bij leveranciers en externe diensten zoals ElevenLabs, een telefonieprovider (indien van toepassing), Vercel (hosting), betaal- en e-maildiensten, en storingen in internet- of telefoonnetwerken.",
       "Tijdens overmacht worden de verplichtingen van BonanzaLabs opgeschort. Duurt de overmacht langer dan 30 dagen, dan mogen beide partijen de overeenkomst schriftelijk beëindigen voor het deel dat nog niet is uitgevoerd, zonder verplichting tot schadevergoeding.",
     ],
   },
@@ -183,7 +183,7 @@ export default function TermsPage() {
           <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-amber-300/20 bg-amber-300/10 px-4 py-2 text-sm text-amber-200"><FileCheck2 className="h-4 w-4" /> Zakelijke pilotvoorwaarden</div>
           <h1 className="mt-6 text-4xl font-black tracking-tight md:text-6xl">Algemene voorwaarden</h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">De scope, garantie, betaling en verantwoordelijkheden vóórdat een pilot wordt geboekt.</p>
-          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 22 oktober 2026</p>
+          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 15 november 2026</p>
           <LegalConceptNote />
           <a href="/algemene-voorwaarden-bonanzalabs.pdf" download className="mt-6 inline-flex items-center gap-2 rounded-xl border border-white/15 px-4 py-2 text-sm font-semibold hover:bg-white/10"><Download className="h-4 w-4" /> Download als PDF</a>
         </div>
