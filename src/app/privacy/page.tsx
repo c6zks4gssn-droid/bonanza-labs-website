@@ -36,9 +36,9 @@ const sections = [
       "Stripe Payments Europe Ltd. (Ierland): betalingen en facturen.",
       "Upstash Inc. (VS): opslag van leadaanvragen en betaalstatus (Redis-database).",
       "Resend Inc. (VS): versturen van e-mailnotificaties over aanvragen.",
-      "ElevenLabs Inc. (VS): Bonanza Voice, spraak- en tekstgesprekken met de AI-assistent (audio, transcript, technische gegevens).",
+      "ElevenLabs Inc. (VS): Bonanza Voice, de spraakassistent op de website (spraak, transcript en eventueel door de gebruiker genoemde contactgegevens).",
       "Telegram Messenger Inc.: interne storingsmeldingen aan de eigenaar over mislukte e-mails. Zo'n melding bevat alleen het tijdstip, de verzendstatus, een intern nummer en de foutmelding van de verzendpartij; geen namen, e-mailadressen of inhoud van aanvragen.",
-      "Doorgifte naar landen buiten de EER gebeurt alleen met een passende waarborg, zoals het EU-VS Data Privacy Framework of standaardcontractbepalingen van de Europese Commissie.",
+      "ElevenLabs is gevestigd in de Verenigde Staten. Doorgifte van persoonsgegevens naar landen buiten de EER, waaronder de VS, gebeurt op basis van de standaardcontractbepalingen (SCC's) van de Europese Commissie. Hetzelfde geldt voor andere leveranciers buiten de EER, zoals Vercel, Upstash en Resend.",
       "Deze partijen ontvangen alleen gegevens die nodig zijn voor hun specifieke taak. BonanzaLabs verkoopt geen persoonsgegevens aan adverteerders of databrokers.",
     ],
   },
@@ -46,7 +46,7 @@ const sections = [
     title: "4a. Bonanza Voice en AI (EU AI Act art. 50)",
     paragraphs: [
       "Bonanza Voice is een AI-assistent, geen mens. Aan het begin van elk gesprek, op de website en bij telefoonlijnen die we voor klanten inrichten, wordt gemeld dat je met AI spreekt.",
-      "Bij een gesprek worden je stem, het transcript en technische gegevens verwerkt door ElevenLabs. Bij een telefoonlijn van een klant kan ook je telefoonnummer worden verwerkt. Of een gesprek wordt opgenomen, hoor je aan het begin van het gesprek. Hoe lang ElevenLabs opnames en transcripts bewaart, hangt af van de instellingen van de assistent; vraag ons gerust naar de actuele bewaartermijn.",
+      "Bij een gesprek worden je stem, het transcript en eventueel door jou genoemde contactgegevens verwerkt door ElevenLabs. Bij een telefoonlijn van een klant kan ook je telefoonnummer worden verwerkt. Of een gesprek wordt opgenomen, hoor je aan het begin van het gesprek. Gespreksopnames en transcripten van Bonanza Voice worden na 30 dagen automatisch verwijderd.",
       "Bij telefoonlijnen die we voor een zakelijke klant inrichten, is die klant de verwerkingsverantwoordelijke en BonanzaLabs de verwerker. Daarvoor sluiten we een verwerkersovereenkomst (zie bonanza-labs.com/verwerkersovereenkomst).",
     ],
   },
@@ -54,6 +54,7 @@ const sections = [
     title: "5. Hoe lang bewaren we gegevens?",
     paragraphs: [
       "Leadaanvragen bewaren we in beginsel maximaal 24 maanden na het laatste inhoudelijke contact, tenzij de gegevens eerder niet meer nodig zijn of een langere bewaartermijn noodzakelijk is voor een lopende overeenkomst of geschil.",
+      "Gespreksopnames en transcripten van Bonanza Voice worden na 30 dagen automatisch verwijderd.",
       "Betaal- en administratieve gegevens bewaren we zolang dit nodig is voor de uitvoering van de overeenkomst en de toepasselijke wettelijke administratieplicht. Technische beveiligingslogs bewaren we zo kort mogelijk en alleen zolang ze nodig zijn voor veiligheid en storingsonderzoek.",
     ],
   },
@@ -98,7 +99,7 @@ export default function PrivacyPage() {
           <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm text-cyan-200"><ShieldCheck className="h-4 w-4" /> Privacy en gegevensbescherming</div>
           <h1 className="mt-6 text-4xl font-black tracking-tight md:text-6xl">Privacyverklaring</h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">Duidelijke informatie over welke gegevens we verwerken, waarom we dat doen en welke keuzes en rechten je hebt.</p>
-          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 12 november 2026</p>
+          <p className="mt-5 text-sm text-slate-500">Laatst bijgewerkt: 15 november 2026</p>
           <LegalConceptNote />
         </div>
       </section>
