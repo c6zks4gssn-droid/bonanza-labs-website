@@ -21,3 +21,10 @@ BonanzaLabs is de onderneming van Clarence Etnel. We richten één afgebakend pr
 
 ## Grenzen
 Demo’s op de site zijn fictieve voorbeelden. Beschikbaarheid, gegevensverwerking en bewaartermijnen worden per implementatie afgesproken. BonanzaLabs belooft geen omzetresultaat of foutloze afhandeling. Menselijke beoordeling blijft onderdeel van de afgesproken flow.
+
+## In English
+BonanzaLabs is a small automation company in Groningen, the Netherlands, for Dutch SMBs in hospitality, construction and installation. It sets up one concrete process at a time, with a person still reviewing the outcome.
+- ServeFlow: a reservation flow for restaurants with confirmation, reminder and changing or cancelling via WhatsApp; 14-day pilot for €497 one-off.
+- TradeFlow: intake, quote preparation and follow-up for construction and installation companies; implementation from €1,995.
+- Bonanza Voice: an AI phone assistant that tells callers it is AI, asks agreed questions and prepares call-back requests; subscriptions of €199, €349 or €499 per month plus €495 setup (Start and Groei), minimum term 3 months.
+The website and the service are in Dutch. All prices exclude VAT: https://www.bonanza-labs.com/pricing
