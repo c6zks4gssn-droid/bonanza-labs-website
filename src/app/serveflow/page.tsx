@@ -10,12 +10,12 @@ import YouTubeEmbed from "@/components/youtube-embed";
 export const metadata: Metadata = withPageSocialMetadata({
   title: "ServeFlow — AI reserveringsflow voor horeca",
   description:
-    "ServeFlow richt één reserveringsflow in voor je restaurant met automatische bevestiging, herinnering en annulering via WhatsApp. 14-dagen pilot, ${formatEuro(PRICES.serveflowPilot)} ex. btw, geen abonnement.",
+    `ServeFlow richt één reserveringsflow in voor je restaurant met automatische bevestiging, herinnering en annulering via WhatsApp. 14-dagen pilot, ${formatEuro(PRICES.serveflowPilot)} ex. btw, geen abonnement.`,
   alternates: { canonical: "https://www.bonanza-labs.com/serveflow" },
   openGraph: {
     title: "ServeFlow — AI reserveringsflow voor horeca",
     description:
-      "Eén reserveringsflow. Veertien dagen. Geen automatische verlenging. {formatEuro(PRICES.serveflowPilot)} ex. btw.",
+      `Eén reserveringsflow. Veertien dagen. Geen automatische verlenging. ${formatEuro(PRICES.serveflowPilot)} ex. btw.`,
     url: "https://www.bonanza-labs.com/serveflow",
     type: "website",
   },
@@ -83,7 +83,7 @@ const faqs = [
   {
     question: "Wat zit er in beheer na de pilot?",
     answer:
-      "Beheer Basis ({formatEuro(PRICES.beheerBasis)}/maand excl. btw) omvat maandelijks beheer van je ingerichte oplossing en kleine aanpassingen aan afgesproken teksten, vragen en antwoorden. Daarnaast zijn er Standaard ({formatEuro(PRICES.beheerStandaard)}) en Uitgebreid ({formatEuro(PRICES.beheerUitgebreid)}); zie de prijzenpagina. Beheer loopt via een afzonderlijke overeenkomst.",
+      `Beheer Basis (${formatEuro(PRICES.beheerBasis)}/maand excl. btw) omvat maandelijks beheer van je ingerichte oplossing en kleine aanpassingen aan afgesproken teksten, vragen en antwoorden. Daarnaast zijn er Standaard (${formatEuro(PRICES.beheerStandaard)}) en Uitgebreid (${formatEuro(PRICES.beheerUitgebreid)}); zie de prijzenpagina. Beheer loopt via een afzonderlijke overeenkomst.`,
   },
   {
     question: "Wat gebeurt er na de 14 dagen?",
@@ -113,7 +113,7 @@ const serviceSchema = {
   name: "ServeFlow",
   serviceType: "Reserveringsautomatisering voor horeca",
   description:
-    "ServeFlow richt één reserveringsflow in voor je restaurant met automatische bevestiging, herinnering en annulering via WhatsApp. 14-dagen pilot, ${formatEuro(PRICES.serveflowPilot)} ex. btw.",
+    `ServeFlow richt één reserveringsflow in voor je restaurant met automatische bevestiging, herinnering en annulering via WhatsApp. 14-dagen pilot, ${formatEuro(PRICES.serveflowPilot)} ex. btw.`,
   provider: {
     "@type": "LocalBusiness",
     name: "BonanzaLabs",

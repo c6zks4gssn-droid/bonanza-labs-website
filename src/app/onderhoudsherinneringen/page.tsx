@@ -93,7 +93,7 @@ const faq = [
   },
   {
     q: "Wat kost TradeFlow Onderhoud?",
-    a: "De inrichting kost vanaf ${formatEuro(PRICES.tradeflowOnderhoud)} excl. btw. Daarna kun je kiezen voor beheer vanaf ${formatEuro(PRICES.beheerBasis)} per maand excl. btw. Sms-kosten en koppelingen spreken we per klant af. Na de intake krijg je een vaste prijs voordat we iets bouwen.",
+    a: `De inrichting kost vanaf ${formatEuro(PRICES.tradeflowOnderhoud)} excl. btw. Daarna kun je kiezen voor beheer vanaf ${formatEuro(PRICES.beheerBasis)} per maand excl. btw. Sms-kosten en koppelingen spreken we per klant af. Na de intake krijg je een vaste prijs voordat we iets bouwen.`,
   },
   {
     q: "Kan dit samen met TradeFlow of Bonanza Voice?",
