@@ -36,7 +36,7 @@ const solutions = [
     name: "TradeFlow Onderhoud",
     audience: "Installatie",
     description:
-      "Voor onderhoudsklanten die op tijd een herinnering krijgen en zelf een moment kiezen, met een belijst voor wie niet reageert.",
+      "Voor onderhoudsklanten die op tijd een herinnering krijgen en zelf een moment kiezen, met een bellijst voor wie niet reageert.",
     href: "/onderhoudsherinneringen",
     accent: "border-violet-400/25 bg-violet-400/5",
     icon: Clock3,
